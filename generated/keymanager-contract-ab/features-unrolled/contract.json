@@ -1,0 +1,153 @@
+{
+  "title": "KeyManager Cloud Admin API",
+  "summary": "An administrative API for managing licenses, sessions, and audit logs on the KeyManager Cloud platform.",
+  "authentication": {
+    "mechanism": "unknown",
+    "evidence": [],
+    "uncertainties": [
+      "No explicit authentication headers or tokens were identified in the captured traffic."
+    ]
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/v1/admin/session",
+      "purpose": "Retrieve session information",
+      "request": "Empty body",
+      "response": "JSON object",
+      "observedStatuses": [],
+      "confidence": "inferred",
+      "evidence": [
+        "Example observed in traffic"
+      ],
+      "warnings": [
+        "Sibling-specific request fields, response schemas, query keys, and statuses may differ unless evidence explicitly associates them with this concrete sibling."
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/admin/licenses",
+      "purpose": "Retrieve license list",
+      "request": "Query param: limit",
+      "response": "JSON object",
+      "observedStatuses": [],
+      "confidence": "inferred",
+      "evidence": [
+        "Example observed in traffic"
+      ],
+      "warnings": [
+        "Sibling-specific request fields, response schemas, query keys, and statuses may differ unless evidence explicitly associates them with this concrete sibling."
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/admin/audit-logs",
+      "purpose": "Retrieve audit logs",
+      "request": "Empty body",
+      "response": "JSON object containing audit_logs array",
+      "observedStatuses": [],
+      "confidence": "inferred",
+      "evidence": [
+        "Example observed in traffic"
+      ],
+      "warnings": [
+        "Sibling-specific request fields, response schemas, query keys, and statuses may differ unless evidence explicitly associates them with this concrete sibling."
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/admin/login",
+      "purpose": "User authentication",
+      "request": "JSON body",
+      "response": "JSON object",
+      "observedStatuses": [],
+      "confidence": "inferred",
+      "evidence": [
+        "Example observed in traffic"
+      ],
+      "warnings": [
+        "Sibling-specific request fields, response schemas, query keys, and statuses may differ unless evidence explicitly associates them with this concrete sibling."
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/admin/licenses",
+      "purpose": "Create a new license",
+      "request": "JSON body containing key, registrant_name, product, expires_at",
+      "response": "JSON object containing license details",
+      "observedStatuses": [],
+      "confidence": "inferred",
+      "evidence": [
+        "Example observed in traffic",
+        "Relation: request.body.json$.key -> response.body.json$.license.license_key"
+      ],
+      "warnings": [
+        "Sibling-specific request fields, response schemas, query keys, and statuses may differ unless evidence explicitly associates them with this concrete sibling."
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/admin/logout",
+      "purpose": "User logout",
+      "request": "Empty body",
+      "response": "JSON object",
+      "observedStatuses": [],
+      "confidence": "inferred",
+      "evidence": [
+        "Example observed in traffic"
+      ],
+      "warnings": [
+        "Sibling-specific request fields, response schemas, query keys, and statuses may differ unless evidence explicitly associates them with this concrete sibling."
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/admin/licenses/:uuid",
+      "purpose": "Update an existing license",
+      "request": "JSON body containing license_key, product, expires_at, registrant_name",
+      "response": "JSON object containing updated license details",
+      "observedStatuses": [],
+      "confidence": "observed",
+      "evidence": [
+        "Relation: request.body.json$.license_key -> response.body.json$.license.license_key"
+      ],
+      "warnings": []
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/admin/licenses/:uuid",
+      "purpose": "Delete a license",
+      "request": "Empty body",
+      "response": "Empty or status object",
+      "observedStatuses": [],
+      "confidence": "observed",
+      "evidence": [
+        "Endpoint observed in traffic"
+      ],
+      "warnings": []
+    }
+  ],
+  "workflows": [
+    {
+      "name": "License Lifecycle Management",
+      "steps": [
+        "POST /v1/admin/licenses",
+        "GET /v1/admin/audit-logs",
+        "PATCH /v1/admin/licenses/:uuid",
+        "DELETE /v1/admin/licenses/:uuid"
+      ],
+      "dataFlow": [
+        "License creation propagates key and registrant data to response",
+        "Audit logs track entity changes",
+        "License updates reflect in subsequent GET requests"
+      ],
+      "confidence": "observed"
+    }
+  ],
+  "uncertainties": [
+    "Authentication mechanism is unknown.",
+    "HTTP status codes were not explicitly captured.",
+    "Request/response schemas are inferred from relations and examples rather than formal definitions."
+  ],
+  "nodejsSample": "fetch('https://keymanager-cloud.thuanvatlyhy.workers.dev/v1/admin/licenses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: 'example-key', product: 'pro', registrant_name: 'user' }) }).then(res => res.json()).then(console.log);"
+}

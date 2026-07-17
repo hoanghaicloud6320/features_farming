@@ -1,6 +1,7 @@
 'use strict';
 
 const crypto = require('node:crypto');
+const { V5_CASES } = require('./v5-cases');
 
 const CHALLENGES = {
   easy: {
@@ -32,6 +33,18 @@ const CHALLENGES = {
     routes: ['/api/aurora/open', '/api/aurora/close'],
   },
 };
+
+for (const definition of V5_CASES) {
+  CHALLENGES[definition.id] = {
+    id: definition.id,
+    title: definition.title,
+    difficulty: definition.axis.label,
+    description: definition.axis.description,
+    routes: definition.groundTruth.coreRoutes,
+    suite: 'v5',
+    axis: definition.axis.id,
+  };
+}
 
 function opaque(prefix, bytes = 9) {
   return `${prefix}_${crypto.randomBytes(bytes).toString('base64url')}`;

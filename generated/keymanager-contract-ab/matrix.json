@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-17T22:36:19.928Z",
+  "target": "https://keymanager-cloud.thuanvatlyhy.workers.dev/admin",
+  "model": "gemini-3.1-flash-lite",
+  "contextBudgetChars": 32000,
+  "collection": {
+    "sessions": 3,
+    "iterationsPerSession": 3,
+    "capturedRequests": 159,
+    "crossSessionEndpoints": 5,
+    "crossSessionRelations": 1541
+  },
+  "conditions": [
+    {
+      "id": "none",
+      "label": "No evidence",
+      "evidenceChars": 94,
+      "promptTokens": 217,
+      "endpointClaims": 0,
+      "workflowClaims": 0,
+      "responseId": "HK5aau7WPJDIrfcPqJefwAc"
+    },
+    {
+      "id": "raw",
+      "label": "Raw recorder",
+      "evidenceChars": 31760,
+      "promptTokens": 17955,
+      "endpointClaims": 8,
+      "workflowClaims": 1,
+      "responseId": "Ia5aaoOwFdyi2roPvaDf2AE"
+    },
+    {
+      "id": "features",
+      "label": "Farmed features",
+      "evidenceChars": 31667,
+      "promptTokens": 13318,
+      "endpointClaims": 4,
+      "workflowClaims": 1,
+      "responseId": "Lq5aav3ZKI3N2roP_eHRoQM"
+    },
+    {
+      "id": "raw-features",
+      "label": "Raw + features",
+      "evidenceChars": 31516,
+      "promptTokens": 14818,
+      "endpointClaims": 4,
+      "workflowClaims": 1,
+      "responseId": "Pa5aaoGzBe-h2roPgc35kAU"
+    }
+  ]
+}

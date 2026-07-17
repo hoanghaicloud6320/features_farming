@@ -1,0 +1,17 @@
+{
+  "title": "API Contract Recovery",
+  "summary": "A reliable contract cannot be recovered due to the absence of evidence.",
+  "authentication": {
+    "mechanism": "unknown",
+    "evidence": [],
+    "uncertainties": [
+      "No traffic evidence provided to determine authentication mechanism."
+    ]
+  },
+  "endpoints": [],
+  "workflows": [],
+  "uncertainties": [
+    "No traffic evidence provided to identify API endpoints or workflows."
+  ],
+  "nodejsSample": "No sample available due to lack of evidence."
+}

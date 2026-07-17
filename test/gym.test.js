@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
 const test = require('node:test');
 const { createGymServer } = require('../gym/server');
+const { V5_CASES, applyTransform } = require('../gym/v5-cases');
 
 async function post(origin, route, body, options = {}) {
   const response = await fetch(`${origin}${route}`, {
@@ -96,4 +97,25 @@ test('benchmark metrics record route coverage and completion', async (t) => {
     ],
     accepted: true,
   });
+});
+
+test('all V5 ground-truth transforms are accepted by their hidden evaluators', async (t) => {
+  const gym = createGymServer();
+  const origin = await gym.listen();
+  t.after(() => gym.close());
+
+  for (const [index, definition] of V5_CASES.entries()) {
+    const label = `v5-test-${index}`;
+    const opened = await post(origin, definition.routes.open, {
+      label,
+      sequence: index + 1,
+    });
+    assert.equal(opened.response.status, 200, definition.id);
+    const proof = applyTransform(definition, { ...opened.value, label });
+    const closed = await post(origin, definition.routes.close, {
+      runId: opened.value.runId,
+      proof,
+    }, { method: 'PUT' });
+    assert.equal(closed.value.accepted, true, definition.id);
+  }
 });

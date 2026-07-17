@@ -2,66 +2,90 @@ FEATURES FARMING - TODO / HANDOFF
 Updated: 2026-07-18
 
 CURRENT STATUS
-- Stop all Gemini calls: the API quota/limit was reached.
-- Current model is gemini-3.1-flash-lite. There is no Gemini 3.5
-  Flash-Lite model; gemini-3.5-flash is a different, non-Lite model.
-- Local gym has four challenges: easy, medium, hard, and noise.
-- Gym V4 noise experiment completed with 3 trials per condition and a
-  fixed 24,000-character evidence budget.
-- V4 result:
-    none          0/3 accepted
-    raw           0/3 accepted, 100% route coverage
-    features      3/3 accepted
-    raw+features  3/3 accepted
-- Full V4 report:
-    GYM_V4_EVALUATION.md
+- Current model: gemini-3.1-flash-lite.
+- Local Gym V5 scores the farmer directly; Gemini is not part of the score.
+- V5 contains 12 cases across three axes:
+    simple transform + high noise
+    hard transform + low noise
+    hard transform + high noise
+- Canonical V5 result:
+    single-session farmer     91.00/100
+    cross-session farmer      98.89/100
+    core endpoint F1          100%
+    noise endpoint recall     100%
+    workflow ordered recall   100%
+    cross-session relation F1 97.2%
+- Full report:
+    GYM_V5_EVALUATION.md
 - Runtime matrix:
-    generated/gym-ab-v4-noise/matrix.md
-- All 16 tests passed immediately before V4.
+    generated/gym-ab-v5/matrix.md
+- The KeyManager real-dashboard experiment captured 3 sessions x 3
+  iterations / 159 requests and produced contracts under all four canonical
+  conditions: none, raw, features, and raw+features.
+- Features-only plus an explicit unroll instruction recovered all 8 observed
+  concrete endpoints with fewer prompt tokens than raw.
+- Full real-dashboard report:
+    KEYMANAGER_CONTRACT_AB_EVALUATION.md
+- All 22 local tests pass.
 
-IMPLEMENTED IN V4
-- Aurora Needle challenge with 36 changing signals.
-- 18 telemetry/decoy requests per iteration.
-- 3 sessions x 5 iterations = 300 captured requests.
-- Farmer classifies 270 /api/events requests as telemetry noise.
-- Farmer finds the stable 15/15 relation:
-    open.response.channels[23].signal
-      -> close.request.signal
-- Fixed context budget for all evidence arms.
-- Selectable challenges through GYM_CHALLENGES.
-- Multi-trial runs through GYM_TRIALS.
-- Evidence budget through GYM_CONTEXT_BUDGET_CHARS.
-- Hidden request count, route coverage, execution time, and prompt-token
-  metrics.
+IMPLEMENTED IN V5
+- Twelve data-driven farmer challenges with independent Gym ground truth.
+- Direct scoring for core/noise classification, workflow ordering, and
+  relation precision/recall.
+- Single-session versus cross-session A/B without Gemini.
+- A deliberate session-one false correlation verifies that cross-session
+  aggregation removes unstable relations.
+- Fixed-budget feature compaction now enforces the complete evidence envelope
+  even with high relation counts.
+- Raw projection supports configurable API path prefixes such as /v1/.
+- Real-browser KeyManager recorder exercises login, CRUD, audit, delete, and
+  logout while redacting sensitive values before Gemini.
+- Feature evidence emits structured warnings when semantic sibling routes were
+  generalized into :var.
 
-HASH-CANDIDATE FARMING STATUS
-- A bounded hash-derived relation detector was added to src/farm.js.
-- It tries common hashes (sha256, sha1, md5), ordered combinations of up
-  to three semantically relevant fields, common delimiters, hex digest,
-  and prefix slicing.
-- Cross-session aggregation now carries multi-source relation metadata.
-- A dedicated unit test was added.
-- The full local suite passes without calling Gemini.
-- It was verified against all 3 hard Prism sessions / 15 iterations and
-  found this hash-derived-copy candidate:
-    sha256(seed + ":" + salt + ":" + label).slice(0, 24)
-- No post-change Gemini A/B was run because the API limit was reached.
+HIGH-PRIORITY FARMER TODO: PRESERVE PER-SIBLING PROVENANCE
+- Current route farming can generalize semantic siblings:
+    GET  /v1/admin/session
+    GET  /v1/admin/licenses
+    GET  /v1/admin/audit-logs
+      -> GET /v1/admin/:var
+- Concrete endpoint names remain recoverable from endpoint examples, so Gemini
+  can unroll them when explicitly instructed.
+- However, cross-session features currently aggregate request fields, response
+  schemas, query keys, and status counts at the :var family level.
+- This means features are sufficient for concrete endpoint discovery but not
+  for lossless per-sibling contract attribution.
+- Preserve a member index under every generalized route family:
+    concrete method + path
+    per-member request count and session/iteration support
+    per-member observed status counts
+    per-member query keys
+    per-member request fields and response schemas
+    per-member examples and relations
+- Keep the generalized family as the primary abstraction, but make unrolling
+  lossless and explicitly warn when an attribute exists only at family level.
+- Add a regression benchmark where siblings deliberately have different
+  statuses and incompatible request/response schemas.
 
-NEXT STEPS
-1. Ensure the hash hypothesis is labeled as a tested candidate rather than
-   proof of program causality.
-2. Update the hard challenge report with the discovered candidate.
-3. When Gemini quota is available again, run a separate hard-only matrix:
-     GYM_CHALLENGES=hard
-     GYM_TRIALS=3
-     GYM_CONTEXT_BUDGET_CHARS=24000
-   Store it in a new output directory; do not overwrite V3 or V4.
-4. Compare whether hash-candidate features turn hard from bridge-only
-   coverage into accepted automation.
+OTHER FARMER TODO
+1. Expand the generic substring/prefix detector beyond its semantic field-name
+   allowlist. V5 currently misses:
+       open.response.token
+         -> close.request.proof = "MARKER-" + token
+   because the target field name "proof" is not a substring candidate.
+2. Distinguish semantic action siblings from truly dynamic path parameters
+   using member stability, schemas, statuses, and repeated finite vocabularies.
+3. Preserve the warning that hash-derived relations are bounded tested
+   candidates, not proof of source-code causality.
+4. Add unseen real applications and holdout transformations before treating
+   the current synthetic score as a production success estimate.
+5. Evaluate compact feature ranking after per-sibling provenance is available;
+   compare endpoint coverage, schema/status fidelity, token cost, and latency.
 
-REPOSITORY NOTE
-- features_farming currently has no .git directory.
-- The sibling requests_recorder directory is a Git repository, but this
-  project is not inside that worktree.
-- Do not move or copy this project into requests_recorder merely to commit
-  it without an explicit repository decision.
+REPRODUCE
+- Farmer-only Gym V5:
+    npm run gym:v5
+- KeyManager four-arm API-contract experiment:
+    npm run keymanager:contract-ab
+- Features-only concrete endpoint unroll diagnostic:
+    npm run keymanager:feature-unroll

@@ -1,0 +1,107 @@
+{
+  "title": "Key Manager Cloud Admin API",
+  "summary": "An administrative API for managing licenses, sessions, and audit logs within the Key Manager Cloud service.",
+  "authentication": {
+    "mechanism": "unknown",
+    "evidence": [],
+    "uncertainties": [
+      "No explicit authentication headers or tokens were identified in the captured traffic."
+    ]
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/v1/admin/:var",
+      "purpose": "Retrieve administrative resources such as sessions, licenses, or audit logs.",
+      "request": "Query parameter: limit (optional)",
+      "response": "JSON object containing resource data or lists (e.g., audit_logs array).",
+      "observedStatuses": [
+        200
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "GET /v1/admin/session",
+        "GET /v1/admin/licenses?limit=100",
+        "GET /v1/admin/audit-logs"
+      ],
+      "warnings": [
+        "Concrete sibling names are recoverable from examples, but request fields, response schemas, query keys, and statuses are aggregated at the generalized endpoint level and may differ by sibling."
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/admin/:var",
+      "purpose": "Perform administrative actions such as login, logout, or license creation.",
+      "request": "JSON body containing fields like key, registrant_name, product, or expires_at.",
+      "response": "JSON object containing operation results or created license details.",
+      "observedStatuses": [
+        200,
+        201
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "POST /v1/admin/login",
+        "POST /v1/admin/licenses",
+        "POST /v1/admin/logout"
+      ],
+      "warnings": [
+        "Concrete sibling names are recoverable from examples, but request fields, response schemas, query keys, and statuses are aggregated at the generalized endpoint level and may differ by sibling."
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/admin/licenses/:uuid",
+      "purpose": "Update details of an existing license.",
+      "request": "JSON body containing fields like license_key, product, or expires_at.",
+      "response": "JSON object containing the updated license details.",
+      "observedStatuses": [
+        200
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "PATCH /v1/admin/licenses/7bade622-b72c-4182-9e5a-6affba227268"
+      ],
+      "warnings": []
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/admin/licenses/:uuid",
+      "purpose": "Remove an existing license.",
+      "request": "None",
+      "response": "Empty or confirmation object.",
+      "observedStatuses": [
+        200,
+        204
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "DELETE /v1/admin/licenses/7bade622-b72c-4182-9e5a-6affba227268"
+      ],
+      "warnings": []
+    }
+  ],
+  "workflows": [
+    {
+      "name": "License Lifecycle Management",
+      "steps": [
+        "POST /v1/admin/licenses",
+        "GET /v1/admin/licenses?limit=100",
+        "PATCH /v1/admin/licenses/:uuid",
+        "DELETE /v1/admin/licenses/:uuid"
+      ],
+      "dataFlow": [
+        "POST response license_key to PATCH request license_key",
+        "POST response product to PATCH request product",
+        "POST response expires_at to PATCH request expires_at",
+        "PATCH URL uuid to PATCH response license.id"
+      ],
+      "confidence": "observed"
+    }
+  ],
+  "uncertainties": [
+    "Authentication mechanism is unknown.",
+    "Exact response schemas for specific siblings are not fully defined.",
+    "Error handling statuses are not explicitly captured."
+  ],
+  "nodejsSample": "const fetch = require('node-fetch'); const baseUrl = 'https://keymanager-cloud.thuanvatlyhy.workers.dev/v1/admin'; async function getAuditLogs() { const res = await fetch(`${baseUrl}/audit-logs?limit=50`); return res.json(); }"
+}

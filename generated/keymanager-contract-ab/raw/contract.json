@@ -1,0 +1,168 @@
+{
+  "title": "KeyManager Cloud Admin API",
+  "summary": "An administrative API for managing software licenses, including creation, updates, deletion, and audit logging.",
+  "authentication": {
+    "mechanism": "Session-based authentication",
+    "evidence": [
+      "GET /v1/admin/session returns 401 Unauthorized when not logged in",
+      "POST /v1/admin/login establishes session",
+      "POST /v1/admin/logout terminates session"
+    ],
+    "uncertainties": [
+      "Exact cookie or header token structure is not visible in the provided traffic"
+    ]
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/v1/admin/session",
+      "purpose": "Check current admin session status",
+      "request": "Empty body",
+      "response": "JSON object with error code and message",
+      "observedStatuses": [
+        401
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "GET /v1/admin/session returns 401 when unauthenticated"
+      ],
+      "warnings": []
+    },
+    {
+      "method": "POST",
+      "path": "/v1/admin/login",
+      "purpose": "Authenticate admin user",
+      "request": "JSON object with name field",
+      "response": "JSON object containing admin profile",
+      "observedStatuses": [
+        200
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "POST /v1/admin/login with name field"
+      ],
+      "warnings": []
+    },
+    {
+      "method": "POST",
+      "path": "/v1/admin/logout",
+      "purpose": "Terminate admin session",
+      "request": "Empty body",
+      "response": "JSON object with ok: true",
+      "observedStatuses": [
+        200
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "POST /v1/admin/logout"
+      ],
+      "warnings": []
+    },
+    {
+      "method": "GET",
+      "path": "/v1/admin/licenses",
+      "purpose": "List all licenses",
+      "request": "Query parameter limit=100",
+      "response": "JSON object with licenses array, limit, and offset",
+      "observedStatuses": [
+        200
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "GET /v1/admin/licenses?limit=100"
+      ],
+      "warnings": [
+        "Sibling-specific query keys and response schemas may differ."
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/admin/licenses",
+      "purpose": "Create a new license",
+      "request": "JSON object with key, registrant_name, product, dates, limits, and metadata",
+      "response": "JSON object with created license details and key",
+      "observedStatuses": [
+        201
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "POST /v1/admin/licenses"
+      ],
+      "warnings": []
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/admin/licenses/:id",
+      "purpose": "Update an existing license",
+      "request": "JSON object with license fields to update",
+      "response": "JSON object with updated license details",
+      "observedStatuses": [
+        200
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "PATCH /v1/admin/licenses/7bade622-b72c-4182-9e5a-6affba227268"
+      ],
+      "warnings": [
+        "Sibling-specific request fields and response schemas may differ."
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/admin/licenses/:id",
+      "purpose": "Delete a license",
+      "request": "Empty body",
+      "response": "Empty body",
+      "observedStatuses": [
+        204
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "DELETE /v1/admin/licenses/7bade622-b72c-4182-9e5a-6affba227268"
+      ],
+      "warnings": [
+        "Sibling-specific statuses may differ."
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/admin/audit-logs",
+      "purpose": "Retrieve audit logs",
+      "request": "Empty body",
+      "response": "JSON object with truncated flag and audit_logs array",
+      "observedStatuses": [
+        200
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "GET /v1/admin/audit-logs"
+      ],
+      "warnings": []
+    }
+  ],
+  "workflows": [
+    {
+      "name": "License Lifecycle Management",
+      "steps": [
+        "Login",
+        "Create License",
+        "Update License",
+        "Delete License",
+        "Verify Audit Logs"
+      ],
+      "dataFlow": [
+        "POST /v1/admin/login",
+        "POST /v1/admin/licenses",
+        "PATCH /v1/admin/licenses/:id",
+        "DELETE /v1/admin/licenses/:id",
+        "GET /v1/admin/audit-logs"
+      ],
+      "confidence": "observed"
+    }
+  ],
+  "uncertainties": [
+    "The exact structure of the session token or cookie is not explicitly defined in the traffic.",
+    "The audit log response is truncated, so the full schema of the log entries is inferred from the preview."
+  ],
+  "nodejsSample": "const response = await fetch('https://keymanager-cloud.thuanvatlyhy.workers.dev/v1/admin/licenses', { method: 'GET', headers: { 'Content-Type': 'application/json' } }); const data = await response.json(); console.log(data);"
+}

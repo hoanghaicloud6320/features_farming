@@ -18,6 +18,18 @@ generated/*
 !generated/gym-ab-v4-noise/**
 !generated/gym-ab-current/
 !generated/gym-ab-current/**
+!generated/gym-ab-v5/
+!generated/gym-ab-v5/matrix.json
+!generated/gym-ab-v5/matrix.md
+generated/gym-ab-v5/manifest.json
+!generated/keymanager-contract-ab/
+!generated/keymanager-contract-ab/*/
+!generated/keymanager-contract-ab/matrix.json
+!generated/keymanager-contract-ab/*/contract.json
+!generated/keymanager-contract-ab/*/contract.md
+!generated/keymanager-contract-ab/features-unrolled/run.json
+generated/keymanager-contract-ab/farm-summary.json
+generated/keymanager-contract-ab/*/evidence.json
 coverage/
 
 # Environment files and secrets

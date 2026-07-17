@@ -136,3 +136,53 @@ npm run gym:ab
 ```
 
 See `GYM_V4_EVALUATION.md` for the experiment where raw failed 3/3 while both farmed features and raw + features passed 3/3.
+
+## Farmer Gym A/B V5
+
+V5 scores the farmer directly and does not call or score Gemini. It contains
+12 cases split evenly across:
+
+- simple transformations with heavy telemetry noise;
+- hard hash-derived transformations with almost no noise;
+- hard hash-derived transformations with heavy noise and plausible decoys.
+
+The A/B arms are:
+
+- A: farming one five-iteration session;
+- B: cross-session farming over three sessions / fifteen iterations.
+
+Every case has independent Gym ground truth for core/noise endpoint
+classification, ordered workflow, and required data-flow transformations.
+
+```powershell
+npm run gym:v5
+```
+
+The canonical result is written to `generated/gym-ab-v5/`. See
+`GYM_V5_EVALUATION.md` for the score definition, current result, and known
+farmer gap found by the benchmark.
+
+## Real dashboard API-contract A/B
+
+The KeyManager dashboard experiment records repeated login and license CRUD
+workflows from a real browser, farms the recordings, redacts sensitive values,
+and asks Gemini for an API contract under the same four evidence conditions:
+none, raw, features, and raw + features.
+
+```powershell
+$env:KEYMANAGER_ADMIN_NAME = "<admin-name>"
+npm run keymanager:contract-ab
+```
+
+The experiment uses a fixed evidence budget for every non-empty arm and writes
+portable contracts under `generated/keymanager-contract-ab/`. Runtime browser
+recordings and full farm outputs remain ignored.
+
+Run the non-canonical features-only unroll diagnostic after the main matrix:
+
+```powershell
+npm run keymanager:feature-unroll
+```
+
+This reuses the same feature evidence but explicitly asks Gemini to expand
+generalized `:var` siblings into concrete endpoints when examples support it.

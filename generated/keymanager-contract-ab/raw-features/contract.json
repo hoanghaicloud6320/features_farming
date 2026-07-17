@@ -1,0 +1,109 @@
+{
+  "title": "KeyManager Admin API",
+  "summary": "An administrative API for managing software licenses, audit logs, and session authentication.",
+  "authentication": {
+    "mechanism": "Session-based (Cookie/Token)",
+    "evidence": [
+      "GET /v1/admin/session returns 401 UNAUTHORIZED",
+      "POST /v1/admin/login establishes session",
+      "POST /v1/admin/logout terminates session"
+    ],
+    "uncertainties": [
+      "Exact header or cookie name used for session persistence is not explicitly defined in the provided evidence."
+    ]
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/v1/admin/:var",
+      "purpose": "Retrieve administrative data (session, licenses, or audit logs)",
+      "request": "Query parameter: limit (optional)",
+      "response": "JSON object containing requested resource (e.g., licenses array, audit_logs array, or admin info)",
+      "observedStatuses": [
+        200,
+        401
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "GET /v1/admin/session",
+        "GET /v1/admin/licenses?limit=100",
+        "GET /v1/admin/audit-logs"
+      ],
+      "warnings": [
+        "Concrete sibling names are recoverable from examples, but request fields, response schemas, query keys, and statuses are aggregated at the generalized endpoint level and may differ by sibling."
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/admin/:var",
+      "purpose": "Perform administrative actions (login, logout, create license)",
+      "request": "JSON body (varies by action, e.g., {name} for login, {key, registrant_name, product, etc.} for licenses)",
+      "response": "JSON object confirming action (e.g., {admin}, {ok}, or {license, key})",
+      "observedStatuses": [
+        200,
+        201
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "POST /v1/admin/login",
+        "POST /v1/admin/logout",
+        "POST /v1/admin/licenses"
+      ],
+      "warnings": [
+        "Concrete sibling names are recoverable from examples, but request fields, response schemas, query keys, and statuses are aggregated at the generalized endpoint level and may differ by sibling."
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/admin/licenses/:uuid",
+      "purpose": "Update an existing license",
+      "request": "JSON body containing fields to update (e.g., license_key, product, expires_at, registrant_name)",
+      "response": "JSON object containing updated license details",
+      "observedStatuses": [
+        200
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "PATCH /v1/admin/licenses/:uuid"
+      ],
+      "warnings": []
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/admin/licenses/:uuid",
+      "purpose": "Delete an existing license",
+      "request": "Empty body",
+      "response": "Empty body",
+      "observedStatuses": [
+        204
+      ],
+      "confidence": "observed",
+      "evidence": [
+        "DELETE /v1/admin/licenses/:uuid"
+      ],
+      "warnings": []
+    }
+  ],
+  "workflows": [
+    {
+      "name": "License Lifecycle Management",
+      "steps": [
+        "POST /v1/admin/login",
+        "GET /v1/admin/licenses",
+        "PATCH /v1/admin/licenses/:uuid",
+        "DELETE /v1/admin/licenses/:uuid"
+      ],
+      "dataFlow": [
+        "POST /v1/admin/licenses returns license ID used in subsequent PATCH/DELETE",
+        "PATCH /v1/admin/licenses/:uuid returns updated license object"
+      ],
+      "confidence": "observed"
+    }
+  ],
+  "uncertainties": [
+    "The exact structure of the audit-logs response is partially truncated in the evidence.",
+    "The specific authentication header name is not explicitly captured.",
+    "The PATCH endpoint response schema is inferred from the relation mapping rather than a full raw capture."
+  ],
+  "nodejsSample": "const res = await fetch('https://keymanager-cloud.thuanvatlyhy.workers.dev/v1/admin/licenses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: 'KM-123', registrant_name: 'User', product: 'App' }) }); const data = await res.json();"
+}

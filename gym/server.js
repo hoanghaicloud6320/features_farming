@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const http = require('node:http');
 const path = require('node:path');
 const { CHALLENGES, opaque, prismProof } = require('./challenges');
+const { V5_CASE_BY_ID, applyTransform } = require('./v5-cases');
 
 const PUBLIC_DIRECTORY = path.join(__dirname, 'public');
 
@@ -182,6 +183,93 @@ function createGymServer() {
       const accepted = state?.challenge === 'noise' && body.signal === state.signal;
       observe(request, pathname, accepted ? 200 : 422, accepted);
       json(response, accepted ? 200 : 422, { accepted, challenge: 'noise' });
+      return;
+    }
+
+    const v5Match = pathname.match(/^\/api\/v5\/([^/]+)\/(open|close|events)$/);
+    if (v5Match) {
+      const definition = V5_CASE_BY_ID.get(v5Match[1]);
+      const action = v5Match[2];
+      if (!definition) {
+        observe(request, pathname, 404);
+        json(response, 404, { error: 'unknown_v5_case' });
+        return;
+      }
+      if (request.method === 'POST' && action === 'open') {
+        const label = String(body.label || '');
+        const sequence = Number(body.sequence);
+        if (!label || !Number.isInteger(sequence)) {
+          observe(request, pathname, 422);
+          json(response, 422, { error: 'label_and_sequence_required' });
+          return;
+        }
+        const runId = opaque('v5run');
+        const values = {
+          runId,
+          label,
+          token: opaque('token', 12).toLowerCase(),
+          capsule: opaque('capsule', 12),
+          seed: opaque('seed', 10),
+          salt: opaque('salt', 8),
+          nonce: opaque('nonce', 11),
+          challenge: opaque('challenge', 10),
+        };
+        const proof = applyTransform(definition, values);
+        const collisionCandidate = label.includes('-s1-')
+          ? proof
+          : opaque('collisionDecoy', 16);
+        sessions.set(runId, { challenge: definition.id, proof });
+        const candidates = Array.from({ length: definition.candidateCount }, (_, index) => ({
+          candidateId: `candidate-${String(index + 1).padStart(2, '0')}`,
+          token: opaque('decoyToken', 12),
+          seedHint: opaque('decoySeed', 10),
+          nonceHint: opaque('decoyNonce', 10),
+        }));
+        observe(request, pathname, 200);
+        json(response, 200, {
+          runId,
+          token: values.token,
+          capsule: values.capsule,
+          seed: values.seed,
+          salt: values.salt,
+          nonce: values.nonce,
+          challenge: values.challenge,
+          collisionCandidate,
+          candidates,
+          metadata: {
+            caseId: definition.id,
+            sequence,
+            candidateCount: candidates.length,
+          },
+        });
+        return;
+      }
+      if (request.method === 'PATCH' && action === 'events') {
+        observe(request, pathname, 202);
+        json(response, 202, {
+          stored: true,
+          eventId: opaque('v5event'),
+          echo: body,
+          decoys: Array.from({ length: 10 }, (_, index) => ({
+            index,
+            proofHint: opaque('proofHint', 16),
+            tokenHint: opaque('tokenHint', 12),
+          })),
+        });
+        return;
+      }
+      if (request.method === 'PUT' && action === 'close') {
+        const state = sessions.get(body.runId);
+        const accepted = state?.challenge === definition.id && body.proof === state.proof;
+        observe(request, pathname, accepted ? 200 : 422, accepted);
+        json(response, accepted ? 200 : 422, {
+          accepted,
+          challenge: definition.id,
+        });
+        return;
+      }
+      observe(request, pathname, 405);
+      json(response, 405, { error: 'method_not_allowed' });
       return;
     }
 

@@ -1,10 +1,14 @@
 'use strict';
 
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
 const test = require('node:test');
 const { CHALLENGES } = require('../gym/challenges');
 const {
   buildBudgetedEvidence,
+  buildFeatureContext,
   buildPrompt,
   compactRawContext,
   scoreResult,
@@ -92,4 +96,64 @@ test('context budgeting keeps raw evidence valid and prioritizes features in the
   assert.ok(evidence.farmedFeatures);
   assert.ok(evidence.rawTimeline);
   assert.equal(evidence.budget.totalChars, 6_000);
+});
+
+test('feature compaction enforces its budget even with many relations', () => {
+  const features = {
+    kind: 'features',
+    collection: { sessions: 3 },
+    endpoints: [{
+      signature: 'POST x/api/open?',
+      classifications: ['core'],
+    }],
+    relations: Array.from({ length: 500 }, (_, index) => ({
+      sourceEndpoint: 'POST x/api/open?',
+      targetEndpoint: 'POST x/api/open?',
+      kind: 'exact-copy',
+      source: `field-${index}-${'x'.repeat(80)}`,
+      target: `target-${index}-${'y'.repeat(80)}`,
+      transforms: [],
+    })),
+    workflow: Array.from({ length: 100 }, (_, index) => ({ endpoint: `step-${index}` })),
+    patterns: {},
+    fields: [],
+    schemas: [],
+  };
+  const compact = buildBudgetedEvidence({
+    condition: { raw: false, features: true },
+    raw: null,
+    features,
+    budgetChars: 5_000,
+  });
+  assert.ok(JSON.stringify(compact).length <= 5_000);
+  assert.ok(compact.farmedFeatures.omitted.relations > 0);
+  assert.equal(compact.farmedFeatures.endpoints.length, 1);
+});
+
+test('feature context warns when semantic sibling routes were generalized', () => {
+  const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'feature-context-'));
+  fs.writeFileSync(path.join(temporary, 'cross-session.json'), JSON.stringify({
+    sessionCount: 3,
+    iterationCount: 9,
+    capturedRequestCount: 27,
+    crossSessionEndpoints: [{
+      routeKey: 'GET example.test/v1/admin/:var',
+      signature: 'GET example.test/v1/admin/:var?limit',
+      examples: [
+        'https://example.test/v1/admin/session',
+        'https://example.test/v1/admin/licenses?limit=100',
+      ],
+    }],
+    crossSessionRelations: [],
+    consensusWorkflow: [],
+    crossSessionFields: [],
+    crossSessionSchemas: [],
+    patternTotals: {},
+  }));
+  const context = buildFeatureContext(temporary);
+  assert.equal(context.generalizationWarnings.length, 1);
+  assert.deepEqual(context.generalizationWarnings[0].concreteExamples, [
+    'GET /v1/admin/session',
+    'GET /v1/admin/licenses?limit=100',
+  ]);
 });

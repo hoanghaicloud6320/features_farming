@@ -61,7 +61,8 @@ function selectHeaders(headers = {}) {
   );
 }
 
-function buildRawContext(recordingRoot) {
+function buildRawContext(recordingRoot, options = {}) {
+  const pathPrefixes = options.pathPrefixes || ['/api/'];
   const directories = fs.readdirSync(recordingRoot, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => path.join(recordingRoot, entry.name))
@@ -73,7 +74,10 @@ function buildRawContext(recordingRoot) {
     sessions: directories.map((directory) => ({
       recordingId: path.basename(directory),
       events: readJson(path.join(directory, 'requests.json'))
-        .filter((record) => record.iterationId && new URL(record.request.url).pathname.startsWith('/api/'))
+        .filter((record) => (
+          record.iterationId
+          && pathPrefixes.some((prefix) => new URL(record.request.url).pathname.startsWith(prefix))
+        ))
         .map((record) => ({
           iterationId: record.iterationId,
           request: {
@@ -94,6 +98,20 @@ function buildRawContext(recordingRoot) {
 
 function buildFeatureContext(farmRoot) {
   const summary = readJson(path.join(farmRoot, 'cross-session.json'));
+  const generalizationWarnings = summary.crossSessionEndpoints
+    .filter((endpoint) => endpoint.signature.includes(':var'))
+    .map((endpoint) => ({
+      endpoint: endpoint.signature,
+      concreteExamples: [...new Set((endpoint.examples || []).map((example) => {
+        try {
+          const url = new URL(example);
+          return `${endpoint.routeKey.split(' ', 1)[0]} ${url.pathname}${url.search}`;
+        } catch {
+          return example;
+        }
+      }))],
+      warning: 'Concrete sibling names are recoverable from examples, but request fields, response schemas, query keys, and statuses are aggregated at the generalized endpoint level and may differ by sibling.',
+    }));
   return {
     kind: 'machine-farmed-features',
     collection: {
@@ -107,6 +125,7 @@ function buildFeatureContext(farmRoot) {
     fields: summary.crossSessionFields,
     schemas: summary.crossSessionSchemas,
     patterns: summary.patternTotals,
+    generalizationWarnings,
   };
 }
 
@@ -198,10 +217,11 @@ function compactFeatureContext(features, budgetChars) {
     )),
     workflow: features.workflow,
     patterns: features.patterns,
+    generalizationWarnings: features.generalizationWarnings || [],
     fields: features.fields.filter((field) => coreSignatures.has(field.endpoint)),
     schemas: features.schemas.filter((schema) => coreSignatures.has(schema.endpoint)),
   };
-  for (const key of ['fields', 'schemas', 'endpoints']) {
+  for (const key of ['fields', 'schemas']) {
     while (compact[key].length && jsonChars(compact) > budgetChars) compact[key].pop();
   }
   if (jsonChars(compact) > budgetChars) {
@@ -214,13 +234,25 @@ function compactFeatureContext(features, budgetChars) {
       transforms: relation.transforms,
     }));
   }
+  while (compact.relations.length && jsonChars(compact) > budgetChars) compact.relations.pop();
+  while (compact.workflow.length && jsonChars(compact) > budgetChars) compact.workflow.pop();
+  if (jsonChars(compact) > budgetChars) compact.patterns = {};
   compact.omitted = {
     endpoints: features.endpoints.length - compact.endpoints.length,
+    relations: features.relations.length - compact.relations.length,
+    workflow: features.workflow.length - compact.workflow.length,
     fields: features.fields.length - compact.fields.length,
     schemas: features.schemas.length - compact.schemas.length,
   };
-  for (const key of ['fields', 'schemas', 'endpoints']) {
+  for (const key of ['fields', 'schemas']) {
     while (compact[key].length && jsonChars(compact) > budgetChars) compact[key].pop();
+  }
+  while (compact.relations.length && jsonChars(compact) > budgetChars) compact.relations.pop();
+  while (compact.workflow.length && jsonChars(compact) > budgetChars) compact.workflow.pop();
+  while (compact.endpoints.length > 1 && jsonChars(compact) > budgetChars) compact.endpoints.pop();
+  if (jsonChars(compact) > budgetChars) {
+    compact.collection = {};
+    compact.omitted = { budgetExhausted: true };
   }
   return compact;
 }
@@ -246,10 +278,12 @@ function buildBudgetedEvidence({ condition, raw, features, budgetChars = Infinit
       },
     };
   }
+  const envelopeReserve = 128;
+  const payloadBudget = Math.max(0, budgetChars - envelopeReserve);
   return {
-    rawTimeline: condition.raw ? compactRawContext(raw, budgetChars) : null,
-    farmedFeatures: condition.features ? compactFeatureContext(features, budgetChars) : null,
-    budget: { totalChars: budgetChars },
+    rawTimeline: condition.raw ? compactRawContext(raw, payloadBudget) : null,
+    farmedFeatures: condition.features ? compactFeatureContext(features, payloadBudget) : null,
+    budget: { totalChars: budgetChars, envelopeReserve },
   };
 }
 

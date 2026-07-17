@@ -1,0 +1,865 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-17T21:56:10.557Z",
+  "benchmark": "farmer-gym-v5",
+  "arms": {
+    "A": "single",
+    "B": "cross-session"
+  },
+  "cases": [
+    {
+      "id": "simple-exact-noise",
+      "title": "Exact Needle",
+      "axis": "simple-noise",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/simple-exact-noise/open",
+            "/api/v5/simple-exact-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/simple-exact-noise/open?",
+            "PUT 127.0.0.1/api/v5/simple-exact-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/simple-exact-noise/open",
+            "/api/v5/simple-exact-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/simple-exact-noise/open?",
+            "PUT 127.0.0.1/api/v5/simple-exact-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    },
+    {
+      "id": "simple-base64-noise",
+      "title": "Base64 Beacon",
+      "axis": "simple-noise",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/simple-base64-noise/open",
+            "/api/v5/simple-base64-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/simple-base64-noise/open?",
+            "PUT 127.0.0.1/api/v5/simple-base64-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/simple-base64-noise/open",
+            "/api/v5/simple-base64-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/simple-base64-noise/open?",
+            "PUT 127.0.0.1/api/v5/simple-base64-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    },
+    {
+      "id": "simple-case-noise",
+      "title": "Uppercase Lantern",
+      "axis": "simple-noise",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/simple-case-noise/open",
+            "/api/v5/simple-case-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/simple-case-noise/open?",
+            "PUT 127.0.0.1/api/v5/simple-case-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/simple-case-noise/open",
+            "/api/v5/simple-case-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/simple-case-noise/open?",
+            "PUT 127.0.0.1/api/v5/simple-case-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    },
+    {
+      "id": "simple-prefix-noise",
+      "title": "Prefix Marker",
+      "axis": "simple-noise",
+      "single": {
+        "mode": "single",
+        "score": 80,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/simple-prefix-noise/open",
+            "/api/v5/simple-prefix-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/simple-prefix-noise/open?",
+            "PUT 127.0.0.1/api/v5/simple-prefix-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5,
+          "expected": 2,
+          "matched": 1,
+          "relevantPredictions": 2,
+          "missed": [
+            {
+              "sourceRoute": "open",
+              "sourceFields": [
+                "response.body.json$.token"
+              ],
+              "targetRoute": "close",
+              "targetField": "request.body.json$.proof",
+              "kind": "suffix-copy",
+              "transform": {}
+            }
+          ]
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 86.67,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/simple-prefix-noise/open",
+            "/api/v5/simple-prefix-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/simple-prefix-noise/open?",
+            "PUT 127.0.0.1/api/v5/simple-prefix-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 0.5,
+          "f1": 0.667,
+          "expected": 2,
+          "matched": 1,
+          "relevantPredictions": 1,
+          "missed": [
+            {
+              "sourceRoute": "open",
+              "sourceFields": [
+                "response.body.json$.token"
+              ],
+              "targetRoute": "close",
+              "targetField": "request.body.json$.proof",
+              "kind": "suffix-copy",
+              "transform": {}
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "hard-sha256-clean",
+      "title": "SHA-256 Triple",
+      "axis": "hard-clean",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha256-clean/open",
+            "/api/v5/hard-sha256-clean/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-sha256-clean/open?",
+            "PUT 127.0.0.1/api/v5/hard-sha256-clean/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha256-clean/open",
+            "/api/v5/hard-sha256-clean/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-sha256-clean/open?",
+            "PUT 127.0.0.1/api/v5/hard-sha256-clean/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    },
+    {
+      "id": "hard-sha1-clean",
+      "title": "SHA-1 Pair",
+      "axis": "hard-clean",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha1-clean/open",
+            "/api/v5/hard-sha1-clean/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-sha1-clean/open?",
+            "PUT 127.0.0.1/api/v5/hard-sha1-clean/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha1-clean/open",
+            "/api/v5/hard-sha1-clean/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-sha1-clean/open?",
+            "PUT 127.0.0.1/api/v5/hard-sha1-clean/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    },
+    {
+      "id": "hard-md5-clean",
+      "title": "MD5 Ordered Triple",
+      "axis": "hard-clean",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-md5-clean/open",
+            "/api/v5/hard-md5-clean/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-md5-clean/open?",
+            "PUT 127.0.0.1/api/v5/hard-md5-clean/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-md5-clean/open",
+            "/api/v5/hard-md5-clean/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-md5-clean/open?",
+            "PUT 127.0.0.1/api/v5/hard-md5-clean/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    },
+    {
+      "id": "hard-sha256-nodelim-clean",
+      "title": "SHA-256 Tight Join",
+      "axis": "hard-clean",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha256-nodelim-clean/open",
+            "/api/v5/hard-sha256-nodelim-clean/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/:token/open?",
+            "PUT 127.0.0.1/api/v5/:token/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha256-nodelim-clean/open",
+            "/api/v5/hard-sha256-nodelim-clean/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/:token/open?",
+            "PUT 127.0.0.1/api/v5/:token/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    },
+    {
+      "id": "hard-sha256-noise",
+      "title": "SHA-256 Storm",
+      "axis": "hard-noise",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha256-noise/open",
+            "/api/v5/hard-sha256-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-sha256-noise/open?",
+            "PUT 127.0.0.1/api/v5/hard-sha256-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha256-noise/open",
+            "/api/v5/hard-sha256-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-sha256-noise/open?",
+            "PUT 127.0.0.1/api/v5/hard-sha256-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    },
+    {
+      "id": "hard-sha1-noise",
+      "title": "SHA-1 Fog",
+      "axis": "hard-noise",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha1-noise/open",
+            "/api/v5/hard-sha1-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-sha1-noise/open?",
+            "PUT 127.0.0.1/api/v5/hard-sha1-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha1-noise/open",
+            "/api/v5/hard-sha1-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-sha1-noise/open?",
+            "PUT 127.0.0.1/api/v5/hard-sha1-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    },
+    {
+      "id": "hard-md5-noise",
+      "title": "MD5 Decoy Field",
+      "axis": "hard-noise",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-md5-noise/open",
+            "/api/v5/hard-md5-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-md5-noise/open?",
+            "PUT 127.0.0.1/api/v5/hard-md5-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-md5-noise/open",
+            "/api/v5/hard-md5-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/hard-md5-noise/open?",
+            "PUT 127.0.0.1/api/v5/hard-md5-noise/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    },
+    {
+      "id": "hard-sha256-candidate-noise",
+      "title": "SHA-256 Candidate Maze",
+      "axis": "hard-noise",
+      "single": {
+        "mode": "single",
+        "score": 92,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha256-candidate-noise/open",
+            "/api/v5/hard-sha256-candidate-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/:token/open?",
+            "PUT 127.0.0.1/api/v5/:token/close?"
+          ]
+        },
+        "relations": {
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
+        }
+      },
+      "cross-session": {
+        "mode": "cross-session",
+        "score": 100,
+        "endpointClassification": {
+          "corePrecision": 1,
+          "coreRecall": 1,
+          "coreF1": 1,
+          "noiseRecall": 1
+        },
+        "workflow": {
+          "orderedRecall": 1,
+          "expected": [
+            "/api/v5/hard-sha256-candidate-noise/open",
+            "/api/v5/hard-sha256-candidate-noise/close"
+          ],
+          "predicted": [
+            "POST 127.0.0.1/api/v5/:token/open?",
+            "PUT 127.0.0.1/api/v5/:token/close?"
+          ]
+        },
+        "relations": {
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "expected": 2,
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
+        }
+      }
+    }
+  ],
+  "aggregates": [
+    {
+      "arm": "single",
+      "cases": 12,
+      "meanScore": 91,
+      "meanCoreF1": 1,
+      "meanNoiseRecall": 1,
+      "meanWorkflowRecall": 1,
+      "meanRelationF1": 0.775,
+      "relationCasesFullyRecovered": 11
+    },
+    {
+      "arm": "cross-session",
+      "cases": 12,
+      "meanScore": 98.89,
+      "meanCoreF1": 1,
+      "meanNoiseRecall": 1,
+      "meanWorkflowRecall": 1,
+      "meanRelationF1": 0.972,
+      "relationCasesFullyRecovered": 11
+    }
+  ],
+  "axes": [
+    {
+      "axis": "simple-noise",
+      "cases": 4,
+      "singleMeanScore": 89,
+      "crossSessionMeanScore": 96.67,
+      "singleRelationRecall": 0.875,
+      "crossSessionRelationRecall": 0.875
+    },
+    {
+      "axis": "hard-clean",
+      "cases": 4,
+      "singleMeanScore": 92,
+      "crossSessionMeanScore": 100,
+      "singleRelationRecall": 1,
+      "crossSessionRelationRecall": 1
+    },
+    {
+      "axis": "hard-noise",
+      "cases": 4,
+      "singleMeanScore": 92,
+      "crossSessionMeanScore": 100,
+      "singleRelationRecall": 1,
+      "crossSessionRelationRecall": 1
+    }
+  ],
+  "run": {
+    "sessionsPerCase": 3,
+    "iterationsPerSession": 5
+  }
+}

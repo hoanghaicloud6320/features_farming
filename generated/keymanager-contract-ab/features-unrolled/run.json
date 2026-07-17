@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-07-17T22:37:42.371Z",
+  "model": "gemini-3.1-flash-lite",
+  "sourceEvidence": "features/evidence.json",
+  "evidenceChars": 31667,
+  "promptTokens": 13398,
+  "endpointClaims": 8,
+  "responseId": "Yq5aapWYJ_KZ0-kPr-_r4QY",
+  "diagnosticOnly": true,
+  "promptDiffersFromCanonicalMatrix": true
+}
