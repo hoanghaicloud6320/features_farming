@@ -1,0 +1,69 @@
+{
+  "condition": "raw-features",
+  "conditionLabel": "Raw + features",
+  "benchmarkRunId": "gym-easy-raw-features-f13419e6",
+  "evidenceBytes": 27997,
+  "promptHash": "d0626d9397594093001fe76ba465fc69174a72457ff5956a06b47a4600fdde9b",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 15852,
+      "candidatesTokenCount": 450,
+      "totalTokenCount": 16302,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 15852
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "_4xaarSXK7_I0-kPzprgsQY",
+    "assessment": {
+      "approach": "The challenge requires a two-step interaction: first, POST to /api/marble/session to obtain a runId and handoffKey, then PUT those values to /api/marble/confirm to complete the challenge. I will use the provided evidence to construct these two requests sequentially, ensuring the required headers are included.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/marble/session",
+        "PUT 127.0.0.1/api/marble/confirm",
+        "The relationship between session response fields (runId, handoffKey) and confirm request body fields."
+      ],
+      "uncertainties": [
+        "None, as the workflow is deterministic and fully documented in the evidence."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 495,
+    "stdout": "✔ complete marble relay challenge (96.4504ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 330.2194\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/marble/session",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/marble/confirm",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/marble/session",
+      "/api/marble/confirm"
+    ],
+    "expectedRoutes": [
+      "/api/marble/session",
+      "/api/marble/confirm"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

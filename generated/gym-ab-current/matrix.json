@@ -1,0 +1,1196 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-17T21:20:11.167Z",
+  "model": "gemini-3.1-flash-lite",
+  "conditions": [
+    {
+      "id": "none",
+      "label": "No evidence",
+      "raw": false,
+      "features": false
+    },
+    {
+      "id": "raw",
+      "label": "Raw recorder",
+      "raw": true,
+      "features": false
+    },
+    {
+      "id": "features",
+      "label": "Farmed features",
+      "raw": false,
+      "features": true
+    },
+    {
+      "id": "raw-features",
+      "label": "Raw + features",
+      "raw": true,
+      "features": true
+    }
+  ],
+  "trials": 1,
+  "contextBudgetChars": 24000,
+  "challenges": [
+    {
+      "id": "easy",
+      "difficulty": "Easy · direct value flow",
+      "cells": [
+        {
+          "condition": "none",
+          "conditionLabel": "No evidence",
+          "trial": 1,
+          "benchmarkRunId": "gym-easy-none-t1-b875dfc4",
+          "evidenceBytes": 72,
+          "promptHash": "24f4d2762902ea3120061dbf29f301d459e9b3e3dc0c921718e234482148d394",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 355,
+              "candidatesTokenCount": 333,
+              "totalTokenCount": 688,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 355
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "RJxaarmAHprOrfcPlrfMoAc",
+            "assessment": {
+              "approach": "Since no specific routes were provided in the evidence, I will attempt to access the root path to identify the challenge endpoint or structure, assuming a standard RESTful interaction pattern for the Marble Relay challenge.",
+              "evidenceUsed": [
+                "Target origin: http://127.0.0.1:65097",
+                "Header: x-gym-benchmark-run: gym-easy-none-t1-b875dfc4"
+              ],
+              "uncertainties": [
+                "The exact endpoint for the Marble Relay challenge is unknown.",
+                "The expected HTTP method for the challenge submission is unknown."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 433,
+            "timedOut": false,
+            "stdout": "✖ Marble Relay Challenge (80.9068ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 256.95\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ Marble Relay Challenge (80.9068ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  404 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-refresh-24k\\easy\\none\\trial-1\\automation.test.js:1:410)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 404,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-refresh-24k\\easy\\none\\trial-1\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [],
+            "expectedRoutes": [
+              "/api/marble/session",
+              "/api/marble/confirm"
+            ],
+            "routeCoverage": 0,
+            "score": 0
+          }
+        },
+        {
+          "condition": "raw",
+          "conditionLabel": "Raw recorder",
+          "trial": 1,
+          "benchmarkRunId": "gym-easy-raw-t1-0478e40d",
+          "evidenceBytes": 11872,
+          "promptHash": "58974ad6f64f578a375c9c688d9fa9d49934f5283e6391eef442616015ff03f3",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 6674,
+              "candidatesTokenCount": 406,
+              "totalTokenCount": 7080,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 6674
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "TpxaaoqZLIzq2roP35b9oAU",
+            "assessment": {
+              "approach": "The challenge requires initiating a session via a POST request to /api/marble/session and then confirming it with a PUT request to /api/marble/confirm using the runId and handoffKey returned by the session creation. The evidence shows this pattern consistently results in an accepted response.",
+              "evidenceUsed": [
+                "POST /api/marble/session",
+                "PUT /api/marble/confirm",
+                "Response structure containing runId, handoffKey, and accepted status"
+              ],
+              "uncertainties": [
+                "None, the API pattern is deterministic based on the provided evidence."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 487,
+            "stdout": "✔ complete marble relay challenge (88.9428ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 318.42\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/marble/session",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/marble/confirm",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/marble/session",
+              "/api/marble/confirm"
+            ],
+            "expectedRoutes": [
+              "/api/marble/session",
+              "/api/marble/confirm"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "features",
+          "conditionLabel": "Farmed features",
+          "trial": 1,
+          "benchmarkRunId": "gym-easy-features-t1-629d6e7d",
+          "evidenceBytes": 16477,
+          "promptHash": "2da958582384477b401820f5b784894fd5c4efec9039574cb33cca484eab9ea6",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 9706,
+              "candidatesTokenCount": 430,
+              "totalTokenCount": 10136,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 9706
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "VZxaavG2G_z52roPrayIqAQ",
+            "assessment": {
+              "approach": "The challenge requires a two-step interaction: first, POST to /api/marble/session to obtain a runId and handoffKey, then PUT to /api/marble/confirm using those values to receive the success response. I will use the provided evidence to construct the request bodies and headers.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/marble/session",
+                "PUT 127.0.0.1/api/marble/confirm",
+                "Exact-copy relations for runId and handoffKey"
+              ],
+              "uncertainties": [
+                "None, the workflow is explicitly defined in the evidence."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 474,
+            "stdout": "✔ Marble Relay Challenge (90.1412ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 314.4786\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/marble/session",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/marble/confirm",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/marble/session",
+              "/api/marble/confirm"
+            ],
+            "expectedRoutes": [
+              "/api/marble/session",
+              "/api/marble/confirm"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "raw-features",
+          "conditionLabel": "Raw + features",
+          "trial": 1,
+          "benchmarkRunId": "gym-easy-raw-features-t1-06bf9d25",
+          "evidenceBytes": 23530,
+          "promptHash": "adb88b34258ea3e463aa515f14da8f582a60667b8e340723ea04b56875c29916",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 13431,
+              "candidatesTokenCount": 442,
+              "totalTokenCount": 13873,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 13431
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "YJxaaqqlIvKy2roP87buiA0",
+            "assessment": {
+              "approach": "The challenge requires a two-step workflow: first, initialize a session by sending a POST request to /api/marble/session with a label, then use the returned runId and handoffKey to confirm the session via a PUT request to /api/marble/confirm. The evidence confirms these are the only two endpoints needed.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/marble/session",
+                "PUT 127.0.0.1/api/marble/confirm",
+                "Exact-copy relations between session response and confirm request fields (runId, handoffKey)"
+              ],
+              "uncertainties": [
+                "None, the workflow is deterministic and fully documented in the evidence."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 475,
+            "stdout": "✔ Marble Relay challenge (85.4751ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 315.025\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/marble/session",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/marble/confirm",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/marble/session",
+              "/api/marble/confirm"
+            ],
+            "expectedRoutes": [
+              "/api/marble/session",
+              "/api/marble/confirm"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "medium",
+      "difficulty": "Medium · transformed value flow",
+      "cells": [
+        {
+          "condition": "none",
+          "conditionLabel": "No evidence",
+          "trial": 1,
+          "benchmarkRunId": "gym-medium-none-t1-fd610877",
+          "evidenceBytes": 72,
+          "promptHash": "9cd9cdbd1597eb79817f66d78c3699185ada9bc45d4bfccd08f97cd0a4afe35a",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 355,
+              "candidatesTokenCount": 331,
+              "totalTokenCount": 686,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 355
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "Z5xaapbqDbLH2roP4f7qiAE",
+            "assessment": {
+              "approach": "Since no specific routes were provided in the evidence, I will attempt to access the root endpoint to identify the challenge structure and then POST to the likely endpoint based on the challenge requirements.",
+              "evidenceUsed": [
+                "Target origin: http://127.0.0.1:65097",
+                "Header: x-gym-benchmark-run: gym-medium-none-t1-fd610877"
+              ],
+              "uncertainties": [
+                "The exact endpoint for the challenge is unknown.",
+                "The expected payload structure for the challenge submission is inferred from the goal."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 426,
+            "timedOut": false,
+            "stdout": "✖ Lattice Capsule challenge (81.3631ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 260.6781\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ Lattice Capsule challenge (81.3631ms)\n  SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON\n      at JSON.parse (<anonymous>)\n      at parseJSONFromBytes (node:internal/deps/undici/undici:4387:19)\n      at successSteps (node:internal/deps/undici/undici:7041:27)\n      at readAllBytes (node:internal/deps/undici/undici:5958:13)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-refresh-24k\\medium\\none\\trial-1\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [],
+            "expectedRoutes": [
+              "/api/lattice/seed",
+              "/api/lattice/unseal"
+            ],
+            "routeCoverage": 0,
+            "score": 0
+          }
+        },
+        {
+          "condition": "raw",
+          "conditionLabel": "Raw recorder",
+          "trial": 1,
+          "benchmarkRunId": "gym-medium-raw-t1-dee4a7f3",
+          "evidenceBytes": 12577,
+          "promptHash": "9b8953108e39832a3bdce7e4d9d483a722a84824490a746d8d6f0489bc89408e",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 7103,
+              "candidatesTokenCount": 473,
+              "totalTokenCount": 7576,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 7103
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "bZxaasz-LpbC0-kPmdKeYA",
+            "assessment": {
+              "approach": "The challenge requires interacting with the /api/lattice/seed endpoint to obtain a runId and a capsule identifier, then using the capsule identifier as a Bearer token to authorize a PUT request to /api/lattice/unseal with the runId in the body. The evidence shows that the capsule identifier is base64 encoded, and the authorization header expects 'Bearer <base64(capsule)>'. I will perform these two steps sequentially.",
+              "evidenceUsed": [
+                "POST /api/lattice/seed returns runId and capsule",
+                "PUT /api/lattice/unseal requires Authorization: Bearer <base64(capsule)> and body {runId: <runId>}"
+              ],
+              "uncertainties": [
+                "None, the protocol is clearly defined in the provided evidence."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 473,
+            "stdout": "✔ complete lattice capsule challenge (89.717ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 310.6726\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/lattice/seed",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/lattice/unseal",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/lattice/seed",
+              "/api/lattice/unseal"
+            ],
+            "expectedRoutes": [
+              "/api/lattice/seed",
+              "/api/lattice/unseal"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "features",
+          "conditionLabel": "Farmed features",
+          "trial": 1,
+          "benchmarkRunId": "gym-medium-features-t1-9d9ed2f0",
+          "evidenceBytes": 17294,
+          "promptHash": "ccd46fbdcb1c509cbd57ff2e4b8c020ef262522b238488a41c51c2f598d27160",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 10291,
+              "candidatesTokenCount": 513,
+              "totalTokenCount": 10804,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 10291
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "dZxaaqP1IMmw0-kP0KS_mA4",
+            "assessment": {
+              "approach": "The challenge requires a two-step workflow: first, calling the POST /api/lattice/seed endpoint to obtain a runId and a capsule string. Second, using these values to call the PUT /api/lattice/unseal endpoint. The capsule must be base64url-encoded and prefixed with 'Bearer ' to be used in the Authorization header, while the runId is passed in the JSON body.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/lattice/seed",
+                "PUT 127.0.0.1/api/lattice/unseal",
+                "authorization-base64-decoded-copy relation",
+                "exact-copy relation for runId"
+              ],
+              "uncertainties": [
+                "None, the workflow is explicitly defined in the evidence."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 472,
+            "stdout": "✔ Lattice Capsule Challenge (87.8894ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 314.4649\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/lattice/seed",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/lattice/unseal",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/lattice/seed",
+              "/api/lattice/unseal"
+            ],
+            "expectedRoutes": [
+              "/api/lattice/seed",
+              "/api/lattice/unseal"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "raw-features",
+          "conditionLabel": "Raw + features",
+          "trial": 1,
+          "benchmarkRunId": "gym-medium-raw-features-t1-656d92d3",
+          "evidenceBytes": 23812,
+          "promptHash": "d251b3c4dff466aa0f79b268b8d95fa60e08c268ba4898587cd75f75df3b8f50",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 13736,
+              "candidatesTokenCount": 548,
+              "totalTokenCount": 14284,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 13736
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "f5xaaqz1D7_I0-kP1pLIkQc",
+            "assessment": {
+              "approach": "The challenge requires a two-step workflow: first, POST to /api/lattice/seed to obtain a runId and a capsule string. Second, use the runId in the body of a PUT request to /api/lattice/unseal, while providing the capsule string as a Bearer token in the Authorization header. The capsule must be base64url encoded and prefixed with 'Bearer '.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.runId",
+                "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.capsule",
+                "PUT 127.0.0.1/api/lattice/unseal? :: request.body.json$.runId",
+                "PUT 127.0.0.1/api/lattice/unseal? :: request.header$header.authorization"
+              ],
+              "uncertainties": [
+                "None, the workflow is clearly defined by the evidence."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 835,
+            "stdout": "✔ Lattice Capsule (124.2844ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 542.865\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/lattice/seed",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/lattice/unseal",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/lattice/seed",
+              "/api/lattice/unseal"
+            ],
+            "expectedRoutes": [
+              "/api/lattice/seed",
+              "/api/lattice/unseal"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "hard",
+      "difficulty": "Hard · inferred bridge plus direct relay",
+      "cells": [
+        {
+          "condition": "none",
+          "conditionLabel": "No evidence",
+          "trial": 1,
+          "benchmarkRunId": "gym-hard-none-t1-d605514e",
+          "evidenceBytes": 72,
+          "promptHash": "e8af655fac1e1c1f81838734f6981a655a928711dc6619d6e40dd21e59ea9456",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 356,
+              "candidatesTokenCount": 347,
+              "totalTokenCount": 703,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 356
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "iZxaau65Dr_I0-kPzprgsQY",
+            "assessment": {
+              "approach": "Since no specific routes were provided in the evidence, I will attempt to access the root and common endpoints to identify the bridge mechanism. Given the challenge name 'Prism Bridge', I will look for a POST endpoint that accepts a JSON payload to satisfy the challenge requirements.",
+              "evidenceUsed": [
+                "Target origin: http://127.0.0.1:65097",
+                "Header: x-gym-benchmark-run: gym-hard-none-t1-d605514e"
+              ],
+              "uncertainties": [
+                "No documentation or routes provided",
+                "Unknown endpoint structure",
+                "Unknown payload format for the challenge"
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 426,
+            "timedOut": false,
+            "stdout": "✖ Prism Bridge Challenge (83.1476ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 258.3187\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ Prism Bridge Challenge (83.1476ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  404 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-refresh-24k\\hard\\none\\trial-1\\automation.test.js:1:407)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 404,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-refresh-24k\\hard\\none\\trial-1\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [],
+            "expectedRoutes": [
+              "/api/prism/origin",
+              "/api/prism/bridge",
+              "/api/prism/complete"
+            ],
+            "routeCoverage": 0,
+            "score": 0
+          }
+        },
+        {
+          "condition": "raw",
+          "conditionLabel": "Raw recorder",
+          "trial": 1,
+          "benchmarkRunId": "gym-hard-raw-t1-8c92b9ab",
+          "evidenceBytes": 18367,
+          "promptHash": "d11eafaeb52ba248027e84ec374cfc6682d3c7e009312a945db69412c7d7e68b",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 10269,
+              "candidatesTokenCount": 643,
+              "totalTokenCount": 10912,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 10269
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "j5xaatHQHL7p2roPuZKmsAg",
+            "assessment": {
+              "approach": "The challenge requires a three-step interaction: POST to /api/prism/origin to get a runId, seed, and salt; compute a proof (which appears to be a hex-encoded hash of the seed and salt); and PUT to /api/prism/bridge to get a bridgeTicket, followed by a PATCH to /api/prism/complete. Since I cannot perform arbitrary computation or know the exact hashing algorithm, I will use the evidence provided to identify the pattern. The evidence shows that for each run, a specific proof is submitted. I will attempt to replicate the flow using the most recent successful sequence from the evidence.",
+              "evidenceUsed": [
+                "The sequence of endpoints: POST /api/prism/origin, PUT /api/prism/bridge, PATCH /api/prism/complete.",
+                "The structure of the request bodies and the required headers (x-gym-benchmark-run).",
+                "The specific values for runId, proof, and ticket from the last successful interaction in the evidence."
+              ],
+              "uncertainties": [
+                "The exact hashing algorithm used to generate the 'proof' field is unknown, so I must rely on the provided evidence values.",
+                "The server state might be reset or require a fresh runId for each attempt."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 491,
+            "timedOut": false,
+            "stdout": "✖ complete prism bridge hard (88.3637ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 327.3501\n\n✖ failing tests:\n\ntest at automation.test.js:1:230\n✖ complete prism bridge hard (88.3637ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  422 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-refresh-24k\\hard\\raw\\trial-1\\automation.test.js:1:722)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 422,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-refresh-24k\\hard\\raw\\trial-1\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/prism/origin",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/prism/bridge",
+                "status": 422
+              }
+            ],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [
+              "/api/prism/origin",
+              "/api/prism/bridge"
+            ],
+            "expectedRoutes": [
+              "/api/prism/origin",
+              "/api/prism/bridge",
+              "/api/prism/complete"
+            ],
+            "routeCoverage": 0.667,
+            "score": 2
+          }
+        },
+        {
+          "condition": "features",
+          "conditionLabel": "Farmed features",
+          "trial": 1,
+          "benchmarkRunId": "gym-hard-features-t1-e5ea6a10",
+          "evidenceBytes": 23862,
+          "promptHash": "550eb8563f68afd1c5784482186b8a15fc3bd4fb8982b40cc1a30eceedc3964b",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 13770,
+              "candidatesTokenCount": 630,
+              "totalTokenCount": 14400,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 13770
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "m5xaarfHNsPH2roP3tyViQE",
+            "assessment": {
+              "approach": "The challenge requires a three-step workflow: 1. POST to /api/prism/origin to get a runId, seed, and salt. 2. Calculate a SHA-256 hash of the concatenated seed, salt, and label (from the first request) to generate a proof, then PUT to /api/prism/bridge with the runId and proof. 3. PATCH to /api/prism/complete with the runId and the bridgeTicket received from the second step.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/prism/origin",
+                "PUT 127.0.0.1/api/prism/bridge",
+                "PATCH 127.0.0.1/api/prism/complete",
+                "hash-derived-copy relation for proof generation",
+                "exact-copy relations for runId and ticket propagation"
+              ],
+              "uncertainties": [
+                "The exact string concatenation order for the hash input is inferred from the relation metadata as seed:salt:label."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 476,
+            "stdout": "✔ Prism Bridge Challenge (92.9842ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 315.6798\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/prism/origin",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/prism/bridge",
+                "status": 200
+              },
+              {
+                "method": "PATCH",
+                "route": "/api/prism/complete",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/prism/origin",
+              "/api/prism/bridge",
+              "/api/prism/complete"
+            ],
+            "expectedRoutes": [
+              "/api/prism/origin",
+              "/api/prism/bridge",
+              "/api/prism/complete"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "raw-features",
+          "conditionLabel": "Raw + features",
+          "trial": 1,
+          "benchmarkRunId": "gym-hard-raw-features-t1-c3b3f8e5",
+          "evidenceBytes": 23592,
+          "promptHash": "908048a0ef5179ce2ce8d8f37d0b11582e02bea317e0c7d613d7e2c7ef78048e",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 13066,
+              "candidatesTokenCount": 600,
+              "totalTokenCount": 13666,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 13066
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "p5xaatL9GtOp0-kPgrbtmQE",
+            "assessment": {
+              "approach": "The challenge requires a three-step workflow: 1) POST to /api/prism/origin to get a runId, seed, and salt. 2) Generate a proof by hashing the seed and salt (using SHA256, hex-encoded, sliced to 24 chars) and PUT it to /api/prism/bridge along with the runId. 3) PATCH the runId and the returned bridgeTicket to /api/prism/complete to finalize the challenge.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/prism/origin",
+                "PUT 127.0.0.1/api/prism/bridge",
+                "PATCH 127.0.0.1/api/prism/complete",
+                "hash-derived-copy relation for proof generation"
+              ],
+              "uncertainties": [
+                "None, the workflow and transformation logic are clearly defined in the evidence."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 492,
+            "stdout": "✔ Prism Bridge Challenge (83.3954ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 325.7984\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/prism/origin",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/prism/bridge",
+                "status": 200
+              },
+              {
+                "method": "PATCH",
+                "route": "/api/prism/complete",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/prism/origin",
+              "/api/prism/bridge",
+              "/api/prism/complete"
+            ],
+            "expectedRoutes": [
+              "/api/prism/origin",
+              "/api/prism/bridge",
+              "/api/prism/complete"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "noise",
+      "difficulty": "Noisy · dependency hidden among decoys",
+      "cells": [
+        {
+          "condition": "none",
+          "conditionLabel": "No evidence",
+          "trial": 1,
+          "benchmarkRunId": "gym-noise-none-t1-2f5805e7",
+          "evidenceBytes": 72,
+          "promptHash": "804a1831c6cb1b14ded465480bba69eab74c3453efebbf4cbca92bb669127ea5",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 356,
+              "candidatesTokenCount": 337,
+              "totalTokenCount": 693,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 356
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "r5xaataRJ8fLrfcP1dK02QE",
+            "assessment": {
+              "approach": "Since no specific routes were provided in the evidence, I will attempt to access the root path and common endpoints to identify the challenge interface. Given the goal is to receive a JSON response with accepted: true, I will inspect the response body of the initial request to determine the correct path or method.",
+              "evidenceUsed": [
+                "Target origin: http://127.0.0.1:65097",
+                "Header: x-gym-benchmark-run: gym-noise-none-t1-2f5805e7"
+              ],
+              "uncertainties": [
+                "The exact endpoint for the challenge is unknown.",
+                "The required HTTP method (GET/POST) is unknown."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 426,
+            "timedOut": false,
+            "stdout": "✖ Aurora Needle challenge (82.7677ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 260.9433\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ Aurora Needle challenge (82.7677ms)\n  SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON\n      at JSON.parse (<anonymous>)\n      at parseJSONFromBytes (node:internal/deps/undici/undici:4387:19)\n      at successSteps (node:internal/deps/undici/undici:7041:27)\n      at readAllBytes (node:internal/deps/undici/undici:5958:13)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-refresh-24k\\noise\\none\\trial-1\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 0,
+            "score": 0
+          }
+        },
+        {
+          "condition": "raw",
+          "conditionLabel": "Raw recorder",
+          "trial": 1,
+          "benchmarkRunId": "gym-noise-raw-t1-43bd4e8e",
+          "evidenceBytes": 23715,
+          "promptHash": "e8f3d53a8fc945f40769b8c3ba2efc1dd777a32e6b4ca123e36d5d299e651946",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 14142,
+              "candidatesTokenCount": 502,
+              "totalTokenCount": 14644,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 14142
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "tpxaarWWHb2l0-kPh4jTuQ4",
+            "assessment": {
+              "approach": "The challenge requires initiating a session via POST /api/aurora/open, sending event data via POST /api/events, and finally closing the session via PUT /api/aurora/close to receive the accepted response. I will follow the observed pattern from the evidence.",
+              "evidenceUsed": [
+                "POST /api/aurora/open",
+                "POST /api/events",
+                "PUT /api/aurora/close"
+              ],
+              "uncertainties": [
+                "The exact runId and signal values are dynamic and must be extracted from the response of the open request."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 478,
+            "timedOut": false,
+            "stdout": "✖ Aurora Needle challenge (89.1784ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 309.8307\n\n✖ failing tests:\n\ntest at automation.test.js:1:231\n✖ Aurora Needle challenge (89.1784ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  422 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-refresh-24k\\noise\\raw\\trial-1\\automation.test.js:1:946)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 422,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-refresh-24k\\noise\\raw\\trial-1\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "POST",
+                "route": "/api/events",
+                "status": 202
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 422
+              }
+            ],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 3
+          }
+        },
+        {
+          "condition": "features",
+          "conditionLabel": "Farmed features",
+          "trial": 1,
+          "benchmarkRunId": "gym-noise-features-t1-cfd6970e",
+          "evidenceBytes": 23590,
+          "promptHash": "50f2eb15da6025dca9c63f47958d1bc27849f6ace81165b3166e3c1b60aa1295",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 14065,
+              "candidatesTokenCount": 572,
+              "totalTokenCount": 14637,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 14065
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "w5xaat3_JuP22roPjorRcQ",
+            "assessment": {
+              "approach": "The challenge requires interacting with two endpoints: POST /api/aurora/open and PUT /api/aurora/close. Based on the evidence, the workflow involves calling 'open' to retrieve a 'runId' and a list of 'channels', then using the 'runId' and the 'signal' from the 24th channel (index 23) in the 'close' request.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/aurora/open? :: response.body.json$.runId",
+                "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[23].signal",
+                "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.runId",
+                "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.signal"
+              ],
+              "uncertainties": [
+                "The exact value of the 'sequence' field in the POST request is not strictly constrained, but it is an increasing integer. I will use a static value of 10."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 549,
+            "stdout": "✔ Aurora Needle challenge (92.106ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 351.916\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "raw-features",
+          "conditionLabel": "Raw + features",
+          "trial": 1,
+          "benchmarkRunId": "gym-noise-raw-features-t1-38e9cb9d",
+          "evidenceBytes": 22494,
+          "promptHash": "c1213bbc6bc20eaf767a548f1c65e5c98b4aee3ac7a4dc23bd6226135b9e4f72",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 12446,
+              "candidatesTokenCount": 492,
+              "totalTokenCount": 12938,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 12446
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "zZxaauiLGorB0-kP842EyQc",
+            "assessment": {
+              "approach": "The challenge requires interacting with the Aurora API. Based on the evidence, the workflow involves first calling POST /api/aurora/open to obtain a runId and signal data, then using these values in a PUT /api/aurora/close request to complete the challenge. I will extract the runId and the signal from the 23rd channel (index 22) as indicated by the relations evidence.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/aurora/open",
+                "PUT 127.0.0.1/api/aurora/close",
+                "Relations: runId and signal mapping"
+              ],
+              "uncertainties": [
+                "The exact index of the signal required for the close operation is specified as channel 23 (index 22) in the relations evidence, which I will follow."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 480,
+            "timedOut": false,
+            "stdout": "✖ Aurora Needle Challenge (87.2495ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 313.6739\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ Aurora Needle Challenge (87.2495ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  422 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-refresh-24k\\noise\\raw-features\\trial-1\\automation.test.js:1:728)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 422,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-refresh-24k\\noise\\raw-features\\trial-1\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 422
+              }
+            ],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 3
+          }
+        }
+      ]
+    }
+  ],
+  "aggregates": [
+    {
+      "condition": "none",
+      "label": "No evidence",
+      "accepted": 0,
+      "total": 4,
+      "meanScore": 0,
+      "meanRequests": 0,
+      "meanPromptTokens": 356
+    },
+    {
+      "condition": "raw",
+      "label": "Raw recorder",
+      "accepted": 2,
+      "total": 4,
+      "meanScore": 6.25,
+      "meanRequests": 2.25,
+      "meanPromptTokens": 9547
+    },
+    {
+      "condition": "features",
+      "label": "Farmed features",
+      "accepted": 4,
+      "total": 4,
+      "meanScore": 10,
+      "meanRequests": 2.25,
+      "meanPromptTokens": 11958
+    },
+    {
+      "condition": "raw-features",
+      "label": "Raw + features",
+      "accepted": 3,
+      "total": 4,
+      "meanScore": 8.25,
+      "meanRequests": 2.25,
+      "meanPromptTokens": 13170
+    }
+  ]
+}

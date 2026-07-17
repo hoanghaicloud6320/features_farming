@@ -1,0 +1,70 @@
+{
+  "condition": "raw",
+  "conditionLabel": "Raw recorder",
+  "trial": 1,
+  "benchmarkRunId": "gym-easy-raw-t1-0478e40d",
+  "evidenceBytes": 11872,
+  "promptHash": "58974ad6f64f578a375c9c688d9fa9d49934f5283e6391eef442616015ff03f3",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 6674,
+      "candidatesTokenCount": 406,
+      "totalTokenCount": 7080,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 6674
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "TpxaaoqZLIzq2roP35b9oAU",
+    "assessment": {
+      "approach": "The challenge requires initiating a session via a POST request to /api/marble/session and then confirming it with a PUT request to /api/marble/confirm using the runId and handoffKey returned by the session creation. The evidence shows this pattern consistently results in an accepted response.",
+      "evidenceUsed": [
+        "POST /api/marble/session",
+        "PUT /api/marble/confirm",
+        "Response structure containing runId, handoffKey, and accepted status"
+      ],
+      "uncertainties": [
+        "None, the API pattern is deterministic based on the provided evidence."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 487,
+    "stdout": "✔ complete marble relay challenge (88.9428ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 318.42\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/marble/session",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/marble/confirm",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/marble/session",
+      "/api/marble/confirm"
+    ],
+    "expectedRoutes": [
+      "/api/marble/session",
+      "/api/marble/confirm"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

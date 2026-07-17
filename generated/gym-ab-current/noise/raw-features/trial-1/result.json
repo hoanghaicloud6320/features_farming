@@ -1,0 +1,71 @@
+{
+  "condition": "raw-features",
+  "conditionLabel": "Raw + features",
+  "trial": 1,
+  "benchmarkRunId": "gym-noise-raw-features-t1-38e9cb9d",
+  "evidenceBytes": 22494,
+  "promptHash": "c1213bbc6bc20eaf767a548f1c65e5c98b4aee3ac7a4dc23bd6226135b9e4f72",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 12446,
+      "candidatesTokenCount": 492,
+      "totalTokenCount": 12938,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 12446
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "zZxaauiLGorB0-kP842EyQc",
+    "assessment": {
+      "approach": "The challenge requires interacting with the Aurora API. Based on the evidence, the workflow involves first calling POST /api/aurora/open to obtain a runId and signal data, then using these values in a PUT /api/aurora/close request to complete the challenge. I will extract the runId and the signal from the 23rd channel (index 22) as indicated by the relations evidence.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/aurora/open",
+        "PUT 127.0.0.1/api/aurora/close",
+        "Relations: runId and signal mapping"
+      ],
+      "uncertainties": [
+        "The exact index of the signal required for the close operation is specified as channel 23 (index 22) in the relations evidence, which I will follow."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 480,
+    "timedOut": false,
+    "stdout": "✖ Aurora Needle Challenge (87.2495ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 313.6739\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ Aurora Needle Challenge (87.2495ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  422 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-refresh-24k\\noise\\raw-features\\trial-1\\automation.test.js:1:728)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 422,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-refresh-24k\\noise\\raw-features\\trial-1\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/aurora/open",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/aurora/close",
+        "status": 422
+      }
+    ],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "expectedRoutes": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "routeCoverage": 1,
+    "score": 3
+  }
+}

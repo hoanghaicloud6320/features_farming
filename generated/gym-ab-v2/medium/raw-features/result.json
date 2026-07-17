@@ -1,0 +1,55 @@
+{
+  "condition": "raw-features",
+  "conditionLabel": "Raw + features",
+  "benchmarkRunId": "gym-medium-raw-features-0acd24b8",
+  "evidenceBytes": 29519,
+  "promptHash": "60bf1e535dc49fbde044f4e57730e729e11f1eff472bf16eb64036352c2d1b18",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 16867,
+      "candidatesTokenCount": 478,
+      "totalTokenCount": 17345,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 16867
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "lI5aaqeyN63G0-kPr6Lq6QY",
+    "assessment": {
+      "approach": "The challenge requires a two-step interaction: first, POST to /api/lattice/seed to obtain a runId and a capsule identifier. Second, PUT to /api/lattice/unseal using the runId in the body and the capsule identifier (base64url encoded) as a Bearer token in the Authorization header. The evidence confirms this workflow is consistent across multiple sessions.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/lattice/seed",
+        "PUT 127.0.0.1/api/lattice/unseal",
+        "The relation between response.body.json$.capsule and request.header$header.authorization",
+        "The relation between response.body.json$.runId and request.body.json$.runId"
+      ],
+      "uncertainties": []
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 305,
+    "timedOut": false,
+    "stdout": "(node:17276) Warning: Failed to load the ES module: <workspace>\\generated\\gym-ab-v2\\medium\\raw-features\\automation.test.js. Make sure to set \"type\": \"module\" in the nearest package.json file or use the .mjs extension.\n(Use `node --trace-warnings ...` to show where the warning was created)\n<workspace>\\generated\\gym-ab-v2\\medium\\raw-features\\automation.test.js:1\nimport { test } from 'node:test'; import assert from 'node:assert/strict'; const ORIGIN = 'http://127.0.0.1:64356'; const HEADERS = { 'Content-Type': 'application/json', 'x-gym-benchmark-run': 'gym-medium-raw-features-0acd24b8' }; test('Lattice Capsule Challenge', async () => { const seedRes = await fetch(`${ORIGIN}/api/lattice/seed`, { method: 'POST', headers: HEADERS, body: JSON.stringify({ label: 'medium-s1-sample-1' }) }); assert.strictEqual(seedRes.status, 200); const { runId, capsule } = await seedRes.json(); const unsealRes = await fetch(`${ORIGIN}/api/lattice/unseal`, { method: 'PUT', headers: { ...HEADERS, 'Authorization': `Bearer ${capsule}` }, body: JSON.stringify({ runId }) }); assert.strictEqual(unsealRes.status, 200); const result = await unsealRes.json(); assert.deepStrictEqual(result, { accepted: true, challenge: 'medium' }); });\n^^^^^^\n\nSyntaxError: Cannot use import statement outside a module\n    at wrapSafe (node:internal/modules/cjs/loader:1804:18)\n    at Module._compile (node:internal/modules/cjs/loader:1845:20)\n    at Module._extensions..js (node:internal/modules/cjs/loader:2002:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v24.18.0\n✖ <workspace>\\generated\\gym-ab-v2\\medium\\raw-features\\automation.test.js (130.3613ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 144.7982\n\n✖ failing tests:\n\ntest at automation.test.js:1:1\n✖ <workspace>\\generated\\gym-ab-v2\\medium\\raw-features\\automation.test.js (130.3613ms)\n  'test failed'\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v2\\medium\\raw-features\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [],
+    "expectedRoutes": [
+      "/api/lattice/seed",
+      "/api/lattice/unseal"
+    ],
+    "routeCoverage": 0,
+    "score": 0
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "approach": "The challenge requires a two-step interaction: first, POST to /api/lattice/seed to obtain a runId and a capsule string. Second, PUT to /api/lattice/unseal using the runId in the body and the capsule as an Authorization header to complete the challenge.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/lattice/seed",
+    "PUT 127.0.0.1/api/lattice/unseal",
+    "$.runId mapping from seed response to unseal request",
+    "$.capsule mapping from seed response to unseal authorization header"
+  ],
+  "uncertainties": [
+    "The exact format of the Authorization header (e.g., Bearer vs raw string) is inferred from the evidence that the capsule is used as the authorization value."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "condition": "raw",
+  "conditionLabel": "Raw recorder",
+  "trial": 1,
+  "benchmarkRunId": "gym-noise-raw-t1-43bd4e8e",
+  "evidenceBytes": 23715,
+  "promptHash": "e8f3d53a8fc945f40769b8c3ba2efc1dd777a32e6b4ca123e36d5d299e651946",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 14142,
+      "candidatesTokenCount": 502,
+      "totalTokenCount": 14644,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 14142
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "tpxaarWWHb2l0-kPh4jTuQ4",
+    "assessment": {
+      "approach": "The challenge requires initiating a session via POST /api/aurora/open, sending event data via POST /api/events, and finally closing the session via PUT /api/aurora/close to receive the accepted response. I will follow the observed pattern from the evidence.",
+      "evidenceUsed": [
+        "POST /api/aurora/open",
+        "POST /api/events",
+        "PUT /api/aurora/close"
+      ],
+      "uncertainties": [
+        "The exact runId and signal values are dynamic and must be extracted from the response of the open request."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 478,
+    "timedOut": false,
+    "stdout": "✖ Aurora Needle challenge (89.1784ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 309.8307\n\n✖ failing tests:\n\ntest at automation.test.js:1:231\n✖ Aurora Needle challenge (89.1784ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  422 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-refresh-24k\\noise\\raw\\trial-1\\automation.test.js:1:946)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 422,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-refresh-24k\\noise\\raw\\trial-1\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/aurora/open",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "route": "/api/events",
+        "status": 202
+      },
+      {
+        "method": "PUT",
+        "route": "/api/aurora/close",
+        "status": 422
+      }
+    ],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "expectedRoutes": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "routeCoverage": 1,
+    "score": 3
+  }
+}

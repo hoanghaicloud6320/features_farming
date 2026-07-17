@@ -1,0 +1,11 @@
+{
+  "approach": "The challenge requires a two-step workflow: first, initialize a session by sending a POST request to /api/marble/session with a label, then use the returned runId and handoffKey to confirm the session via a PUT request to /api/marble/confirm. The evidence confirms these are the only two endpoints needed.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/marble/session",
+    "PUT 127.0.0.1/api/marble/confirm",
+    "Exact-copy relations between session response and confirm request fields (runId, handoffKey)"
+  ],
+  "uncertainties": [
+    "None, the workflow is deterministic and fully documented in the evidence."
+  ]
+}

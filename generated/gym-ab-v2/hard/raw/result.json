@@ -1,0 +1,77 @@
+{
+  "condition": "raw",
+  "conditionLabel": "Raw recorder",
+  "benchmarkRunId": "gym-hard-raw-f04671e2",
+  "evidenceBytes": 18156,
+  "promptHash": "ed277b29df3eb1df1024b6bb459f2c4f7b34419a82f1f84b62972d9b060bad03",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 10141,
+      "candidatesTokenCount": 589,
+      "totalTokenCount": 10730,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 10141
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "pY5aauCjJOH32roPkp2duQc",
+    "assessment": {
+      "approach": "The challenge requires a three-step interaction with the /api/prism/ endpoints: POST to /origin to get a runId, seed, and salt; PUT to /bridge with a proof (which appears to be a hex string derived from the seed/salt); and PATCH to /complete to finalize. Since the proof generation logic is not explicitly provided, I will attempt to replicate the pattern observed in the evidence by using a simple HMAC-SHA256 hash of the seed and salt, truncated to 24 characters, as the proof.",
+      "evidenceUsed": [
+        "The timeline shows a consistent pattern of POST /origin -> PUT /bridge -> PATCH /complete.",
+        "The proof in the PUT request is a 24-character hex string.",
+        "The target origin is http://127.0.0.1:64356."
+      ],
+      "uncertainties": [
+        "The exact algorithm for generating the 'proof' string is unknown; I am assuming a deterministic derivation based on the provided seed and salt."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 535,
+    "timedOut": false,
+    "stdout": "✖ complete prism bridge challenge (105.7967ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 352.921\n\n✖ failing tests:\n\ntest at automation.test.js:1:270\n✖ complete prism bridge challenge (105.7967ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  false !== true\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-v2\\hard\\raw\\automation.test.js:1:1046)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: false,\n    expected: true,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v2\\hard\\raw\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/prism/origin",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/prism/bridge",
+        "status": 422
+      },
+      {
+        "method": "PATCH",
+        "route": "/api/prism/complete",
+        "status": 422
+      }
+    ],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "expectedRoutes": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "routeCoverage": 1,
+    "score": 3
+  }
+}

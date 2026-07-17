@@ -1,0 +1,1005 @@
+{
+  "rawTimeline": null,
+  "farmedFeatures": {
+    "kind": "machine-farmed-features",
+    "collection": {
+      "sessionCount": 3,
+      "iterationCount": 15,
+      "capturedRequestCount": 30
+    },
+    "endpoints": [
+      {
+        "routeKey": "POST 127.0.0.1/api/lattice/seed",
+        "signature": "POST 127.0.0.1/api/lattice/seed?",
+        "queryKeys": [],
+        "sessionPresence": 3,
+        "sessionPresenceRatio": 1,
+        "totalRequestCount": 15,
+        "classifications": [
+          "core"
+        ],
+        "medianDurationMs": 1.3,
+        "examples": [
+          "http://127.0.0.1:64235/api/lattice/seed"
+        ]
+      },
+      {
+        "routeKey": "PUT 127.0.0.1/api/lattice/unseal",
+        "signature": "PUT 127.0.0.1/api/lattice/unseal?",
+        "queryKeys": [],
+        "sessionPresence": 3,
+        "sessionPresenceRatio": 1,
+        "totalRequestCount": 15,
+        "classifications": [
+          "core"
+        ],
+        "medianDurationMs": 1.2,
+        "examples": [
+          "http://127.0.0.1:64235/api/lattice/unseal"
+        ]
+      }
+    ],
+    "fields": [
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.label",
+        "display": "POST 127.0.0.1/api/lattice/seed? :: request.body.json$.label",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "medium-s1-sample-1"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "medium-s2-sample-1"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "medium-s3-sample-1"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.origin",
+        "display": "POST 127.0.0.1/api/lattice/seed? :: request.header$header.origin",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.referer",
+        "display": "POST 127.0.0.1/api/lattice/seed? :: request.header$header.referer",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[1]",
+        "display": "POST 127.0.0.1/api/lattice/seed? :: request.url.path$path[1]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "api"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[2]",
+        "display": "POST 127.0.0.1/api/lattice/seed? :: request.url.path$path[2]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "lattice"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "lattice"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "lattice"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[3]",
+        "display": "POST 127.0.0.1/api/lattice/seed? :: request.url.path$path[3]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "seed"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "seed"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "seed"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.capsule",
+        "display": "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.capsule",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "capsule_Jfw7D4zzwczUMD7e"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "capsule_T4SMqLDlUlOEdaGB"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "capsule_iT5CumKNRw_E3iUI"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.encoding",
+        "display": "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.encoding",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "base64url"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "base64url"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "base64url"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.phase",
+        "display": "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.phase",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "sealed"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "sealed"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "sealed"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "display": "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.runId",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "lattice_7zJAUqcmfCCL"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "lattice_1V9R_FVKNq5L"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "lattice_QjBdt36ljSqi"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "display": "PUT 127.0.0.1/api/lattice/unseal? :: request.body.json$.runId",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "lattice_7zJAUqcmfCCL"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "lattice_1V9R_FVKNq5L"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "lattice_QjBdt36ljSqi"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.authorization",
+        "display": "PUT 127.0.0.1/api/lattice/unseal? :: request.header$header.authorization",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": {
+              "redacted": true,
+              "valueHash": "820d32bd22f1",
+              "length": 39
+            }
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": {
+              "redacted": true,
+              "valueHash": "e65c34b634cf",
+              "length": 39
+            }
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": {
+              "redacted": true,
+              "valueHash": "abceb0108035",
+              "length": 39
+            }
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.origin",
+        "display": "PUT 127.0.0.1/api/lattice/unseal? :: request.header$header.origin",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.referer",
+        "display": "PUT 127.0.0.1/api/lattice/unseal? :: request.header$header.referer",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[1]",
+        "display": "PUT 127.0.0.1/api/lattice/unseal? :: request.url.path$path[1]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "api"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[2]",
+        "display": "PUT 127.0.0.1/api/lattice/unseal? :: request.url.path$path[2]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "lattice"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "lattice"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "lattice"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[3]",
+        "display": "PUT 127.0.0.1/api/lattice/unseal? :: request.url.path$path[3]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "unseal"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "unseal"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "unseal"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.accepted",
+        "display": "PUT 127.0.0.1/api/lattice/unseal? :: response.body.json$.accepted",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "boolean"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": true
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": true
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.challenge",
+        "display": "PUT 127.0.0.1/api/lattice/unseal? :: response.body.json$.challenge",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-28-848Z_a1c900b4",
+            "iterationId": "iteration-1",
+            "value": "medium"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-30-736Z_49832853",
+            "iterationId": "iteration-1",
+            "value": "medium"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-32-556Z_37649cb5",
+            "iterationId": "iteration-1",
+            "value": "medium"
+          }
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "kind": "exact-copy",
+        "source": "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.runId",
+        "target": "PUT 127.0.0.1/api/lattice/unseal? :: request.body.json$.runId",
+        "sourceEndpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "targetEndpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.91,
+        "supportIterations": 15,
+        "transforms": []
+      },
+      {
+        "kind": "authorization-base64-decoded-copy",
+        "source": "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.capsule",
+        "target": "PUT 127.0.0.1/api/lattice/unseal? :: request.header$header.authorization",
+        "sourceEndpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "targetEndpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.91,
+        "supportIterations": 15,
+        "transforms": [
+          {
+            "direction": "source-to-target",
+            "steps": [
+              {
+                "operation": "base64url-encode-utf8",
+                "padding": false
+              },
+              {
+                "operation": "prefix",
+                "value": "Bearer "
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "prefix-copy",
+        "source": "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.runId",
+        "target": "PUT 127.0.0.1/api/lattice/unseal? :: request.url.path$path[2]",
+        "sourceEndpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "targetEndpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.7,
+        "supportIterations": 15,
+        "transforms": []
+      }
+    ],
+    "schemas": [
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "label"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "capsule",
+          "encoding",
+          "phase",
+          "runId"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "runId"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "accepted",
+          "challenge"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.accepted",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "boolean"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.capsule",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.challenge",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.encoding",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.label",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.phase",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      }
+    ],
+    "workflow": [
+      {
+        "endpoint": "POST 127.0.0.1/api/lattice/seed?",
+        "sessionPresence": 3,
+        "medianPosition": 0
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/lattice/unseal?",
+        "sessionPresence": 3,
+        "medianPosition": 1
+      }
+    ],
+    "patterns": {
+      "optionalBranches": 0,
+      "retries": 0,
+      "polling": 0
+    }
+  }
+}

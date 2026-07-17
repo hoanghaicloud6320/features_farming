@@ -1,0 +1,55 @@
+{
+  "condition": "none",
+  "conditionLabel": "No evidence",
+  "benchmarkRunId": "gym-hard-none-e5c30745",
+  "evidenceBytes": 42,
+  "promptHash": "ec20824f4b280e2ed8f2af04af61c5f830bfb04a5909000920d91a6c2da508fb",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 295,
+      "candidatesTokenCount": 309,
+      "totalTokenCount": 604,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 295
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "NY1aaoDIIeb62roP2eve0Qc",
+    "assessment": {
+      "approach": "Since no evidence is provided, I will attempt to probe the root endpoint and common REST patterns to identify the challenge interface, assuming a standard JSON API structure.",
+      "evidenceUsed": [],
+      "uncertainties": [
+        "No documentation or routes provided",
+        "Unknown API structure",
+        "Unknown authentication or payload requirements"
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 424,
+    "timedOut": false,
+    "stdout": "✖ Prism Bridge Challenge (83.6529ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 262.2189\n\n✖ failing tests:\n\ntest at automation.test.js:1:232\n✖ Prism Bridge Challenge (83.6529ms)\n  SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON\n      at JSON.parse (<anonymous>)\n      at parseJSONFromBytes (node:internal/deps/undici/undici:4387:19)\n      at successSteps (node:internal/deps/undici/undici:7041:27)\n      at readAllBytes (node:internal/deps/undici/undici:5958:13)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab\\hard\\none\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [],
+    "expectedRoutes": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "routeCoverage": 0,
+    "score": 0
+  }
+}

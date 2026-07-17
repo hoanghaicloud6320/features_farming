@@ -1,0 +1,70 @@
+{
+  "condition": "raw-features",
+  "conditionLabel": "Raw + features",
+  "trial": 1,
+  "benchmarkRunId": "gym-noise-raw-features-t1-1cae4609",
+  "evidenceBytes": 22494,
+  "promptHash": "3499d7d95bc064b8eb397fe2bf2f2c9abd2e2962a01fee6b931f74d73445e4b7",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 12446,
+      "candidatesTokenCount": 467,
+      "totalTokenCount": 12913,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 12446
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "CJVaas6kNrrq2roPtMTI8QE",
+    "assessment": {
+      "approach": "The challenge requires interacting with the Aurora API by first opening a session via POST /api/aurora/open to obtain a runId and signal, then closing it via PUT /api/aurora/close using those values. The evidence confirms the workflow and the exact-copy relationship between the response of the open endpoint and the request of the close endpoint.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/aurora/open",
+        "PUT 127.0.0.1/api/aurora/close",
+        "exact-copy relationship between POST response runId/signal and PUT request runId/signal"
+      ],
+      "uncertainties": [
+        "None, the workflow is explicitly defined in the evidence."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 483,
+    "stdout": "✔ Aurora Needle challenge (98.8249ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 321.3842\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/aurora/open",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/aurora/close",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "expectedRoutes": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

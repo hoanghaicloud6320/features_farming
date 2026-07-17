@@ -1,0 +1,898 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-17T20:47:54.005Z",
+  "model": "gemini-3.1-flash-lite",
+  "conditions": [
+    {
+      "id": "none",
+      "label": "No evidence",
+      "raw": false,
+      "features": false
+    },
+    {
+      "id": "raw",
+      "label": "Raw recorder",
+      "raw": true,
+      "features": false
+    },
+    {
+      "id": "features",
+      "label": "Farmed features",
+      "raw": false,
+      "features": true
+    },
+    {
+      "id": "raw-features",
+      "label": "Raw + features",
+      "raw": true,
+      "features": true
+    }
+  ],
+  "trials": 3,
+  "contextBudgetChars": 24000,
+  "challenges": [
+    {
+      "id": "noise",
+      "difficulty": "Noisy · dependency hidden among decoys",
+      "cells": [
+        {
+          "condition": "none",
+          "conditionLabel": "No evidence",
+          "trial": 1,
+          "benchmarkRunId": "gym-noise-none-t1-772b8a9a",
+          "evidenceBytes": 72,
+          "promptHash": "1d5568dc50450f2d2c346156a70bdd8600fbc5974e331f00791ee183ae5b62b4",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 356,
+              "candidatesTokenCount": 313,
+              "totalTokenCount": 669,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 356
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "s5RaaqXjEI6Q0-kPo_uY6QE",
+            "assessment": {
+              "approach": "Since no specific routes or documentation are provided in the evidence, I will attempt to access the root endpoint to identify the API structure or potential challenge endpoints, assuming standard RESTful patterns for such challenges.",
+              "evidenceUsed": [
+                "Target origin: http://127.0.0.1:64624",
+                "Header: x-gym-benchmark-run: gym-noise-none-t1-772b8a9a"
+              ],
+              "uncertainties": [
+                "The exact route for the 'noise' challenge is unknown.",
+                "The authentication or payload requirements for the challenge are unknown."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 481,
+            "timedOut": false,
+            "stdout": "✖ solve noise challenge (100.7337ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 287.336\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ solve noise challenge (100.7337ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  404 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-v4-noise\\noise\\none\\trial-1\\automation.test.js:1:387)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 404,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v4-noise\\noise\\none\\trial-1\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 0,
+            "score": 0
+          }
+        },
+        {
+          "condition": "none",
+          "conditionLabel": "No evidence",
+          "trial": 2,
+          "benchmarkRunId": "gym-noise-none-t2-20526c55",
+          "evidenceBytes": 72,
+          "promptHash": "df07d71ca30976303cb34016422876f3475c256989d6cb3288dc2e2c3be2ef8a",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 356,
+              "candidatesTokenCount": 337,
+              "totalTokenCount": 693,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 356
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "u5RaarjHFp612roPjLyPuQI",
+            "assessment": {
+              "approach": "Since no specific routes were provided in the evidence, I will attempt to access the root path to identify the challenge endpoint or structure. Given the challenge name 'noise', I will check for a /noise endpoint if the root does not provide immediate access.",
+              "evidenceUsed": [
+                "Target origin: http://127.0.0.1:64624",
+                "Header: x-gym-benchmark-run: gym-noise-none-t2-20526c55"
+              ],
+              "uncertainties": [
+                "The exact endpoint for the challenge is unknown.",
+                "The HTTP method required to trigger the challenge is unknown."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 514,
+            "timedOut": false,
+            "stdout": "✖ solve noise challenge (87.6822ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 329.28\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ solve noise challenge (87.6822ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  404 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-v4-noise\\noise\\none\\trial-2\\automation.test.js:1:387)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 404,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v4-noise\\noise\\none\\trial-2\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 0,
+            "score": 0
+          }
+        },
+        {
+          "condition": "none",
+          "conditionLabel": "No evidence",
+          "trial": 3,
+          "benchmarkRunId": "gym-noise-none-t3-e38e50d1",
+          "evidenceBytes": 72,
+          "promptHash": "b82de7f4b87c13ad4b1fd4f604744c2a2153600dd6e3214910178f4639704413",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 356,
+              "candidatesTokenCount": 322,
+              "totalTokenCount": 678,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 356
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "xZRaavSpIuP22roPjorRcQ",
+            "assessment": {
+              "approach": "Since no specific routes were provided in the evidence, I will attempt to access the root and common endpoints to identify the challenge interface, assuming standard REST patterns for the gym benchmark.",
+              "evidenceUsed": [
+                "Target origin: http://127.0.0.1:64624",
+                "Header: x-gym-benchmark-run: gym-noise-none-t3-e38e50d1"
+              ],
+              "uncertainties": [
+                "No documentation or route discovery provided",
+                "Unknown endpoint structure for the challenge"
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 436,
+            "timedOut": false,
+            "stdout": "✖ solve aurora needle (84.3607ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 261.4746\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ solve aurora needle (84.3607ms)\n  SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON\n      at JSON.parse (<anonymous>)\n      at parseJSONFromBytes (node:internal/deps/undici/undici:4387:19)\n      at successSteps (node:internal/deps/undici/undici:7041:27)\n      at readAllBytes (node:internal/deps/undici/undici:5958:13)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v4-noise\\noise\\none\\trial-3\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 0,
+            "score": 0
+          }
+        },
+        {
+          "condition": "raw",
+          "conditionLabel": "Raw recorder",
+          "trial": 1,
+          "benchmarkRunId": "gym-noise-raw-t1-91af5e11",
+          "evidenceBytes": 23715,
+          "promptHash": "12332aea74f0fa5ca62c3fd621c2ac7d4781bceec7c4ee39609583897237071d",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 14142,
+              "candidatesTokenCount": 481,
+              "totalTokenCount": 14623,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 14142
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "ypRaatuHHr_I0-kPzprgsQY",
+            "assessment": {
+              "approach": "The challenge requires interacting with the Aurora API to open a session, perform event submissions, and finally close the session with a valid signal identifier. Based on the provided evidence, the workflow involves a POST request to /api/aurora/open to obtain a runId, followed by multiple POST requests to /api/events to submit data, and a final PUT request to /api/aurora/close with the runId and a signal identifier to receive the accepted response.",
+              "evidenceUsed": [
+                "POST /api/aurora/open",
+                "POST /api/events",
+                "PUT /api/aurora/close"
+              ],
+              "uncertainties": [
+                "The specific signal required for the close operation might vary per run, but the evidence shows that any valid signal from the channel list returned by the open operation is accepted."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 484,
+            "timedOut": false,
+            "stdout": "✖ complete aurora noise challenge (87.2038ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 318.3589\n\n✖ failing tests:\n\ntest at automation.test.js:1:231\n✖ complete aurora noise challenge (87.2038ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  422 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-v4-noise\\noise\\raw\\trial-1\\automation.test.js:1:722)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 422,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v4-noise\\noise\\raw\\trial-1\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 422
+              }
+            ],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 3
+          }
+        },
+        {
+          "condition": "raw",
+          "conditionLabel": "Raw recorder",
+          "trial": 2,
+          "benchmarkRunId": "gym-noise-raw-t2-4d2c6b6d",
+          "evidenceBytes": 23715,
+          "promptHash": "f3e398dd9510f0e3f2643022b5ac67517bd9dec5cc5b747cb548ab1fcb1804d5",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 14143,
+              "candidatesTokenCount": 540,
+              "totalTokenCount": 14683,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 14143
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "1JRaatC8Osqj2roP4NvQgAs",
+            "assessment": {
+              "approach": "The challenge requires interacting with the Aurora API to open a session, submit event data, and close the session with a specific signal. Based on the provided evidence, the process involves a POST request to /api/aurora/open to obtain a runId, followed by multiple POST requests to /api/events to submit payload data, and finally a PUT request to /api/aurora/close with the runId and a signal to complete the challenge.",
+              "evidenceUsed": [
+                "POST /api/aurora/open",
+                "POST /api/events",
+                "PUT /api/aurora/close"
+              ],
+              "uncertainties": [
+                "The exact signal required for the close operation might be dynamic or specific to the runId generated in the open phase."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 480,
+            "timedOut": false,
+            "stdout": "✖ Aurora Needle challenge (104.7317ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 313.5882\n\n✖ failing tests:\n\ntest at automation.test.js:1:231\n✖ Aurora Needle challenge (104.7317ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  422 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-v4-noise\\noise\\raw\\trial-2\\automation.test.js:1:932)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 422,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v4-noise\\noise\\raw\\trial-2\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "POST",
+                "route": "/api/events",
+                "status": 202
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 422
+              }
+            ],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 3
+          }
+        },
+        {
+          "condition": "raw",
+          "conditionLabel": "Raw recorder",
+          "trial": 3,
+          "benchmarkRunId": "gym-noise-raw-t3-f780300f",
+          "evidenceBytes": 23715,
+          "promptHash": "f67c7fbc8e322c5943b18bb89a66b7b23e6a15b46da7a6f8847f78a6522a671d",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 14143,
+              "candidatesTokenCount": 521,
+              "totalTokenCount": 14664,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 14143
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "4ZRaavGtA8f32roPzeDWcA",
+            "assessment": {
+              "approach": "The challenge requires interacting with the Aurora API to open a session, submit event data, and close the session with a specific signal. Based on the evidence, the workflow is: 1. POST to /api/aurora/open to get a runId. 2. POST to /api/events with the runId and signal data. 3. PUT to /api/aurora/close with the runId and a signal to finalize. I will perform these steps sequentially.",
+              "evidenceUsed": [
+                "POST /api/aurora/open",
+                "POST /api/events",
+                "PUT /api/aurora/close"
+              ],
+              "uncertainties": [
+                "The exact signal required for the close operation might vary, but the evidence shows a pattern of using a signal from the initial open response."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 1,
+            "durationMs": 500,
+            "timedOut": false,
+            "stdout": "✖ Aurora Needle challenge (97.5812ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 326.4785\n\n✖ failing tests:\n\ntest at automation.test.js:1:231\n✖ Aurora Needle challenge (97.5812ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  422 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-v4-noise\\noise\\raw\\trial-3\\automation.test.js:1:926)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 422,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+            "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v4-noise\\noise\\raw\\trial-3\\automation.test.js\n"
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "POST",
+                "route": "/api/events",
+                "status": 202
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 422
+              }
+            ],
+            "accepted": false
+          },
+          "score": {
+            "accepted": false,
+            "testPassed": false,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 3
+          }
+        },
+        {
+          "condition": "features",
+          "conditionLabel": "Farmed features",
+          "trial": 1,
+          "benchmarkRunId": "gym-noise-features-t1-979c3af9",
+          "evidenceBytes": 23590,
+          "promptHash": "8fa1764068e69a85e11ea6f323cfe7a20c23cfcc3d0dc247ae1185455ccf34fa",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 14065,
+              "candidatesTokenCount": 598,
+              "totalTokenCount": 14663,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 14065
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "7JRaaq7SKajG2roPnN7kiAg",
+            "assessment": {
+              "approach": "The challenge requires interacting with two endpoints: POST /api/aurora/open and PUT /api/aurora/close. Based on the evidence, the workflow involves calling 'open' to retrieve a 'runId' and a list of 'channels' containing 'signal' values. The 'close' endpoint requires the 'runId' and a 'signal' from the 'open' response (specifically the 24th channel, index 23). I will perform a POST request to 'open', extract the necessary data, and then perform a PUT request to 'close' with the extracted values.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/aurora/open? :: response.body.json$.runId",
+                "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[23].signal",
+                "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.runId",
+                "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.signal"
+              ],
+              "uncertainties": [
+                "The exact value for the 'label' and 'sequence' fields in the POST request is not strictly constrained, so I will use dummy values."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 479,
+            "stdout": "✔ Aurora Needle challenge (86.0709ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 316.0727\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "features",
+          "conditionLabel": "Farmed features",
+          "trial": 2,
+          "benchmarkRunId": "gym-noise-features-t2-65be12eb",
+          "evidenceBytes": 23590,
+          "promptHash": "82073968562586a2560901106d599a28e933b5c070ae7c470e8d5ca7fdbe9b66",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 14064,
+              "candidatesTokenCount": 570,
+              "totalTokenCount": 14634,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 14064
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "9pRaarHmCdGM0-kP2qGNWA",
+            "assessment": {
+              "approach": "The challenge requires interacting with two endpoints: POST /api/aurora/open and PUT /api/aurora/close. Based on the evidence, the workflow involves calling 'open' to retrieve a 'runId' and a list of 'channels', then using the 'runId' and the 'signal' from the 24th channel (index 23) in the 'close' request. I will perform these two steps sequentially.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/aurora/open? :: response.body.json$.runId",
+                "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[23].signal",
+                "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.runId",
+                "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.signal"
+              ],
+              "uncertainties": [
+                "The exact value for the 'label' and 'sequence' fields in the POST request is not strictly constrained, so I will use dummy values."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 554,
+            "stdout": "✔ Aurora Needle (104.2452ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 367.5273\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "features",
+          "conditionLabel": "Farmed features",
+          "trial": 3,
+          "benchmarkRunId": "gym-noise-features-t3-bf721016",
+          "evidenceBytes": 23590,
+          "promptHash": "f2835dc173fec507d05e2b34db7095b4b6a99b4bf4c2f83424bbf251dbeb37d0",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 14065,
+              "candidatesTokenCount": 580,
+              "totalTokenCount": 14645,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 14065
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "ApVaaqnzGJT22roPks_puQc",
+            "assessment": {
+              "approach": "The challenge requires interacting with two endpoints: POST /api/aurora/open and PUT /api/aurora/close. Based on the evidence, the workflow involves calling /open to obtain a runId and a signal (from the channels array), then passing these values to /close. I will perform a POST request to /open, extract the runId and the signal from the 24th channel (index 23), and then perform a PUT request to /close with these values.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/aurora/open? :: response.body.json$.runId",
+                "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[23].signal",
+                "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.runId",
+                "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.signal"
+              ],
+              "uncertainties": [
+                "The exact index of the channel to use for the signal was inferred from the relation mapping, assuming index 23 is the correct one."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 542,
+            "stdout": "✔ Aurora Needle (85.1428ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 311.7198\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "raw-features",
+          "conditionLabel": "Raw + features",
+          "trial": 1,
+          "benchmarkRunId": "gym-noise-raw-features-t1-1cae4609",
+          "evidenceBytes": 22494,
+          "promptHash": "3499d7d95bc064b8eb397fe2bf2f2c9abd2e2962a01fee6b931f74d73445e4b7",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 12446,
+              "candidatesTokenCount": 467,
+              "totalTokenCount": 12913,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 12446
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "CJVaas6kNrrq2roPtMTI8QE",
+            "assessment": {
+              "approach": "The challenge requires interacting with the Aurora API by first opening a session via POST /api/aurora/open to obtain a runId and signal, then closing it via PUT /api/aurora/close using those values. The evidence confirms the workflow and the exact-copy relationship between the response of the open endpoint and the request of the close endpoint.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/aurora/open",
+                "PUT 127.0.0.1/api/aurora/close",
+                "exact-copy relationship between POST response runId/signal and PUT request runId/signal"
+              ],
+              "uncertainties": [
+                "None, the workflow is explicitly defined in the evidence."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 483,
+            "stdout": "✔ Aurora Needle challenge (98.8249ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 321.3842\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "raw-features",
+          "conditionLabel": "Raw + features",
+          "trial": 2,
+          "benchmarkRunId": "gym-noise-raw-features-t2-c86a4ea8",
+          "evidenceBytes": 22494,
+          "promptHash": "da828d764c47bc4396dd1a3d4d75cef2342c2132159a8d18d1981a1d2f860c3a",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 12446,
+              "candidatesTokenCount": 544,
+              "totalTokenCount": 12990,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 12446
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "FJVaatfhF6Do2roPtpiRcA",
+            "assessment": {
+              "approach": "The challenge requires interacting with the Aurora API. Based on the evidence, I must first call POST /api/aurora/open to obtain a runId and a signal value from the channels array. Then, I must use these values to call PUT /api/aurora/close to complete the challenge. I will use the provided header x-gym-benchmark-run for all requests.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/aurora/open",
+                "PUT 127.0.0.1/api/aurora/close",
+                "Exact copy relation between POST response runId and PUT request runId",
+                "Exact copy relation between POST response channels[23].signal and PUT request signal"
+              ],
+              "uncertainties": [
+                "The evidence shows channels[23].signal is used, but the response body is truncated in the raw timeline. I will assume the structure is consistent and extract the signal from the 24th channel (index 23) if available, or fallback to a valid signal from the array."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 477,
+            "stdout": "✔ Aurora Needle challenge (85.1245ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 313.9297\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        },
+        {
+          "condition": "raw-features",
+          "conditionLabel": "Raw + features",
+          "trial": 3,
+          "benchmarkRunId": "gym-noise-raw-features-t3-bfb299cc",
+          "evidenceBytes": 22494,
+          "promptHash": "47fe1f7d999678f15081dd0714ddad5827d71f54143a5e32df0b114216c2b2ea",
+          "gemini": {
+            "keyIndex": 0,
+            "usageMetadata": {
+              "promptTokenCount": 12445,
+              "candidatesTokenCount": 490,
+              "totalTokenCount": 12935,
+              "promptTokensDetails": [
+                {
+                  "modality": "TEXT",
+                  "tokenCount": 12445
+                }
+              ],
+              "serviceTier": "standard"
+            },
+            "responseId": "HJVaav_wFub62roP2eve0Qc",
+            "assessment": {
+              "approach": "The challenge requires interacting with the Aurora API by first opening a session via POST /api/aurora/open to obtain a runId and signal, then closing it via PUT /api/aurora/close using those values. I will perform these two steps sequentially, ensuring the required headers are included.",
+              "evidenceUsed": [
+                "POST 127.0.0.1/api/aurora/open",
+                "PUT 127.0.0.1/api/aurora/close",
+                "exact-copy relation between POST response runId and PUT request runId",
+                "exact-copy relation between POST response signal and PUT request signal"
+              ],
+              "uncertainties": [
+                "The specific channel index to use for the signal was inferred from the evidence as channel 23 (index 23 in the channels array)."
+              ]
+            }
+          },
+          "execution": {
+            "exitCode": 0,
+            "durationMs": 501,
+            "stdout": "✔ Aurora Needle challenge (89.2675ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 337.1503\n",
+            "stderr": ""
+          },
+          "metrics": {
+            "requests": [
+              {
+                "method": "POST",
+                "route": "/api/aurora/open",
+                "status": 200
+              },
+              {
+                "method": "PUT",
+                "route": "/api/aurora/close",
+                "status": 200
+              }
+            ],
+            "accepted": true
+          },
+          "score": {
+            "accepted": true,
+            "testPassed": true,
+            "routesCovered": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "expectedRoutes": [
+              "/api/aurora/open",
+              "/api/aurora/close"
+            ],
+            "routeCoverage": 1,
+            "score": 10
+          }
+        }
+      ]
+    }
+  ],
+  "aggregates": [
+    {
+      "condition": "none",
+      "label": "No evidence",
+      "accepted": 0,
+      "total": 3,
+      "meanScore": 0,
+      "meanRequests": 0,
+      "meanPromptTokens": 356
+    },
+    {
+      "condition": "raw",
+      "label": "Raw recorder",
+      "accepted": 0,
+      "total": 3,
+      "meanScore": 3,
+      "meanRequests": 2.67,
+      "meanPromptTokens": 14143
+    },
+    {
+      "condition": "features",
+      "label": "Farmed features",
+      "accepted": 3,
+      "total": 3,
+      "meanScore": 10,
+      "meanRequests": 2,
+      "meanPromptTokens": 14065
+    },
+    {
+      "condition": "raw-features",
+      "label": "Raw + features",
+      "accepted": 3,
+      "total": 3,
+      "meanScore": 10,
+      "meanRequests": 2,
+      "meanPromptTokens": 12446
+    }
+  ]
+}

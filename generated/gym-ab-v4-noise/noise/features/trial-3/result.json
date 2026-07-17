@@ -1,0 +1,71 @@
+{
+  "condition": "features",
+  "conditionLabel": "Farmed features",
+  "trial": 3,
+  "benchmarkRunId": "gym-noise-features-t3-bf721016",
+  "evidenceBytes": 23590,
+  "promptHash": "f2835dc173fec507d05e2b34db7095b4b6a99b4bf4c2f83424bbf251dbeb37d0",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 14065,
+      "candidatesTokenCount": 580,
+      "totalTokenCount": 14645,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 14065
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "ApVaaqnzGJT22roPks_puQc",
+    "assessment": {
+      "approach": "The challenge requires interacting with two endpoints: POST /api/aurora/open and PUT /api/aurora/close. Based on the evidence, the workflow involves calling /open to obtain a runId and a signal (from the channels array), then passing these values to /close. I will perform a POST request to /open, extract the runId and the signal from the 24th channel (index 23), and then perform a PUT request to /close with these values.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/aurora/open? :: response.body.json$.runId",
+        "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[23].signal",
+        "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.runId",
+        "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.signal"
+      ],
+      "uncertainties": [
+        "The exact index of the channel to use for the signal was inferred from the relation mapping, assuming index 23 is the correct one."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 542,
+    "stdout": "✔ Aurora Needle (85.1428ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 311.7198\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/aurora/open",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/aurora/close",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "expectedRoutes": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

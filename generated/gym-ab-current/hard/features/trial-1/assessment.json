@@ -1,0 +1,13 @@
+{
+  "approach": "The challenge requires a three-step workflow: 1. POST to /api/prism/origin to get a runId, seed, and salt. 2. Calculate a SHA-256 hash of the concatenated seed, salt, and label (from the first request) to generate a proof, then PUT to /api/prism/bridge with the runId and proof. 3. PATCH to /api/prism/complete with the runId and the bridgeTicket received from the second step.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/prism/origin",
+    "PUT 127.0.0.1/api/prism/bridge",
+    "PATCH 127.0.0.1/api/prism/complete",
+    "hash-derived-copy relation for proof generation",
+    "exact-copy relations for runId and ticket propagation"
+  ],
+  "uncertainties": [
+    "The exact string concatenation order for the hash input is inferred from the relation metadata as seed:salt:label."
+  ]
+}

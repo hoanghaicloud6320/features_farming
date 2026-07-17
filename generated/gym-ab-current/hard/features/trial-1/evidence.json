@@ -1,0 +1,1384 @@
+{
+  "rawTimeline": null,
+  "farmedFeatures": {
+    "kind": "machine-farmed-features",
+    "collection": {
+      "sessionCount": 3,
+      "iterationCount": 15,
+      "capturedRequestCount": 45
+    },
+    "budgetChars": 24000,
+    "endpoints": [
+      {
+        "routeKey": "POST 127.0.0.1/api/prism/origin",
+        "signature": "POST 127.0.0.1/api/prism/origin?",
+        "queryKeys": [],
+        "sessionPresence": 3,
+        "sessionPresenceRatio": 1,
+        "totalRequestCount": 15,
+        "classifications": [
+          "core"
+        ],
+        "medianDurationMs": 1.4,
+        "examples": [
+          "http://127.0.0.1:64235/api/prism/origin"
+        ]
+      },
+      {
+        "routeKey": "PUT 127.0.0.1/api/prism/bridge",
+        "signature": "PUT 127.0.0.1/api/prism/bridge?",
+        "queryKeys": [],
+        "sessionPresence": 3,
+        "sessionPresenceRatio": 1,
+        "totalRequestCount": 15,
+        "classifications": [
+          "core"
+        ],
+        "medianDurationMs": 1.3,
+        "examples": [
+          "http://127.0.0.1:64235/api/prism/bridge"
+        ]
+      },
+      {
+        "routeKey": "PATCH 127.0.0.1/api/prism/complete",
+        "signature": "PATCH 127.0.0.1/api/prism/complete?",
+        "queryKeys": [],
+        "sessionPresence": 3,
+        "sessionPresenceRatio": 1,
+        "totalRequestCount": 15,
+        "classifications": [
+          "core"
+        ],
+        "medianDurationMs": 1.2,
+        "examples": [
+          "http://127.0.0.1:64235/api/prism/complete"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "kind": "hash-derived-copy",
+        "source": "POST 127.0.0.1/api/prism/origin? :: response.body.json$.seed",
+        "sources": [
+          {
+            "endpointId": "213723ebd2a7",
+            "endpoint": "POST 127.0.0.1/api/prism/origin?",
+            "side": "response",
+            "location": "body.json",
+            "fieldPath": "$.seed",
+            "display": "POST 127.0.0.1/api/prism/origin? :: response.body.json$.seed"
+          },
+          {
+            "endpointId": "213723ebd2a7",
+            "endpoint": "POST 127.0.0.1/api/prism/origin?",
+            "side": "response",
+            "location": "body.json",
+            "fieldPath": "$.salt",
+            "display": "POST 127.0.0.1/api/prism/origin? :: response.body.json$.salt"
+          },
+          {
+            "endpointId": "213723ebd2a7",
+            "endpoint": "POST 127.0.0.1/api/prism/origin?",
+            "side": "request",
+            "location": "body.json",
+            "fieldPath": "$.label",
+            "display": "POST 127.0.0.1/api/prism/origin? :: request.body.json$.label"
+          }
+        ],
+        "target": "PUT 127.0.0.1/api/prism/bridge? :: request.body.json$.proof",
+        "sourceEndpoint": "POST 127.0.0.1/api/prism/origin?",
+        "targetEndpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.96,
+        "supportIterations": 15,
+        "transforms": [
+          {
+            "direction": "sources-to-target",
+            "operation": "hash",
+            "algorithm": "sha256",
+            "inputOrder": [
+              null,
+              null,
+              null
+            ],
+            "delimiter": ":",
+            "inputEncoding": "utf8",
+            "digestEncoding": "hex",
+            "slice": {
+              "start": 0,
+              "length": 24
+            }
+          }
+        ]
+      },
+      {
+        "kind": "exact-copy",
+        "source": "POST 127.0.0.1/api/prism/origin? :: response.body.json$.runId",
+        "target": "PUT 127.0.0.1/api/prism/bridge? :: request.body.json$.runId",
+        "sourceEndpoint": "POST 127.0.0.1/api/prism/origin?",
+        "targetEndpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.91,
+        "supportIterations": 15,
+        "transforms": []
+      },
+      {
+        "kind": "exact-copy",
+        "source": "POST 127.0.0.1/api/prism/origin? :: response.body.json$.runId",
+        "target": "PATCH 127.0.0.1/api/prism/complete? :: request.body.json$.runId",
+        "sourceEndpoint": "POST 127.0.0.1/api/prism/origin?",
+        "targetEndpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.91,
+        "supportIterations": 15,
+        "transforms": []
+      },
+      {
+        "kind": "exact-copy",
+        "source": "PUT 127.0.0.1/api/prism/bridge? :: response.body.json$.bridgeTicket",
+        "target": "PATCH 127.0.0.1/api/prism/complete? :: request.body.json$.ticket",
+        "sourceEndpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "targetEndpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.91,
+        "supportIterations": 15,
+        "transforms": []
+      },
+      {
+        "kind": "exact-copy",
+        "source": "PUT 127.0.0.1/api/prism/bridge? :: request.body.json$.runId",
+        "target": "PATCH 127.0.0.1/api/prism/complete? :: request.body.json$.runId",
+        "sourceEndpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "targetEndpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.83,
+        "supportIterations": 15,
+        "transforms": []
+      }
+    ],
+    "workflow": [
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "sessionPresence": 3,
+        "medianPosition": 0
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "sessionPresence": 3,
+        "medianPosition": 1
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "sessionPresence": 3,
+        "medianPosition": 2
+      }
+    ],
+    "patterns": {
+      "optionalBranches": 0,
+      "retries": 0,
+      "polling": 0
+    },
+    "fields": [
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "display": "PATCH 127.0.0.1/api/prism/complete? :: request.body.json$.runId",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "prism_uFDKDFkmeHtu"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "prism_b3inrhJ0PBP9"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "prism_xeN9XE9a8Txl"
+          }
+        ]
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.ticket",
+        "display": "PATCH 127.0.0.1/api/prism/complete? :: request.body.json$.ticket",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "bridge_1q9jHfzrKF9Y"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "bridge_ssR9f-9JmP9Y"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "bridge_BZP2Fw12qABq"
+          }
+        ]
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.origin",
+        "display": "PATCH 127.0.0.1/api/prism/complete? :: request.header$header.origin",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          }
+        ]
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.referer",
+        "display": "PATCH 127.0.0.1/api/prism/complete? :: request.header$header.referer",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          }
+        ]
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[1]",
+        "display": "PATCH 127.0.0.1/api/prism/complete? :: request.url.path$path[1]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "api"
+          }
+        ]
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[2]",
+        "display": "PATCH 127.0.0.1/api/prism/complete? :: request.url.path$path[2]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "prism"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "prism"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "prism"
+          }
+        ]
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[3]",
+        "display": "PATCH 127.0.0.1/api/prism/complete? :: request.url.path$path[3]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "complete"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "complete"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "complete"
+          }
+        ]
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.accepted",
+        "display": "PATCH 127.0.0.1/api/prism/complete? :: response.body.json$.accepted",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "boolean"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": true
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": true
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": true
+          }
+        ]
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.challenge",
+        "display": "PATCH 127.0.0.1/api/prism/complete? :: response.body.json$.challenge",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "hard"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "hard"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "hard"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.label",
+        "display": "POST 127.0.0.1/api/prism/origin? :: request.body.json$.label",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "hard-s1-sample-1"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "hard-s2-sample-1"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "hard-s3-sample-1"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.sequence",
+        "display": "POST 127.0.0.1/api/prism/origin? :: request.body.json$.sequence",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "increasing"
+        ],
+        "types": [
+          "integer"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": 10
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": 20
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": 30
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.origin",
+        "display": "POST 127.0.0.1/api/prism/origin? :: request.header$header.origin",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.referer",
+        "display": "POST 127.0.0.1/api/prism/origin? :: request.header$header.referer",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[1]",
+        "display": "POST 127.0.0.1/api/prism/origin? :: request.url.path$path[1]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "api"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[2]",
+        "display": "POST 127.0.0.1/api/prism/origin? :: request.url.path$path[2]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "prism"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "prism"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "prism"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[3]",
+        "display": "POST 127.0.0.1/api/prism/origin? :: request.url.path$path[3]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "origin"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "origin"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "origin"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.phase",
+        "display": "POST 127.0.0.1/api/prism/origin? :: response.body.json$.phase",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "origin"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "origin"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "origin"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "display": "POST 127.0.0.1/api/prism/origin? :: response.body.json$.runId",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "prism_uFDKDFkmeHtu"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "prism_b3inrhJ0PBP9"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "prism_xeN9XE9a8Txl"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.salt",
+        "display": "POST 127.0.0.1/api/prism/origin? :: response.body.json$.salt",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "salt_O-uyRbI2xA"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "salt_xhzIz5GJGg"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "salt_22qnWWEy5g"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.seed",
+        "display": "POST 127.0.0.1/api/prism/origin? :: response.body.json$.seed",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "seed_soJ3ocYqs3YUfw"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "seed_5uOVG32gjM_ipA"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "seed_PTsmeRqBfeKSKQ"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.proof",
+        "display": "PUT 127.0.0.1/api/prism/bridge? :: request.body.json$.proof",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "776aa33f5d402df65f7fd5be"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "882f85b26db5c16a4c851584"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "d472fe58248c748f0351057f"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "display": "PUT 127.0.0.1/api/prism/bridge? :: request.body.json$.runId",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "prism_uFDKDFkmeHtu"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "prism_b3inrhJ0PBP9"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "prism_xeN9XE9a8Txl"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.origin",
+        "display": "PUT 127.0.0.1/api/prism/bridge? :: request.header$header.origin",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-34-918Z_4c8ac031",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-36-802Z_fcbb1116",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-38-556Z_1c23befd",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          }
+        ]
+      }
+    ],
+    "schemas": [
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "runId",
+          "ticket"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "accepted",
+          "challenge"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "label",
+          "sequence"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "phase",
+          "runId",
+          "salt",
+          "seed"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "proof",
+          "runId"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "accepted",
+          "bridgeTicket",
+          "phase"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.accepted",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "boolean"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.accepted",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "boolean"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.bridgeTicket",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.challenge",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.label",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.phase",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.phase",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.proof",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/prism/bridge?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.salt",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.seed",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/prism/origin?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.sequence",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "integer"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PATCH 127.0.0.1/api/prism/complete?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.ticket",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      }
+    ],
+    "omitted": {
+      "endpoints": 0,
+      "fields": 7,
+      "schemas": 0
+    }
+  },
+  "budget": {
+    "totalChars": 24000
+  }
+}

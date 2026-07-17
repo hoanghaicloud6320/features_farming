@@ -1,0 +1,10 @@
+{
+  "approach": "The challenge requires initiating a session via a POST request to /api/marble/session and then confirming it via a PUT request to /api/marble/confirm using the runId and handoffKey returned by the session creation. The evidence shows a consistent pattern for the 'easy' challenge.",
+  "evidenceUsed": [
+    "POST /api/marble/session returns runId and handoffKey",
+    "PUT /api/marble/confirm accepts runId and handoffKey to return accepted: true"
+  ],
+  "uncertainties": [
+    "None, the API pattern is consistent across all observed sessions."
+  ]
+}

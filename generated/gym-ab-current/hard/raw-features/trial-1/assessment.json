@@ -1,0 +1,12 @@
+{
+  "approach": "The challenge requires a three-step workflow: 1) POST to /api/prism/origin to get a runId, seed, and salt. 2) Generate a proof by hashing the seed and salt (using SHA256, hex-encoded, sliced to 24 chars) and PUT it to /api/prism/bridge along with the runId. 3) PATCH the runId and the returned bridgeTicket to /api/prism/complete to finalize the challenge.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/prism/origin",
+    "PUT 127.0.0.1/api/prism/bridge",
+    "PATCH 127.0.0.1/api/prism/complete",
+    "hash-derived-copy relation for proof generation"
+  ],
+  "uncertainties": [
+    "None, the workflow and transformation logic are clearly defined in the evidence."
+  ]
+}

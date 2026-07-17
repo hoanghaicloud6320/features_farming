@@ -308,7 +308,7 @@ function validateCode(code, origin, benchmarkRunId) {
 async function executeTest(file) {
   const startedAt = Date.now();
   try {
-    const result = await execFileAsync(process.execPath, ['--test', file], {
+    const result = await execFileAsync(process.execPath, ['--test', path.basename(file)], {
       cwd: path.dirname(file),
       timeout: 15_000,
       windowsHide: true,

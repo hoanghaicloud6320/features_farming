@@ -1,0 +1,1022 @@
+{
+  "rawTimeline": {
+    "kind": "raw-http-timeline-projection",
+    "note": "Direct request/response observations. Only browser transport noise was omitted; no relations were inferred. Context budget applied; large bodies and middle events may be omitted.",
+    "budgetChars": 24000,
+    "sessions": [
+      {
+        "recordingId": "2026-07-17T20-11-34-918Z_4c8ac031",
+        "originalEventCount": 15,
+        "events": [
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s1-sample-1\",\"sequence\":10}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_uFDKDFkmeHtu",
+                "seed": "seed_soJ3ocYqs3YUfw",
+                "salt": "salt_O-uyRbI2xA",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_EoYHq1c5ijgI\",\"ticket\":\"bridge_7pobXrCkRDGU\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_uFDKDFkmeHtu\",\"proof\":\"776aa33f5d402df65f7fd5be\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_1q9jHfzrKF9Y",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_uFDKDFkmeHtu\",\"ticket\":\"bridge_1q9jHfzrKF9Y\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s1-sample-2\",\"sequence\":11}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_rnuW5mhS9OH8",
+                "seed": "seed_xHcofB8KvDrgew",
+                "salt": "salt_RXjRv6feXQ",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_rnuW5mhS9OH8\",\"proof\":\"20bd6a64868c0afae4e5fadb\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_fI2ann0v58NJ",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_rnuW5mhS9OH8\",\"ticket\":\"bridge_fI2ann0v58NJ\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s1-sample-3\",\"sequence\":12}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_KRJ_BEx1obai",
+                "seed": "seed_PpMVPHHTzxVK6w",
+                "salt": "salt_QSDXZzVOWQ",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_KRJ_BEx1obai\",\"proof\":\"e1263d38781ff17c8f988a2e\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_IVePytjnS9EI",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_KRJ_BEx1obai\",\"ticket\":\"bridge_IVePytjnS9EI\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s1-sample-4\",\"sequence\":13}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism__or-04Qvnc-D",
+                "seed": "seed_ZFOsYRG6K8x5wA",
+                "salt": "salt_EONdzWLgJg",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism__or-04Qvnc-D\",\"proof\":\"89e430921f48f85ad6f81c31\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_cjEIDDLEzKyM",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism__or-04Qvnc-D\",\"ticket\":\"bridge_cjEIDDLEzKyM\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s1-sample-5\",\"sequence\":14}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_EoYHq1c5ijgI",
+                "seed": "seed_AatQ_sDsO6Ljzg",
+                "salt": "salt_WiYGLdjwgw",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_EoYHq1c5ijgI\",\"proof\":\"442c7820f5d610949d0dd871\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_7pobXrCkRDGU",
+                "phase": "bridged"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "recordingId": "2026-07-17T20-11-36-802Z_fcbb1116",
+        "originalEventCount": 15,
+        "events": [
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s2-sample-1\",\"sequence\":20}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_b3inrhJ0PBP9",
+                "seed": "seed_5uOVG32gjM_ipA",
+                "salt": "salt_xhzIz5GJGg",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_5NVEjBf6kU9a\",\"ticket\":\"bridge_zUdS1Z6HKEpC\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_b3inrhJ0PBP9\",\"proof\":\"882f85b26db5c16a4c851584\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_ssR9f-9JmP9Y",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_b3inrhJ0PBP9\",\"ticket\":\"bridge_ssR9f-9JmP9Y\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s2-sample-2\",\"sequence\":21}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_8ntNGWRpsGXM",
+                "seed": "seed_7uYRMjpLgRH71A",
+                "salt": "salt_UOVfXhGlSA",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_8ntNGWRpsGXM\",\"proof\":\"2063f30d42fd110b1d9eae82\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_n5p6QX4IFwiM",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_8ntNGWRpsGXM\",\"ticket\":\"bridge_n5p6QX4IFwiM\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s2-sample-3\",\"sequence\":22}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_mKmxg9bngIDc",
+                "seed": "seed_pz9rS-Ge5tnulg",
+                "salt": "salt_QodA8uQ7yg",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_mKmxg9bngIDc\",\"proof\":\"56b90ea50a8972ba70ce1744\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_b3wu1vCOWWTF",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_mKmxg9bngIDc\",\"ticket\":\"bridge_b3wu1vCOWWTF\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s2-sample-4\",\"sequence\":23}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_vEKIjUT-zRub",
+                "seed": "seed_ArKj8mglDkU4cw",
+                "salt": "salt_DnLltHcXZw",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_vEKIjUT-zRub\",\"proof\":\"0d24d1bf56397ede08398596\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_vos0nbv4-PLL",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_vEKIjUT-zRub\",\"ticket\":\"bridge_vos0nbv4-PLL\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s2-sample-5\",\"sequence\":24}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_5NVEjBf6kU9a",
+                "seed": "seed_in7R-z-eH2GGZA",
+                "salt": "salt_PAWPMLBC5Q",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_5NVEjBf6kU9a\",\"proof\":\"c17478092ec6b0b7ab924640\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_zUdS1Z6HKEpC",
+                "phase": "bridged"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "recordingId": "2026-07-17T20-11-38-556Z_1c23befd",
+        "originalEventCount": 15,
+        "events": [
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s3-sample-1\",\"sequence\":30}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_xeN9XE9a8Txl",
+                "seed": "seed_PTsmeRqBfeKSKQ",
+                "salt": "salt_22qnWWEy5g",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_YjQ9JPIYhZ7L\",\"ticket\":\"bridge_5ZzCZWcR7I5m\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_xeN9XE9a8Txl\",\"proof\":\"d472fe58248c748f0351057f\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_BZP2Fw12qABq",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_xeN9XE9a8Txl\",\"ticket\":\"bridge_BZP2Fw12qABq\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s3-sample-2\",\"sequence\":31}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_DS00lNsyR3Je",
+                "seed": "seed_CKydpwoy8rjUcg",
+                "salt": "salt_H4AO7YoYuQ",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_DS00lNsyR3Je\",\"proof\":\"491365f55bad7c14911e730f\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_PFTVA3Gak1WJ",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_DS00lNsyR3Je\",\"ticket\":\"bridge_PFTVA3Gak1WJ\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s3-sample-3\",\"sequence\":32}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_HeLLQz3bIftF",
+                "seed": "seed_Y5Nm6q8APIvu8g",
+                "salt": "salt_v-E2PwSSzA",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_HeLLQz3bIftF\",\"proof\":\"2a5122fbec6130b769b8063e\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_vNKv341X_oXm",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_HeLLQz3bIftF\",\"ticket\":\"bridge_vNKv341X_oXm\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s3-sample-4\",\"sequence\":33}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_48c-xfa0hNGh",
+                "seed": "seed_E0FoIw6TjPJIGQ",
+                "salt": "salt_vpSi3nTZOQ",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_48c-xfa0hNGh\",\"proof\":\"7d6d4d83785d8acd4117f67c\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_aL7ykGrzS36x",
+                "phase": "bridged"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PATCH",
+              "url": "http://127.0.0.1:64235/api/prism/complete",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_48c-xfa0hNGh\",\"ticket\":\"bridge_aL7ykGrzS36x\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "hard"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/prism/origin",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"hard-s3-sample-5\",\"sequence\":34}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "prism_YjQ9JPIYhZ7L",
+                "seed": "seed_N612cdlQZbLFug",
+                "salt": "salt_jO4ehUCifA",
+                "phase": "origin"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/prism/bridge",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"prism_YjQ9JPIYhZ7L\",\"proof\":\"5c810c3fa8a46136f6de8e12\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "bridgeTicket": "bridge_5ZzCZWcR7I5m",
+                "phase": "bridged"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "omittedEvents": 0
+  },
+  "farmedFeatures": null,
+  "budget": {
+    "totalChars": 24000
+  }
+}

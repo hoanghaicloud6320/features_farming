@@ -1,0 +1,12 @@
+{
+  "approach": "The challenge requires a two-step interaction: first, initialize a session via POST /api/marble/session to obtain a runId and handoffKey, then confirm the session via PUT /api/marble/confirm using those credentials. The evidence confirms these endpoints and the required JSON structure for the request bodies.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/marble/session",
+    "PUT 127.0.0.1/api/marble/confirm",
+    "$.runId",
+    "$.handoffKey"
+  ],
+  "uncertainties": [
+    "None, as the workflow is explicitly defined in the evidence."
+  ]
+}

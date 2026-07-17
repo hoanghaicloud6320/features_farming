@@ -1,0 +1,11 @@
+{
+  "approach": "The challenge requires a three-step interaction: POST to /api/prism/origin to get a runId, seed, and salt; PUT to /api/prism/bridge with a proof (which appears to be a hex string derived from the seed/salt, though the evidence shows direct values); and PATCH to /api/prism/complete with the bridge ticket. Since I cannot compute the proof, I will use the provided evidence to perform a single successful sequence.",
+  "evidenceUsed": [
+    "The sequence of POST, PUT, PATCH requests to /api/prism/origin, /api/prism/bridge, and /api/prism/complete.",
+    "The specific headers required: x-gym-benchmark-run: gym-hard-raw-0ce62919.",
+    "The structure of the JSON payloads for each step."
+  ],
+  "uncertainties": [
+    "The exact algorithm for generating the 'proof' field is unknown, so I must rely on the provided evidence to pick a valid sequence."
+  ]
+}

@@ -1,0 +1,1041 @@
+{
+  "rawTimeline": {
+    "kind": "raw-http-timeline-projection",
+    "note": "Direct request/response observations. Only browser transport noise was omitted; no relations were inferred. Context budget applied; large bodies and middle events may be omitted.",
+    "budgetChars": 24000,
+    "sessions": [
+      {
+        "recordingId": "2026-07-17T20-44-36-830Z_e588e191",
+        "originalEventCount": 100,
+        "events": [
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/aurora/open",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"noise-s1-sample-1\",\"sequence\":10}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "truncated": true,
+                "originalChars": 4023,
+                "preview": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"phase\":\"spectrum\",\"channels\":[{\"channelId\":\"ch-01\",\"signal\":\"signal_uawdBC195gIq5rNO\",\"amplitude\":1010,\"checksumHint\":\"hint_eRz1fI3oaQ\"},{\"channelId\":\"ch-02\",\"signal\":\"signal_SiZ_K78Nl-J5ybIO\",\"amplitude\":1027,\"checksumHint\":\"hint_g3VUESOtSw\"},{\"channelId\":\"ch-03\",\"signal\":\"signal_xmBDa7xft65kEBeh\",\"amplitude\":1044,\"checksumHint\":\"hint_GB2L6ooLWA\"},{\"channelId\":\"ch-04\",\"signal\":\"signal_S3gUYRC55BBQSWM_\",\"amplitude\":1061,\"checksumHint\":\"hint_8YuT-YaYPA\"},{\"channelId\":\"ch-05\",\"signal\":\"signal_3GjSyDvZNvVEFe5p\",\"amplitude\":1078,\"checksumHint\":\"hint_6MwqJr9orw\"},{\"channelId\":\"ch-06\",\"signal\":\"signal_c5C7TJYmFiQc3Ev2\",\"amplitude\":1095,\"checksumHint\":\"hint_LX3eRXGgPQ\"},{\"channelId\":\"ch-07\",\"signal\":\"signal_PaOqOd-Y7THyb0UW\",\"amplitude\":1112,\"checksumHint\":\"hint_UW0iCKoqLA\"},{\"channelId\":\"ch-08\",\"signal\":\"signal_9JNPQxmXAM2zaORq\",\"amplitude\":1129,\"checksumHint\":\"hint_DY_oW2wb6w\"},{\"channelId\":\"ch-09\",\"signal\":\"signal_8oO6h9xsRINEbkJb\",\"amplitude\":1146,\"checksumHint\":\"hint_h746XOguxQ\"},{\"channelId\":\"ch-10\",\"signal\":\"signal_FQGyOJn3ZSd8j30p\",\"amplitude\":1163,\"checksumHint\":\"hint_tTCHPk92ww\"},{\"channelId\":\"ch-11\",\"signal\":\"signal_Y1qXH4ZtMzkPavtq\",\"amplitude\":1180,\"checksumHint\":\"hint_r8iDJh7MfA\"},{\"channelId\":\"ch-12\",\"signal\":\"signal_xZ-DE2PrG5lCDNy_\",\"amplitude\":1197,\"checksumHint\":\"hint_IHG-tiCcmA\"},{\"channelId\":\"ch-13\",\"signal\":\"signal_qHVn0fPsG1Qwx-k8\",\"amplitude\":1214,\"checksumHint\":\"hint_NeIMnh4qSA\"},{\"channelId\":\"ch-14\",\"signal\":\"signal_z61sryVPvDLYI971\",\"amplitude\":1231,\"checksumHint\":\"hint_GQB6UHIUqw\"},{\"channelId\":\"ch-15\",\"signal\":\"signal_97t2i-JBl9mg4WfW\",\"amplitude\":1248,\"checksumHint\":\"hint_-soJi7wpRQ\"},{\"channelId\":\"ch-16\",\"signal\":\"signal_KM-G7B809Tbyh3Yx\",\"amplitude\":1265,\"checksumHint\":\"hint_Xdz2upuheg\"},{\"channelId\":\"ch-17\",\"signal\":\"signal_TiDyhZjFdXjMzrBE\",\"amplitude\":1282,\"checksumHint\":\"hint_Y9MtXKszQg\"},{\"channelId\":\"ch-18\",\"signal\":\"signal_Q7O-9uqI5Y5ItiQc\",\"amplitude\":1299,\"checksumHint\":\"hint_lh53mM6Ixg\"},{\"channelId\":\"ch-19\",\"signal\":\"signal_G1TM87K9oiRFzHeU\",\"amplitude\":1316,\"checksumHint\":\"hint_iAfB-9eHcQ\"},{\"channelId\":\"ch-20\",\"signal\":\"signal_GQ-LrQuzzgan7Oqv\",\"amplitude\":1333,\"checksumHint\":\"hint_DBWNvBH_EA\"},{\"channelId\":\"ch-21\",\"signal\":\"signal_aMDUtL14HOyI1QVr\",\"amplitude\":1350,\"checksumHint\":\"hint_Mt12cMsGCA\"},{\"channelId\":\"ch-22\",\"signal\":\"signal_jmSBXFCTWT8GvBIW\",\"amplitude\":1367,\"checksumHint\":\"hint_vYItGAdVCg\"},{\"channelId\":\"ch-23\",\"signal\":\"signal_2YNeO0D76kSrwi3p\",\"amplitude\":1384,\"checksumHint\":\"hint_Ap6Uccp72w\"},{\"channelId\":\"ch-24\",\"signal\":\"signal_GgnOToskbjpl55qW\",\"amplitude\":1401,\"checksumHint\":\"hint_YRZwfEKCYg\"},{\"channelId\":\"ch-25\",\"signal\":\"signal_1cXgl681_eGb7pNd\",\"amplitude\":1418,\"checksumHint\":\"hint_MNhywALU4Q\"},{\"channelId\":\"ch-26\",\"signal\":\"signal_Gv2AkViN9F43HM29\",\"amplitude\":1435,\"checksumHint\":\"hint_ZyglnIbUAg\"},{\"channelId\":\"ch-27\",\"signal\":\"signal_hz0ryA72-vpLchEF\",\"amplitude\":1452,\"checksumHint\":\"hint_XRTc2G_Slg\"},{\"channelId\":\"ch-28\",\"signal\":\"signal_0qCDaSOhFbb-aliv\",\"amplitude\":1469,\"checksumHint\":\"hint_96__-7ytpg\"},{\"channelId\":\"ch-29\",\"signal\":\"signal_KA_xML6AjE4Ym_gU\",\"amplitude\":1"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64588/api/aurora/close",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kn_Yabg0rKL0\",\"signal\":\"signal_Tu-UsyFqJkWfr7C0\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "noise"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":0,\"observed\":\"signal_uawdBC195gIq5rNO\",\"payload\":[\"noise-s1-sample-1-0-0\",\"noise-s1-sample-1-0-1\",\"noise-s1-sample-1-0-2\",\"noise-s1-sample-1-0-3\",\"noise-s1-sample-1-0-4\",\"noise-s1-sample-1-0-5\",\"noise-s1-sample-1-0-6\",\"noise-s1-sample-1-0-7\",\"noise-s1-sample-1-0-8\",\"noise-s1-sample-1-0-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_pxuRGhaeo3-r",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 0,
+                  "observed": "signal_uawdBC195gIq5rNO",
+                  "payload": [
+                    "noise-s1-sample-1-0-0",
+                    "noise-s1-sample-1-0-1",
+                    "noise-s1-sample-1-0-2",
+                    "noise-s1-sample-1-0-3",
+                    "noise-s1-sample-1-0-4",
+                    "noise-s1-sample-1-0-5",
+                    "noise-s1-sample-1-0-6",
+                    "noise-s1-sample-1-0-7",
+                    "noise-s1-sample-1-0-8",
+                    "noise-s1-sample-1-0-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_Zy3efURCuX2waED8eKE"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_7WsiYK5FNv1AqBzefxA"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_A6a-afsk2S1Q6MJLIgA"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_u2VcpTJ59TJC8pFRETk"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_JvJT0dfo4vfTSmVgVIY"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_WoYC8pConkoJLfbFliM"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_UjWXn3PkID6fnrmKvL0"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_s8oAeM2HC82gtPHjj6c"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":1,\"observed\":\"signal_9JNPQxmXAM2zaORq\",\"payload\":[\"noise-s1-sample-1-1-0\",\"noise-s1-sample-1-1-1\",\"noise-s1-sample-1-1-2\",\"noise-s1-sample-1-1-3\",\"noise-s1-sample-1-1-4\",\"noise-s1-sample-1-1-5\",\"noise-s1-sample-1-1-6\",\"noise-s1-sample-1-1-7\",\"noise-s1-sample-1-1-8\",\"noise-s1-sample-1-1-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_XvxDHr2o_Okf",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 1,
+                  "observed": "signal_9JNPQxmXAM2zaORq",
+                  "payload": [
+                    "noise-s1-sample-1-1-0",
+                    "noise-s1-sample-1-1-1",
+                    "noise-s1-sample-1-1-2",
+                    "noise-s1-sample-1-1-3",
+                    "noise-s1-sample-1-1-4",
+                    "noise-s1-sample-1-1-5",
+                    "noise-s1-sample-1-1-6",
+                    "noise-s1-sample-1-1-7",
+                    "noise-s1-sample-1-1-8",
+                    "noise-s1-sample-1-1-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_DvPurDhQOGKLUqhqWRo"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_5HCHuVeF-pdDlQWDTpA"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_XuNKNgdh3sBv3ITY6JU"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_Blx78c82q6PJ19Zmuuo"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_tT3UURTEChj4AV6oIco"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_A79Ne_lv-2slwzZh5jE"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_Z3919VExFZgfBf-jPj8"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_rVHQkFqQqzj2PgukYCo"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":2,\"observed\":\"signal_97t2i-JBl9mg4WfW\",\"payload\":[\"noise-s1-sample-1-2-0\",\"noise-s1-sample-1-2-1\",\"noise-s1-sample-1-2-2\",\"noise-s1-sample-1-2-3\",\"noise-s1-sample-1-2-4\",\"noise-s1-sample-1-2-5\",\"noise-s1-sample-1-2-6\",\"noise-s1-sample-1-2-7\",\"noise-s1-sample-1-2-8\",\"noise-s1-sample-1-2-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_tyHGjHFRuupg",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 2,
+                  "observed": "signal_97t2i-JBl9mg4WfW",
+                  "payload": [
+                    "noise-s1-sample-1-2-0",
+                    "noise-s1-sample-1-2-1",
+                    "noise-s1-sample-1-2-2",
+                    "noise-s1-sample-1-2-3",
+                    "noise-s1-sample-1-2-4",
+                    "noise-s1-sample-1-2-5",
+                    "noise-s1-sample-1-2-6",
+                    "noise-s1-sample-1-2-7",
+                    "noise-s1-sample-1-2-8",
+                    "noise-s1-sample-1-2-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_OQXhsM5cwYiFrcPsdWI"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_2--VZyTD3Cl03fOS2Es"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_u5rsbZZQmJHowWZ4iEc"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_TIPkTQbVnkvxKBdlA0c"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_mxMpBx9Ljyo208OOcvI"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_Zr66SullGrg3_HDFDV0"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_fdCTNf5gDqAoH81V694"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_p9iWoUGOC_R3W9h1q8k"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":3,\"observed\":\"signal_jmSBXFCTWT8GvBIW\",\"payload\":[\"noise-s1-sample-1-3-0\",\"noise-s1-sample-1-3-1\",\"noise-s1-sample-1-3-2\",\"noise-s1-sample-1-3-3\",\"noise-s1-sample-1-3-4\",\"noise-s1-sample-1-3-5\",\"noise-s1-sample-1-3-6\",\"noise-s1-sample-1-3-7\",\"noise-s1-sample-1-3-8\",\"noise-s1-sample-1-3-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_W0vu3mu8R-Nk",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 3,
+                  "observed": "signal_jmSBXFCTWT8GvBIW",
+                  "payload": [
+                    "noise-s1-sample-1-3-0",
+                    "noise-s1-sample-1-3-1",
+                    "noise-s1-sample-1-3-2",
+                    "noise-s1-sample-1-3-3",
+                    "noise-s1-sample-1-3-4",
+                    "noise-s1-sample-1-3-5",
+                    "noise-s1-sample-1-3-6",
+                    "noise-s1-sample-1-3-7",
+                    "noise-s1-sample-1-3-8",
+                    "noise-s1-sample-1-3-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_BaWtwO1gq1NYxSzOW90"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_PmDnwirlhkUrAtC0RkM"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_N6G4Ktk6EXahH-mjU4g"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_fEqYDLbs1ke86j4FD_Q"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_FmuWmbjYNnOhfSKxGvs"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_Fd_7CeSowLfDOMIUcdk"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_41XsV9xGaHhuztUpUws"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_FN_LTa5rjNif7y_7WPg"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":4,\"observed\":\"signal_KA_xML6AjE4Ym_gU\",\"payload\":[\"noise-s1-sample-1-4-0\",\"noise-s1-sample-1-4-1\",\"noise-s1-sample-1-4-2\",\"noise-s1-sample-1-4-3\",\"noise-s1-sample-1-4-4\",\"noise-s1-sample-1-4-5\",\"noise-s1-sample-1-4-6\",\"noise-s1-sample-1-4-7\",\"noise-s1-sample-1-4-8\",\"noise-s1-sample-1-4-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_-YiuYrCuNdRB",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 4,
+                  "observed": "signal_KA_xML6AjE4Ym_gU",
+                  "payload": [
+                    "noise-s1-sample-1-4-0",
+                    "noise-s1-sample-1-4-1",
+                    "noise-s1-sample-1-4-2",
+                    "noise-s1-sample-1-4-3",
+                    "noise-s1-sample-1-4-4",
+                    "noise-s1-sample-1-4-5",
+                    "noise-s1-sample-1-4-6",
+                    "noise-s1-sample-1-4-7",
+                    "noise-s1-sample-1-4-8",
+                    "noise-s1-sample-1-4-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_45Vmi_1HX6vLyjb8RiU"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_B4AiK0cUCpFmY0CMXRE"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_V2eN3yYAkpPZyESx6yg"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_mHHpxUfQTQ1Gimukj98"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_5jQnWdTmM-10wzoB5-k"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_rM_ljsei4MxH89ThO7I"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_U6qe9rGA6Qdng1ZcaYY"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_XQn_7lKQg_PwKPFKJj4"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":5,\"observed\":\"signal_u6g-UgV8jMw_r5_d\",\"payload\":[\"noise-s1-sample-1-5-0\",\"noise-s1-sample-1-5-1\",\"noise-s1-sample-1-5-2\",\"noise-s1-sample-1-5-3\",\"noise-s1-sample-1-5-4\",\"noise-s1-sample-1-5-5\",\"noise-s1-sample-1-5-6\",\"noise-s1-sample-1-5-7\",\"noise-s1-sample-1-5-8\",\"noise-s1-sample-1-5-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_6qt6AYwoMp_T",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 5,
+                  "observed": "signal_u6g-UgV8jMw_r5_d",
+                  "payload": [
+                    "noise-s1-sample-1-5-0",
+                    "noise-s1-sample-1-5-1",
+                    "noise-s1-sample-1-5-2",
+                    "noise-s1-sample-1-5-3",
+                    "noise-s1-sample-1-5-4",
+                    "noise-s1-sample-1-5-5",
+                    "noise-s1-sample-1-5-6",
+                    "noise-s1-sample-1-5-7",
+                    "noise-s1-sample-1-5-8",
+                    "noise-s1-sample-1-5-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_p_fFtCmJ3aF77KYZhUw"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_JkydDTcIUrmt9n16sZc"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_e3TbHciATc44nzGYQzI"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_n7O8-HYA5p8SibiM9BU"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_eOYHDlpv9LA4RNNe2-8"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_0DvtPVeeg0S9zODx91E"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_4qxdTHrc2YhqgZPTY3g"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_biyPoXmyHi_7DbwmFzc"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":6,\"observed\":\"signal_PaOqOd-Y7THyb0UW\",\"payload\":[\"noise-s1-sample-1-6-0\",\"noise-s1-sample-1-6-1\",\"noise-s1-sample-1-6-2\",\"noise-s1-sample-1-6-3\",\"noise-s1-sample-1-6-4\",\"noise-s1-sample-1-6-5\",\"noise-s1-sample-1-6-6\",\"noise-s1-sample-1-6-7\",\"noise-s1-sample-1-6-8\",\"noise-s1-sample-1-6-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_BVa4ZIixOzoO",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 6,
+                  "observed": "signal_PaOqOd-Y7THyb0UW",
+                  "payload": [
+                    "noise-s1-sample-1-6-0",
+                    "noise-s1-sample-1-6-1",
+                    "noise-s1-sample-1-6-2",
+                    "noise-s1-sample-1-6-3",
+                    "noise-s1-sample-1-6-4",
+                    "noise-s1-sample-1-6-5",
+                    "noise-s1-sample-1-6-6",
+                    "noise-s1-sample-1-6-7",
+                    "noise-s1-sample-1-6-8",
+                    "noise-s1-sample-1-6-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_BiX0j-olSsjQYnQI-Ac"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_Udcb_Zs5QePOfrWJJr4"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_cOC5FVTtY3SvV9Q3rUc"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_oH0QanYkuO9vpWEQGzc"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_a8TnvywRrJW89qwecCs"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_wMPo-eTdzOuq_1gu5xc"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_yA1Xk2gv9RfsgYS2CeU"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy__UqaVYmk7k9kcUcjii8"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":7,\"observed\":\"signal_z61sryVPvDLYI971\",\"payload\":[\"noise-s1-sample-1-7-0\",\"noise-s1-sample-1-7-1\",\"noise-s1-sample-1-7-2\",\"noise-s1-sample-1-7-3\",\"noise-s1-sample-1-7-4\",\"noise-s1-sample-1-7-5\",\"noise-s1-sample-1-7-6\",\"noise-s1-sample-1-7-7\",\"noise-s1-sample-1-7-8\",\"noise-s1-sample-1-7-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_-LpvmEqdODBh",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 7,
+                  "observed": "signal_z61sryVPvDLYI971",
+                  "payload": [
+                    "noise-s1-sample-1-7-0",
+                    "noise-s1-sample-1-7-1",
+                    "noise-s1-sample-1-7-2",
+                    "noise-s1-sample-1-7-3",
+                    "noise-s1-sample-1-7-4",
+                    "noise-s1-sample-1-7-5",
+                    "noise-s1-sample-1-7-6",
+                    "noise-s1-sample-1-7-7",
+                    "noise-s1-sample-1-7-8",
+                    "noise-s1-sample-1-7-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_mszNZRawxvQTKH7sJXc"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_zue2qGdQtR2OD8PUa1E"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_B9u3_3zWptrl-jEFMnM"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_gQk8m7shAS4oCxEqJqw"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_Bc23fIq2Rbz4wXX9cvY"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_y6oBRcldxVOvQvMyz1Y"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_j7kKyK3n8kIU0befxWk"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_wWtktlpX6xDTckUBkLs"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":8,\"observed\":\"signal_aMDUtL14HOyI1QVr\",\"payload\":[\"noise-s1-sample-1-8-0\",\"noise-s1-sample-1-8-1\",\"noise-s1-sample-1-8-2\",\"noise-s1-sample-1-8-3\",\"noise-s1-sample-1-8-4\",\"noise-s1-sample-1-8-5\",\"noise-s1-sample-1-8-6\",\"noise-s1-sample-1-8-7\",\"noise-s1-sample-1-8-8\",\"noise-s1-sample-1-8-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_nIfq6UgcarKP",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 8,
+                  "observed": "signal_aMDUtL14HOyI1QVr",
+                  "payload": [
+                    "noise-s1-sample-1-8-0",
+                    "noise-s1-sample-1-8-1",
+                    "noise-s1-sample-1-8-2",
+                    "noise-s1-sample-1-8-3",
+                    "noise-s1-sample-1-8-4",
+                    "noise-s1-sample-1-8-5",
+                    "noise-s1-sample-1-8-6",
+                    "noise-s1-sample-1-8-7",
+                    "noise-s1-sample-1-8-8",
+                    "noise-s1-sample-1-8-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_oUcv6IT_mIWiH8DNAgQ"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_KvZC3r232o9_HclcQyo"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_6Gk4mRpsWCuMmGg8pWY"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_oQohD640-DZY8BmJ5vc"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_3hv8QwBQMlyX8rUF9bE"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_5RbLZLlBXwnR-Er8sfc"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_ySl_dwaiqSUGdWY327I"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_L7IZAwGVL_oznbFXGhg"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":9,\"observed\":\"signal_0qCDaSOhFbb-aliv\",\"payload\":[\"noise-s1-sample-1-9-0\",\"noise-s1-sample-1-9-1\",\"noise-s1-sample-1-9-2\",\"noise-s1-sample-1-9-3\",\"noise-s1-sample-1-9-4\",\"noise-s1-sample-1-9-5\",\"noise-s1-sample-1-9-6\",\"noise-s1-sample-1-9-7\",\"noise-s1-sample-1-9-8\",\"noise-s1-sample-1-9-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_E9J_MlYj6AfO",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 9,
+                  "observed": "signal_0qCDaSOhFbb-aliv",
+                  "payload": [
+                    "noise-s1-sample-1-9-0",
+                    "noise-s1-sample-1-9-1",
+                    "noise-s1-sample-1-9-2",
+                    "noise-s1-sample-1-9-3",
+                    "noise-s1-sample-1-9-4",
+                    "noise-s1-sample-1-9-5",
+                    "noise-s1-sample-1-9-6",
+                    "noise-s1-sample-1-9-7",
+                    "noise-s1-sample-1-9-8",
+                    "noise-s1-sample-1-9-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_G9TAjoGaDRao_fMXU3M"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_MqtzUzGl8c9AeT30QsQ"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_k5nUZfLAwSIROPWmZWQ"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_UI8ptDVFoaytZZEsaCU"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_K7ZhtETfDHH1CvLJVlE"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_EAtdoRcjwx62RUs0qd4"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_B14nBblZBafYxDN9saM"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_NPtswNWIA2nwoPRJMAw"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":10,\"observed\":\"signal_HasI4yctypslRFji\",\"payload\":[\"noise-s1-sample-1-10-0\",\"noise-s1-sample-1-10-1\",\"noise-s1-sample-1-10-2\",\"noise-s1-sample-1-10-3\",\"noise-s1-sample-1-10-4\",\"noise-s1-sample-1-10-5\",\"noise-s1-sample-1-10-6\",\"noise-s1-sample-1-10-7\",\"noise-s1-sample-1-10-8\",\"noise-s1-sample-1-10-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_FERNKTuHyAYg",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 10,
+                  "observed": "signal_HasI4yctypslRFji",
+                  "payload": [
+                    "noise-s1-sample-1-10-0",
+                    "noise-s1-sample-1-10-1",
+                    "noise-s1-sample-1-10-2",
+                    "noise-s1-sample-1-10-3",
+                    "noise-s1-sample-1-10-4",
+                    "noise-s1-sample-1-10-5",
+                    "noise-s1-sample-1-10-6",
+                    "noise-s1-sample-1-10-7",
+                    "noise-s1-sample-1-10-8",
+                    "noise-s1-sample-1-10-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_QP0uuTN6ajTRb960mso"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_m6W0pbUgx50CVR3j9oQ"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_4wcn3EGaqsF3qrCD1t8"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_iKohdg_eMH9hgiOUaVM"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_uu-j_c1ARLNk2oapeD0"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_4-SOXjsVT_HaEu4XgT0"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_BAGUsJdyq_rG1iA80bU"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_G9uiKIprpJLebpK3dg8"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":11,\"observed\":\"signal_c5C7TJYmFiQc3Ev2\",\"payload\":[\"noise-s1-sample-1-11-0\",\"noise-s1-sample-1-11-1\",\"noise-s1-sample-1-11-2\",\"noise-s1-sample-1-11-3\",\"noise-s1-sample-1-11-4\",\"noise-s1-sample-1-11-5\",\"noise-s1-sample-1-11-6\",\"noise-s1-sample-1-11-7\",\"noise-s1-sample-1-11-8\",\"noise-s1-sample-1-11-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_cQO5UL-Ekmt7",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 11,
+                  "observed": "signal_c5C7TJYmFiQc3Ev2",
+                  "payload": [
+                    "noise-s1-sample-1-11-0",
+                    "noise-s1-sample-1-11-1",
+                    "noise-s1-sample-1-11-2",
+                    "noise-s1-sample-1-11-3",
+                    "noise-s1-sample-1-11-4",
+                    "noise-s1-sample-1-11-5",
+                    "noise-s1-sample-1-11-6",
+                    "noise-s1-sample-1-11-7",
+                    "noise-s1-sample-1-11-8",
+                    "noise-s1-sample-1-11-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_gB1SZzryqwwKeQ2OzYs"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_aVsLnddSexyyK3SWF4Y"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_5Nf4sFRq2lNY_HwOlOQ"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_3bQZV7K9dXKG6hflUqQ"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_IIEpIyVqaJ1yF23x15E"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_45jA0fRoU7WqNaXUxzQ"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_iSyNquUqg7cIYdFJT18"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_VIsj40urd5n-fEe-Gic"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64588/api/events",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"ordinal\":12,\"observed\":\"signal_qHVn0fPsG1Qwx-k8\",\"payload\":[\"noise-s1-sample-1-12-0\",\"noise-s1-sample-1-12-1\",\"noise-s1-sample-1-12-2\",\"noise-s1-sample-1-12-3\",\"noise-s1-sample-1-12-4\",\"noise-s1-sample-1-12-5\",\"noise-s1-sample-1-12-6\",\"noise-s1-sample-1-12-7\",\"noise-s1-sample-1-12-8\",\"noise-s1-sample-1-12-9\"]}"
+            },
+            "response": {
+              "status": 202,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "stored": true,
+                "eventId": "event_j1HeAVsdWnzu",
+                "echo": {
+                  "runId": "aurora_kh2-klgfaNBB",
+                  "ordinal": 12,
+                  "observed": "signal_qHVn0fPsG1Qwx-k8",
+                  "payload": [
+                    "noise-s1-sample-1-12-0",
+                    "noise-s1-sample-1-12-1",
+                    "noise-s1-sample-1-12-2",
+                    "noise-s1-sample-1-12-3",
+                    "noise-s1-sample-1-12-4",
+                    "noise-s1-sample-1-12-5",
+                    "noise-s1-sample-1-12-6",
+                    "noise-s1-sample-1-12-7",
+                    "noise-s1-sample-1-12-8",
+                    "noise-s1-sample-1-12-9"
+                  ]
+                },
+                "decoys": [
+                  {
+                    "index": 0,
+                    "value": "decoy_HJxHQ8Bj7bJaU5A25zk"
+                  },
+                  {
+                    "index": 1,
+                    "value": "decoy_0WOL_clDDWfKbgJhDFw"
+                  },
+                  {
+                    "index": 2,
+                    "value": "decoy_AyKSDEOs2yvXoOh_bgA"
+                  },
+                  {
+                    "index": 3,
+                    "value": "decoy_4VktBvtAYxcSoVvItO0"
+                  },
+                  {
+                    "index": 4,
+                    "value": "decoy_gCtmylyMol_FB0OMjwo"
+                  },
+                  {
+                    "index": 5,
+                    "value": "decoy_IkV_h-gIhDFeqB_Gc9I"
+                  },
+                  {
+                    "index": 6,
+                    "value": "decoy_O-DpQowz6b0tyXkJM7A"
+                  },
+                  {
+                    "index": 7,
+                    "value": "decoy_y0kiWputzambQJ-wcss"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64588/api/aurora/close",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_kh2-klgfaNBB\",\"signal\":\"signal_GgnOToskbjpl55qW\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "noise"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64588/api/aurora/close",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"aurora_s5TZmnunnkNo\",\"signal\":\"signal_TjwoLruP5YMwy1Vw\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "noise"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "omittedEvents": 283
+  },
+  "farmedFeatures": null,
+  "budget": {
+    "totalChars": 24000
+  }
+}

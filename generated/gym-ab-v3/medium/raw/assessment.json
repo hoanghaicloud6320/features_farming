@@ -1,0 +1,9 @@
+{
+  "approach": "The challenge requires interacting with the /api/lattice/seed endpoint to obtain a runId and a capsule identifier. The capsule identifier must be base64 encoded and used as a Bearer token in the Authorization header for a subsequent PUT request to /api/lattice/unseal, which also requires the runId in the request body. I will perform these two steps sequentially to complete the challenge.",
+  "evidenceUsed": [
+    "The timeline shows a consistent pattern: POST /api/lattice/seed returns {runId, capsule}. Then, PUT /api/lattice/unseal with Authorization: Bearer <base64(capsule)> and body {runId} returns {accepted: true, challenge: 'medium'}."
+  ],
+  "uncertainties": [
+    "None, the pattern is consistent across all recorded sessions."
+  ]
+}

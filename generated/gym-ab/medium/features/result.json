@@ -1,0 +1,57 @@
+{
+  "condition": "features",
+  "conditionLabel": "Farmed features",
+  "benchmarkRunId": "gym-medium-features-f201d0ea",
+  "evidenceBytes": 17058,
+  "promptHash": "1f79cde4b62d6bee473035cc075836ffddee9362c4fe36bb4b521d2baae24371",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 10105,
+      "candidatesTokenCount": 474,
+      "totalTokenCount": 10579,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 10105
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "IY1aasm_Fsmi2roPtuX9iAE",
+    "assessment": {
+      "approach": "The challenge requires a two-step interaction: first, POST to /api/lattice/seed to obtain a runId and a capsule string. Second, PUT to /api/lattice/unseal using the runId in the body and the capsule as an Authorization header to complete the challenge.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/lattice/seed",
+        "PUT 127.0.0.1/api/lattice/unseal",
+        "$.runId mapping from seed response to unseal request",
+        "$.capsule mapping from seed response to unseal authorization header"
+      ],
+      "uncertainties": [
+        "The exact format of the Authorization header (e.g., Bearer vs raw string) is inferred from the evidence that the capsule is used as the authorization value."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 312,
+    "timedOut": false,
+    "stdout": "(node:13248) Warning: Failed to load the ES module: <workspace>\\generated\\gym-ab\\medium\\features\\automation.test.js. Make sure to set \"type\": \"module\" in the nearest package.json file or use the .mjs extension.\n(Use `node --trace-warnings ...` to show where the warning was created)\n<workspace>\\generated\\gym-ab\\medium\\features\\automation.test.js:1\nimport { test } from 'node:test'; import assert from 'node:assert/strict'; test('Lattice Capsule Challenge', async () => { const origin = 'http://127.0.0.1:64274'; const headers = { 'Content-Type': 'application/json', 'x-gym-benchmark-run': 'gym-medium-features-f201d0ea' }; const seedRes = await fetch(`${origin}/api/lattice/seed`, { method: 'POST', headers, body: JSON.stringify({ label: 'medium-test' }) }); assert.strictEqual(seedRes.status, 200); const seedData = await seedRes.json(); const { runId, capsule } = seedData; const unsealRes = await fetch(`${origin}/api/lattice/unseal`, { method: 'PUT', headers: { ...headers, 'Authorization': capsule }, body: JSON.stringify({ runId }) }); assert.strictEqual(unsealRes.status, 200); const unsealData = await unsealRes.json(); assert.deepStrictEqual(unsealData, { accepted: true, challenge: 'medium' }); });\n^^^^^^\n\nSyntaxError: Cannot use import statement outside a module\n    at wrapSafe (node:internal/modules/cjs/loader:1804:18)\n    at Module._compile (node:internal/modules/cjs/loader:1845:20)\n    at Module._extensions..js (node:internal/modules/cjs/loader:2002:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v24.18.0\n✖ <workspace>\\generated\\gym-ab\\medium\\features\\automation.test.js (131.0975ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 145.3643\n\n✖ failing tests:\n\ntest at automation.test.js:1:1\n✖ <workspace>\\generated\\gym-ab\\medium\\features\\automation.test.js (131.0975ms)\n  'test failed'\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab\\medium\\features\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [],
+    "expectedRoutes": [
+      "/api/lattice/seed",
+      "/api/lattice/unseal"
+    ],
+    "routeCoverage": 0,
+    "score": 0
+  }
+}

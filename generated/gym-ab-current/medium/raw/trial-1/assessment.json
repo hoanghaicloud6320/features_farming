@@ -1,0 +1,10 @@
+{
+  "approach": "The challenge requires interacting with the /api/lattice/seed endpoint to obtain a runId and a capsule identifier, then using the capsule identifier as a Bearer token to authorize a PUT request to /api/lattice/unseal with the runId in the body. The evidence shows that the capsule identifier is base64 encoded, and the authorization header expects 'Bearer <base64(capsule)>'. I will perform these two steps sequentially.",
+  "evidenceUsed": [
+    "POST /api/lattice/seed returns runId and capsule",
+    "PUT /api/lattice/unseal requires Authorization: Bearer <base64(capsule)> and body {runId: <runId>}"
+  ],
+  "uncertainties": [
+    "None, the protocol is clearly defined in the provided evidence."
+  ]
+}

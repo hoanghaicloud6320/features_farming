@@ -1,0 +1,12 @@
+{
+  "approach": "The challenge requires a three-step workflow: first, initialize the session via POST /api/prism/origin to obtain a runId, salt, and seed. Second, compute a proof by hashing the seed and salt (using SHA-256 as a common cryptographic standard for such challenges) and send it via PUT /api/prism/bridge to obtain a bridgeTicket. Finally, submit the runId and bridgeTicket to PATCH /api/prism/complete to receive the final confirmation.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/prism/origin",
+    "PUT 127.0.0.1/api/prism/bridge",
+    "PATCH 127.0.0.1/api/prism/complete",
+    "Relations between runId and bridgeTicket"
+  ],
+  "uncertainties": [
+    "The exact hashing algorithm for the proof is not explicitly stated, but SHA-256 is the standard assumption for such challenges."
+  ]
+}

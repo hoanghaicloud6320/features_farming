@@ -1,0 +1,71 @@
+{
+  "condition": "features",
+  "conditionLabel": "Farmed features",
+  "trial": 1,
+  "benchmarkRunId": "gym-medium-features-t1-9d9ed2f0",
+  "evidenceBytes": 17294,
+  "promptHash": "ccd46fbdcb1c509cbd57ff2e4b8c020ef262522b238488a41c51c2f598d27160",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 10291,
+      "candidatesTokenCount": 513,
+      "totalTokenCount": 10804,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 10291
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "dZxaaqP1IMmw0-kP0KS_mA4",
+    "assessment": {
+      "approach": "The challenge requires a two-step workflow: first, calling the POST /api/lattice/seed endpoint to obtain a runId and a capsule string. Second, using these values to call the PUT /api/lattice/unseal endpoint. The capsule must be base64url-encoded and prefixed with 'Bearer ' to be used in the Authorization header, while the runId is passed in the JSON body.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/lattice/seed",
+        "PUT 127.0.0.1/api/lattice/unseal",
+        "authorization-base64-decoded-copy relation",
+        "exact-copy relation for runId"
+      ],
+      "uncertainties": [
+        "None, the workflow is explicitly defined in the evidence."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 472,
+    "stdout": "✔ Lattice Capsule Challenge (87.8894ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 314.4649\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/lattice/seed",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/lattice/unseal",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/lattice/seed",
+      "/api/lattice/unseal"
+    ],
+    "expectedRoutes": [
+      "/api/lattice/seed",
+      "/api/lattice/unseal"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

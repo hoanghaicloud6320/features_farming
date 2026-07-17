@@ -1,0 +1,57 @@
+{
+  "condition": "none",
+  "conditionLabel": "No evidence",
+  "trial": 1,
+  "benchmarkRunId": "gym-noise-none-t1-772b8a9a",
+  "evidenceBytes": 72,
+  "promptHash": "1d5568dc50450f2d2c346156a70bdd8600fbc5974e331f00791ee183ae5b62b4",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 356,
+      "candidatesTokenCount": 313,
+      "totalTokenCount": 669,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 356
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "s5RaaqXjEI6Q0-kPo_uY6QE",
+    "assessment": {
+      "approach": "Since no specific routes or documentation are provided in the evidence, I will attempt to access the root endpoint to identify the API structure or potential challenge endpoints, assuming standard RESTful patterns for such challenges.",
+      "evidenceUsed": [
+        "Target origin: http://127.0.0.1:64624",
+        "Header: x-gym-benchmark-run: gym-noise-none-t1-772b8a9a"
+      ],
+      "uncertainties": [
+        "The exact route for the 'noise' challenge is unknown.",
+        "The authentication or payload requirements for the challenge are unknown."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 481,
+    "timedOut": false,
+    "stdout": "✖ solve noise challenge (100.7337ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 287.336\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ solve noise challenge (100.7337ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  404 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-v4-noise\\noise\\none\\trial-1\\automation.test.js:1:387)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 404,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v4-noise\\noise\\none\\trial-1\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [],
+    "expectedRoutes": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "routeCoverage": 0,
+    "score": 0
+  }
+}

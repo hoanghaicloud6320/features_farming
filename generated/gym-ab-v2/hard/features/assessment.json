@@ -1,0 +1,11 @@
+{
+  "approach": "The challenge requires a three-step workflow: first, call /api/prism/origin to obtain a runId, salt, and seed. Second, compute a proof using the provided salt and seed (likely a hash), then call /api/prism/bridge with the runId and proof. Finally, call /api/prism/complete with the runId and the bridgeTicket obtained from the second step. I will use node:crypto to generate the proof by hashing the seed and salt.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/prism/origin",
+    "PUT 127.0.0.1/api/prism/bridge",
+    "PATCH 127.0.0.1/api/prism/complete"
+  ],
+  "uncertainties": [
+    "The exact hashing algorithm for the proof is not specified, but hex-encoded SHA-256 is standard for such challenges."
+  ]
+}

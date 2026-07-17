@@ -1,0 +1,54 @@
+{
+  "condition": "none",
+  "conditionLabel": "No evidence",
+  "benchmarkRunId": "gym-medium-none-3e1f410f",
+  "evidenceBytes": 42,
+  "promptHash": "e2ff9817e0be0e3bb9f837d5d0bc8702fb403c384fef579d44a3e24ad7138d54",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 295,
+      "candidatesTokenCount": 290,
+      "totalTokenCount": 585,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 295
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "C41aaqi8IsCc2roP69uB6AE",
+    "assessment": {
+      "approach": "Since no evidence is provided, I will attempt to discover the endpoint by probing common REST patterns for a challenge of this type, starting with a GET request to the root to inspect headers or body, followed by a POST to /submit or /solve if the structure suggests it.",
+      "evidenceUsed": [],
+      "uncertainties": [
+        "No documentation or discovery evidence provided.",
+        "Unknown API structure.",
+        "Unknown authentication or payload requirements."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 423,
+    "timedOut": false,
+    "stdout": "✖ solve lattice capsule (81.1764ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 254.2525\n\n✖ failing tests:\n\ntest at automation.test.js:1:234\n✖ solve lattice capsule (81.1764ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  404 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab\\medium\\none\\automation.test.js:1:405)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 404,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab\\medium\\none\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [],
+    "expectedRoutes": [
+      "/api/lattice/seed",
+      "/api/lattice/unseal"
+    ],
+    "routeCoverage": 0,
+    "score": 0
+  }
+}

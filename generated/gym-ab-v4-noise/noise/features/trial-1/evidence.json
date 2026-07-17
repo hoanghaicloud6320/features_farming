@@ -1,0 +1,1360 @@
+{
+  "rawTimeline": null,
+  "farmedFeatures": {
+    "kind": "machine-farmed-features",
+    "collection": {
+      "sessionCount": 3,
+      "iterationCount": 15,
+      "capturedRequestCount": 300
+    },
+    "budgetChars": 24000,
+    "endpoints": [
+      {
+        "routeKey": "POST 127.0.0.1/api/aurora/open",
+        "signature": "POST 127.0.0.1/api/aurora/open?",
+        "queryKeys": [],
+        "sessionPresence": 3,
+        "sessionPresenceRatio": 1,
+        "totalRequestCount": 15,
+        "classifications": [
+          "core"
+        ],
+        "medianDurationMs": 1.7,
+        "examples": [
+          "http://127.0.0.1:64588/api/aurora/open"
+        ]
+      },
+      {
+        "routeKey": "PUT 127.0.0.1/api/aurora/close",
+        "signature": "PUT 127.0.0.1/api/aurora/close?",
+        "queryKeys": [],
+        "sessionPresence": 3,
+        "sessionPresenceRatio": 1,
+        "totalRequestCount": 15,
+        "classifications": [
+          "core"
+        ],
+        "medianDurationMs": 1.4,
+        "examples": [
+          "http://127.0.0.1:64588/api/aurora/close"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "kind": "exact-copy",
+        "source": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.runId",
+        "target": "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.runId",
+        "sourceEndpoint": "POST 127.0.0.1/api/aurora/open?",
+        "targetEndpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.91,
+        "supportIterations": 15,
+        "transforms": []
+      },
+      {
+        "kind": "exact-copy",
+        "source": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[23].signal",
+        "target": "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.signal",
+        "sourceEndpoint": "POST 127.0.0.1/api/aurora/open?",
+        "targetEndpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.91,
+        "supportIterations": 15,
+        "transforms": []
+      },
+      {
+        "kind": "exact-copy",
+        "source": "POST 127.0.0.1/api/aurora/open? :: request.body.json$.sequence",
+        "target": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.diagnostics.generatedAtTick",
+        "sourceEndpoint": "POST 127.0.0.1/api/aurora/open?",
+        "targetEndpoint": "POST 127.0.0.1/api/aurora/open?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.87,
+        "supportIterations": 15,
+        "transforms": []
+      },
+      {
+        "kind": "prefix-copy",
+        "source": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.runId",
+        "target": "PUT 127.0.0.1/api/aurora/close? :: request.url.path$path[2]",
+        "sourceEndpoint": "POST 127.0.0.1/api/aurora/open?",
+        "targetEndpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.7,
+        "supportIterations": 15,
+        "transforms": []
+      }
+    ],
+    "workflow": [
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "sessionPresence": 3,
+        "medianPosition": 0
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "sessionPresence": 3,
+        "medianPosition": 1
+      }
+    ],
+    "patterns": {
+      "optionalBranches": 0,
+      "retries": 0,
+      "polling": 0
+    },
+    "fields": [
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.label",
+        "display": "POST 127.0.0.1/api/aurora/open? :: request.body.json$.label",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "noise-s1-sample-1"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "noise-s2-sample-1"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "noise-s3-sample-1"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.sequence",
+        "display": "POST 127.0.0.1/api/aurora/open? :: request.body.json$.sequence",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "increasing"
+        ],
+        "types": [
+          "integer"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 10
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": 20
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": 30
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.origin",
+        "display": "POST 127.0.0.1/api/aurora/open? :: request.header$header.origin",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.referer",
+        "display": "POST 127.0.0.1/api/aurora/open? :: request.header$header.referer",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588/"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588/"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588/"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[1]",
+        "display": "POST 127.0.0.1/api/aurora/open? :: request.url.path$path[1]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "api"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[2]",
+        "display": "POST 127.0.0.1/api/aurora/open? :: request.url.path$path[2]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "aurora"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "aurora"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "aurora"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[3]",
+        "display": "POST 127.0.0.1/api/aurora/open? :: request.url.path$path[3]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "open"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "open"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "open"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.channels[].amplitude",
+        "display": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[].amplitude",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "increasing"
+        ],
+        "types": [
+          "integer"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 1010
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 1027
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 1180
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 1197
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 1214
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 1231
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 1248
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 1265
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.channels[].channelId",
+        "display": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[].channelId",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "ch-01"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "ch-02"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "ch-11"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "ch-12"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "ch-13"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "ch-14"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "ch-15"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "ch-16"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.channels[].checksumHint",
+        "display": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[].checksumHint",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "hint_eRz1fI3oaQ"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "hint_g3VUESOtSw"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "hint_r8iDJh7MfA"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "hint_IHG-tiCcmA"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "hint_NeIMnh4qSA"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "hint_GQB6UHIUqw"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "hint_-soJi7wpRQ"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "hint_Xdz2upuheg"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.channels[].signal",
+        "display": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[].signal",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "signal_uawdBC195gIq5rNO"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "signal_SiZ_K78Nl-J5ybIO"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "signal_Y1qXH4ZtMzkPavtq"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "signal_xZ-DE2PrG5lCDNy_"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "signal_qHVn0fPsG1Qwx-k8"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "signal_z61sryVPvDLYI971"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "signal_97t2i-JBl9mg4WfW"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "signal_KM-G7B809Tbyh3Yx"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.diagnostics.calibration",
+        "display": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.diagnostics.calibration",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "calibration_CnGnGLYLw9qLZ64HOlQEAhqj"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "calibration_74ztoGgfO5Lx2qapRsIal_ME"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "calibration_cR_aeoydfZYuM80Plx19pLXh"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.diagnostics.generatedAtTick",
+        "display": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.diagnostics.generatedAtTick",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "increasing"
+        ],
+        "types": [
+          "integer"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 10
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": 20
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": 30
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.diagnostics.sampleWindow",
+        "display": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.diagnostics.sampleWindow",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "integer"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": 36
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": 36
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": 36
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.phase",
+        "display": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.phase",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "spectrum"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "spectrum"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "spectrum"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "display": "POST 127.0.0.1/api/aurora/open? :: response.body.json$.runId",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "aurora_kh2-klgfaNBB"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "aurora_UQj0Bjoi9EUC"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "aurora_7EPzqThSGdln"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "display": "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.runId",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "aurora_kh2-klgfaNBB"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "aurora_UQj0Bjoi9EUC"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "aurora_7EPzqThSGdln"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.signal",
+        "display": "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.signal",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "signal_GgnOToskbjpl55qW"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "signal_FJBHWlrGFv8Dfvhv"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "signal_ttCiB264XV8PKmsG"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.origin",
+        "display": "PUT 127.0.0.1/api/aurora/close? :: request.header$header.origin",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.referer",
+        "display": "PUT 127.0.0.1/api/aurora/close? :: request.header$header.referer",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588/"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588/"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64588/"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[1]",
+        "display": "PUT 127.0.0.1/api/aurora/close? :: request.url.path$path[1]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-44-36-830Z_e588e191",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-39-855Z_41a99339",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-44-42-807Z_7c008788",
+            "iterationId": "iteration-1",
+            "value": "api"
+          }
+        ]
+      }
+    ],
+    "schemas": [
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "label",
+          "sequence"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "channels",
+          "diagnostics",
+          "phase",
+          "runId"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "runId",
+          "signal"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "accepted",
+          "challenge"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.accepted",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "boolean"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.challenge",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.channels",
+        "kind": "array",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "array"
+        ],
+        "itemTypes": [
+          "object"
+        ],
+        "keys": [],
+        "arrayLengthRange": {
+          "min": 36,
+          "max": 36,
+          "median": 36
+        }
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.channels[]",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "amplitude",
+          "channelId",
+          "checksumHint",
+          "signal"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.channels[].amplitude",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "integer"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.channels[].channelId",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.channels[].checksumHint",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.channels[].signal",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.diagnostics",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "calibration",
+          "generatedAtTick",
+          "sampleWindow"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.diagnostics.calibration",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.diagnostics.generatedAtTick",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "integer"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.diagnostics.sampleWindow",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "integer"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.label",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.phase",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/aurora/open?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.sequence",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "integer"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/aurora/close?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.signal",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      }
+    ],
+    "omitted": {
+      "endpoints": 1,
+      "fields": 20,
+      "schemas": 19
+    }
+  },
+  "budget": {
+    "totalChars": 24000
+  }
+}

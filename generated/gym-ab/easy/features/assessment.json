@@ -1,0 +1,12 @@
+{
+  "approach": "The challenge requires a two-step interaction: first, initialize a session by calling POST /api/marble/session to obtain a runId and handoffKey. Second, use these values in a PUT /api/marble/confirm request to complete the challenge. The evidence confirms these endpoints and the required payload structure.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/marble/session",
+    "PUT 127.0.0.1/api/marble/confirm",
+    "Response fields: $.runId, $.handoffKey",
+    "Request fields: $.runId, $.handoffKey"
+  ],
+  "uncertainties": [
+    "None, the workflow is explicitly defined in the evidence."
+  ]
+}

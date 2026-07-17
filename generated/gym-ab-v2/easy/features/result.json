@@ -1,0 +1,70 @@
+{
+  "condition": "features",
+  "conditionLabel": "Farmed features",
+  "benchmarkRunId": "gym-easy-features-96d774fa",
+  "evidenceBytes": 16378,
+  "promptHash": "58c80e3acce50b2a3e6f3ad983b1a7d8815cf6abed3746569574e83d929f371a",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 9599,
+      "candidatesTokenCount": 427,
+      "totalTokenCount": 10026,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 9599
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "Yo5aavzZMMqh2roPp_uimQU",
+    "assessment": {
+      "approach": "The challenge requires a two-step interaction: first, initialize a session via POST /api/marble/session to obtain a runId and handoffKey, then confirm the session via PUT /api/marble/confirm using those credentials. The evidence confirms these endpoints and the required JSON structure for the request bodies.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/marble/session",
+        "PUT 127.0.0.1/api/marble/confirm",
+        "$.runId",
+        "$.handoffKey"
+      ],
+      "uncertainties": [
+        "None, as the workflow is explicitly defined in the evidence."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 528,
+    "stdout": "✔ Marble Relay Challenge (93.8739ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 344.9386\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/marble/session",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/marble/confirm",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/marble/session",
+      "/api/marble/confirm"
+    ],
+    "expectedRoutes": [
+      "/api/marble/session",
+      "/api/marble/confirm"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

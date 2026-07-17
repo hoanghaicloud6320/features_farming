@@ -1,0 +1,707 @@
+{
+  "rawTimeline": {
+    "kind": "raw-http-timeline-projection",
+    "note": "Direct request/response observations. Only browser transport noise was omitted; no relations were inferred. Context budget applied; large bodies and middle events may be omitted.",
+    "budgetChars": 24000,
+    "sessions": [
+      {
+        "recordingId": "2026-07-17T20-11-28-848Z_a1c900b4",
+        "originalEventCount": 10,
+        "events": [
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s1-sample-1\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_7zJAUqcmfCCL",
+                "capsule": "capsule_Jfw7D4zzwczUMD7e",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV92WkpYd0xtZnA0M2Q5OHBN",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_8pc11tFv5OZU\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9KZnc3RDR6endjelVNRDdl",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_7zJAUqcmfCCL\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s1-sample-2\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_aJsBAt6jqSU8",
+                "capsule": "capsule_9jFqGNPRo2n-Orga",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV85akZxR05QUm8ybi1Pcmdh",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_aJsBAt6jqSU8\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s1-sample-3\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_s9fg4BvLiXqn",
+                "capsule": "capsule_Ux-C4IOb0sWANcUV",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9VeC1DNElPYjBzV0FOY1VW",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_s9fg4BvLiXqn\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s1-sample-4\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_F_7B9jHvnFOS",
+                "capsule": "capsule_grgSQhf4yVyhDo2P",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9ncmdTUWhmNHlWeWhEbzJQ",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_F_7B9jHvnFOS\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s1-sample-5\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_8pc11tFv5OZU",
+                "capsule": "capsule_vZJXwLmfp43d98pM",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "recordingId": "2026-07-17T20-11-30-736Z_49832853",
+        "originalEventCount": 10,
+        "events": [
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s2-sample-1\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_1V9R_FVKNq5L",
+                "capsule": "capsule_T4SMqLDlUlOEdaGB",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV8yX29TM2JPN2VBaF9hbl9q",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_lMNV1ema8Ctw\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9UNFNNcUxEbFVsT0VkYUdC",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_1V9R_FVKNq5L\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s2-sample-2\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_wNJeL9XM2eGB",
+                "capsule": "capsule_AIxQtdlMn46o_gYR",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9BSXhRdGRsTW40Nm9fZ1lS",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_wNJeL9XM2eGB\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s2-sample-3\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_oGj52mImRfSl",
+                "capsule": "capsule_qFktxJCx-GYftNyf",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9xRmt0eEpDeC1HWWZ0Tnlm",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_oGj52mImRfSl\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s2-sample-4\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_ySVuYPG2D41U",
+                "capsule": "capsule_OU63tB_o4OdgSOx8",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9PVTYzdEJfbzRPZGdTT3g4",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_ySVuYPG2D41U\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s2-sample-5\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_lMNV1ema8Ctw",
+                "capsule": "capsule_2_oS3bO7eAh_an_j",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "recordingId": "2026-07-17T20-11-32-556Z_37649cb5",
+        "originalEventCount": 10,
+        "events": [
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s3-sample-1\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_QjBdt36ljSqi",
+                "capsule": "capsule_iT5CumKNRw_E3iUI",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9QLVNxa19NTGFrUWRJQmJp",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_rpdzDeuTnJGG\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9pVDVDdW1LTlJ3X0UzaVVJ",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_QjBdt36ljSqi\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s3-sample-2\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_xr6DyFTJIlFB",
+                "capsule": "capsule_BFC7C0lFEGkZH_Q5",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9CRkM3QzBsRkVHa1pIX1E1",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_xr6DyFTJIlFB\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s3-sample-3\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_EC9R0m_GndZZ",
+                "capsule": "capsule_5WNSulgRwsyuaHwB",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV81V05TdWxnUndzeXVhSHdC",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_EC9R0m_GndZZ\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s3-sample-4\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_I3KKI2dVPElV",
+                "capsule": "capsule_h9bW9VQ31RAlA5fL",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/lattice/unseal",
+              "headers": {
+                "authorization": "Bearer Y2Fwc3VsZV9oOWJXOVZRMzFSQWxBNWZM",
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"lattice_I3KKI2dVPElV\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "medium"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/lattice/seed",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"medium-s3-sample-5\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "lattice_rpdzDeuTnJGG",
+                "capsule": "capsule_P-Sqk_MLakQdIBbi",
+                "encoding": "base64url",
+                "phase": "sealed"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "omittedEvents": 0
+  },
+  "farmedFeatures": null,
+  "budget": {
+    "totalChars": 24000
+  }
+}

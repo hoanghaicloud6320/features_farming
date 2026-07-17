@@ -1,0 +1,12 @@
+{
+  "approach": "The challenge requires a two-step workflow: first, calling the POST /api/lattice/seed endpoint to obtain a runId and a capsule string. Second, using these values to call the PUT /api/lattice/unseal endpoint. The capsule must be base64url-encoded and prefixed with 'Bearer ' to be used in the Authorization header, while the runId is passed in the JSON body.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/lattice/seed",
+    "PUT 127.0.0.1/api/lattice/unseal",
+    "authorization-base64-decoded-copy relation",
+    "exact-copy relation for runId"
+  ],
+  "uncertainties": [
+    "None, the workflow is explicitly defined in the evidence."
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "condition": "features",
+  "conditionLabel": "Farmed features",
+  "benchmarkRunId": "gym-hard-features-d891cf50",
+  "evidenceBytes": 26632,
+  "promptHash": "df207c1db45a01fbbddd1af7d51b7542f18f3c615ecaf10c048a472c9e3a1633",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 15507,
+      "candidatesTokenCount": 585,
+      "totalTokenCount": 16092,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 15507
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "rY5aav7xOoSf0-kPipeJmA4",
+    "assessment": {
+      "approach": "The challenge requires a three-step workflow: first, call /api/prism/origin to obtain a runId, salt, and seed. Second, compute a proof using the provided salt and seed (likely a hash), then call /api/prism/bridge with the runId and proof. Finally, call /api/prism/complete with the runId and the bridgeTicket obtained from the second step. I will use node:crypto to generate the proof by hashing the seed and salt.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/prism/origin",
+        "PUT 127.0.0.1/api/prism/bridge",
+        "PATCH 127.0.0.1/api/prism/complete"
+      ],
+      "uncertainties": [
+        "The exact hashing algorithm for the proof is not specified, but hex-encoded SHA-256 is standard for such challenges."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 476,
+    "timedOut": false,
+    "stdout": "✖ Prism Bridge Challenge (79.8045ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 313.1993\n\n✖ failing tests:\n\ntest at automation.test.js:1:275\n✖ Prism Bridge Challenge (79.8045ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  422 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-v2\\hard\\features\\automation.test.js:1:767)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 422,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v2\\hard\\features\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/prism/origin",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/prism/bridge",
+        "status": 422
+      }
+    ],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [
+      "/api/prism/origin",
+      "/api/prism/bridge"
+    ],
+    "expectedRoutes": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "routeCoverage": 0.667,
+    "score": 2
+  }
+}

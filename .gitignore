@@ -7,7 +7,17 @@ node_modules/
 # Generated artifacts and captured data
 output/
 demo-data/
-generated/
+generated/*
+!generated/gym-ab/
+!generated/gym-ab/**
+!generated/gym-ab-v2/
+!generated/gym-ab-v2/**
+!generated/gym-ab-v3/
+!generated/gym-ab-v3/**
+!generated/gym-ab-v4-noise/
+!generated/gym-ab-v4-noise/**
+!generated/gym-ab-current/
+!generated/gym-ab-current/**
 coverage/
 
 # Environment files and secrets

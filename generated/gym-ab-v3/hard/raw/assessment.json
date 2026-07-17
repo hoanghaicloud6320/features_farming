@@ -1,0 +1,11 @@
+{
+  "approach": "The challenge requires a three-step interaction with the /api/prism/ endpoints: POST to /origin to get a runId, seed, and salt; PUT to /bridge with a proof (derived from seed and salt); and PATCH to /complete with the bridge ticket. Since the proof is a 24-character hex string, I will use HMAC-SHA256 with the seed and salt to generate the proof, truncated to 24 characters.",
+  "evidenceUsed": [
+    "The timeline shows a consistent pattern: POST /api/prism/origin -> PUT /api/prism/bridge -> PATCH /api/prism/complete.",
+    "The proof is a 24-character hex string.",
+    "The headers must include x-gym-benchmark-run: gym-hard-raw-01d25bcc."
+  ],
+  "uncertainties": [
+    "The exact derivation function for the proof is not explicitly stated, but HMAC-SHA256(seed, salt) is a standard cryptographic pattern for such challenges."
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "condition": "raw-features",
+  "conditionLabel": "Raw + features",
+  "benchmarkRunId": "gym-medium-raw-features-5776f709",
+  "evidenceBytes": 29382,
+  "promptHash": "db5c3da62f58be1546b97fea0f977c357f16a4b370ac48a79dd89984bd4162c6",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 16789,
+      "candidatesTokenCount": 469,
+      "totalTokenCount": 17258,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 16789
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "K41aaoqJHMKp2roPi_a--Aw",
+    "assessment": {
+      "approach": "The challenge requires a two-step workflow: first, POST to /api/lattice/seed to obtain a runId and a capsule string. Second, PUT to /api/lattice/unseal using the runId in the body and the capsule as a Bearer token in the Authorization header. The evidence confirms this pattern across multiple sessions.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/lattice/seed",
+        "PUT 127.0.0.1/api/lattice/unseal",
+        "Authorization header format: Bearer <base64(capsule)>"
+      ],
+      "uncertainties": [
+        "None, the workflow is consistent across all provided evidence."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 475,
+    "stdout": "✔ Lattice Capsule Challenge (87.2618ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 312.8489\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/lattice/seed",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/lattice/unseal",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/lattice/seed",
+      "/api/lattice/unseal"
+    ],
+    "expectedRoutes": [
+      "/api/lattice/seed",
+      "/api/lattice/unseal"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

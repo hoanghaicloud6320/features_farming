@@ -1,0 +1,68 @@
+{
+  "condition": "raw",
+  "conditionLabel": "Raw recorder",
+  "benchmarkRunId": "gym-easy-raw-c48ea99f",
+  "evidenceBytes": 11661,
+  "promptHash": "8cf93e116f3107efed13632cb0c4866d9caba4cf3db4a11e287d56061a328b73",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 6580,
+      "candidatesTokenCount": 401,
+      "totalTokenCount": 6981,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 6580
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "VY9aasCICp612roPjLyPuQI",
+    "assessment": {
+      "approach": "The challenge requires initiating a session via a POST request to /api/marble/session and then confirming it via a PUT request to /api/marble/confirm using the runId and handoffKey returned by the session creation. The evidence shows a consistent pattern for the 'easy' challenge.",
+      "evidenceUsed": [
+        "POST /api/marble/session returns runId and handoffKey",
+        "PUT /api/marble/confirm accepts runId and handoffKey to return accepted: true"
+      ],
+      "uncertainties": [
+        "None, the API pattern is consistent across all observed sessions."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 507,
+    "stdout": "✔ complete marble relay easy (98.4738ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 342.2001\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/marble/session",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/marble/confirm",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/marble/session",
+      "/api/marble/confirm"
+    ],
+    "expectedRoutes": [
+      "/api/marble/session",
+      "/api/marble/confirm"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

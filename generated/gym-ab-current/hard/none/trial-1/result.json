@@ -1,0 +1,59 @@
+{
+  "condition": "none",
+  "conditionLabel": "No evidence",
+  "trial": 1,
+  "benchmarkRunId": "gym-hard-none-t1-d605514e",
+  "evidenceBytes": 72,
+  "promptHash": "e8af655fac1e1c1f81838734f6981a655a928711dc6619d6e40dd21e59ea9456",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 356,
+      "candidatesTokenCount": 347,
+      "totalTokenCount": 703,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 356
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "iZxaau65Dr_I0-kPzprgsQY",
+    "assessment": {
+      "approach": "Since no specific routes were provided in the evidence, I will attempt to access the root and common endpoints to identify the bridge mechanism. Given the challenge name 'Prism Bridge', I will look for a POST endpoint that accepts a JSON payload to satisfy the challenge requirements.",
+      "evidenceUsed": [
+        "Target origin: http://127.0.0.1:65097",
+        "Header: x-gym-benchmark-run: gym-hard-none-t1-d605514e"
+      ],
+      "uncertainties": [
+        "No documentation or routes provided",
+        "Unknown endpoint structure",
+        "Unknown payload format for the challenge"
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 426,
+    "timedOut": false,
+    "stdout": "✖ Prism Bridge Challenge (83.1476ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 258.3187\n\n✖ failing tests:\n\ntest at automation.test.js:1:82\n✖ Prism Bridge Challenge (83.1476ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  404 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-refresh-24k\\hard\\none\\trial-1\\automation.test.js:1:407)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 404,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-refresh-24k\\hard\\none\\trial-1\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [],
+    "expectedRoutes": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "routeCoverage": 0,
+    "score": 0
+  }
+}

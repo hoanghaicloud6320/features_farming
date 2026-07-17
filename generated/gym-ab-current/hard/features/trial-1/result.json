@@ -1,0 +1,79 @@
+{
+  "condition": "features",
+  "conditionLabel": "Farmed features",
+  "trial": 1,
+  "benchmarkRunId": "gym-hard-features-t1-e5ea6a10",
+  "evidenceBytes": 23862,
+  "promptHash": "550eb8563f68afd1c5784482186b8a15fc3bd4fb8982b40cc1a30eceedc3964b",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 13770,
+      "candidatesTokenCount": 630,
+      "totalTokenCount": 14400,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 13770
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "m5xaarfHNsPH2roP3tyViQE",
+    "assessment": {
+      "approach": "The challenge requires a three-step workflow: 1. POST to /api/prism/origin to get a runId, seed, and salt. 2. Calculate a SHA-256 hash of the concatenated seed, salt, and label (from the first request) to generate a proof, then PUT to /api/prism/bridge with the runId and proof. 3. PATCH to /api/prism/complete with the runId and the bridgeTicket received from the second step.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/prism/origin",
+        "PUT 127.0.0.1/api/prism/bridge",
+        "PATCH 127.0.0.1/api/prism/complete",
+        "hash-derived-copy relation for proof generation",
+        "exact-copy relations for runId and ticket propagation"
+      ],
+      "uncertainties": [
+        "The exact string concatenation order for the hash input is inferred from the relation metadata as seed:salt:label."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 476,
+    "stdout": "✔ Prism Bridge Challenge (92.9842ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 315.6798\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/prism/origin",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/prism/bridge",
+        "status": 200
+      },
+      {
+        "method": "PATCH",
+        "route": "/api/prism/complete",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "expectedRoutes": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

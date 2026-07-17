@@ -1,0 +1,11 @@
+{
+  "approach": "The challenge requires a two-step interaction: first, POST to /api/marble/session to obtain a runId and handoffKey, then PUT those values to /api/marble/confirm to receive the final accepted response. I will perform these two requests sequentially, ensuring the required headers are included.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/marble/session",
+    "PUT 127.0.0.1/api/marble/confirm",
+    "Relations between session response and confirm request"
+  ],
+  "uncertainties": [
+    "None, the workflow is deterministic based on the provided evidence."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "approach": "The challenge requires a three-step interaction with the /api/prism/ endpoints: POST to /origin to get a runId, seed, and salt; PUT to /bridge with a proof (which appears to be a hex string derived from the seed/salt); and PATCH to /complete to finalize. Since the proof generation logic is not explicitly provided, I will attempt to replicate the pattern observed in the evidence by using a simple HMAC-SHA256 hash of the seed and salt, truncated to 24 characters, as the proof.",
+  "evidenceUsed": [
+    "The timeline shows a consistent pattern of POST /origin -> PUT /bridge -> PATCH /complete.",
+    "The proof in the PUT request is a 24-character hex string.",
+    "The target origin is http://127.0.0.1:64356."
+  ],
+  "uncertainties": [
+    "The exact algorithm for generating the 'proof' string is unknown; I am assuming a deterministic derivation based on the provided seed and salt."
+  ]
+}

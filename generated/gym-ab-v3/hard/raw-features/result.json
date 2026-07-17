@@ -1,0 +1,71 @@
+{
+  "condition": "raw-features",
+  "conditionLabel": "Raw + features",
+  "benchmarkRunId": "gym-hard-raw-features-94ce92bc",
+  "evidenceBytes": 44746,
+  "promptHash": "62157f334a556d6ad640bd88c0d0a3e6df73316dbef8b97e390c28282733cf00",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 25390,
+      "candidatesTokenCount": 589,
+      "totalTokenCount": 25979,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 25390
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "uI9aau_2Kpnd2roP2vKX-QU",
+    "assessment": {
+      "approach": "The challenge requires a three-step workflow: first, initialize a session by calling POST /api/prism/origin to obtain a runId. Second, use that runId to call PUT /api/prism/bridge with a proof (which, based on the provided evidence, appears to be a static or derived value that the server accepts). Third, call PATCH /api/prism/complete with the runId and the bridgeTicket returned from the previous step to finalize the challenge. I will use the first example from the evidence to ensure success.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/prism/origin",
+        "PUT 127.0.0.1/api/prism/bridge",
+        "PATCH 127.0.0.1/api/prism/complete"
+      ],
+      "uncertainties": [
+        "The proof value in the PUT request is treated as a static string based on the provided evidence, assuming the server logic accepts the specific proof provided in the first example."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 485,
+    "timedOut": false,
+    "stdout": "✖ complete prism bridge challenge (91.0616ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 318.7611\n\n✖ failing tests:\n\ntest at automation.test.js:1:236\n✖ complete prism bridge challenge (91.0616ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  422 !== 200\n  \n      at TestContext.<anonymous> (<workspace>\\generated\\gym-ab-v3\\hard\\raw-features\\automation.test.js:1:676)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1332:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 422,\n    expected: 200,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v3\\hard\\raw-features\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/prism/origin",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/prism/bridge",
+        "status": 422
+      }
+    ],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [
+      "/api/prism/origin",
+      "/api/prism/bridge"
+    ],
+    "expectedRoutes": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "routeCoverage": 0.667,
+    "score": 2
+  }
+}

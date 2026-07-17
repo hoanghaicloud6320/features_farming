@@ -1,0 +1,78 @@
+{
+  "condition": "raw-features",
+  "conditionLabel": "Raw + features",
+  "trial": 1,
+  "benchmarkRunId": "gym-hard-raw-features-t1-c3b3f8e5",
+  "evidenceBytes": 23592,
+  "promptHash": "908048a0ef5179ce2ce8d8f37d0b11582e02bea317e0c7d613d7e2c7ef78048e",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 13066,
+      "candidatesTokenCount": 600,
+      "totalTokenCount": 13666,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 13066
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "p5xaatL9GtOp0-kPgrbtmQE",
+    "assessment": {
+      "approach": "The challenge requires a three-step workflow: 1) POST to /api/prism/origin to get a runId, seed, and salt. 2) Generate a proof by hashing the seed and salt (using SHA256, hex-encoded, sliced to 24 chars) and PUT it to /api/prism/bridge along with the runId. 3) PATCH the runId and the returned bridgeTicket to /api/prism/complete to finalize the challenge.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/prism/origin",
+        "PUT 127.0.0.1/api/prism/bridge",
+        "PATCH 127.0.0.1/api/prism/complete",
+        "hash-derived-copy relation for proof generation"
+      ],
+      "uncertainties": [
+        "None, the workflow and transformation logic are clearly defined in the evidence."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 492,
+    "stdout": "✔ Prism Bridge Challenge (83.3954ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 325.7984\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/prism/origin",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/prism/bridge",
+        "status": 200
+      },
+      {
+        "method": "PATCH",
+        "route": "/api/prism/complete",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "expectedRoutes": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

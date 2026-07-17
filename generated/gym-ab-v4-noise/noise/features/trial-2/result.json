@@ -1,0 +1,71 @@
+{
+  "condition": "features",
+  "conditionLabel": "Farmed features",
+  "trial": 2,
+  "benchmarkRunId": "gym-noise-features-t2-65be12eb",
+  "evidenceBytes": 23590,
+  "promptHash": "82073968562586a2560901106d599a28e933b5c070ae7c470e8d5ca7fdbe9b66",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 14064,
+      "candidatesTokenCount": 570,
+      "totalTokenCount": 14634,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 14064
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "9pRaarHmCdGM0-kP2qGNWA",
+    "assessment": {
+      "approach": "The challenge requires interacting with two endpoints: POST /api/aurora/open and PUT /api/aurora/close. Based on the evidence, the workflow involves calling 'open' to retrieve a 'runId' and a list of 'channels', then using the 'runId' and the 'signal' from the 24th channel (index 23) in the 'close' request. I will perform these two steps sequentially.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/aurora/open? :: response.body.json$.runId",
+        "POST 127.0.0.1/api/aurora/open? :: response.body.json$.channels[23].signal",
+        "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.runId",
+        "PUT 127.0.0.1/api/aurora/close? :: request.body.json$.signal"
+      ],
+      "uncertainties": [
+        "The exact value for the 'label' and 'sequence' fields in the POST request is not strictly constrained, so I will use dummy values."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 0,
+    "durationMs": 554,
+    "stdout": "✔ Aurora Needle (104.2452ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 367.5273\n",
+    "stderr": ""
+  },
+  "metrics": {
+    "requests": [
+      {
+        "method": "POST",
+        "route": "/api/aurora/open",
+        "status": 200
+      },
+      {
+        "method": "PUT",
+        "route": "/api/aurora/close",
+        "status": 200
+      }
+    ],
+    "accepted": true
+  },
+  "score": {
+    "accepted": true,
+    "testPassed": true,
+    "routesCovered": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "expectedRoutes": [
+      "/api/aurora/open",
+      "/api/aurora/close"
+    ],
+    "routeCoverage": 1,
+    "score": 10
+  }
+}

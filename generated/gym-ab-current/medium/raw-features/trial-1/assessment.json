@@ -1,0 +1,12 @@
+{
+  "approach": "The challenge requires a two-step workflow: first, POST to /api/lattice/seed to obtain a runId and a capsule string. Second, use the runId in the body of a PUT request to /api/lattice/unseal, while providing the capsule string as a Bearer token in the Authorization header. The capsule must be base64url encoded and prefixed with 'Bearer '.",
+  "evidenceUsed": [
+    "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.runId",
+    "POST 127.0.0.1/api/lattice/seed? :: response.body.json$.capsule",
+    "PUT 127.0.0.1/api/lattice/unseal? :: request.body.json$.runId",
+    "PUT 127.0.0.1/api/lattice/unseal? :: request.header$header.authorization"
+  ],
+  "uncertainties": [
+    "None, the workflow is clearly defined by the evidence."
+  ]
+}

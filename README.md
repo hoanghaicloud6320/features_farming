@@ -119,6 +119,12 @@ npm run gym:ab
 
 The four evidence conditions are no evidence, raw recorder, farmed features, and raw + features. Generated automation is executed against a fresh localhost server and scored using hidden acceptance plus route coverage. See `GYM_EVALUATION.md` for the final result and interpretation.
 
+Sample A/B outputs are committed under `generated/`. `gym-ab-current` is the latest
+complete 4-challenge matrix with a 24,000-character evidence budget. The
+`gym-ab`, `gym-ab-v2`, `gym-ab-v3`, and `gym-ab-v4-noise` directories preserve
+earlier benchmark runs for comparison. API keys, captured input data, and other
+generated working files remain excluded from Git.
+
 Run only the noisy fixed-budget benchmark with three trials:
 
 ```powershell

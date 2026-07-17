@@ -1,0 +1,1350 @@
+{
+  "farmedFeatures": {
+    "kind": "machine-farmed-features",
+    "collection": {
+      "sessionCount": 3,
+      "iterationCount": 15,
+      "capturedRequestCount": 30
+    },
+    "budgetChars": 16080,
+    "endpoints": [
+      {
+        "routeKey": "POST 127.0.0.1/api/marble/session",
+        "signature": "POST 127.0.0.1/api/marble/session?",
+        "queryKeys": [],
+        "sessionPresence": 3,
+        "sessionPresenceRatio": 1,
+        "totalRequestCount": 15,
+        "classifications": [
+          "core"
+        ],
+        "medianDurationMs": 1.5,
+        "examples": [
+          "http://127.0.0.1:64235/api/marble/session"
+        ]
+      },
+      {
+        "routeKey": "PUT 127.0.0.1/api/marble/confirm",
+        "signature": "PUT 127.0.0.1/api/marble/confirm?",
+        "queryKeys": [],
+        "sessionPresence": 3,
+        "sessionPresenceRatio": 1,
+        "totalRequestCount": 15,
+        "classifications": [
+          "core"
+        ],
+        "medianDurationMs": 1.2,
+        "examples": [
+          "http://127.0.0.1:64235/api/marble/confirm"
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "kind": "exact-copy",
+        "source": "POST 127.0.0.1/api/marble/session? :: response.body.json$.runId",
+        "target": "PUT 127.0.0.1/api/marble/confirm? :: request.body.json$.runId",
+        "sourceEndpoint": "POST 127.0.0.1/api/marble/session?",
+        "targetEndpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.91,
+        "supportIterations": 15,
+        "transforms": []
+      },
+      {
+        "kind": "exact-copy",
+        "source": "POST 127.0.0.1/api/marble/session? :: response.body.json$.handoffKey",
+        "target": "PUT 127.0.0.1/api/marble/confirm? :: request.body.json$.handoffKey",
+        "sourceEndpoint": "POST 127.0.0.1/api/marble/session?",
+        "targetEndpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.91,
+        "supportIterations": 15,
+        "transforms": []
+      },
+      {
+        "kind": "prefix-copy",
+        "source": "POST 127.0.0.1/api/marble/session? :: response.body.json$.runId",
+        "target": "PUT 127.0.0.1/api/marble/confirm? :: request.url.path$path[2]",
+        "sourceEndpoint": "POST 127.0.0.1/api/marble/session?",
+        "targetEndpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "sourceEndpointClassifications": [
+          "core"
+        ],
+        "targetEndpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "averageConfidence": 0.7,
+        "supportIterations": 15,
+        "transforms": []
+      }
+    ],
+    "workflow": [
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "sessionPresence": 3,
+        "medianPosition": 0
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "sessionPresence": 3,
+        "medianPosition": 1
+      }
+    ],
+    "patterns": {
+      "optionalBranches": 0,
+      "retries": 0,
+      "polling": 0
+    },
+    "fields": [
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.label",
+        "display": "POST 127.0.0.1/api/marble/session? :: request.body.json$.label",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "easy-s1-sample-1"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "easy-s2-sample-1"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "easy-s3-sample-1"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.origin",
+        "display": "POST 127.0.0.1/api/marble/session? :: request.header$header.origin",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.referer",
+        "display": "POST 127.0.0.1/api/marble/session? :: request.header$header.referer",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[1]",
+        "display": "POST 127.0.0.1/api/marble/session? :: request.url.path$path[1]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "api"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[2]",
+        "display": "POST 127.0.0.1/api/marble/session? :: request.url.path$path[2]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "marble"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "marble"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "marble"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[3]",
+        "display": "POST 127.0.0.1/api/marble/session? :: request.url.path$path[3]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "session"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "session"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "session"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.handoffKey",
+        "display": "POST 127.0.0.1/api/marble/session? :: response.body.json$.handoffKey",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "handoff_IArxDY8rLGtb"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "handoff_pS1qdKyv7j38"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "handoff_ullRLBNO_lDN"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.phase",
+        "display": "POST 127.0.0.1/api/marble/session? :: response.body.json$.phase",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "ready"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "ready"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "ready"
+          }
+        ]
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "display": "POST 127.0.0.1/api/marble/session? :: response.body.json$.runId",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "marble_W7Sjc2XzzP_P"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "marble_x4GTHlHKcdCs"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "marble_R_IE-3eCZHgM"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.handoffKey",
+        "display": "PUT 127.0.0.1/api/marble/confirm? :: request.body.json$.handoffKey",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "handoff_IArxDY8rLGtb"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "handoff_pS1qdKyv7j38"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "handoff_ullRLBNO_lDN"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "display": "PUT 127.0.0.1/api/marble/confirm? :: request.body.json$.runId",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "variable"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "marble_W7Sjc2XzzP_P"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "marble_x4GTHlHKcdCs"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "marble_R_IE-3eCZHgM"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.origin",
+        "display": "PUT 127.0.0.1/api/marble/confirm? :: request.header$header.origin",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "request",
+        "location": "header",
+        "fieldPath": "$header.referer",
+        "display": "PUT 127.0.0.1/api/marble/confirm? :: request.header$header.referer",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "http://127.0.0.1:64235/"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[1]",
+        "display": "PUT 127.0.0.1/api/marble/confirm? :: request.url.path$path[1]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "api"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "api"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[2]",
+        "display": "PUT 127.0.0.1/api/marble/confirm? :: request.url.path$path[2]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "marble"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "marble"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "marble"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "request",
+        "location": "url.path",
+        "fieldPath": "$path[3]",
+        "display": "PUT 127.0.0.1/api/marble/confirm? :: request.url.path$path[3]",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "string"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": "confirm"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": "confirm"
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": "confirm"
+          }
+        ]
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.accepted",
+        "display": "PUT 127.0.0.1/api/marble/confirm? :: response.body.json$.accepted",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "behaviors": [
+          "constant"
+        ],
+        "types": [
+          "boolean"
+        ],
+        "examples": [
+          {
+            "sessionId": "2026-07-17T20-11-22-283Z_e7409ce7",
+            "iterationId": "iteration-1",
+            "value": true
+          },
+          {
+            "sessionId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+            "iterationId": "iteration-1",
+            "value": true
+          },
+          {
+            "sessionId": "2026-07-17T20-11-26-610Z_bbf6c0af",
+            "iterationId": "iteration-1",
+            "value": true
+          }
+        ]
+      }
+    ],
+    "schemas": [
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "label"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "handoffKey",
+          "phase",
+          "runId"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "handoffKey",
+          "runId"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$",
+        "kind": "object",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "object"
+        ],
+        "itemTypes": [],
+        "keys": [
+          "accepted",
+          "challenge"
+        ],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.accepted",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "boolean"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.challenge",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.handoffKey",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.handoffKey",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.label",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.phase",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "POST 127.0.0.1/api/marble/session?",
+        "side": "response",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      },
+      {
+        "endpoint": "PUT 127.0.0.1/api/marble/confirm?",
+        "side": "request",
+        "location": "body.json",
+        "fieldPath": "$.runId",
+        "kind": "scalar",
+        "endpointClassifications": [
+          "core"
+        ],
+        "sessionPresence": 3,
+        "types": [
+          "string"
+        ],
+        "itemTypes": [],
+        "keys": [],
+        "arrayLengthRange": null
+      }
+    ],
+    "omitted": {
+      "endpoints": 0,
+      "fields": 1,
+      "schemas": 0
+    }
+  },
+  "rawTimeline": {
+    "kind": "raw-http-timeline-projection",
+    "note": "Direct request/response observations. Only browser transport noise was omitted; no relations were inferred. Context budget applied; large bodies and middle events may be omitted.",
+    "budgetChars": 7680,
+    "sessions": [
+      {
+        "recordingId": "2026-07-17T20-11-22-283Z_e7409ce7",
+        "originalEventCount": 10,
+        "events": [
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/marble/session",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"easy-s1-sample-1\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "marble_W7Sjc2XzzP_P",
+                "handoffKey": "handoff_IArxDY8rLGtb",
+                "phase": "ready"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/marble/confirm",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"marble_xoeax404x2xV\",\"handoffKey\":\"handoff_6qO-hjIS87VE\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "easy"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/marble/confirm",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"marble_W7Sjc2XzzP_P\",\"handoffKey\":\"handoff_IArxDY8rLGtb\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "easy"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/marble/session",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"easy-s1-sample-2\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "marble_upsWazamqrJ3",
+                "handoffKey": "handoff_uQUdqlU_bFXo",
+                "phase": "ready"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/marble/confirm",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"marble_upsWazamqrJ3\",\"handoffKey\":\"handoff_uQUdqlU_bFXo\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "easy"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/marble/session",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"easy-s1-sample-3\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "marble_1jYtkcS0c_PS",
+                "handoffKey": "handoff_XtINLAHtCZsa",
+                "phase": "ready"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/marble/confirm",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"marble_1jYtkcS0c_PS\",\"handoffKey\":\"handoff_XtINLAHtCZsa\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "easy"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/marble/session",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"easy-s1-sample-4\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "marble_K_6hO_VI2Jr9",
+                "handoffKey": "handoff_SVHyDRUhffT2",
+                "phase": "ready"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/marble/confirm",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"marble_K_6hO_VI2Jr9\",\"handoffKey\":\"handoff_SVHyDRUhffT2\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "easy"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/marble/session",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"easy-s1-sample-5\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "marble_xoeax404x2xV",
+                "handoffKey": "handoff_6qO-hjIS87VE",
+                "phase": "ready"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "recordingId": "2026-07-17T20-11-24-627Z_9a2b39f6",
+        "originalEventCount": 10,
+        "events": [
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/marble/session",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"easy-s2-sample-1\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "marble_x4GTHlHKcdCs",
+                "handoffKey": "handoff_pS1qdKyv7j38",
+                "phase": "ready"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-5",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/marble/confirm",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"marble_Jk4q20oxM6G_\",\"handoffKey\":\"handoff_ZxsyHLRXyPH6\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "easy"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-1",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/marble/confirm",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"marble_x4GTHlHKcdCs\",\"handoffKey\":\"handoff_pS1qdKyv7j38\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "easy"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/marble/session",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"easy-s2-sample-2\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "marble_-GlgjbQ22FmC",
+                "handoffKey": "handoff_JBcBMo0khfUz",
+                "phase": "ready"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-2",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/marble/confirm",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"marble_-GlgjbQ22FmC\",\"handoffKey\":\"handoff_JBcBMo0khfUz\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "easy"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/marble/session",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"easy-s2-sample-3\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "marble_8Col9e4Hy13Q",
+                "handoffKey": "handoff_hGSG4oJAOS_T",
+                "phase": "ready"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-3",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/marble/confirm",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"marble_8Col9e4Hy13Q\",\"handoffKey\":\"handoff_hGSG4oJAOS_T\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "easy"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "POST",
+              "url": "http://127.0.0.1:64235/api/marble/session",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"label\":\"easy-s2-sample-4\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "runId": "marble_apKQ1wvQSGLv",
+                "handoffKey": "handoff_3pmaSWwZ623s",
+                "phase": "ready"
+              }
+            }
+          },
+          {
+            "iterationId": "iteration-4",
+            "request": {
+              "method": "PUT",
+              "url": "http://127.0.0.1:64235/api/marble/confirm",
+              "headers": {
+                "content-type": "application/json"
+              },
+              "postData": "{\"runId\":\"marble_apKQ1wvQSGLv\",\"handoffKey\":\"handoff_3pmaSWwZ623s\"}"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+                "content-type": "application/json; charset=utf-8"
+              },
+              "body": {
+                "accepted": true,
+                "challenge": "easy"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "omittedEvents": 11
+  },
+  "budget": {
+    "totalChars": 24000,
+    "featureChars": 16080,
+    "rawChars": 7680,
+    "envelopeReserve": 240
+  }
+}

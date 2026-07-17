@@ -1,0 +1,57 @@
+{
+  "condition": "raw-features",
+  "conditionLabel": "Raw + features",
+  "benchmarkRunId": "gym-hard-raw-features-1c212958",
+  "evidenceBytes": 44746,
+  "promptHash": "dbf62ff7989e797f673aa7995c78e6bdb3b7c9a769ed990e89ae9ae277646c32",
+  "gemini": {
+    "keyIndex": 0,
+    "usageMetadata": {
+      "promptTokenCount": 25356,
+      "candidatesTokenCount": 612,
+      "totalTokenCount": 25968,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 25356
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "responseId": "uo5aavfkJsbLrfcPo_yH6Ac",
+    "assessment": {
+      "approach": "The challenge requires a three-step workflow: first, POST to /api/prism/origin to obtain a runId; second, PUT to /api/prism/bridge using the runId and a proof (which appears to be a hex string based on the evidence); third, PATCH to /api/prism/complete using the runId and the bridgeTicket received from the second step. I will perform these steps sequentially, asserting the status code 200 and the expected response structure at each step.",
+      "evidenceUsed": [
+        "POST 127.0.0.1/api/prism/origin",
+        "PUT 127.0.0.1/api/prism/bridge",
+        "PATCH 127.0.0.1/api/prism/complete"
+      ],
+      "uncertainties": [
+        "The exact generation logic for the 'proof' field in the PUT request is not explicitly provided, but the evidence shows it is a 24-character hex string. I will use a placeholder hex string that matches the observed format."
+      ]
+    }
+  },
+  "execution": {
+    "exitCode": 1,
+    "durationMs": 306,
+    "timedOut": false,
+    "stdout": "(node:11576) Warning: Failed to load the ES module: <workspace>\\generated\\gym-ab-v2\\hard\\raw-features\\automation.test.js. Make sure to set \"type\": \"module\" in the nearest package.json file or use the .mjs extension.\n(Use `node --trace-warnings ...` to show where the warning was created)\n<workspace>\\generated\\gym-ab-v2\\hard\\raw-features\\automation.test.js:1\nimport { test } from 'node:test'; import assert from 'node:assert/strict'; const ORIGIN = 'http://127.0.0.1:64356'; const HEADERS = { 'Content-Type': 'application/json', 'x-gym-benchmark-run': 'gym-hard-raw-features-1c212958' }; test('complete prism bridge challenge', async () => { const originRes = await fetch(`${ORIGIN}/api/prism/origin`, { method: 'POST', headers: HEADERS, body: JSON.stringify({ label: 'hard-s1-sample-1', sequence: 10 }) }); assert.strictEqual(originRes.status, 200); const { runId } = await originRes.json(); const bridgeRes = await fetch(`${ORIGIN}/api/prism/bridge`, { method: 'PUT', headers: HEADERS, body: JSON.stringify({ runId, proof: '776aa33f5d402df65f7fd5be' }) }); assert.strictEqual(bridgeRes.status, 200); const { bridgeTicket } = await bridgeRes.json(); const completeRes = await fetch(`${ORIGIN}/api/prism/complete`, { method: 'PATCH', headers: HEADERS, body: JSON.stringify({ runId, ticket: bridgeTicket }) }); assert.strictEqual(completeRes.status, 200); const final = await completeRes.json(); assert.deepStrictEqual(final, { accepted: true, challenge: 'hard' }); });\n^^^^^^\n\nSyntaxError: Cannot use import statement outside a module\n    at wrapSafe (node:internal/modules/cjs/loader:1804:18)\n    at Module._compile (node:internal/modules/cjs/loader:1845:20)\n    at Module._extensions..js (node:internal/modules/cjs/loader:2002:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v24.18.0\n✖ <workspace>\\generated\\gym-ab-v2\\hard\\raw-features\\automation.test.js (132.8949ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 147.5224\n\n✖ failing tests:\n\ntest at automation.test.js:1:1\n✖ <workspace>\\generated\\gym-ab-v2\\hard\\raw-features\\automation.test.js (132.8949ms)\n  'test failed'\n",
+    "stderr": "Command failed: <node> --test <workspace>\\generated\\gym-ab-v2\\hard\\raw-features\\automation.test.js\n"
+  },
+  "metrics": {
+    "requests": [],
+    "accepted": false
+  },
+  "score": {
+    "accepted": false,
+    "testPassed": false,
+    "routesCovered": [],
+    "expectedRoutes": [
+      "/api/prism/origin",
+      "/api/prism/bridge",
+      "/api/prism/complete"
+    ],
+    "routeCoverage": 0,
+    "score": 0
+  }
+}
