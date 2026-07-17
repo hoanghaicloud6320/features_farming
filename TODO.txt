@@ -1,0 +1,67 @@
+FEATURES FARMING - TODO / HANDOFF
+Updated: 2026-07-18
+
+CURRENT STATUS
+- Stop all Gemini calls: the API quota/limit was reached.
+- Current model is gemini-3.1-flash-lite. There is no Gemini 3.5
+  Flash-Lite model; gemini-3.5-flash is a different, non-Lite model.
+- Local gym has four challenges: easy, medium, hard, and noise.
+- Gym V4 noise experiment completed with 3 trials per condition and a
+  fixed 24,000-character evidence budget.
+- V4 result:
+    none          0/3 accepted
+    raw           0/3 accepted, 100% route coverage
+    features      3/3 accepted
+    raw+features  3/3 accepted
+- Full V4 report:
+    GYM_V4_EVALUATION.md
+- Runtime matrix:
+    generated/gym-ab-v4-noise/matrix.md
+- All 16 tests passed immediately before V4.
+
+IMPLEMENTED IN V4
+- Aurora Needle challenge with 36 changing signals.
+- 18 telemetry/decoy requests per iteration.
+- 3 sessions x 5 iterations = 300 captured requests.
+- Farmer classifies 270 /api/events requests as telemetry noise.
+- Farmer finds the stable 15/15 relation:
+    open.response.channels[23].signal
+      -> close.request.signal
+- Fixed context budget for all evidence arms.
+- Selectable challenges through GYM_CHALLENGES.
+- Multi-trial runs through GYM_TRIALS.
+- Evidence budget through GYM_CONTEXT_BUDGET_CHARS.
+- Hidden request count, route coverage, execution time, and prompt-token
+  metrics.
+
+HASH-CANDIDATE FARMING STATUS
+- A bounded hash-derived relation detector was added to src/farm.js.
+- It tries common hashes (sha256, sha1, md5), ordered combinations of up
+  to three semantically relevant fields, common delimiters, hex digest,
+  and prefix slicing.
+- Cross-session aggregation now carries multi-source relation metadata.
+- A dedicated unit test was added.
+- The full local suite passes without calling Gemini.
+- It was verified against all 3 hard Prism sessions / 15 iterations and
+  found this hash-derived-copy candidate:
+    sha256(seed + ":" + salt + ":" + label).slice(0, 24)
+- No post-change Gemini A/B was run because the API limit was reached.
+
+NEXT STEPS
+1. Ensure the hash hypothesis is labeled as a tested candidate rather than
+   proof of program causality.
+2. Update the hard challenge report with the discovered candidate.
+3. When Gemini quota is available again, run a separate hard-only matrix:
+     GYM_CHALLENGES=hard
+     GYM_TRIALS=3
+     GYM_CONTEXT_BUDGET_CHARS=24000
+   Store it in a new output directory; do not overwrite V3 or V4.
+4. Compare whether hash-candidate features turn hard from bridge-only
+   coverage into accepted automation.
+
+REPOSITORY NOTE
+- features_farming currently has no .git directory.
+- The sibling requests_recorder directory is a Git repository, but this
+  project is not inside that worktree.
+- Do not move or copy this project into requests_recorder merely to commit
+  it without an explicit repository decision.

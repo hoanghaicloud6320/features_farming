@@ -1,0 +1,28 @@
+{
+  "name": "features-farming",
+  "version": "0.5.0",
+  "description": "Extract structures, variables, data flows and workflow hints from request recordings.",
+  "private": true,
+  "type": "commonjs",
+  "main": "src/farm.js",
+  "bin": {
+    "features-farm": "src/cli.js"
+  },
+  "scripts": {
+    "farm": "node src/cli.js",
+    "gym:start": "node gym/server.js",
+    "gym:collect": "node scripts/collect-gym-data.js",
+    "gym:ab": "node scripts/run-gym-ab.js",
+    "demo:collect": "node scripts/collect-artic-demo.js",
+    "demo:generate": "node scripts/generate-artic-automations.js",
+    "demo:ab": "node scripts/run-artic-ab.js",
+    "demo:test": "node --test generated/artic-artworks/*.test.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@google/genai": "^2.12.0"
+  }
+}
