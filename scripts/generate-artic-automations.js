@@ -7,7 +7,7 @@ const { loadApiKeys } = require('../src/gemini');
 
 async function main() {
   const workspace = path.resolve(__dirname, '..');
-  const keyFile = path.resolve(workspace, '..', 'requests_recorder', 'gemini-api-key.txt');
+  const keyFile = path.resolve(workspace, 'gemini-api-key.txt');
   const farmDirectory = path.join(workspace, 'output', 'demo', 'artic-artworks');
   const outputDirectory = path.join(workspace, 'generated', 'artic-artworks');
   const apiKeys = loadApiKeys(keyFile);

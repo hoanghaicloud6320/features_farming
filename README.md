@@ -71,7 +71,7 @@ npm test
 
 The demo records three sessions against the anonymous, read-only Art Institute of Chicago API, farms the collection, asks `gemini-3.1-flash-lite` to create three constrained Node.js tests, validates the generated source, and then runs it.
 
-The API key file is expected at `../requests_recorder/gemini-api-key.txt`, with one key per line. Keys are tried in order and are never included in prompts or output.
+The API key file is expected at `./gemini-api-key.txt`, with one key per line. Keys are tried in order and are never included in prompts or output. The file is excluded from Git by `.gitignore`.
 
 ```powershell
 npm run demo:collect

@@ -10,7 +10,7 @@ async function main() {
   const workspace = path.resolve(__dirname, '..');
   const apiKeyFile = process.env.GEMINI_API_KEY_FILE
     ? path.resolve(process.env.GEMINI_API_KEY_FILE)
-    : path.resolve(workspace, '..', 'requests_recorder', 'gemini-api-key.txt');
+    : path.resolve(workspace, 'gemini-api-key.txt');
   const apiKeys = loadApiKeys(apiKeyFile);
   const challengeIds = process.env.GYM_CHALLENGES
     ? process.env.GYM_CHALLENGES.split(',').map((value) => value.trim()).filter(Boolean)

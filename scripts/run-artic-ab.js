@@ -7,7 +7,7 @@ const { loadApiKeys } = require('../src/gemini');
 
 async function main() {
   const workspace = path.resolve(__dirname, '..');
-  const apiKeys = loadApiKeys(path.resolve(workspace, '..', 'requests_recorder', 'gemini-api-key.txt'));
+  const apiKeys = loadApiKeys(path.resolve(workspace, 'gemini-api-key.txt'));
   const farmDirectory = path.join(workspace, 'output', 'demo', 'artic-artworks');
   const outputDirectory = path.join(workspace, 'generated', 'artic-ab');
   console.log(`Running controlled A/B with ${apiKeys.length} available key slot(s); key contents are not logged.`);

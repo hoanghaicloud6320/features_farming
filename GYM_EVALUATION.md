@@ -113,7 +113,7 @@ npm run gym:collect
 npm run gym:ab
 ```
 
-The Gemini key file defaults to `../requests_recorder/gemini-api-key.txt`, one key per line. Use `GYM_AB_OUTPUT` to preserve multiple runs:
+The Gemini key file defaults to `./gemini-api-key.txt`, one key per line. It is excluded from Git by `.gitignore`. Use `GYM_AB_OUTPUT` to preserve multiple runs:
 
 ```powershell
 $env:GYM_AB_OUTPUT = "generated/gym-ab-repeat"
