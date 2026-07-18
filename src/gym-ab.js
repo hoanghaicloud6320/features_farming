@@ -218,8 +218,15 @@ function selectContractRelations(relations, relationIds, targetRouteKey, maximum
     };
     if (relation.sources.length > 1) compactRelation.sources = relation.sources.map(compactRelationPoint);
     if (relation.transforms[0]) compactRelation.transform = relation.transforms[0];
-    if (relation.kind === 'hash-derived-copy') {
-      compactRelation.note = 'Bounded tested candidate; not proof of source-code causality.';
+    if ([
+      'affine-numeric',
+      'hash-derived-copy',
+      'hmac-sha256',
+      'json-base64url',
+      'reverse-copy',
+      'substring-copy',
+    ].includes(relation.kind) && relation.transform) {
+      compactRelation.note = 'Bounded deterministic candidate verified from observations; not proof of source-code causality.';
     }
     selected.push(compactRelation);
     if (selected.length >= maximum) break;

@@ -11,7 +11,9 @@ const {
   generateV6Suite,
 } = require('../gym/v6-cases');
 const { writeV6Recording } = require('../gym/v6-recording');
+const { generateV7Suite } = require('../gym/v7-cases');
 const { farmInput } = require('../src/collection');
+const { evaluateFarmerOutput } = require('../src/gym-v5');
 const { evaluateSemanticSiblings } = require('../src/gym-v6');
 const { parseSeeds } = require('../scripts/run-gym-v6');
 
@@ -82,4 +84,44 @@ test('V6 semantic siblings preserve randomized status and schema attribution', a
   const cross = evaluateSemanticSiblings(definition, farmed.summary, 'cross-session', 2);
   assert.equal(single.score, 100);
   assert.equal(cross.score, 100);
+});
+
+test('bounded transform detectors recover all known families on a fresh seed', async (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'gym-v6-detectors-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const definitions = generateV6Suite(79_919).cases.filter((item) => item.transform);
+  for (const definition of definitions) {
+    const recordings = path.join(root, definition.id, 'recordings');
+    writeV6Recording({
+      definition,
+      directory: path.join(recordings, 'session-1'),
+      sessionNumber: 1,
+      iterationCount: 4,
+    });
+    const farmed = await farmInput({
+      inputDirectory: recordings,
+      outputDirectory: path.join(root, definition.id, 'features'),
+    });
+    const score = evaluateFarmerOutput(
+      definition,
+      farmed.sessionResults[0].result,
+      'single',
+    );
+    assert.equal(score.relations.recall, 1, definition.family);
+  }
+});
+
+test('V7 adds a deterministic transform family held out from the detectors', () => {
+  const first = generateV7Suite(81_017);
+  const repeated = generateV7Suite(81_017);
+  assert.deepEqual(first, repeated);
+  const holdout = first.cases.at(-1);
+  assert.equal(holdout.family, 'character-rotation-holdout');
+  assert.equal(holdout.groundTruth.relations.at(-1).kind, 'character-rotation');
+  const transformed = applyV6Transform(holdout, {
+    source: 'abcdefghij',
+    secondSource: 'unused',
+  }, 'unused');
+  const shift = holdout.transform.shift;
+  assert.equal(transformed, `abcdefghij`.slice(shift) + `abcdefghij`.slice(0, shift));
 });

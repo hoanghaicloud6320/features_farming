@@ -44,36 +44,32 @@ feature context.
 
 | Arm | Mean score | Core F1 | Noise recall | Workflow recall | Relation F1 | Cases with all required relations |
 |---|---:|---:|---:|---:|---:|---:|
-| A: single session | 91.00 | 100% | 100% | 100% | 77.5% | 11/12 |
-| B: cross-session | **98.89** | **100%** | **100%** | **100%** | **97.2%** | **11/12** |
+| A: single session | 92.00 | 100% | 100% | 100% | 80.0% | 12/12 |
+| B: cross-session | **100.00** | **100%** | **100%** | **100%** | **100%** | **12/12** |
 
 Cross-session farming removes the deliberate session-one collision in all
-cases, increasing mean score by 7.89 points and relation F1 by 19.7 percentage
+cases, increasing mean score by 8 points and relation F1 by 20 percentage
 points.
 
 | Axis | Cases | A mean | B mean | B required-relation recall |
 |---|---:|---:|---:|---:|
-| Simple + noise | 4 | 89.00 | 96.67 | 87.5% |
+| Simple + noise | 4 | 92.00 | 100.00 | 100% |
 | Hard + clean | 4 | 92.00 | 100.00 | 100% |
 | Hard + noise | 4 | 92.00 | 100.00 | 100% |
 
-## Farmer gap found
+## Farmer gap resolved
 
-The only missed decisive relation is the prefix case:
+The original V5 run missed the prefix case:
 
 ```text
 open.response.token
   -> close.request.proof = "MARKER-" + token
 ```
 
-The current substring detector restricts body-field candidates using semantic
-field-name hints. A target named `proof` is not included in that allowlist, so
-the relation is missed even though the transform is simple and repeated in all
-15 iterations.
-
-This is a useful V5 failure: it identifies a farmer recall limitation rather
-than a downstream model failure. The canonical result intentionally preserves
-the miss instead of changing the farmer and tuning against the same V5 cases.
+The bounded structural detector now recovers this relation without relying on
+the target field name. Cross-session precision and recall are both 100%. The
+single-session score remains lower because every case deliberately contains an
+accidental relation that is broken by later sessions.
 
 ## Reproduce
 

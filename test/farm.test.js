@@ -5,7 +5,12 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
-const { farmRecording, findHashRelations, parseStructuredText } = require('../src/farm');
+const {
+  farmRecording,
+  findBoundedTransformRelations,
+  findHashRelations,
+  parseStructuredText,
+} = require('../src/farm');
 const { farmInput } = require('../src/collection');
 const { buildFeatureContext, compactFeatureContext } = require('../src/gym-ab');
 
@@ -59,6 +64,33 @@ test('finds a repeated multi-source hash transform', () => {
   assert.equal(relation.transform.delimiter, ':');
   assert.deepEqual(relation.transform.slice, { start: 0, length: 24 });
   assert.deepEqual(relation.sources.map((source) => source.fieldPath), ['$.seed', '$.salt', '$.label']);
+});
+
+test('does not promote a three-point numeric coincidence to an affine data flow', () => {
+  const iterations = ['iteration-1', 'iteration-2', 'iteration-3'];
+  const occurrences = [];
+  iterations.forEach((iterationId, index) => {
+    const add = (id, endpointId, endpoint, side, fieldPath, value, requestIndex) => {
+      occurrences.push({
+        id: `${iterationId}-${id}`,
+        iterationId,
+        requestId: `${iterationId}-${id}`,
+        requestIndex,
+        endpointId,
+        endpoint,
+        side,
+        location: 'body.json',
+        fieldPath,
+        value,
+        canonical: String(value),
+        type: 'integer',
+      });
+    };
+    add('source', 'open', 'POST example.test/open?', 'response', '$.randomCounter', index + 1, 0);
+    add('target', 'close', 'PUT example.test/close?', 'request', '$.otherCounter', (index + 1) * 3 + 17, 1);
+  });
+  const relations = findBoundedTransformRelations(occurrences, iterations);
+  assert.equal(relations.some((relation) => relation.kind === 'affine-numeric'), false);
 });
 
 test('farms variables, request-response echo and route templates', async (t) => {

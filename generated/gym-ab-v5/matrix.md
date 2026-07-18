@@ -11,7 +11,7 @@
 | simple-exact-noise | simple-noise | 92.00 | 100.00 | 100% | 100% |
 | simple-base64-noise | simple-noise | 92.00 | 100.00 | 100% | 100% |
 | simple-case-noise | simple-noise | 92.00 | 100.00 | 100% | 100% |
-| simple-prefix-noise | simple-noise | 80.00 | 86.67 | 50% | 50% |
+| simple-prefix-noise | simple-noise | 92.00 | 100.00 | 100% | 100% |
 | hard-sha256-clean | hard-clean | 92.00 | 100.00 | 100% | 100% |
 | hard-sha1-clean | hard-clean | 92.00 | 100.00 | 100% | 100% |
 | hard-md5-clean | hard-clean | 92.00 | 100.00 | 100% | 100% |
@@ -25,14 +25,14 @@
 
 | Arm | Mean score | Core F1 | Noise recall | Workflow recall | Relation F1 | Full relation cases |
 |---|---:|---:|---:|---:|---:|---:|
-| single | 91.00 | 100.0% | 100.0% | 100.0% | 77.5% | 11/12 |
-| cross-session | 98.89 | 100.0% | 100.0% | 100.0% | 97.2% | 11/12 |
+| single | 92.00 | 100.0% | 100.0% | 100.0% | 80.0% | 12/12 |
+| cross-session | 100.00 | 100.0% | 100.0% | 100.0% | 100.0% | 12/12 |
 
 ## Three validation axes
 
 | Axis | Cases | A score | B score | A relation recall | B relation recall |
 |---|---:|---:|---:|---:|---:|
-| simple-noise | 4 | 89.00 | 96.67 | 87.5% | 87.5% |
+| simple-noise | 4 | 92.00 | 100.00 | 100.0% | 100.0% |
 | hard-clean | 4 | 92.00 | 100.00 | 100.0% | 100.0% |
 | hard-noise | 4 | 92.00 | 100.00 | 100.0% | 100.0% |
 

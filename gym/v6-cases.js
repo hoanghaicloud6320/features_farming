@@ -217,6 +217,10 @@ function applyV6Transform(definition, values, label) {
   if (transform.operation === 'array-selection') {
     return values.payloads[transform.selectedIndex][definition.fields.sourceField];
   }
+  if (transform.operation === 'character-rotation') {
+    const shift = transform.shift % values.source.length;
+    return `${values.source.slice(shift)}${values.source.slice(0, shift)}`;
+  }
   throw new Error(`Unsupported V6 transform: ${transform.operation}`);
 }
 

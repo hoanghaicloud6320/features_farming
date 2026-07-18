@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T21:56:10.557Z",
+  "generatedAt": "2026-07-18T08:42:51.295Z",
   "benchmark": "farmer-gym-v5",
   "arms": {
     "A": "single",
@@ -208,7 +208,7 @@
       "axis": "simple-noise",
       "single": {
         "mode": "single",
-        "score": 80,
+        "score": 92,
         "endpointClassification": {
           "corePrecision": 1,
           "coreRecall": 1,
@@ -227,29 +227,18 @@
           ]
         },
         "relations": {
-          "precision": 0.5,
-          "recall": 0.5,
-          "f1": 0.5,
+          "precision": 0.667,
+          "recall": 1,
+          "f1": 0.8,
           "expected": 2,
-          "matched": 1,
-          "relevantPredictions": 2,
-          "missed": [
-            {
-              "sourceRoute": "open",
-              "sourceFields": [
-                "response.body.json$.token"
-              ],
-              "targetRoute": "close",
-              "targetField": "request.body.json$.proof",
-              "kind": "suffix-copy",
-              "transform": {}
-            }
-          ]
+          "matched": 2,
+          "relevantPredictions": 3,
+          "missed": []
         }
       },
       "cross-session": {
         "mode": "cross-session",
-        "score": 86.67,
+        "score": 100,
         "endpointClassification": {
           "corePrecision": 1,
           "coreRecall": 1,
@@ -269,23 +258,12 @@
         },
         "relations": {
           "precision": 1,
-          "recall": 0.5,
-          "f1": 0.667,
+          "recall": 1,
+          "f1": 1,
           "expected": 2,
-          "matched": 1,
-          "relevantPredictions": 1,
-          "missed": [
-            {
-              "sourceRoute": "open",
-              "sourceFields": [
-                "response.body.json$.token"
-              ],
-              "targetRoute": "close",
-              "targetField": "request.body.json$.proof",
-              "kind": "suffix-copy",
-              "transform": {}
-            }
-          ]
+          "matched": 2,
+          "relevantPredictions": 2,
+          "missed": []
         }
       }
     },
@@ -814,32 +792,32 @@
     {
       "arm": "single",
       "cases": 12,
-      "meanScore": 91,
+      "meanScore": 92,
       "meanCoreF1": 1,
       "meanNoiseRecall": 1,
       "meanWorkflowRecall": 1,
-      "meanRelationF1": 0.775,
-      "relationCasesFullyRecovered": 11
+      "meanRelationF1": 0.8,
+      "relationCasesFullyRecovered": 12
     },
     {
       "arm": "cross-session",
       "cases": 12,
-      "meanScore": 98.89,
+      "meanScore": 100,
       "meanCoreF1": 1,
       "meanNoiseRecall": 1,
       "meanWorkflowRecall": 1,
-      "meanRelationF1": 0.972,
-      "relationCasesFullyRecovered": 11
+      "meanRelationF1": 1,
+      "relationCasesFullyRecovered": 12
     }
   ],
   "axes": [
     {
       "axis": "simple-noise",
       "cases": 4,
-      "singleMeanScore": 89,
-      "crossSessionMeanScore": 96.67,
-      "singleRelationRecall": 0.875,
-      "crossSessionRelationRecall": 0.875
+      "singleMeanScore": 92,
+      "crossSessionMeanScore": 100,
+      "singleRelationRecall": 1,
+      "crossSessionRelationRecall": 1
     },
     {
       "axis": "hard-clean",
@@ -860,6 +838,7 @@
   ],
   "run": {
     "sessionsPerCase": 3,
-    "iterationsPerSession": 5
+    "iterationsPerSession": 5,
+    "refarmedFrom": "2026-07-18T08-32-44-261Z"
   }
 }

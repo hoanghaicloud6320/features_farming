@@ -903,6 +903,348 @@ function findHashRelations(occurrences, iterationOrder) {
   return relations;
 }
 
+function relationPoint(occurrence) {
+  return {
+    endpointId: occurrence.endpointId,
+    endpoint: occurrence.endpoint,
+    side: occurrence.side,
+    location: occurrence.location,
+    fieldPath: occurrence.fieldPath,
+    display: displayField(occurrence),
+  };
+}
+
+function stableTransformCandidates(occurrences, targets, iterationOrder, maximum = 18) {
+  const targetByIteration = new Map(targets.map((target) => [target.iterationId, target]));
+  const perField = new Map();
+  for (const occurrence of occurrences) {
+    const target = targetByIteration.get(occurrence.iterationId);
+    if (
+      !target
+      || occurrence.requestIndex > target.requestIndex
+      || occurrence.id === target.id
+      || !['string', 'integer', 'number'].includes(occurrence.type)
+      || !isUsefulValue(occurrence.value, occurrence.fieldPath, true)
+    ) continue;
+    const key = occurrenceFieldKey(occurrence);
+    if (!perField.has(key)) perField.set(key, new Map());
+    const byIteration = perField.get(key);
+    if (!byIteration.has(occurrence.iterationId)) byIteration.set(occurrence.iterationId, occurrence);
+  }
+  const candidates = [...perField.entries()]
+    .filter(([, byIteration]) => targets.every((target) => byIteration.has(target.iterationId)))
+    .map(([key, byIteration]) => ({
+      key,
+      byIteration,
+      first: byIteration.values().next().value,
+      fingerprint: targets.map((target) => byIteration.get(target.iterationId).canonical).join('\u0000'),
+    }))
+    .filter((candidate) => new Set(
+      targets.map((target) => candidate.byIteration.get(target.iterationId).canonical),
+    ).size >= 2)
+    .sort((a, b) => {
+      const score = (candidate) => (
+        (candidate.first.side === 'response' ? 40 : 0)
+        + (!candidate.first.fieldPath.includes('[') ? 50 : 0)
+        + (candidate.first.location.startsWith('body.') ? 10 : 0)
+        - Math.max(0, targets[0].requestIndex - candidate.first.requestIndex)
+      );
+      return score(b) - score(a) || a.key.localeCompare(b.key);
+    });
+  const unique = [];
+  const fingerprints = new Set();
+  for (const candidate of candidates) {
+    if (fingerprints.has(candidate.fingerprint)) continue;
+    fingerprints.add(candidate.fingerprint);
+    unique.push(candidate);
+    if (unique.length >= maximum) break;
+  }
+  return unique;
+}
+
+function transformEvidence(targets, sources) {
+  return targets.slice(0, 5).map((target) => ({
+    iterationId: target.iterationId,
+    sourceFields: sources.map((source) => displayField(source.byIteration.get(target.iterationId))),
+    target: {
+      requestId: target.requestId,
+      field: displayField(target),
+      value: evidenceValue(target),
+    },
+    requestDistance: target.requestIndex - sources[0].byIteration.get(target.iterationId).requestIndex,
+  }));
+}
+
+function makeBoundedTransformRelation({
+  kind,
+  targets,
+  sources,
+  iterationOrder,
+  transform,
+  confidence = 0.94,
+}) {
+  const sourceOccurrences = sources.map((source) => source.first);
+  const target = targets[0];
+  return {
+    id: shortHash([
+      kind,
+      ...sources.map((source) => source.key),
+      occurrenceFieldKey(target),
+      JSON.stringify(transform),
+    ].join('|')),
+    kind,
+    source: relationPoint(sourceOccurrences[0]),
+    sources: sourceOccurrences.map(relationPoint),
+    target: relationPoint(target),
+    supportIterations: targets.length,
+    supportRatio: round(targets.length / Math.max(iterationOrder.length, 1)),
+    distinctSourceValues: new Set(sources.map((source) => source.fingerprint)).size === 1
+      ? new Set(targets.map((item) => sources[0].byIteration.get(item.iterationId).canonical)).size
+      : targets.length,
+    medianRequestDistance: median(targets.map((item) => (
+      item.requestIndex - sources[0].byIteration.get(item.iterationId).requestIndex
+    ))),
+    confidence,
+    transform,
+    evidence: transformEvidence(targets, sources),
+    note: 'Bounded deterministic candidate verified across repeated observations; not proof of source-code causality.',
+  };
+}
+
+function decodeBase64urlJson(value) {
+  if (typeof value !== 'string' || value.length < 8 || value.length > 4096) return null;
+  if (!/^[A-Za-z0-9_-]+={0,2}$/.test(value)) return null;
+  try {
+    const decoded = Buffer.from(value, 'base64url').toString('utf8');
+    const parsed = JSON.parse(decoded);
+    return parsed && typeof parsed === 'object' ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+function flatScalarValues(value, output = []) {
+  if (value === null || ['string', 'number', 'boolean'].includes(typeof value)) {
+    output.push(canonicalValue(value));
+    return output;
+  }
+  if (Array.isArray(value)) {
+    for (const child of value.slice(0, 12)) flatScalarValues(child, output);
+    return output;
+  }
+  for (const child of Object.values(value).slice(0, 12)) flatScalarValues(child, output);
+  return output;
+}
+
+function findBoundedTransformRelations(occurrences, iterationOrder) {
+  if (iterationOrder.length < 3) return [];
+  const minimumSupport = Math.min(3, iterationOrder.length);
+  const targetGroups = new Map();
+  for (const occurrence of occurrences) {
+    if (
+      occurrence.side !== 'request'
+      || !['body.json', 'body.form', 'url.query', 'header'].includes(occurrence.location)
+      || !['string', 'integer', 'number'].includes(occurrence.type)
+      || occurrence.canonical.length > 4096
+    ) continue;
+    const key = occurrenceFieldKey(occurrence);
+    if (!targetGroups.has(key)) targetGroups.set(key, []);
+    targetGroups.get(key).push(occurrence);
+  }
+
+  const relations = [];
+  for (const targets of [...targetGroups.values()].slice(0, 80)) {
+    const uniqueTargets = [...new Map(targets.map((target) => [target.iterationId, target])).values()];
+    if (uniqueTargets.length < minimumSupport) continue;
+    if (new Set(uniqueTargets.map((target) => target.canonical)).size < 2) continue;
+    const candidates = stableTransformCandidates(occurrences, uniqueTargets, iterationOrder);
+    const responseCandidates = candidates.filter((candidate) => candidate.first.side === 'response');
+    let matched = false;
+
+    for (const source of responseCandidates) {
+      const pairs = uniqueTargets.map((target) => ({
+        source: source.byIteration.get(target.iterationId),
+        target,
+      }));
+      if (pairs.every(({ source: item, target }) => (
+        typeof item.value === 'string'
+        && typeof target.value === 'string'
+        && target.canonical === [...item.canonical].reverse().join('')
+        && target.canonical !== item.canonical
+      ))) {
+        relations.push(makeBoundedTransformRelation({
+          kind: 'reverse-copy',
+          targets: uniqueTargets,
+          sources: [source],
+          iterationOrder,
+          transform: { operation: 'reverse-string' },
+        }));
+        matched = true;
+        break;
+      }
+      if (pairs.every(({ source: item, target }) => (
+        typeof item.value === 'string'
+        && typeof target.value === 'string'
+        && target.canonical.includes(item.canonical)
+        && target.canonical !== item.canonical
+      ))) {
+        const affixes = pairs.map(({ source: item, target }) => {
+          const index = target.canonical.indexOf(item.canonical);
+          return {
+            prefix: target.canonical.slice(0, index),
+            suffix: target.canonical.slice(index + item.canonical.length),
+          };
+        });
+        if (affixes.every((item) => (
+          item.prefix === affixes[0].prefix && item.suffix === affixes[0].suffix
+        ))) {
+          const kind = affixes[0].prefix
+            ? (affixes[0].suffix ? 'substring-copy' : 'suffix-copy')
+            : 'prefix-copy';
+          relations.push(makeBoundedTransformRelation({
+            kind,
+            targets: uniqueTargets,
+            sources: [source],
+            iterationOrder,
+            transform: { operation: 'affix', ...affixes[0] },
+            confidence: 0.92,
+          }));
+          matched = true;
+          break;
+        }
+      }
+      if (pairs.every(({ source: item, target }) => (
+        typeof item.value === 'number' && typeof target.value === 'number'
+      ))) {
+        const numericPairs = pairs.map(({ source: item, target }) => ({
+          source: Number(item.value),
+          target: Number(target.value),
+        }));
+        const distinctSourceCount = new Set(numericPairs.map((item) => item.source)).size;
+        const distinct = numericPairs.find((item) => item.source !== numericPairs[0].source);
+        if (distinct && distinctSourceCount >= 4) {
+          const scale = (distinct.target - numericPairs[0].target)
+            / (distinct.source - numericPairs[0].source);
+          const offset = numericPairs[0].target - scale * numericPairs[0].source;
+          if (
+            Number.isFinite(scale)
+            && Number.isFinite(offset)
+            && Math.abs(scale) <= 1_000_000
+            && Math.abs(offset) <= 1_000_000_000
+            && numericPairs.every((item) => (
+              Math.abs((item.source * scale + offset) - item.target) < 1e-9
+            ))
+            && Math.abs(scale - 1) > 1e-9
+            && Math.abs(offset) > 1e-9
+          ) {
+            relations.push(makeBoundedTransformRelation({
+              kind: 'affine-numeric',
+              targets: uniqueTargets,
+              sources: [source],
+              iterationOrder,
+              transform: {
+                operation: 'affine',
+                scale: round(scale, 9),
+                offset: round(offset, 9),
+              },
+            }));
+            matched = true;
+            break;
+          }
+        }
+      }
+    }
+    if (matched) continue;
+
+    const decoded = uniqueTargets.map((target) => decodeBase64urlJson(target.value));
+    if (decoded.every(Boolean)) {
+      const scalarRows = decoded.map((value) => flatScalarValues(value));
+      const width = scalarRows[0].length;
+      if (
+        width >= 1
+        && width <= 6
+        && scalarRows.every((row) => row.length === width)
+      ) {
+        const sources = [];
+        for (let column = 0; column < width; column += 1) {
+          const source = candidates.find((candidate) => uniqueTargets.every((target, row) => (
+            candidate.byIteration.get(target.iterationId).canonical === scalarRows[row][column]
+          )));
+          if (!source) break;
+          sources.push(source);
+        }
+        if (sources.length === width && new Set(sources.map((source) => source.key)).size === width) {
+          relations.push(makeBoundedTransformRelation({
+            kind: 'json-base64url',
+            targets: uniqueTargets,
+            sources,
+            iterationOrder,
+            transform: {
+              operation: 'json-base64url',
+              scalarOrder: sources.map((source) => displayField(source.first)),
+            },
+          }));
+          continue;
+        }
+      }
+    }
+
+    if (
+      uniqueTargets.every((target) => (
+        typeof target.value === 'string' && /^[0-9a-f]{20,64}$/i.test(target.canonical)
+      ))
+    ) {
+      const hmacCandidates = candidates.slice(0, 16);
+      let hmacMatch = null;
+      for (const keySource of hmacCandidates) {
+        for (const firstSource of hmacCandidates) {
+          if (firstSource.key === keySource.key) continue;
+          for (const secondSource of hmacCandidates) {
+            if (secondSource.key === keySource.key || secondSource.key === firstSource.key) continue;
+            const valid = uniqueTargets.every((target) => {
+              const key = keySource.byIteration.get(target.iterationId).canonical;
+              const message = [
+                firstSource.byIteration.get(target.iterationId).canonical,
+                secondSource.byIteration.get(target.iterationId).canonical,
+              ].join('|');
+              return crypto.createHmac('sha256', key)
+                .update(message, 'utf8')
+                .digest('hex')
+                .slice(0, target.canonical.length)
+                .toLowerCase() === target.canonical.toLowerCase();
+            });
+            if (valid) {
+              hmacMatch = [keySource, firstSource, secondSource];
+              break;
+            }
+          }
+          if (hmacMatch) break;
+        }
+        if (hmacMatch) break;
+      }
+      if (hmacMatch) {
+        relations.push(makeBoundedTransformRelation({
+          kind: 'hmac-sha256',
+          targets: uniqueTargets,
+          sources: hmacMatch,
+          iterationOrder,
+          transform: {
+            operation: 'hmac',
+            algorithm: 'sha256',
+            keyField: displayField(hmacMatch[0].first),
+            inputOrder: hmacMatch.slice(1).map((source) => displayField(source.first)),
+            delimiter: '|',
+            digestEncoding: 'hex',
+            slice: { start: 0, length: uniqueTargets[0].canonical.length },
+          },
+          confidence: 0.96,
+        }));
+      }
+    }
+  }
+  return relations;
+}
+
 function findNumericRelations(fields, iterationOrder) {
   const numeric = fields.filter((field) => (
     ['integer', 'number'].includes(field.type)
@@ -1745,6 +2087,7 @@ function findAllRelations(occurrences, fields, iterationOrder) {
   return [
     ...findRelations(occurrences, iterationOrder),
     ...findHashRelations(occurrences, iterationOrder),
+    ...findBoundedTransformRelations(occurrences, iterationOrder),
     ...findSubstringRelations(occurrences, iterationOrder),
     ...findNumericRelations(fields, iterationOrder),
   ].sort((a, b) => b.confidence - a.confidence || b.supportIterations - a.supportIterations);
@@ -1890,6 +2233,7 @@ module.exports = {
   canonicalValue,
   classifyFieldSeries,
   farmRecording,
+  findBoundedTransformRelations,
   findHashRelations,
   parseStructuredText,
   prepareRoutes,

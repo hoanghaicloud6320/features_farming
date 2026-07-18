@@ -98,11 +98,41 @@ semantic siblings should be compared.
 - KeyManager checks evaluate observable contract facts, not prose quality or
   whether generated code passes an external API conformance suite.
 
+## Deterministic detector follow-up
+
+Bounded detectors were added after the initial V6 measurement. Candidate
+selection now uses repeated structural support, request ordering, scalar type,
+and hard limits rather than semantic field-name allowlists.
+
+| Measurement | Before | After |
+|---|---:|---:|
+| V6 cross-session score | 90.48 | **100.00** |
+| V6 cross-session relation recall | 58.3% | **100%** |
+| V6 single-session score | 84.57 | **93.14** |
+
+The added transform checks cover constant affixes, affine numeric mappings,
+HMAC-SHA256, JSON-base64url composition, and reverse strings. Existing exact
+array selection remains supported.
+
+Gym V7 then evaluated five fresh seeds and added a character-rotation family
+that was held out from detector implementation:
+
+| V7 family group | Cross-session result |
+|---|---:|
+| Six supported relation families | 100% relation recall |
+| Semantic siblings | 100/100 attribution |
+| Character-rotation holdout | 50% recall, 100% precision |
+| All 40 V7 cases | 98.33/100 |
+
+The holdout result is intentional. The farmer recovered the ordinary relation
+but did not claim the unsupported rotation transform.
+
 ## Reproduce
 
 ```powershell
 npm run keymanager:contract-multiseed
 npm run gym:v6
+npm run gym:v7
 ```
 
 Custom seeds can be supplied through `KEYMANAGER_SEEDS` and `GYM_V6_SEEDS`.

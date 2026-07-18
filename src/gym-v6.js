@@ -131,7 +131,7 @@ function buildV6Result(suites, caseOutputs, configuration) {
   });
   return {
     schemaVersion: 1,
-    benchmark: 'farmer-gym-v6',
+    benchmark: configuration.benchmark || 'farmer-gym-v6',
     generatedAt: new Date().toISOString(),
     seeds: suites.map((suite) => suite.seed),
     configuration,
@@ -143,7 +143,7 @@ function buildV6Result(suites, caseOutputs, configuration) {
 
 function markdownReport(result) {
   const lines = [
-    '# Farmer Gym V6 · seeded novel holdouts',
+    `# ${result.benchmark} - seeded novel holdouts`,
     '',
     `Seeds: ${result.seeds.join(', ')}.`,
     `${result.cases.length} generated cases; ${result.configuration.sessionsPerCase} sessions x ${result.configuration.iterationsPerSession} iterations per case.`,

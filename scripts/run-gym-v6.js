@@ -12,53 +12,74 @@ const DEFAULT_SEEDS = [73_001, 73_019, 73_043];
 const SESSION_COUNT = Number(process.env.GYM_V6_SESSIONS || 2);
 const ITERATIONS_PER_SESSION = Number(process.env.GYM_V6_ITERATIONS || 4);
 
-function parseSeeds(value) {
+function parseSeedList(value, defaultSeeds, environmentName) {
   const seeds = value
     ? value.split(',').map((item) => Number(item.trim()))
-    : DEFAULT_SEEDS;
+    : defaultSeeds;
   if (
     seeds.length < 2
     || seeds.length > 10
     || seeds.some((seed) => !Number.isFinite(seed) || !Number.isInteger(seed))
   ) {
-    throw new Error('GYM_V6_SEEDS must contain 2 to 10 comma-separated integer seeds');
+    throw new Error(`${environmentName} must contain 2 to 10 comma-separated integer seeds`);
   }
-  if (new Set(seeds).size !== seeds.length) throw new Error('GYM_V6_SEEDS must be unique');
+  if (new Set(seeds).size !== seeds.length) throw new Error(`${environmentName} must be unique`);
   return seeds;
 }
 
-function validateConfiguration() {
-  if (!Number.isInteger(SESSION_COUNT) || SESSION_COUNT < 2 || SESSION_COUNT > 5) {
-    throw new Error('GYM_V6_SESSIONS must be an integer from 2 to 5');
+function parseSeeds(value) {
+  return parseSeedList(value, DEFAULT_SEEDS, 'GYM_V6_SEEDS');
+}
+
+function validateConfiguration(
+  sessionCount = SESSION_COUNT,
+  iterationsPerSession = ITERATIONS_PER_SESSION,
+  environmentPrefix = 'GYM_V6',
+) {
+  if (!Number.isInteger(sessionCount) || sessionCount < 2 || sessionCount > 5) {
+    throw new Error(`${environmentPrefix}_SESSIONS must be an integer from 2 to 5`);
   }
-  if (!Number.isInteger(ITERATIONS_PER_SESSION) || ITERATIONS_PER_SESSION < 3 || ITERATIONS_PER_SESSION > 10) {
-    throw new Error('GYM_V6_ITERATIONS must be an integer from 3 to 10');
+  if (!Number.isInteger(iterationsPerSession) || iterationsPerSession < 3 || iterationsPerSession > 10) {
+    throw new Error(`${environmentPrefix}_ITERATIONS must be an integer from 3 to 10`);
   }
 }
 
-async function main() {
-  validateConfiguration();
+async function runGym({
+  benchmark = 'farmer-gym-v6',
+  defaultSeeds = DEFAULT_SEEDS,
+  environmentPrefix = 'GYM_V6',
+  folder = 'gym-v6',
+  resultFolder = 'gym-ab-v6',
+  suiteFactory = generateV6Suite,
+} = {}) {
+  const sessionCount = Number(process.env[`${environmentPrefix}_SESSIONS`] || 2);
+  const iterationsPerSession = Number(process.env[`${environmentPrefix}_ITERATIONS`] || 4);
+  validateConfiguration(sessionCount, iterationsPerSession, environmentPrefix);
   const workspace = path.resolve(__dirname, '..');
   const runId = new Date().toISOString().replaceAll(':', '-').replaceAll('.', '-');
-  const dataRoot = process.env.GYM_V6_DATA_ROOT
-    ? path.resolve(process.env.GYM_V6_DATA_ROOT)
-    : path.join(workspace, 'demo-data', 'gym-v6', runId);
-  const farmRoot = process.env.GYM_V6_FARM_ROOT
-    ? path.resolve(process.env.GYM_V6_FARM_ROOT)
-    : path.join(workspace, 'output', 'gym-v6', runId);
-  const resultRoot = process.env.GYM_V6_OUTPUT
-    ? path.resolve(process.env.GYM_V6_OUTPUT)
-    : path.join(workspace, 'generated', 'gym-ab-v6');
-  const seeds = parseSeeds(process.env.GYM_V6_SEEDS);
-  const suites = seeds.map(generateV6Suite);
+  const dataRootVariable = `${environmentPrefix}_DATA_ROOT`;
+  const farmRootVariable = `${environmentPrefix}_FARM_ROOT`;
+  const outputVariable = `${environmentPrefix}_OUTPUT`;
+  const seedsVariable = `${environmentPrefix}_SEEDS`;
+  const dataRoot = process.env[dataRootVariable]
+    ? path.resolve(process.env[dataRootVariable])
+    : path.join(workspace, 'demo-data', folder, runId);
+  const farmRoot = process.env[farmRootVariable]
+    ? path.resolve(process.env[farmRootVariable])
+    : path.join(workspace, 'output', folder, runId);
+  const resultRoot = process.env[outputVariable]
+    ? path.resolve(process.env[outputVariable])
+    : path.join(workspace, 'generated', resultFolder);
+  const seeds = parseSeedList(process.env[seedsVariable], defaultSeeds, seedsVariable);
+  const suites = seeds.map(suiteFactory);
   const caseOutputs = new Map();
   const manifest = {
     schemaVersion: 1,
-    benchmark: 'farmer-gym-v6',
+    benchmark,
     generatedAt: new Date().toISOString(),
     seeds,
-    sessionsPerCase: SESSION_COUNT,
-    iterationsPerSession: ITERATIONS_PER_SESSION,
+    sessionsPerCase: sessionCount,
+    iterationsPerSession,
     cases: [],
   };
   fs.mkdirSync(dataRoot, { recursive: true });
@@ -70,12 +91,12 @@ async function main() {
     for (const definition of suite.cases) {
       const recordingRoot = path.join(dataRoot, `seed-${suite.seed}`, definition.id);
       const caseFarmRoot = path.join(farmRoot, `seed-${suite.seed}`, definition.id);
-      for (let sessionNumber = 1; sessionNumber <= SESSION_COUNT; sessionNumber += 1) {
+      for (let sessionNumber = 1; sessionNumber <= sessionCount; sessionNumber += 1) {
         writeV6Recording({
           definition,
           directory: path.join(recordingRoot, `session-${sessionNumber}`),
           sessionNumber,
-          iterationCount: ITERATIONS_PER_SESSION,
+          iterationCount: iterationsPerSession,
         });
       }
       const farmed = await farmInput({
@@ -102,8 +123,9 @@ async function main() {
   }
 
   const result = buildV6Result(suites, caseOutputs, {
-    sessionsPerCase: SESSION_COUNT,
-    iterationsPerSession: ITERATIONS_PER_SESSION,
+    benchmark,
+    sessionsPerCase: sessionCount,
+    iterationsPerSession,
   });
   writeV6Result(resultRoot, result);
   fs.writeFileSync(path.join(resultRoot, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
@@ -114,7 +136,12 @@ async function main() {
       + `relation recall ${(aggregate.relationRecall * 100).toFixed(1)}%`,
     );
   }
-  console.log(`V6 report: ${path.join(resultRoot, 'matrix.md')}`);
+  console.log(`${benchmark} report: ${path.join(resultRoot, 'matrix.md')}`);
+  return result;
+}
+
+async function main() {
+  return runGym();
 }
 
 if (require.main === module) {
@@ -125,6 +152,8 @@ if (require.main === module) {
 }
 
 module.exports = {
+  parseSeedList,
   parseSeeds,
+  runGym,
   validateConfiguration,
 };

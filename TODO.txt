@@ -9,12 +9,12 @@ CURRENT STATUS
     hard transform + low noise
     hard transform + high noise
 - Canonical V5 result:
-    single-session farmer     91.00/100
-    cross-session farmer      98.89/100
+    single-session farmer     92.00/100
+    cross-session farmer      100.00/100
     core endpoint F1          100%
     noise endpoint recall     100%
     workflow ordered recall   100%
-    cross-session relation F1 97.2%
+    cross-session relation F1 100%
 - Full report:
     GYM_V5_EVALUATION.md
 - Runtime matrix:
@@ -28,7 +28,7 @@ CURRENT STATUS
     KEYMANAGER_CONTRACT_AB_EVALUATION.md
 - A five-seed KeyManager run and a 21-case seeded Gym V6 are documented in:
     GYM_V6_EVALUATION.md
-- All 29 local tests pass.
+- All 32 local tests pass.
 
 IMPLEMENTED IN V5
 - Twelve data-driven farmer challenges with independent Gym ground truth.
@@ -106,12 +106,25 @@ COMPLETED 2026-07-18: MULTI-SEED MEASUREMENT AND SEEDED GYM V6
   array selection reaches 100%. This provides explicit targets for the next
   detector work without asking the LLM to discover candidate relationships.
 
+COMPLETED 2026-07-18: BOUNDED TRANSFORM DETECTORS AND GYM V7
+- Candidate selection is structural and bounded instead of relying on semantic
+  field-name allowlists.
+- Deterministic detectors cover affix, affine numeric, HMAC-SHA256,
+  JSON-base64url, reverse string, and array selection transforms.
+- V6 cross-session improved from 90.48 to 100.00 and relation recall improved
+  from 58.3% to 100%.
+- Gym V7 uses five fresh seeds / 40 cases and includes an unsupported
+  character-rotation holdout. Supported families remain at 100% relation
+  recall; the holdout remains undiscovered with 100% precision.
+- A real KeyManager refarm exposed six spurious affine correlations. Requiring
+  four distinct source values plus a non-identity scale and non-zero offset
+  removed all six while preserving the supported Gym affine family.
+- Full farmer-vs-raw interpretation:
+    FARMER_EFFECTIVENESS.md
+
 OTHER FARMER TODO
-1. Expand the generic substring/prefix detector beyond its semantic field-name
-   allowlist. V5 currently misses:
-       open.response.token
-         -> close.request.proof = "MARKER-" + token
-   because the target field name "proof" is not a substring candidate.
+1. Continue replacing semantic field-name allowlists with bounded structural
+   candidate generation where a detector has strong repeated evidence.
 2. Distinguish semantic action siblings from truly dynamic path parameters
    using member stability, schemas, statuses, and repeated finite vocabularies.
 3. Preserve the warning that hash-derived relations are bounded tested
@@ -133,3 +146,5 @@ REPRODUCE
     npm run keymanager:contract-multiseed
 - Seeded randomized Gym V6:
     npm run gym:v6
+- Fresh-seed Gym V7 with an unsupported transform holdout:
+    npm run gym:v7
