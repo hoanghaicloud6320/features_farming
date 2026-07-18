@@ -185,3 +185,48 @@ the high-relation-count budget case.
 - `generated/keymanager-contract-ab/raw-features/contract.md`
 - `generated/keymanager-contract-ab/features-unrolled/contract.md`
 - `generated/keymanager-contract-ab/matrix.json`
+
+## 2026-07-18 per-sibling provenance rerun
+
+The farmer now keeps a concrete member index beneath every generalized
+`:var` family. Each member carries its own request/session/iteration support,
+status counts, query keys, request fields, response schemas, examples, and
+relations. The generalized family remains the primary route abstraction.
+
+The same three-session, nine-iteration, 159-request recording was reused.
+Results were written separately under
+`generated/keymanager-contract-ab-after-provenance`.
+
+| Output | Before | After |
+|---|---:|---:|
+| Neutral features endpoint claims | 4 generalized | 8 concrete |
+| Explicit-unroll endpoint claims | 8 concrete | 8 concrete |
+| Explicit-unroll endpoints with exact observed statuses | 0/8 | 8/8 |
+| Neutral features prompt tokens | 13,318 | 15,504 |
+| Explicit-unroll prompt tokens | 13,398 | 15,586 |
+| Raw reference prompt tokens after rerun | - | 17,967 |
+
+The after-run feature contract attributed these status sets:
+
+```text
+GET    /v1/admin/audit-logs       200
+GET    /v1/admin/licenses         200
+GET    /v1/admin/session          401
+POST   /v1/admin/licenses         201
+POST   /v1/admin/login            200
+POST   /v1/admin/logout           200
+PATCH  /v1/admin/licenses/:uuid   200
+DELETE /v1/admin/licenses/:uuid   204
+```
+
+These match the raw reference. Features-only therefore moved from reversible
+endpoint-name discovery with ambiguous sibling attributes to a directly usable
+concrete contract with member-attributed statuses and schemas. The additional
+provenance increased the neutral feature prompt by 16.4%, while remaining
+13.7% below the rerun raw prompt.
+
+The raw+features arm emitted six concrete endpoints in this rerun. This is
+better than the previous four generalized claims but below the eight endpoints
+from features-only and raw. Since the feature-only arm contains all eight
+within the same evidence budget, this combined-arm miss is a generation/ranking
+result rather than loss of member provenance and remains an evaluation target.

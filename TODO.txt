@@ -43,7 +43,7 @@ IMPLEMENTED IN V5
 - Feature evidence emits structured warnings when semantic sibling routes were
   generalized into :var.
 
-HIGH-PRIORITY FARMER TODO: PRESERVE PER-SIBLING PROVENANCE
+COMPLETED 2026-07-18: PRESERVE PER-SIBLING PROVENANCE
 - Current route farming can generalize semantic siblings:
     GET  /v1/admin/session
     GET  /v1/admin/licenses
@@ -55,17 +55,23 @@ HIGH-PRIORITY FARMER TODO: PRESERVE PER-SIBLING PROVENANCE
   schemas, query keys, and status counts at the :var family level.
 - This means features are sufficient for concrete endpoint discovery but not
   for lossless per-sibling contract attribution.
-- Preserve a member index under every generalized route family:
+- A member index is now preserved under every generalized route family:
     concrete method + path
     per-member request count and session/iteration support
     per-member observed status counts
     per-member query keys
     per-member request fields and response schemas
     per-member examples and relations
-- Keep the generalized family as the primary abstraction, but make unrolling
-  lossless and explicitly warn when an attribute exists only at family level.
-- Add a regression benchmark where siblings deliberately have different
-  statuses and incompatible request/response schemas.
+- The generalized family remains the primary abstraction; unrolling is
+  lossless and attributes supported only at family level emit explicit
+  attribution warnings.
+- A regression benchmark now gives login, licenses, and logout siblings
+  different statuses and incompatible request/response schemas.
+- All 23 local tests pass.
+- The KeyManager rerun recovered 8 concrete endpoints from neutral
+  features-only evidence, with all 8 observed status sets matching raw.
+- Before this change, neutral features emitted 4 generalized endpoints and
+  the explicit-unroll diagnostic emitted 8 endpoints with empty statuses.
 
 OTHER FARMER TODO
 1. Expand the generic substring/prefix detector beyond its semantic field-name

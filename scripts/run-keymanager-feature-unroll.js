@@ -8,7 +8,9 @@ const { CONTRACT_SCHEMA, renderContract } = require('./run-keymanager-contract-a
 
 async function main() {
   const workspace = path.resolve(__dirname, '..');
-  const resultRoot = path.join(workspace, 'generated', 'keymanager-contract-ab');
+  const resultRoot = process.env.KEYMANAGER_AB_OUTPUT
+    ? path.resolve(process.env.KEYMANAGER_AB_OUTPUT)
+    : path.join(workspace, 'generated', 'keymanager-contract-ab');
   const evidenceFile = path.join(resultRoot, 'features', 'evidence.json');
   if (!fs.existsSync(evidenceFile)) {
     throw new Error('Run npm run keymanager:contract-ab before the feature-unroll diagnostic');
@@ -21,8 +23,9 @@ async function main() {
     'The farmer may generalize stable sibling path segments as :var.',
     'UNROLL RULE: when endpoint examples, fields, relations, schemas, or workflow evidence name concrete sibling paths, emit each supported concrete method + path as its own endpoint.',
     'Do not retain a :var endpoint when the evidence supports its finite concrete alternatives.',
-    'Every unrolled endpoint must include a warning that sibling-specific request fields, response schemas, query keys, and statuses may differ unless evidence explicitly associates them with that concrete sibling.',
-    'Do not inherit aggregated statuses or schemas from the :var family. Use an empty status list and mark details inferred/unknown when per-sibling attribution is absent.',
+    'Use the concrete member index for sibling-specific request fields, response schemas, query keys, statuses, examples, and relations.',
+    'Do not inherit aggregated statuses or schemas from the :var family. Use an empty status list and mark details inferred/unknown only when member-level attribution is absent.',
+    'If an attribute is marked family-only, do not copy it to a concrete sibling and state that limitation.',
     'If the concrete alternatives are not supported by evidence, retain the generalized form and state the uncertainty.',
     'Mark every endpoint as observed, inferred, or unknown.',
     'Describe request and response shapes compactly in plain text.',

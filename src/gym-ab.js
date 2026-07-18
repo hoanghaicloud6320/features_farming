@@ -102,6 +102,7 @@ function buildFeatureContext(farmRoot) {
     .filter((endpoint) => endpoint.signature.includes(':var'))
     .map((endpoint) => ({
       endpoint: endpoint.signature,
+      concreteMembers: (endpoint.members || []).map((member) => member.signature),
       concreteExamples: [...new Set((endpoint.examples || []).map((example) => {
         try {
           const url = new URL(example);
@@ -110,7 +111,10 @@ function buildFeatureContext(farmRoot) {
           return example;
         }
       }))],
-      warning: 'Concrete sibling names are recoverable from examples, but request fields, response schemas, query keys, and statuses are aggregated at the generalized endpoint level and may differ by sibling.',
+      familyOnlyAttributes: endpoint.familyOnlyAttributes || {},
+      warning: (endpoint.attributionWarnings || []).length
+        ? 'Use each member index for concrete attribution. Attributes listed as family-only must not be copied to a concrete sibling.'
+        : 'Concrete sibling provenance is available in the member index; use member-level statuses, query keys, fields, schemas, examples, and relations when unrolling.',
     }));
   return {
     kind: 'machine-farmed-features',
@@ -205,7 +209,56 @@ function compactRawContext(raw, budgetChars) {
 
 function compactFeatureContext(features, budgetChars) {
   if (!Number.isFinite(budgetChars)) return features;
-  const coreEndpoints = features.endpoints.filter((endpoint) => endpoint.classifications.includes('core'));
+  const coreEndpoints = features.endpoints
+    .filter((endpoint) => endpoint.classifications.includes('core'))
+    .map((endpoint) => ({
+      routeKey: endpoint.routeKey,
+      signature: endpoint.signature,
+      queryKeys: endpoint.queryKeys,
+      sessionPresence: endpoint.sessionPresence,
+      totalRequestCount: endpoint.totalRequestCount,
+      statusCounts: endpoint.statusCounts,
+      classifications: endpoint.classifications,
+      examples: (endpoint.examples || []).slice(0, 2),
+      familyOnlyAttributes: Object.fromEntries(Object.entries(endpoint.familyOnlyAttributes || {}).map(([key, values]) => (
+        [key, { count: values.length, examples: values.slice(0, 3) }]
+      ))),
+      attributionWarnings: endpoint.attributionWarnings,
+      members: (endpoint.members || []).map((member) => ({
+        signature: member.signature,
+        method: member.method,
+        pathnameTemplate: member.pathnameTemplate,
+        queryKeys: member.queryKeys,
+        sessionPresence: member.sessionPresence,
+        iterationPresence: member.iterationPresence,
+        totalRequestCount: member.totalRequestCount,
+        sessionSupport: member.sessionSupport,
+        statusCounts: member.statusCounts,
+        examples: (member.examples || []).slice(0, 1),
+        requestFields: (member.requestFields || []).map((field) => ({
+          path: `${field.location}${field.fieldPath}`,
+          sessionPresence: field.sessionPresence,
+          types: field.types,
+        })),
+        responseSchemas: (member.responseSchemas || []).map((schema) => ({
+          path: `${schema.location}${schema.fieldPath}`,
+          kind: schema.kind,
+          sessionPresence: schema.sessionPresence,
+          types: schema.types,
+          itemTypes: schema.itemTypes,
+          keys: schema.keys,
+        })),
+        relations: (member.relations || []).slice(0, 10).map((relation) => ({
+          kind: relation.kind,
+          source: relation.source?.display || relation.source,
+          target: relation.target?.display || relation.target,
+          sessionPresence: relation.sessionPresence,
+          supportIterations: relation.supportIterations,
+          transforms: relation.transforms,
+        })),
+        omittedRelations: Math.max(0, (member.relations || []).length - 10),
+      })),
+    }));
   const coreSignatures = new Set(coreEndpoints.map((endpoint) => endpoint.signature));
   const compact = {
     kind: features.kind,
@@ -223,6 +276,15 @@ function compactFeatureContext(features, budgetChars) {
   };
   for (const key of ['fields', 'schemas']) {
     while (compact[key].length && jsonChars(compact) > budgetChars) compact[key].pop();
+  }
+  for (const endpoint of compact.endpoints) {
+    for (const member of endpoint.members || []) {
+      const originalRelationCount = member.relations.length;
+      while (member.relations.length && jsonChars(compact) > budgetChars) member.relations.pop();
+      if (member.relations.length !== originalRelationCount) {
+        member.omittedRelations += originalRelationCount - member.relations.length;
+      }
+    }
   }
   if (jsonChars(compact) > budgetChars) {
     compact.relations = compact.relations.map((relation) => ({

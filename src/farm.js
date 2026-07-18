@@ -357,9 +357,26 @@ function prepareRoutes(records) {
       hostname: representative.url.hostname,
       pathnameTemplate: templateSegments.join('/'),
       queryKeys,
+      isGeneralizedFamily: templateSegments.includes(':var'),
     };
     for (const entry of entries) {
-      routes.set(entry.record, routeInfo);
+      const memberSegments = templateSegments.map((segment, index) => (
+        segment === ':var' ? entry.segments[index] : segment
+      ));
+      const memberQueryKeys = [...new Set(entry.url.searchParams.keys())].sort();
+      const memberPathname = memberSegments.join('/');
+      const memberSignature = `${routeInfo.method} ${routeInfo.hostname}${memberPathname}?${memberQueryKeys.join(',')}`;
+      routes.set(entry.record, {
+        ...routeInfo,
+        member: {
+          id: shortHash(`${routeInfo.id}|${memberSignature}`),
+          signature: memberSignature,
+          method: routeInfo.method,
+          hostname: routeInfo.hostname,
+          pathnameTemplate: memberPathname,
+          queryKeys: memberQueryKeys,
+        },
+      });
     }
   }
   return routes;
@@ -420,6 +437,8 @@ function extractOccurrences(inputDirectory, records, routes, maxJsonBytes) {
       timestamp: record.requestTimestamp,
       endpointId: route.id,
       endpoint: route.signature,
+      memberId: route.isGeneralizedFamily ? route.member.id : null,
+      memberEndpoint: route.isGeneralizedFamily ? route.member.signature : null,
     };
     const add = (side, location, fieldPath, value, timestamp = record.requestTimestamp) => {
       addOccurrence(occurrences, { ...base, side, location, fieldPath, value, timestamp });
@@ -439,6 +458,8 @@ function extractOccurrences(inputDirectory, records, routes, maxJsonBytes) {
         iterationId: record.iterationId,
         endpointId: route.id,
         endpoint: route.signature,
+        memberId: route.isGeneralizedFamily ? route.member.id : null,
+        memberEndpoint: route.isGeneralizedFamily ? route.member.signature : null,
         side: 'request',
         location: `body.${requestBody.format}`,
       }, schemaObservations);
@@ -478,6 +499,8 @@ function extractOccurrences(inputDirectory, records, routes, maxJsonBytes) {
               iterationId: record.iterationId,
               endpointId: route.id,
               endpoint: route.signature,
+              memberId: route.isGeneralizedFamily ? route.member.id : null,
+              memberEndpoint: route.isGeneralizedFamily ? route.member.signature : null,
               side: 'response',
               location: 'body.json',
             }, schemaObservations);
@@ -1064,6 +1087,7 @@ function buildEndpoints(records, routes, iterationOrder, startHost) {
         resourceTypes: new Set(),
         examples: [],
         roles: [],
+        members: new Map(),
       });
     }
     const group = groups.get(route.id);
@@ -1075,6 +1099,26 @@ function buildEndpoints(records, routes, iterationOrder, startHost) {
     group.resourceTypes.add(record.resourceType);
     if (group.examples.length < 3) group.examples.push(record.request.url);
     group.roles.push(inferRole(record, startHost));
+    if (route.isGeneralizedFamily) {
+      if (!group.members.has(route.member.id)) {
+        group.members.set(route.member.id, {
+          ...route.member,
+          requestCount: 0,
+          iterations: new Set(),
+          statuses: new Map(),
+          queryKeys: new Set(),
+          examples: [],
+        });
+      }
+      const member = group.members.get(route.member.id);
+      member.requestCount += 1;
+      member.iterations.add(record.iterationId);
+      if (record.response?.status) {
+        member.statuses.set(record.response.status, (member.statuses.get(record.response.status) || 0) + 1);
+      }
+      for (const queryKey of route.member.queryKeys) member.queryKeys.add(queryKey);
+      if (member.examples.length < 5) member.examples.push(record.request.url);
+    }
   }
 
   return [...groups.values()].map((group) => {
@@ -1109,8 +1153,81 @@ function buildEndpoints(records, routes, iterationOrder, startHost) {
       medianDurationMs: round(median(group.durations), 1),
       medianTimelinePosition: median(group.positions),
       examples: group.examples,
+      members: [...group.members.values()]
+        .map((member) => ({
+          id: member.id,
+          signature: member.signature,
+          method: member.method,
+          hostname: member.hostname,
+          pathnameTemplate: member.pathnameTemplate,
+          queryKeys: [...member.queryKeys].sort(),
+          requestCount: member.requestCount,
+          iterationPresence: member.iterations.size,
+          presenceRatio: round(member.iterations.size / Math.max(iterationOrder.length, 1)),
+          statusCounts: Object.fromEntries([...member.statuses.entries()].sort()),
+          examples: member.examples,
+        }))
+        .sort((a, b) => a.signature.localeCompare(b.signature)),
     };
   }).sort((a, b) => b.coreScore - a.coreScore || b.requestCount - a.requestCount);
+}
+
+function relationShape(relation) {
+  const sourceFields = relation.sources?.length
+    ? relation.sources.map((source) => `${source.side}|${source.location}|${source.fieldPath}`).sort()
+    : [`${relation.source.side}|${relation.source.location}|${relation.source.fieldPath}`];
+  return [
+    relation.kind,
+    sourceFields.join(','),
+    relation.target.side,
+    relation.target.location,
+    relation.target.fieldPath,
+  ].join('|');
+}
+
+function enrichEndpointMembers(endpoints, memberFields, memberSchemas, memberRelations, familyFields, familySchemas, familyRelations) {
+  for (const endpoint of endpoints) {
+    if (!endpoint.members.length) continue;
+    for (const member of endpoint.members) {
+      member.fields = memberFields.filter((field) => field.endpointId === member.id);
+      member.requestFields = member.fields.filter((field) => field.side === 'request');
+      member.schemas = memberSchemas.filter((schema) => schema.endpointId === member.id);
+      member.responseSchemas = member.schemas.filter((schema) => schema.side === 'response');
+      member.relations = memberRelations.filter((relation) => (
+        relation.source.endpointId === member.id
+        || relation.target.endpointId === member.id
+        || relation.sources?.some((source) => source.endpointId === member.id)
+      ));
+    }
+
+    const memberFieldShapes = new Set(endpoint.members.flatMap((member) => member.fields.map((field) => (
+      `${field.side}|${field.location}|${field.fieldPath}`
+    ))));
+    const memberSchemaShapes = new Set(endpoint.members.flatMap((member) => member.schemas.map((schema) => (
+      `${schema.side}|${schema.location}|${schema.fieldPath}|${schema.kind}`
+    ))));
+    const memberRelationShapes = new Set(memberRelations.map(relationShape));
+    const familyOnlyAttributes = {
+      fields: familyFields
+        .filter((field) => field.endpointId === endpoint.id)
+        .filter((field) => !memberFieldShapes.has(`${field.side}|${field.location}|${field.fieldPath}`))
+        .map((field) => `${field.side}.${field.location}${field.fieldPath}`),
+      schemas: familySchemas
+        .filter((schema) => schema.endpointId === endpoint.id)
+        .filter((schema) => !memberSchemaShapes.has(`${schema.side}|${schema.location}|${schema.fieldPath}|${schema.kind}`))
+        .map((schema) => `${schema.side}.${schema.location}${schema.fieldPath}:${schema.kind}`),
+      relations: familyRelations
+        .filter((relation) => relation.source.endpointId === endpoint.id || relation.target.endpointId === endpoint.id)
+        .filter((relation) => !memberRelationShapes.has(relationShape(relation)))
+        .map(relationShape),
+    };
+    endpoint.familyOnlyAttributes = familyOnlyAttributes;
+    endpoint.attributionWarnings = Object.entries(familyOnlyAttributes)
+      .filter(([, values]) => values.length)
+      .map(([attribute, values]) => (
+        `${values.length} ${attribute} item(s) have only family-level evidence and must not be copied to a concrete sibling.`
+      ));
+  }
 }
 
 function buildWorkflow(records, routes, endpoints, iterationOrder) {
@@ -1616,6 +1733,25 @@ function writeOccurrences(file, occurrences) {
   }
 }
 
+function projectMemberEvidence(items) {
+  return items
+    .filter((item) => item.memberId && item.memberEndpoint)
+    .map((item) => ({
+      ...item,
+      endpointId: item.memberId,
+      endpoint: item.memberEndpoint,
+    }));
+}
+
+function findAllRelations(occurrences, fields, iterationOrder) {
+  return [
+    ...findRelations(occurrences, iterationOrder),
+    ...findHashRelations(occurrences, iterationOrder),
+    ...findSubstringRelations(occurrences, iterationOrder),
+    ...findNumericRelations(fields, iterationOrder),
+  ].sort((a, b) => b.confidence - a.confidence || b.supportIterations - a.supportIterations);
+}
+
 async function farmRecording({
   inputDirectory,
   outputDirectory,
@@ -1638,12 +1774,13 @@ async function farmRecording({
   const endpoints = buildEndpoints(records, routes, iterationOrder, startHost);
   const fields = classifyFieldSeries(occurrences, iterationOrder);
   const schemas = buildSchemas(schemaObservations, iterationOrder);
-  const relations = [
-    ...findRelations(occurrences, iterationOrder),
-    ...findHashRelations(occurrences, iterationOrder),
-    ...findSubstringRelations(occurrences, iterationOrder),
-    ...findNumericRelations(fields, iterationOrder),
-  ].sort((a, b) => b.confidence - a.confidence || b.supportIterations - a.supportIterations);
+  const relations = findAllRelations(occurrences, fields, iterationOrder);
+  const memberOccurrences = projectMemberEvidence(occurrences);
+  const memberSchemaObservations = projectMemberEvidence(schemaObservations);
+  const memberFields = classifyFieldSeries(memberOccurrences, iterationOrder);
+  const memberSchemas = buildSchemas(memberSchemaObservations, iterationOrder);
+  const memberRelations = findAllRelations(memberOccurrences, memberFields, iterationOrder);
+  enrichEndpointMembers(endpoints, memberFields, memberSchemas, memberRelations, fields, schemas, relations);
   const workflow = buildWorkflow(records, routes, endpoints, iterationOrder);
   const coreEndpointIds = new Set(endpoints.filter((endpoint) => endpoint.classifications === 'core').map((endpoint) => endpoint.id));
   const notableRelations = relations.filter((relation) => (
@@ -1664,7 +1801,7 @@ async function farmRecording({
   ));
   const automationHints = buildAutomationHints(endpoints, fields, notableRelations, workflow);
   const summary = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     generatedAt: new Date().toISOString(),
     recording: {
       id: manifest.id,
@@ -1705,6 +1842,9 @@ async function farmRecording({
         requestCount: endpoint.requestCount,
         statusCounts: endpoint.statusCounts,
         medianDurationMs: endpoint.medianDurationMs,
+        members: endpoint.members,
+        familyOnlyAttributes: endpoint.familyOnlyAttributes,
+        attributionWarnings: endpoint.attributionWarnings,
       })),
   };
 
@@ -1713,6 +1853,14 @@ async function farmRecording({
   writeJson(path.join(outputDirectory, 'endpoints.json'), endpoints);
   writeJson(path.join(outputDirectory, 'fields.json'), fields);
   writeJson(path.join(outputDirectory, 'schemas.json'), schemas);
+  writeJson(path.join(outputDirectory, 'members.json'), endpoints.flatMap((endpoint) => endpoint.members.map((member) => ({
+    familyEndpointId: endpoint.id,
+    familyEndpoint: endpoint.signature,
+    ...member,
+  }))));
+  writeJson(path.join(outputDirectory, 'fields.members.json'), memberFields);
+  writeJson(path.join(outputDirectory, 'schemas.members.json'), memberSchemas);
+  writeJson(path.join(outputDirectory, 'relations.members.json'), memberRelations);
   writeJson(path.join(outputDirectory, 'relations.json'), relations);
   writeJson(path.join(outputDirectory, 'workflow.json'), workflow);
   writeJson(path.join(outputDirectory, 'workflow-patterns.json'), workflowPatterns);
@@ -1727,6 +1875,9 @@ async function farmRecording({
     endpoints,
     fields,
     schemas,
+    memberFields,
+    memberSchemas,
+    memberRelations,
     relations,
     workflow,
     workflowPatterns,

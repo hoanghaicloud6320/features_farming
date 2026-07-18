@@ -52,6 +52,135 @@ function aggregateByKey(sessionResults, selector, keyOf, summarize) {
   return [...groups.entries()].map(([key, entries]) => summarize(key, entries));
 }
 
+function sumCounts(entries, selector) {
+  const counts = new Map();
+  for (const entry of entries) {
+    for (const [key, count] of Object.entries(selector(entry) || {})) {
+      counts.set(key, (counts.get(key) || 0) + count);
+    }
+  }
+  return Object.fromEntries([...counts.entries()].sort(([a], [b]) => String(a).localeCompare(String(b))));
+}
+
+function aggregateNested(entries, selector, keyOf, summarize) {
+  const groups = new Map();
+  for (const entry of entries) {
+    for (const item of selector(entry.item)) {
+      const key = keyOf(item);
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push({ sessionId: entry.sessionId, item });
+    }
+  }
+  return [...groups.values()].map(summarize);
+}
+
+function aggregateEndpointMembers(entries, usableCount) {
+  const groups = new Map();
+  for (const entry of entries) {
+    for (const member of entry.item.members || []) {
+      const key = endpointBase(member.signature);
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push({ sessionId: entry.sessionId, item: member });
+    }
+  }
+  return [...groups.entries()].map(([routeKey, memberEntries]) => {
+    const first = memberEntries[0].item;
+    const queryKeys = [...new Set(memberEntries.flatMap((entry) => entry.item.queryKeys || []))].sort();
+    const fields = aggregateNested(
+      memberEntries,
+      (member) => member.fields || [],
+      (field) => `${field.side}|${field.location}|${field.fieldPath}`,
+      (fieldEntries) => {
+        const field = fieldEntries[0].item;
+        return {
+          side: field.side,
+          location: field.location,
+          fieldPath: field.fieldPath,
+          sessionPresence: new Set(fieldEntries.map((entry) => entry.sessionId)).size,
+          iterationPresence: fieldEntries.reduce((sum, entry) => sum + entry.item.iterationPresence, 0),
+          behaviors: [...new Set(fieldEntries.map((entry) => entry.item.classification))].sort(),
+          types: [...new Set(fieldEntries.map((entry) => entry.item.type))].sort(),
+          examples: fieldEntries.flatMap((entry) => entry.item.examples || []).slice(0, 8),
+        };
+      },
+    ).sort((a, b) => a.side.localeCompare(b.side) || a.fieldPath.localeCompare(b.fieldPath));
+    const schemas = aggregateNested(
+      memberEntries,
+      (member) => member.schemas || [],
+      (schema) => `${schema.side}|${schema.location}|${schema.fieldPath}|${schema.kind}`,
+      (schemaEntries) => {
+        const schema = schemaEntries[0].item;
+        return {
+          side: schema.side,
+          location: schema.location,
+          fieldPath: schema.fieldPath,
+          kind: schema.kind,
+          sessionPresence: new Set(schemaEntries.map((entry) => entry.sessionId)).size,
+          observationCount: schemaEntries.reduce((sum, entry) => sum + entry.item.observationCount, 0),
+          types: [...new Set(schemaEntries.flatMap((entry) => entry.item.types || []))].sort(),
+          itemTypes: [...new Set(schemaEntries.flatMap((entry) => entry.item.itemTypes || []))].sort(),
+          keys: [...new Set(schemaEntries.flatMap((entry) => entry.item.keys || []))].sort(),
+          examples: schemaEntries.flatMap((entry) => entry.item.examples || []).slice(0, 8),
+        };
+      },
+    ).sort((a, b) => a.side.localeCompare(b.side) || a.fieldPath.localeCompare(b.fieldPath));
+    const relations = aggregateNested(
+      memberEntries,
+      (member) => member.relations || [],
+      (relation) => [
+        relation.kind,
+        relation.source.endpoint,
+        relation.source.side,
+        relation.source.location,
+        relation.source.fieldPath,
+        relation.target.endpoint,
+        relation.target.side,
+        relation.target.location,
+        relation.target.fieldPath,
+      ].join('|'),
+      (relationEntries) => {
+        const relation = relationEntries[0].item;
+        return {
+          kind: relation.kind,
+          source: relation.source,
+          sources: relation.sources,
+          target: relation.target,
+          sessionPresence: new Set(relationEntries.map((entry) => entry.sessionId)).size,
+          supportIterations: relationEntries.reduce((sum, entry) => sum + entry.item.supportIterations, 0),
+          transforms: [...new Set(relationEntries
+            .map((entry) => JSON.stringify(entry.item.transform))
+            .filter((value) => value !== undefined))].map(JSON.parse),
+          examples: relationEntries.flatMap((entry) => entry.item.evidence || []).slice(0, 5),
+        };
+      },
+    ).sort((a, b) => b.sessionPresence - a.sessionPresence || b.supportIterations - a.supportIterations);
+    return {
+      routeKey,
+      signature: `${routeKey}?${queryKeys.join(',')}`,
+      method: first.method,
+      hostname: first.hostname,
+      pathnameTemplate: first.pathnameTemplate,
+      queryKeys,
+      sessionPresence: new Set(memberEntries.map((entry) => entry.sessionId)).size,
+      sessionPresenceRatio: round(new Set(memberEntries.map((entry) => entry.sessionId)).size / Math.max(usableCount, 1)),
+      iterationPresence: memberEntries.reduce((sum, entry) => sum + entry.item.iterationPresence, 0),
+      totalRequestCount: memberEntries.reduce((sum, entry) => sum + entry.item.requestCount, 0),
+      sessionSupport: memberEntries.map((entry) => ({
+        sessionId: entry.sessionId,
+        iterationPresence: entry.item.iterationPresence,
+        requestCount: entry.item.requestCount,
+      })),
+      statusCounts: sumCounts(memberEntries, (entry) => entry.item.statusCounts),
+      examples: [...new Set(memberEntries.flatMap((entry) => entry.item.examples || []))].slice(0, 12),
+      fields,
+      requestFields: fields.filter((field) => field.side === 'request'),
+      schemas,
+      responseSchemas: schemas.filter((schema) => schema.side === 'response'),
+      relations,
+    };
+  }).sort((a, b) => a.signature.localeCompare(b.signature));
+}
+
 function collectionReport(summary) {
   const lines = ['# Cross-session features report', ''];
   const coreFields = summary.crossSessionFields
@@ -158,9 +287,17 @@ function aggregateSessions(sessionResults) {
       sessionPresence: new Set(entries.map((entry) => entry.sessionId)).size,
       sessionPresenceRatio: round(new Set(entries.map((entry) => entry.sessionId)).size / Math.max(usableCount, 1)),
       totalRequestCount: entries.reduce((sum, entry) => sum + entry.item.requestCount, 0),
+      statusCounts: sumCounts(entries, (entry) => entry.item.statusCounts),
       classifications: [...new Set(entries.map((entry) => entry.item.classifications))].sort(),
       medianDurationMs: median(entries.map((entry) => entry.item.medianDurationMs).filter(Number.isFinite)),
       examples: [...new Set(entries.flatMap((entry) => entry.item.examples))].slice(0, 5),
+      members: aggregateEndpointMembers(entries, usableCount),
+      familyOnlyAttributes: {
+        fields: [...new Set(entries.flatMap((entry) => entry.item.familyOnlyAttributes?.fields || []))],
+        schemas: [...new Set(entries.flatMap((entry) => entry.item.familyOnlyAttributes?.schemas || []))],
+        relations: [...new Set(entries.flatMap((entry) => entry.item.familyOnlyAttributes?.relations || []))],
+      },
+      attributionWarnings: [...new Set(entries.flatMap((entry) => entry.item.attributionWarnings || []))],
     };
     },
   ).sort((a, b) => b.sessionPresence - a.sessionPresence || b.totalRequestCount - a.totalRequestCount);
@@ -306,7 +443,7 @@ function aggregateSessions(sessionResults) {
   ).sort((a, b) => b.sessionPresence - a.sessionPresence || a.name.localeCompare(b.name));
 
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     generatedAt: new Date().toISOString(),
     sessionCount: sessionResults.length,
     usableSessionCount: usableCount,

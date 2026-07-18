@@ -284,3 +284,97 @@ test('aggregates repeated evidence across recording sessions', async (t) => {
   assert.ok(farmed.summary.crossSessionRelations.some((relation) => relation.kind === 'authorization-token-copy'));
   assert.ok(fs.existsSync(path.join(output, 'report.md')));
 });
+
+function writeSiblingRecording(input, recordingId) {
+  fs.mkdirSync(path.join(input, 'bodies'), { recursive: true });
+  fs.writeFileSync(path.join(input, 'manifest.json'), JSON.stringify({
+    id: recordingId,
+    startUrl: 'https://example.test/admin',
+  }));
+  fs.writeFileSync(path.join(input, 'iterations.json'), JSON.stringify([1, 2, 3].map((iteration) => ({
+    id: `iteration-${iteration}`,
+    requestCount: 3,
+  }))));
+  const definitions = [
+    {
+      path: 'login',
+      status: 201,
+      request: (iteration) => ({ username: `user-${iteration}`, password: `secret-${iteration}` }),
+      response: (iteration) => ({ session: { token: `token-${recordingId}-${iteration}`, expiresAt: 1000 + iteration } }),
+    },
+    {
+      path: 'licenses',
+      status: 202,
+      request: (iteration) => ({ licenseKey: `key-${iteration}`, limits: { seats: iteration + 1 } }),
+      response: (iteration) => ({ jobId: `job-${recordingId}-${iteration}`, queued: true }),
+    },
+    {
+      path: 'logout',
+      status: 204,
+      request: (iteration) => ({ allDevices: iteration % 2 === 0 }),
+      response: null,
+    },
+  ];
+  const requests = [];
+  for (let iteration = 1; iteration <= 3; iteration += 1) {
+    definitions.forEach((definition, position) => {
+      const id = `${recordingId}-${definition.path}-${iteration}`;
+      const bodyFile = definition.response ? `bodies/${definition.path}-${iteration}.json` : null;
+      requests.push({
+        id,
+        requestId: id,
+        iterationId: `iteration-${iteration}`,
+        requestTimestamp: iteration * 100 + position,
+        responseTimestamp: iteration * 100 + position + 0.5,
+        resourceType: 'Fetch',
+        request: {
+          method: 'POST',
+          url: `https://example.test/v1/admin/${definition.path}`,
+          headers: { 'content-type': 'application/json' },
+          postData: JSON.stringify(definition.request(iteration)),
+        },
+        response: { status: definition.status, mimeType: definition.response ? 'application/json' : 'text/plain' },
+        body: bodyFile ? { file: bodyFile } : undefined,
+      });
+      if (bodyFile) {
+        fs.writeFileSync(path.join(input, bodyFile), JSON.stringify(definition.response(iteration)));
+      }
+    });
+  }
+  fs.writeFileSync(path.join(input, 'requests.json'), JSON.stringify(requests));
+}
+
+test('preserves lossless per-sibling statuses and incompatible schemas across sessions', async (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'features-siblings-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const input = path.join(root, 'scenario');
+  writeSiblingRecording(path.join(input, 'run-a'), 'run-a');
+  writeSiblingRecording(path.join(input, 'run-b'), 'run-b');
+  const output = path.join(root, 'features');
+  const farmed = await farmInput({ inputDirectory: input, outputDirectory: output });
+
+  const family = farmed.summary.crossSessionEndpoints.find((endpoint) => (
+    endpoint.signature.includes('POST example.test/v1/admin/:var')
+  ));
+  assert.ok(family);
+  assert.equal(family.members.length, 3);
+
+  const login = family.members.find((member) => member.pathnameTemplate.endsWith('/login'));
+  const licenses = family.members.find((member) => member.pathnameTemplate.endsWith('/licenses'));
+  const logout = family.members.find((member) => member.pathnameTemplate.endsWith('/logout'));
+  assert.deepEqual(login.statusCounts, { 201: 6 });
+  assert.deepEqual(licenses.statusCounts, { 202: 6 });
+  assert.deepEqual(logout.statusCounts, { 204: 6 });
+  assert.equal(login.sessionPresence, 2);
+  assert.equal(login.iterationPresence, 6);
+  assert.equal(login.totalRequestCount, 6);
+
+  assert.ok(login.requestFields.some((field) => field.fieldPath === '$.username'));
+  assert.ok(!login.requestFields.some((field) => field.fieldPath === '$.licenseKey'));
+  assert.ok(licenses.requestFields.some((field) => field.fieldPath === '$.limits.seats'));
+  assert.ok(logout.requestFields.some((field) => field.fieldPath === '$.allDevices'));
+  assert.ok(login.responseSchemas.some((schema) => schema.fieldPath === '$.session.token'));
+  assert.ok(licenses.responseSchemas.some((schema) => schema.fieldPath === '$.jobId'));
+  assert.equal(logout.responseSchemas.length, 0);
+  assert.ok(fs.existsSync(path.join(output, 'endpoints.cross-session.json')));
+});
