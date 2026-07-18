@@ -26,7 +26,9 @@ CURRENT STATUS
   concrete endpoints with fewer prompt tokens than raw.
 - Full real-dashboard report:
     KEYMANAGER_CONTRACT_AB_EVALUATION.md
-- All 22 local tests pass.
+- A five-seed KeyManager run and a 21-case seeded Gym V6 are documented in:
+    GYM_V6_EVALUATION.md
+- All 29 local tests pass.
 
 IMPLEMENTED IN V5
 - Twelve data-driven farmer challenges with independent Gym ground truth.
@@ -87,6 +89,23 @@ COMPLETED 2026-07-18: CONTRACT-ORIENTED ATTENTION COMPACTION
   endpoint, status, authentication, and workflow dependency fidelity.
 - KeyManager farm artifacts fell from 150.33 MB to 70.41 MB.
 
+COMPLETED 2026-07-18: MULTI-SEED MEASUREMENT AND SEEDED GYM V6
+- KeyManager contract generation now runs raw, features, and raw+features over
+  five configurable model seeds.
+- All three arms were stable on endpoints, statuses, hallucinations, and
+  lifecycle dependencies. Features and raw+features identified cookie
+  authentication in 5/5 runs; raw identified it in 0/5.
+- Features used 12,407 prompt tokens, 31.3% fewer than raw.
+- Gym V6 generates randomized recorder-compatible holdouts from three seeds:
+  arbitrary affix, affine numeric, HMAC-SHA256, JSON-base64url, reverse
+  string, array selection, and semantic siblings.
+- Across 21 V6 cases, cross-session farming scored 90.48 versus 84.57 for one
+  session. Core/noise classification, workflow order, and semantic sibling
+  attribution remained exact.
+- Five novel transforms remain unsupported and reach only 50% relation recall;
+  array selection reaches 100%. This provides explicit targets for the next
+  detector work without asking the LLM to discover candidate relationships.
+
 OTHER FARMER TODO
 1. Expand the generic substring/prefix detector beyond its semantic field-name
    allowlist. V5 currently misses:
@@ -99,6 +118,9 @@ OTHER FARMER TODO
    candidates, not proof of source-code causality.
 4. Add unseen real applications and holdout transformations before treating
    the current synthetic score as a production success estimate.
+5. Add bounded deterministic detectors for the V6 holdouts, then evaluate
+   them on fresh seeds and at least one transform family not used while
+   implementing each detector.
 
 REPRODUCE
 - Farmer-only Gym V5:
@@ -107,3 +129,7 @@ REPRODUCE
     npm run keymanager:contract-ab
 - Features-only concrete endpoint unroll diagnostic:
     npm run keymanager:feature-unroll
+- KeyManager multi-seed contract experiment:
+    npm run keymanager:contract-multiseed
+- Seeded randomized Gym V6:
+    npm run gym:v6

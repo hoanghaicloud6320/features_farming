@@ -19,6 +19,7 @@ const ADMIN_NAME = process.env.KEYMANAGER_ADMIN_NAME || '';
 const SESSION_COUNT = Number(process.env.KEYMANAGER_SESSIONS || 3);
 const ITERATIONS_PER_SESSION = Number(process.env.KEYMANAGER_ITERATIONS || 3);
 const CONTEXT_BUDGET_CHARS = Number(process.env.KEYMANAGER_CONTEXT_BUDGET_CHARS || 32_000);
+const GENERATION_SEED = Number(process.env.KEYMANAGER_SEED || 95_501);
 
 const CONTRACT_SCHEMA = {
   type: 'object',
@@ -377,7 +378,7 @@ async function main() {
       prompt: buildPrompt(condition, evidence),
       responseJsonSchema: CONTRACT_SCHEMA,
       maxOutputTokens: 12_000,
-      seed: 95_501,
+      seed: GENERATION_SEED,
     });
     matrix.model ||= generated.model;
     const conditionRoot = path.join(resultRoot, condition.id);
@@ -393,6 +394,7 @@ async function main() {
       promptTokens: generated.usageMetadata?.promptTokenCount || null,
       endpointClaims: generated.data.endpoints.length,
       workflowClaims: generated.data.workflows.length,
+      seed: GENERATION_SEED,
       evaluation,
       responseId: generated.responseId,
     });
@@ -413,6 +415,7 @@ if (require.main === module) {
 
 module.exports = {
   CONTRACT_SCHEMA,
+  buildPrompt,
   evaluateContract,
   normalizeContractPath,
   renderContract,
