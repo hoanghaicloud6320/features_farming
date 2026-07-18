@@ -329,7 +329,7 @@ function aggregateSessions(sessionResults) {
         sessionPresence: new Set(entries.map((entry) => entry.sessionId)).size,
         behaviors: [...new Set(entries.map((entry) => entry.item.classification))].sort(),
         types: [...new Set(entries.map((entry) => entry.item.type))].sort(),
-        examples: entries.flatMap((entry) => entry.item.examples.slice(0, 1).map((example) => ({
+        examples: entries.flatMap((entry) => entry.item.examples.slice(0, 4).map((example) => ({
           sessionId: entry.sessionId,
           iterationId: example.iterationId,
           value: example.value,
@@ -520,6 +520,15 @@ function aggregateSessions(sessionResults) {
         sessionPresence: new Set(entries.map((entry) => entry.sessionId)).size,
         types: [...new Set(entries.flatMap((entry) => entry.item.types))].sort(),
         itemTypes: [...new Set(entries.flatMap((entry) => entry.item.itemTypes))].sort(),
+        contentTypes: [...new Set(entries.flatMap(
+          (entry) => entry.item.contentTypes || [],
+        ))].sort(),
+        examples: [...new Map(entries.flatMap(
+          (entry) => (entry.item.examples || []).map((value) => [
+            JSON.stringify(value),
+            value,
+          ]),
+        )).values()].slice(0, 5),
         keys: [...new Set(entries.flatMap((entry) => entry.item.keys))].sort(),
         arrayLengthRange: ranges.length
           ? {
@@ -537,13 +546,21 @@ function aggregateSessions(sessionResults) {
   for (const session of usable) {
     session.result.workflow.forEach((step, position) => {
       const endpoint = endpointAliases.get(step.endpoint) || step.endpoint;
-      if (!workflowPositions.has(endpoint)) workflowPositions.set(endpoint, []);
-      workflowPositions.get(endpoint).push({ sessionId: session.sessionId, position });
+      const occurrence = step.occurrence || 1;
+      const key = `${endpoint}|${occurrence}`;
+      if (!workflowPositions.has(key)) workflowPositions.set(key, []);
+      workflowPositions.get(key).push({
+        sessionId: session.sessionId,
+        position,
+        endpoint,
+        occurrence,
+      });
     });
   }
   const consensusWorkflow = [...workflowPositions.entries()]
-    .map(([endpoint, positions]) => ({
-      endpoint,
+    .map(([_key, positions]) => ({
+      endpoint: positions[0].endpoint,
+      occurrence: positions[0].occurrence,
       sessionPresence: new Set(positions.map((item) => item.sessionId)).size,
       medianPosition: median(positions.map((item) => item.position)),
     }))
@@ -569,6 +586,38 @@ function aggregateSessions(sessionResults) {
     },
   ).sort((a, b) => b.sessionPresence - a.sessionPresence || a.name.localeCompare(b.name));
 
+  const observedTraceCandidates = memberRelationCandidates
+    .filter((relation) => (
+      relation.source.side === 'response'
+      && relation.target.side === 'request'
+      && /body|query|path/.test(
+        `${relation.source.location}|${relation.target.location}`,
+      )
+      && relation.promotion?.attentionEligible === false
+    ))
+    .slice(0, 50)
+    .map((relation) => ({
+      kind: relation.kind,
+      from: {
+        endpoint: relation.source.routeKey,
+        field: `${relation.source.side}.${relation.source.location}${relation.source.fieldPath}`,
+      },
+      to: {
+        endpoint: relation.target.routeKey,
+        field: `${relation.target.side}.${relation.target.location}${relation.target.fieldPath}`,
+      },
+      support: {
+        sessions: relation.sessionPresence,
+        iterations: relation.supportIterations,
+        distinctValues: relation.distinctSourceValues,
+        medianRequestDistance: relation.medianRequestDistance,
+        confidence: relation.averageConfidence,
+      },
+      status: 'candidate',
+      reason: relation.promotion.reason,
+      risks: relation.promotion.risks || [],
+    }));
+
   return {
     schemaVersion: 5,
     generatedAt: new Date().toISOString(),
@@ -593,10 +642,15 @@ function aggregateSessions(sessionResults) {
     crossSessionSchemas: schemas,
     crossSessionCookies: cookies,
     consensusWorkflow,
+    observedTraceCandidates,
     patternTotals: {
       optionalBranches: usable.reduce((sum, session) => sum + session.result.workflowPatterns.optionalBranches.length, 0),
       retries: usable.reduce((sum, session) => sum + session.result.workflowPatterns.retries.length, 0),
       polling: usable.reduce((sum, session) => sum + session.result.workflowPatterns.polling.length, 0),
+      repeatedCalls: usable.reduce(
+        (sum, session) => sum + (session.result.workflowPatterns.repeatedCalls || []).length,
+        0,
+      ),
     },
   };
 }

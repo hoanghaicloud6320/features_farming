@@ -151,9 +151,143 @@ function compactResponseSchemas(schemas, maximum = 80) {
       };
       if (schema.types?.length) output.types = schema.types;
       if (schema.itemTypes?.length) output.itemTypes = schema.itemTypes;
+      if (schema.contentTypes?.length) output.contentTypes = schema.contentTypes;
       if (schema.keys?.length) output.keys = schema.keys;
+      if (schema.kind === 'scalar' && schema.examples?.length) {
+        output.examples = schema.examples.slice(0, 3);
+      }
       return output;
     });
+}
+
+function replayFieldRole(field) {
+  const name = `${field.location}.${field.fieldPath}`.toLowerCase();
+  if (/authorization|cookie|csrf|token|secret|password|nonce/.test(name)) {
+    return 'credential-or-nonce';
+  }
+  if (/(?:^|[.$_-])(?:after|before|cursor)(?:$|[._-])/.test(name)) {
+    return 'cursor';
+  }
+  if (/(?:^|[.$_-])(?:id|uuid)(?:$|[._-])/.test(name) || field.location === 'url.path') {
+    return 'identifier';
+  }
+  if (/(?:first|last|limit|offset|page|pagesize|page_size|from|to)$/.test(name)) {
+    return 'pagination-control';
+  }
+  if (/(?:function|operation|action|mode|type|sort|order)$/.test(name)) {
+    return 'operation-or-enum';
+  }
+  if (field.types?.some((type) => ['boolean'].includes(type))) return 'protocol-flag';
+  return 'business-input';
+}
+
+function buildReplayProfiles(summary, maximum = 80) {
+  return (summary.crossSessionFields || [])
+    .filter((field) => (
+      field.side === 'request'
+      && (field.endpointClassifications || []).includes('core')
+      && ['body.json', 'body.form', 'url.query', 'url.path'].includes(field.location)
+      && (
+        field.location !== 'url.path'
+        || field.endpoint.includes(':var')
+        || (field.behaviors || []).some((behavior) => behavior !== 'constant')
+      )
+      && field.examples?.length
+    ))
+    .sort((a, b) => fieldImportance(b) - fieldImportance(a))
+    .slice(0, maximum)
+    .map((field) => {
+      const values = [...new Map(field.examples.map((example) => [
+        JSON.stringify(example.value),
+        example.value,
+      ])).values()].slice(0, 4);
+      const role = replayFieldRole(field);
+      const observedStable = (
+        values.length === 1
+        && (field.behaviors || []).every((behavior) => behavior === 'constant')
+      );
+      const sensitive = role === 'credential-or-nonce';
+      const profile = {
+        endpoint: field.endpoint,
+        field: `${field.location}${field.fieldPath}`,
+        types: field.types,
+        role,
+        classification: observedStable ? 'observed-stable' : 'observed-variable',
+        observedValues: sensitive ? [] : values,
+        distinctObservedValues: values.length,
+        sessionPresence: field.sessionPresence,
+        parameterize: true,
+        interpretation: observedStable
+          ? 'Observed stable in passive traffic; not proven required by the API.'
+          : 'Observed to vary; do not hardcode.',
+      };
+      if (observedStable && !sensitive && values.length) {
+        profile.observedDefault = values[0];
+      }
+      return profile;
+    });
+}
+
+function buildAutomationEvidence(summary, replayProfiles) {
+  const representations = new Map();
+  for (const schema of summary.crossSessionSchemas || []) {
+    if (
+      schema.side !== 'response'
+      || !(schema.endpointClassifications || []).includes('core')
+    ) continue;
+    if (!representations.has(schema.endpoint)) {
+      representations.set(schema.endpoint, {
+        endpoint: schema.endpoint,
+        bodyKinds: new Set(),
+        contentTypes: new Set(),
+        rootKinds: new Set(),
+        scalarExamples: [],
+      });
+    }
+    const item = representations.get(schema.endpoint);
+    item.bodyKinds.add(schema.location.replace(/^body\./, ''));
+    for (const contentType of schema.contentTypes || []) {
+      if (contentType) item.contentTypes.add(contentType);
+    }
+    if (schema.fieldPath === '$') {
+      item.rootKinds.add(schema.kind);
+      if (schema.kind === 'scalar') {
+        item.scalarExamples.push(...(schema.examples || []).slice(0, 3));
+      }
+    }
+  }
+  return {
+    replayProfileCount: replayProfiles.length,
+    responseRepresentations: [...representations.values()].map((item) => ({
+      endpoint: item.endpoint,
+      bodyKinds: [...item.bodyKinds].sort(),
+      contentTypes: [...item.contentTypes].sort(),
+      rootKinds: [...item.rootKinds].sort(),
+      scalarExamples: [...new Map(item.scalarExamples.map((value) => [
+        JSON.stringify(value),
+        value,
+      ])).values()].slice(0, 3),
+      parserGuidance: item.bodyKinds.has('json') && item.rootKinds.has('scalar')
+        ? 'The payload is a JSON scalar. Use the parsed value directly (or text for wire fidelity); do not assume an object property.'
+        : item.bodyKinds.has('json')
+          ? 'Use response.json(); root kind determines whether the result is an object or array.'
+        : item.bodyKinds.has('text')
+          ? 'Use response.text().'
+          : 'Response parser is not established.',
+    })),
+    suggestedSequence: (summary.consensusWorkflow || []).map((step, index) => ({
+      step: index + 1,
+      endpoint: step.endpoint,
+      occurrence: step.occurrence || 1,
+      sessionPresence: step.sessionPresence,
+    })),
+    observedTraceCandidates: summary.observedTraceCandidates || [],
+    epistemicPolicy: {
+      replayProfiles: 'Observed values are replay defaults/examples, not asserted API requirements.',
+      observedTraceCandidates: 'Ordered equalities with insufficient value diversity; useful for replay but not confirmed causality.',
+      confirmedFlows: 'Use contractInventory.dataFlows for promoted response-to-request dependencies.',
+    },
+  };
 }
 
 function relationImportance(relation) {
@@ -191,7 +325,6 @@ function selectContractRelations(relations, relationIds, targetRouteKey, maximum
     .filter((relation) => relationIdSet.has(relation.id))
     .filter((relation) => relation.target.routeKey === targetRouteKey)
     .filter((relation) => relation.source.side === 'response' && relation.target.side === 'request')
-    .filter((relation) => relation.source.routeKey !== relation.target.routeKey)
     .sort((a, b) => relationImportance(b) - relationImportance(a));
   const selected = [];
   const targets = new Set();
@@ -235,7 +368,7 @@ function selectContractRelations(relations, relationIds, targetRouteKey, maximum
     selected,
     availableCount: candidates.length,
     omittedCount: Math.max(0, candidates.length - selected.length),
-    selectionRule: 'Cross-endpoint response-to-request flows first, then structured transformed flows, ranked by session and iteration support.',
+    selectionRule: 'Response-to-request flows, including repeated calls to the same endpoint, ranked by session and iteration support.',
   };
 }
 
@@ -385,6 +518,7 @@ function buildContractInventory(summary) {
 
 function buildFeatureContext(farmRoot) {
   const summary = readJson(path.join(farmRoot, 'cross-session.json'));
+  const replayProfiles = buildReplayProfiles(summary);
   const relationCandidates = summary.crossSessionRelationCandidates;
   const diagnosticCandidateCount = Array.isArray(relationCandidates)
     ? relationCandidates.filter((relation) => relation.promotion?.attentionEligible === false).length
@@ -432,6 +566,8 @@ function buildFeatureContext(farmRoot) {
       note: 'Compressed view only; direct edge evidence remains in relation artifacts.',
     },
     contractInventory: buildContractInventory(summary),
+    replayProfiles,
+    automationHints: buildAutomationEvidence(summary, replayProfiles),
     authenticationEvidence: buildAuthenticationEvidence(summary),
     patterns: summary.patternTotals,
     generalizationWarnings,
@@ -540,6 +676,13 @@ function compactFeatureContext(features, budgetChars) {
       routeFamilies: 'Abstraction context only; do not copy family attributes over contractInventory.',
     },
     contractInventory: structuredClone(features.contractInventory || []),
+    replayProfiles: structuredClone(features.replayProfiles || []),
+    automationHints: structuredClone(features.automationHints || {
+      replayProfileCount: 0,
+      responseRepresentations: [],
+      suggestedSequence: [],
+      observedTraceCandidates: [],
+    }),
     authenticationEvidence: structuredClone(features.authenticationEvidence || {
       credentials: [],
       lineage: [],
@@ -563,11 +706,28 @@ function compactFeatureContext(features, budgetChars) {
       endpoint.omittedRequestFields = (endpoint.omittedRequestFields || 0) + 1;
     }
   }
+  for (const profile of [...compact.replayProfiles].reverse()) {
+    while (profile.observedValues?.length > 1 && jsonChars(compact) > budgetChars) {
+      profile.observedValues.pop();
+    }
+  }
+  while (
+    compact.automationHints.observedTraceCandidates?.length > 8
+    && jsonChars(compact) > budgetChars
+  ) {
+    compact.automationHints.observedTraceCandidates.pop();
+  }
   while (compact.authenticationEvidence.lineage.length && jsonChars(compact) > budgetChars) {
     compact.authenticationEvidence.lineage.pop();
     compact.authenticationEvidence.omittedCount += 1;
   }
   while (compact.workflow.length && jsonChars(compact) > budgetChars) compact.workflow.pop();
+  while (
+    compact.automationHints.suggestedSequence?.length
+    && jsonChars(compact) > budgetChars
+  ) {
+    compact.automationHints.suggestedSequence.pop();
+  }
   if (jsonChars(compact) > budgetChars) compact.patterns = {};
   for (const endpoint of [...compact.contractInventory].reverse()) {
     while (endpoint.responseSchemas?.length > 6 && jsonChars(compact) > budgetChars) {
@@ -589,12 +749,22 @@ function compactFeatureContext(features, budgetChars) {
     if (jsonChars(compact) <= budgetChars) break;
     endpoint.examples = [];
   }
+  while (compact.replayProfiles.length > 1 && jsonChars(compact) > budgetChars) {
+    compact.replayProfiles.pop();
+  }
+  while (
+    compact.automationHints.responseRepresentations?.length > 1
+    && jsonChars(compact) > budgetChars
+  ) {
+    compact.automationHints.responseRepresentations.pop();
+  }
   compact.omitted = {
     endpoints: features.endpoints.length - compact.endpoints.length,
     relations: features.relations.length,
     workflow: features.workflow.length - compact.workflow.length,
     fields: features.fields.length,
     schemas: features.schemas.length,
+    replayProfiles: (features.replayProfiles || []).length - compact.replayProfiles.length,
     contractEndpoints: (features.contractInventory || []).length - compact.contractInventory.length,
   };
   while (compact.workflow.length && jsonChars(compact) > budgetChars) compact.workflow.pop();
@@ -912,6 +1082,7 @@ module.exports = {
   buildContractInventory,
   buildFeatureContext,
   buildBudgetedEvidence,
+  buildReplayProfiles,
   buildPrompt,
   buildRawContext,
   compactFeatureContext,

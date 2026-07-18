@@ -1,0 +1,1618 @@
+{
+  "schemaVersion": 2,
+  "benchmark": "public-no-login-contract-automation",
+  "generatedAt": "2026-07-18T16:08:50.244Z",
+  "model": "gemini-3.1-flash-lite",
+  "generationSeed": 126071,
+  "sessions": 2,
+  "iterationsPerSession": 3,
+  "contextBudgetChars": 32000,
+  "relay": {
+    "origin": "https://mockserver.in",
+    "expiresIn": "72 hours",
+    "provisionedAt": "2026-07-18T16:08:50.244Z"
+  },
+  "targets": [
+    {
+      "id": "quickmock-relay",
+      "label": "MockServer opaque two-step relay",
+      "origin": "https://mockserver.in",
+      "entryUrl": "https://mockserver.in/",
+      "caseCount": 1,
+      "noEvidence": {
+        "contractEndpointRecall": 0,
+        "literalRouteMatches": [],
+        "automationAccepted": false,
+        "contaminated": false
+      },
+      "executionTruth": {
+        "representations": [
+          {
+            "method": "GET",
+            "path": "/m/dnjvzsr7",
+            "requestBodyKinds": [
+              "none"
+            ],
+            "responseBodyKinds": [
+              "json-object"
+            ],
+            "responseContentTypes": [
+              "application/json"
+            ]
+          },
+          {
+            "method": "GET",
+            "path": "/m/7sf3rx8y",
+            "requestBodyKinds": [
+              "none"
+            ],
+            "responseBodyKinds": [
+              "json-object"
+            ],
+            "responseContentTypes": [
+              "application/json"
+            ]
+          }
+        ],
+        "replayProfiles": [],
+        "flows": [
+          {
+            "from": "response.body.json$.runId,response.body.json$.handoffKey",
+            "to": "request.url.query$query.runId,request.url.query$query.handoffKey"
+          }
+        ],
+        "repeatedCalls": []
+      }
+    },
+    {
+      "id": "tryscrapeme-ajax",
+      "label": "TryScrapeMe AJAX books",
+      "origin": "https://tryscrapeme.com",
+      "entryUrl": "https://tryscrapeme.com/web-scraping-practice/beginner/ajax",
+      "caseCount": 1,
+      "noEvidence": {
+        "contractEndpointRecall": 0,
+        "literalRouteMatches": [],
+        "automationAccepted": false,
+        "contaminated": false
+      },
+      "executionTruth": {
+        "representations": [
+          {
+            "method": "GET",
+            "path": "/web-scraping-practice/beginner/ajax/api",
+            "requestBodyKinds": [
+              "none"
+            ],
+            "responseBodyKinds": [
+              "json-array"
+            ],
+            "responseContentTypes": [
+              "text/plain"
+            ]
+          }
+        ],
+        "replayProfiles": [],
+        "flows": [],
+        "repeatedCalls": []
+      }
+    },
+    {
+      "id": "webscraping-graphql",
+      "label": "web-scraping.dev GraphQL pagination",
+      "origin": "https://web-scraping.dev",
+      "entryUrl": "https://web-scraping.dev/reviews",
+      "caseCount": 1,
+      "noEvidence": {
+        "contractEndpointRecall": 0,
+        "literalRouteMatches": [],
+        "automationAccepted": false,
+        "contaminated": false
+      },
+      "executionTruth": {
+        "representations": [
+          {
+            "method": "POST",
+            "path": "/api/graphql",
+            "requestBodyKinds": [
+              "json"
+            ],
+            "responseBodyKinds": [
+              "json-object"
+            ],
+            "responseContentTypes": [
+              "application/json"
+            ]
+          }
+        ],
+        "replayProfiles": [
+          {
+            "endpoint": "POST /api/graphql",
+            "field": "body.json$.variables.first",
+            "observedValues": [
+              "20"
+            ]
+          }
+        ],
+        "flows": [
+          {
+            "from": "response.body.json$.data.reviews.pageInfo.endCursor",
+            "to": "request.body.json$.variables.after"
+          }
+        ],
+        "repeatedCalls": [
+          {
+            "endpoint": "POST /api/graphql",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "testpages-calculator",
+      "label": "TestPages internal calculator API",
+      "origin": "https://testpages.eviltester.com",
+      "entryUrl": "https://testpages.eviltester.com/apps/server-side-calculator/",
+      "caseCount": 1,
+      "noEvidence": {
+        "contractEndpointRecall": 0,
+        "literalRouteMatches": [],
+        "automationAccepted": false,
+        "contaminated": false
+      },
+      "executionTruth": {
+        "representations": [
+          {
+            "method": "POST",
+            "path": "/internalapi/simple-calculator",
+            "requestBodyKinds": [
+              "form"
+            ],
+            "responseBodyKinds": [
+              "json-scalar"
+            ],
+            "responseContentTypes": [
+              "text/html"
+            ]
+          }
+        ],
+        "replayProfiles": [
+          {
+            "endpoint": "POST /internalapi/simple-calculator",
+            "field": "body.form$.function",
+            "observedValues": [
+              "times",
+              "divide",
+              "minus"
+            ]
+          }
+        ],
+        "flows": [],
+        "repeatedCalls": [
+          {
+            "endpoint": "POST /internalapi/simple-calculator",
+            "count": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "testpages-products",
+      "label": "TestPages product count/list/detail",
+      "origin": "https://testpages.eviltester.com",
+      "entryUrl": "https://testpages.eviltester.com/apps/basiccart/",
+      "caseCount": 1,
+      "noEvidence": {
+        "contractEndpointRecall": 0,
+        "literalRouteMatches": [],
+        "automationAccepted": false,
+        "contaminated": false
+      },
+      "executionTruth": {
+        "representations": [
+          {
+            "method": "GET",
+            "path": "/api/basicstore/products/count",
+            "requestBodyKinds": [
+              "none"
+            ],
+            "responseBodyKinds": [
+              "json-scalar"
+            ]
+          },
+          {
+            "method": "GET",
+            "path": "/api/basicstore/products",
+            "requestBodyKinds": [
+              "none"
+            ],
+            "responseBodyKinds": [
+              "json-array"
+            ]
+          },
+          {
+            "method": "GET",
+            "path": "/api/basicstore/products/:id",
+            "requestBodyKinds": [
+              "none"
+            ],
+            "responseBodyKinds": [
+              "json-object"
+            ]
+          }
+        ],
+        "replayProfiles": [
+          {
+            "endpoint": "GET /api/basicstore/products",
+            "field": "url.query$query.limit",
+            "observedValues": [
+              "4"
+            ]
+          }
+        ],
+        "flows": [
+          {
+            "from": "response.body.json$[].id",
+            "to": "request.url.path$path.id"
+          }
+        ],
+        "repeatedCalls": []
+      }
+    }
+  ],
+  "runs": [
+    {
+      "target": "quickmock-relay",
+      "targetLabel": "MockServer opaque two-step relay",
+      "arm": "none",
+      "evidenceChars": 94,
+      "contract": {
+        "promptTokens": 295,
+        "outputTokens": 421,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 0,
+          "endpointPrecision": 0,
+          "endpointRecall": 0,
+          "endpointF1": 0,
+          "exactStatusAccuracy": 0,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 10,
+          "cases": [
+            {
+              "caseId": "quickmock-relay",
+              "endpointRecall": 0,
+              "endpointPrecision": 0,
+              "exactStatusAccuracy": 0,
+              "hallucinatedEndpoints": [],
+              "complete": false
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 0,
+          "representationAccuracy": 0,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 0
+        },
+        "responseId": "yqRbauTmI9HH1e8PuKXViQ4"
+      },
+      "automation": {
+        "promptTokens": 313,
+        "outputTokens": 285,
+        "score": {
+          "accepted": false,
+          "checks": {
+            "finalResponse": false,
+            "copiedRunId": false,
+            "copiedHandoffKey": false
+          },
+          "exactAccepted": false,
+          "semanticAccepted": false
+        },
+        "exitCode": 0,
+        "requestCount": 1,
+        "literalRouteMatches": [],
+        "responseId": "zKRbaqPzHYK6vr0PjPb8yA0"
+      }
+    },
+    {
+      "target": "quickmock-relay",
+      "targetLabel": "MockServer opaque two-step relay",
+      "arm": "raw",
+      "evidenceChars": 3906,
+      "contract": {
+        "promptTokens": 1627,
+        "outputTokens": 824,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0.5,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 77.5,
+          "cases": [
+            {
+              "caseId": "quickmock-relay",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "z6RbapauEvanvr0P57KdsA4"
+      },
+      "automation": {
+        "promptTokens": 1645,
+        "outputTokens": 337,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "finalResponse": true,
+            "copiedRunId": true,
+            "copiedHandoffKey": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 2,
+        "literalRouteMatches": [
+          "/m/dnjvzsr7",
+          "/m/7sf3rx8y"
+        ],
+        "responseId": "0qRbaoH5BL_W1e8P-LG2gA4"
+      }
+    },
+    {
+      "target": "quickmock-relay",
+      "targetLabel": "MockServer opaque two-step relay",
+      "arm": "features",
+      "evidenceChars": 13721,
+      "contract": {
+        "promptTokens": 4457,
+        "outputTokens": 896,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0.5,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 77.5,
+          "cases": [
+            {
+              "caseId": "quickmock-relay",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "1aRbatzRItvCvr0PxeaS4AY"
+      },
+      "automation": {
+        "promptTokens": 4475,
+        "outputTokens": 405,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "finalResponse": true,
+            "copiedRunId": true,
+            "copiedHandoffKey": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 2,
+        "literalRouteMatches": [
+          "/m/dnjvzsr7",
+          "/m/7sf3rx8y"
+        ],
+        "responseId": "2KRbau_BManf1e8Po_G7qQ4"
+      }
+    },
+    {
+      "target": "quickmock-relay",
+      "targetLabel": "MockServer opaque two-step relay",
+      "arm": "raw-features",
+      "evidenceChars": 17571,
+      "contract": {
+        "promptTokens": 5807,
+        "outputTokens": 834,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0.5,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 77.5,
+          "cases": [
+            {
+              "caseId": "quickmock-relay",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "3KRbatvRIYvAvr0P8MLTsA4"
+      },
+      "automation": {
+        "promptTokens": 5825,
+        "outputTokens": 344,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "finalResponse": true,
+            "copiedRunId": true,
+            "copiedHandoffKey": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 2,
+        "literalRouteMatches": [
+          "/m/dnjvzsr7",
+          "/m/7sf3rx8y"
+        ],
+        "responseId": "36RbarPKLpCKvr0Pk6na6Q0"
+      }
+    },
+    {
+      "target": "tryscrapeme-ajax",
+      "targetLabel": "TryScrapeMe AJAX books",
+      "arm": "none",
+      "evidenceChars": 94,
+      "contract": {
+        "promptTokens": 308,
+        "outputTokens": 222,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 0,
+          "endpointPrecision": 0,
+          "endpointRecall": 0,
+          "endpointF1": 0,
+          "exactStatusAccuracy": 0,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 10,
+          "cases": [
+            {
+              "caseId": "tryscrapeme-ajax",
+              "endpointRecall": 0,
+              "endpointPrecision": 0,
+              "exactStatusAccuracy": 0,
+              "hallucinatedEndpoints": [],
+              "complete": false
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 0,
+          "representationAccuracy": 0,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 0
+        },
+        "responseId": "4qRbaqvAMaKV9tMPkeSf0A4"
+      },
+      "automation": {
+        "promptTokens": 325,
+        "outputTokens": 278,
+        "score": {
+          "accepted": false,
+          "checks": {
+            "itemCount": false,
+            "totalPrice": false
+          },
+          "exactAccepted": false,
+          "semanticAccepted": false
+        },
+        "exitCode": 1,
+        "requestCount": 0,
+        "literalRouteMatches": [],
+        "responseId": "5KRbas36F4_s1e8Pza_p4A0"
+      }
+    },
+    {
+      "target": "tryscrapeme-ajax",
+      "targetLabel": "TryScrapeMe AJAX books",
+      "arm": "raw",
+      "evidenceChars": 14016,
+      "contract": {
+        "promptTokens": 5587,
+        "outputTokens": 469,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 1,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 85,
+          "cases": [
+            {
+              "caseId": "tryscrapeme-ajax",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "5qRbav7tG7q9vr0PyZy1uA4"
+      },
+      "automation": {
+        "promptTokens": 5604,
+        "outputTokens": 315,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "itemCount": true,
+            "totalPrice": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 1,
+        "literalRouteMatches": [
+          "/web-scraping-practice/beginner/ajax/api"
+        ],
+        "responseId": "6KRbar3MOYiOosUP0crduA4"
+      }
+    },
+    {
+      "target": "tryscrapeme-ajax",
+      "targetLabel": "TryScrapeMe AJAX books",
+      "arm": "features",
+      "evidenceChars": 5611,
+      "contract": {
+        "promptTokens": 1723,
+        "outputTokens": 563,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 1,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 85,
+          "cases": [
+            {
+              "caseId": "tryscrapeme-ajax",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "66RbauiTD96i9tMP4viEsQ0"
+      },
+      "automation": {
+        "promptTokens": 1740,
+        "outputTokens": 285,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "itemCount": true,
+            "totalPrice": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 1,
+        "literalRouteMatches": [
+          "/web-scraping-practice/beginner/ajax/api"
+        ],
+        "responseId": "7aRbarjUFPiyvr0Pyom2sA4"
+      }
+    },
+    {
+      "target": "tryscrapeme-ajax",
+      "targetLabel": "TryScrapeMe AJAX books",
+      "arm": "raw-features",
+      "evidenceChars": 15079,
+      "contract": {
+        "promptTokens": 5310,
+        "outputTokens": 434,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 1,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 85,
+          "cases": [
+            {
+              "caseId": "tryscrapeme-ajax",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "76RbaqmZIrfA1e8PoIrHsA4"
+      },
+      "automation": {
+        "promptTokens": 5327,
+        "outputTokens": 303,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "itemCount": true,
+            "totalPrice": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 1,
+        "literalRouteMatches": [
+          "/web-scraping-practice/beginner/ajax/api"
+        ],
+        "responseId": "8aRbao_RIfKU9tMPvPu6sQ4"
+      }
+    },
+    {
+      "target": "webscraping-graphql",
+      "targetLabel": "web-scraping.dev GraphQL pagination",
+      "arm": "none",
+      "evidenceChars": 94,
+      "contract": {
+        "promptTokens": 310,
+        "outputTokens": 698,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 0,
+          "endpointPrecision": 0,
+          "endpointRecall": 0,
+          "endpointF1": 0,
+          "exactStatusAccuracy": 0,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 1,
+          "qualityScore": 0,
+          "cases": [
+            {
+              "caseId": "webscraping-graphql",
+              "endpointRecall": 0,
+              "endpointPrecision": 0,
+              "exactStatusAccuracy": 0,
+              "hallucinatedEndpoints": [
+                "POST /graphql"
+              ],
+              "complete": false
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 0,
+          "representationAccuracy": 0,
+          "replayAccuracy": 0,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 0,
+          "score": 0
+        },
+        "responseId": "86RbavyvJb25vr0P8uru-Q0"
+      },
+      "automation": {
+        "promptTokens": 329,
+        "outputTokens": 389,
+        "score": {
+          "accepted": false,
+          "checks": {
+            "reviewCount": false,
+            "ratingSum": false,
+            "cursorFlow": false
+          },
+          "exactAccepted": false,
+          "semanticAccepted": false
+        },
+        "exitCode": 0,
+        "requestCount": 1,
+        "literalRouteMatches": [],
+        "responseId": "9qRbaq6aDdbK1e8Pr5Py4A0"
+      }
+    },
+    {
+      "target": "webscraping-graphql",
+      "targetLabel": "web-scraping.dev GraphQL pagination",
+      "arm": "raw",
+      "evidenceChars": 30516,
+      "contract": {
+        "promptTokens": 11116,
+        "outputTokens": 818,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 1,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 85,
+          "cases": [
+            {
+              "caseId": "webscraping-graphql",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "-aRbaoPBFvqEvr0P09jcqA4"
+      },
+      "automation": {
+        "promptTokens": 11135,
+        "outputTokens": 534,
+        "score": {
+          "accepted": false,
+          "checks": {
+            "reviewCount": false,
+            "ratingSum": false,
+            "cursorFlow": false
+          },
+          "exactAccepted": false,
+          "semanticAccepted": false
+        },
+        "exitCode": 1,
+        "requestCount": 0,
+        "literalRouteMatches": [
+          "/api/graphql"
+        ],
+        "responseId": "_KRbariyGNuQvr0Prtmh6A0"
+      }
+    },
+    {
+      "target": "webscraping-graphql",
+      "targetLabel": "web-scraping.dev GraphQL pagination",
+      "arm": "features",
+      "evidenceChars": 9890,
+      "contract": {
+        "promptTokens": 2893,
+        "outputTokens": 965,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 1,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 85,
+          "cases": [
+            {
+              "caseId": "webscraping-graphql",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "_6RbaoUb1J2ixQ-fwNnpDQ"
+      },
+      "automation": {
+        "promptTokens": 2912,
+        "outputTokens": 537,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "reviewCount": true,
+            "ratingSum": true,
+            "cursorFlow": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 2,
+        "literalRouteMatches": [
+          "/api/graphql"
+        ],
+        "responseId": "AqVbar_BIfPR1e8PtfmPqQ4"
+      }
+    },
+    {
+      "target": "webscraping-graphql",
+      "targetLabel": "web-scraping.dev GraphQL pagination",
+      "arm": "raw-features",
+      "evidenceChars": 17777,
+      "contract": {
+        "promptTokens": 5688,
+        "outputTokens": 806,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 1,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 85,
+          "cases": [
+            {
+              "caseId": "webscraping-graphql",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "B6Vbap-oHqO8vr0Pge6byQ4"
+      },
+      "automation": {
+        "promptTokens": 5707,
+        "outputTokens": 526,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "reviewCount": true,
+            "ratingSum": true,
+            "cursorFlow": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 2,
+        "literalRouteMatches": [
+          "/api/graphql"
+        ],
+        "responseId": "CqVbauTAJYmgvr0PiKSs8Q0"
+      }
+    },
+    {
+      "target": "testpages-calculator",
+      "targetLabel": "TestPages internal calculator API",
+      "arm": "none",
+      "evidenceChars": 94,
+      "contract": {
+        "promptTokens": 329,
+        "outputTokens": 696,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 0,
+          "endpointPrecision": 0,
+          "endpointRecall": 0,
+          "endpointF1": 0,
+          "exactStatusAccuracy": 0,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 1,
+          "qualityScore": 0,
+          "cases": [
+            {
+              "caseId": "testpages-calculator",
+              "endpointRecall": 0,
+              "endpointPrecision": 0,
+              "exactStatusAccuracy": 0,
+              "hallucinatedEndpoints": [
+                "POST /apps/server-side-calculator/calculate.php"
+              ],
+              "complete": false
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 0,
+          "representationAccuracy": 0,
+          "replayAccuracy": 0,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 0,
+          "score": 0
+        },
+        "responseId": "D6Vbat_6GILN1e8Phenf-Qw"
+      },
+      "automation": {
+        "promptTokens": 351,
+        "outputTokens": 336,
+        "score": {
+          "accepted": false,
+          "checks": {
+            "allCalculations": false
+          },
+          "exactAccepted": false,
+          "semanticAccepted": false
+        },
+        "exitCode": 0,
+        "requestCount": 3,
+        "literalRouteMatches": [],
+        "responseId": "EaVbao2bMsqqvr0Plo7GsA4"
+      }
+    },
+    {
+      "target": "testpages-calculator",
+      "targetLabel": "TestPages internal calculator API",
+      "arm": "raw",
+      "evidenceChars": 6264,
+      "contract": {
+        "promptTokens": 2202,
+        "outputTokens": 690,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 1,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 85,
+          "cases": [
+            {
+              "caseId": "testpages-calculator",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "FaVbatevCYuT1e8P6qGL4A0"
+      },
+      "automation": {
+        "promptTokens": 2224,
+        "outputTokens": 347,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "allCalculations": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 3,
+        "literalRouteMatches": [
+          "/internalapi/simple-calculator"
+        ],
+        "responseId": "F6VbauqeMuKIosUP4OCk6A0"
+      }
+    },
+    {
+      "target": "testpages-calculator",
+      "targetLabel": "TestPages internal calculator API",
+      "arm": "features",
+      "evidenceChars": 5755,
+      "contract": {
+        "promptTokens": 1695,
+        "outputTokens": 747,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 1,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 85,
+          "cases": [
+            {
+              "caseId": "testpages-calculator",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "G6VbaqDFBPO5vr0Pj4KU2Q0"
+      },
+      "automation": {
+        "promptTokens": 1717,
+        "outputTokens": 352,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "allCalculations": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 3,
+        "literalRouteMatches": [
+          "/internalapi/simple-calculator"
+        ],
+        "responseId": "HaVbaqLrLJPk1e8P4Y2dkA4"
+      }
+    },
+    {
+      "target": "testpages-calculator",
+      "targetLabel": "TestPages internal calculator API",
+      "arm": "raw-features",
+      "evidenceChars": 11963,
+      "contract": {
+        "promptTokens": 3586,
+        "outputTokens": 631,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 1,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 85,
+          "cases": [
+            {
+              "caseId": "testpages-calculator",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "IKVbapmGNaTT1e8P_7TT2A0"
+      },
+      "automation": {
+        "promptTokens": 3608,
+        "outputTokens": 380,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "allCalculations": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 3,
+        "literalRouteMatches": [
+          "/internalapi/simple-calculator"
+        ],
+        "responseId": "I6VbarfHE82ivr0PkPuTyQ4"
+      }
+    },
+    {
+      "target": "testpages-products",
+      "targetLabel": "TestPages product count/list/detail",
+      "arm": "none",
+      "evidenceChars": 94,
+      "contract": {
+        "promptTokens": 311,
+        "outputTokens": 309,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 0,
+          "endpointPrecision": 0,
+          "endpointRecall": 0,
+          "endpointF1": 0,
+          "exactStatusAccuracy": 0,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 10,
+          "cases": [
+            {
+              "caseId": "testpages-products",
+              "endpointRecall": 0,
+              "endpointPrecision": 0,
+              "exactStatusAccuracy": 0,
+              "hallucinatedEndpoints": [],
+              "complete": false
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 0,
+          "representationAccuracy": 0,
+          "replayAccuracy": 0,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 0
+        },
+        "responseId": "JqVbaoDqDL6ivr0P1J-euA4"
+      },
+      "automation": {
+        "promptTokens": 333,
+        "outputTokens": 320,
+        "score": {
+          "accepted": false,
+          "checks": {
+            "count": false,
+            "selectedId": false,
+            "selectedTitle": false,
+            "detailTitleMatches": false
+          },
+          "exactAccepted": false,
+          "semanticAccepted": false
+        },
+        "exitCode": 0,
+        "requestCount": 1,
+        "literalRouteMatches": [],
+        "responseId": "J6Vbas2IN4Kzvr0PwpursQ4"
+      }
+    },
+    {
+      "target": "testpages-products",
+      "targetLabel": "TestPages product count/list/detail",
+      "arm": "raw",
+      "evidenceChars": 25424,
+      "contract": {
+        "promptTokens": 7087,
+        "outputTokens": 943,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0.846,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 82.69,
+          "cases": [
+            {
+              "caseId": "testpages-products",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 0,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 77.78
+        },
+        "responseId": "KqVbavWxGIyTvr0P2vbt4Q0"
+      },
+      "automation": {
+        "promptTokens": 7109,
+        "outputTokens": 412,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "count": true,
+            "selectedId": true,
+            "selectedTitle": true,
+            "detailTitleMatches": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 3,
+        "literalRouteMatches": [
+          "/api/basicstore/products/count",
+          "/api/basicstore/products"
+        ],
+        "responseId": "LaVbaraLM7ik1e8P7pS-8Q0"
+      }
+    },
+    {
+      "target": "testpages-products",
+      "targetLabel": "TestPages product count/list/detail",
+      "arm": "features",
+      "evidenceChars": 23830,
+      "contract": {
+        "promptTokens": 6138,
+        "outputTokens": 1056,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0.846,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 82.69,
+          "cases": [
+            {
+              "caseId": "testpages-products",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "MKVbaqSvOIuxvr0P2aCM4A0"
+      },
+      "automation": {
+        "promptTokens": 6160,
+        "outputTokens": 417,
+        "score": {
+          "accepted": true,
+          "checks": {
+            "count": true,
+            "selectedId": true,
+            "selectedTitle": true,
+            "detailTitleMatches": true
+          },
+          "exactAccepted": true,
+          "semanticAccepted": true
+        },
+        "exitCode": 0,
+        "requestCount": 3,
+        "literalRouteMatches": [
+          "/api/basicstore/products/count",
+          "/api/basicstore/products",
+          "/api/basicstore/products/:id"
+        ],
+        "responseId": "NKVbaozxH-HAvr0Pn_GG8Q0"
+      }
+    },
+    {
+      "target": "testpages-products",
+      "targetLabel": "TestPages product count/list/detail",
+      "arm": "raw-features",
+      "evidenceChars": 31796,
+      "contract": {
+        "promptTokens": 8301,
+        "outputTokens": 1084,
+        "evaluation": {
+          "caseCount": 1,
+          "completeCaseRate": 1,
+          "endpointPrecision": 1,
+          "endpointRecall": 1,
+          "endpointF1": 1,
+          "exactStatusAccuracy": 1,
+          "requestFieldRecall": 0,
+          "responseFieldRecall": 0.846,
+          "hallucinatedEndpoints": 0,
+          "qualityScore": 82.69,
+          "cases": [
+            {
+              "caseId": "testpages-products",
+              "endpointRecall": 1,
+              "endpointPrecision": 1,
+              "exactStatusAccuracy": 1,
+              "hallucinatedEndpoints": [],
+              "complete": true
+            }
+          ]
+        },
+        "executableReadiness": {
+          "endpointCoverage": 1,
+          "representationAccuracy": 1,
+          "replayAccuracy": 1,
+          "flowAccuracy": 1,
+          "repeatedWorkflowAccuracy": 1,
+          "score": 100
+        },
+        "responseId": "N6VbapP3NeKe1e8P44GkgQ0"
+      },
+      "automation": {
+        "promptTokens": 8323,
+        "outputTokens": 396,
+        "score": {
+          "accepted": false,
+          "checks": {
+            "count": false,
+            "selectedId": false,
+            "selectedTitle": false,
+            "detailTitleMatches": false
+          },
+          "exactAccepted": false,
+          "semanticAccepted": false
+        },
+        "exitCode": 1,
+        "requestCount": 0,
+        "literalRouteMatches": [
+          "/api/basicstore/products/count",
+          "/api/basicstore/products",
+          "/api/basicstore/products/:id"
+        ],
+        "responseId": "PKVbaoP6A-WM1e8PxLymqQ0"
+      }
+    }
+  ],
+  "cleanTargetIds": [
+    "quickmock-relay",
+    "tryscrapeme-ajax",
+    "webscraping-graphql",
+    "testpages-calculator",
+    "testpages-products"
+  ],
+  "aggregates": [
+    {
+      "arm": "none",
+      "targets": 5,
+      "meanContractQuality": 6,
+      "meanExecutableReadiness": 0,
+      "meanEndpointF1": 0,
+      "exactStatusAccuracy": 0,
+      "automationPassRate": 0,
+      "exactAutomationPassRate": 0,
+      "semanticAutomationPassRate": 0,
+      "contractPromptTokens": 1553,
+      "automationPromptTokens": 1651,
+      "promptTokens": 3204,
+      "meanPromptTokensPerTarget": 640.8,
+      "contractQualityPer1kPromptTokens": 19.32
+    },
+    {
+      "arm": "raw",
+      "targets": 5,
+      "meanContractQuality": 83.04,
+      "meanExecutableReadiness": 95.56,
+      "meanEndpointF1": 1,
+      "exactStatusAccuracy": 1,
+      "automationPassRate": 0.8,
+      "exactAutomationPassRate": 0.8,
+      "semanticAutomationPassRate": 0.8,
+      "contractPromptTokens": 27619,
+      "automationPromptTokens": 27717,
+      "promptTokens": 55336,
+      "meanPromptTokensPerTarget": 11067.2,
+      "contractQualityPer1kPromptTokens": 15.03
+    },
+    {
+      "arm": "features",
+      "targets": 5,
+      "meanContractQuality": 83.04,
+      "meanExecutableReadiness": 100,
+      "meanEndpointF1": 1,
+      "exactStatusAccuracy": 1,
+      "automationPassRate": 1,
+      "exactAutomationPassRate": 1,
+      "semanticAutomationPassRate": 1,
+      "contractPromptTokens": 16906,
+      "automationPromptTokens": 17004,
+      "promptTokens": 33910,
+      "meanPromptTokensPerTarget": 6782,
+      "contractQualityPer1kPromptTokens": 24.56
+    },
+    {
+      "arm": "raw-features",
+      "targets": 5,
+      "meanContractQuality": 83.04,
+      "meanExecutableReadiness": 100,
+      "meanEndpointF1": 1,
+      "exactStatusAccuracy": 1,
+      "automationPassRate": 0.8,
+      "exactAutomationPassRate": 0.8,
+      "semanticAutomationPassRate": 0.8,
+      "contractPromptTokens": 28692,
+      "automationPromptTokens": 28790,
+      "promptTokens": 57482,
+      "meanPromptTokensPerTarget": 11496.4,
+      "contractQualityPer1kPromptTokens": 14.47
+    }
+  ],
+  "cleanAggregates": [
+    {
+      "arm": "none",
+      "targets": 5,
+      "meanContractQuality": 6,
+      "meanExecutableReadiness": 0,
+      "meanEndpointF1": 0,
+      "exactStatusAccuracy": 0,
+      "automationPassRate": 0,
+      "exactAutomationPassRate": 0,
+      "semanticAutomationPassRate": 0,
+      "contractPromptTokens": 1553,
+      "automationPromptTokens": 1651,
+      "promptTokens": 3204,
+      "meanPromptTokensPerTarget": 640.8,
+      "contractQualityPer1kPromptTokens": 19.32
+    },
+    {
+      "arm": "raw",
+      "targets": 5,
+      "meanContractQuality": 83.04,
+      "meanExecutableReadiness": 95.56,
+      "meanEndpointF1": 1,
+      "exactStatusAccuracy": 1,
+      "automationPassRate": 0.8,
+      "exactAutomationPassRate": 0.8,
+      "semanticAutomationPassRate": 0.8,
+      "contractPromptTokens": 27619,
+      "automationPromptTokens": 27717,
+      "promptTokens": 55336,
+      "meanPromptTokensPerTarget": 11067.2,
+      "contractQualityPer1kPromptTokens": 15.03
+    },
+    {
+      "arm": "features",
+      "targets": 5,
+      "meanContractQuality": 83.04,
+      "meanExecutableReadiness": 100,
+      "meanEndpointF1": 1,
+      "exactStatusAccuracy": 1,
+      "automationPassRate": 1,
+      "exactAutomationPassRate": 1,
+      "semanticAutomationPassRate": 1,
+      "contractPromptTokens": 16906,
+      "automationPromptTokens": 17004,
+      "promptTokens": 33910,
+      "meanPromptTokensPerTarget": 6782,
+      "contractQualityPer1kPromptTokens": 24.56
+    },
+    {
+      "arm": "raw-features",
+      "targets": 5,
+      "meanContractQuality": 83.04,
+      "meanExecutableReadiness": 100,
+      "meanEndpointF1": 1,
+      "exactStatusAccuracy": 1,
+      "automationPassRate": 0.8,
+      "exactAutomationPassRate": 0.8,
+      "semanticAutomationPassRate": 0.8,
+      "contractPromptTokens": 28692,
+      "automationPromptTokens": 28790,
+      "promptTokens": 57482,
+      "meanPromptTokensPerTarget": 11496.4,
+      "contractQualityPer1kPromptTokens": 14.47
+    }
+  ]
+}

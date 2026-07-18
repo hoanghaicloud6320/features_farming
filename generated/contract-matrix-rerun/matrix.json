@@ -1,0 +1,4960 @@
+{
+  "schemaVersion": 1,
+  "benchmark": "all-versions-contract-generation",
+  "generatedAt": "2026-07-18T10:28:48.780Z",
+  "model": "gemini-3.1-flash-lite",
+  "suites": [
+    {
+      "id": "v1",
+      "label": "Gym V1 diagnostic",
+      "cases": 3
+    },
+    {
+      "id": "v2",
+      "label": "Gym V2 diagnostic",
+      "cases": 3
+    },
+    {
+      "id": "v3",
+      "label": "Gym V3 canonical",
+      "cases": 3
+    },
+    {
+      "id": "v4",
+      "label": "Gym V4 noise",
+      "cases": 1
+    },
+    {
+      "id": "v5",
+      "label": "Gym V5",
+      "cases": 12
+    },
+    {
+      "id": "v6",
+      "label": "Gym V6",
+      "cases": 21
+    },
+    {
+      "id": "v7",
+      "label": "Gym V7",
+      "cases": 40
+    },
+    {
+      "id": "v8",
+      "label": "Gym V8",
+      "cases": 25
+    },
+    {
+      "id": "keymanager",
+      "label": "KeyManager",
+      "cases": 1
+    }
+  ],
+  "runs": [
+    {
+      "suite": "v1",
+      "suiteLabel": "Gym V1 diagnostic",
+      "arm": "none",
+      "seed": 101001,
+      "evidenceChars": 203,
+      "latencyMs": 1364,
+      "usage": {
+        "promptTokens": 218,
+        "outputTokens": 221,
+        "totalTokens": 439
+      },
+      "tokenEfficiency": 45.87,
+      "tokensPerCase": 72.7,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0,
+        "endpointRecall": 0,
+        "endpointF1": 0,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0,
+        "responseFieldRecall": 0,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 10,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "R1Jbau7YB4LN1e8Phenf-Qw"
+    },
+    {
+      "suite": "v1",
+      "suiteLabel": "Gym V1 diagnostic",
+      "arm": "raw",
+      "seed": 101001,
+      "evidenceChars": 1642,
+      "latencyMs": 3285,
+      "usage": {
+        "promptTokens": 572,
+        "outputTokens": 981,
+        "totalTokens": 1553
+      },
+      "tokenEfficiency": 124.74,
+      "tokensPerCase": 190.7,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 0,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0.423,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 71.35,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "SFJbaqieD4m4vr0PwsaB4Q0"
+    },
+    {
+      "suite": "v1",
+      "suiteLabel": "Gym V1 diagnostic",
+      "arm": "features",
+      "seed": 101001,
+      "evidenceChars": 3899,
+      "latencyMs": 3830,
+      "usage": {
+        "promptTokens": 1206,
+        "outputTokens": 1245,
+        "totalTokens": 2451
+      },
+      "tokenEfficiency": 82.92,
+      "tokensPerCase": 402,
+      "completeCasesPer1kTokens": 2.488,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 100,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "S1JbaoL_LaWA1e8PrbTqEA"
+    },
+    {
+      "suite": "v1",
+      "suiteLabel": "Gym V1 diagnostic",
+      "arm": "raw-features",
+      "seed": 101001,
+      "evidenceChars": 5338,
+      "latencyMs": 3736,
+      "usage": {
+        "promptTokens": 1560,
+        "outputTokens": 1243,
+        "totalTokens": 2803
+      },
+      "tokenEfficiency": 51.28,
+      "tokensPerCase": 520,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 0,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 80,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "T1JbaoX1IfqEvr0P09jcqA4"
+    },
+    {
+      "suite": "v2",
+      "suiteLabel": "Gym V2 diagnostic",
+      "arm": "none",
+      "seed": 102001,
+      "evidenceChars": 203,
+      "latencyMs": 1235,
+      "usage": {
+        "promptTokens": 218,
+        "outputTokens": 244,
+        "totalTokens": 462
+      },
+      "tokenEfficiency": 45.87,
+      "tokensPerCase": 72.7,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0,
+        "endpointRecall": 0,
+        "endpointF1": 0,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0,
+        "responseFieldRecall": 0,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 10,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "U1JbaqayBt6i9tMP4viEsQ0"
+    },
+    {
+      "suite": "v2",
+      "suiteLabel": "Gym V2 diagnostic",
+      "arm": "raw",
+      "seed": 102001,
+      "evidenceChars": 1642,
+      "latencyMs": 3222,
+      "usage": {
+        "promptTokens": 572,
+        "outputTokens": 1014,
+        "totalTokens": 1586
+      },
+      "tokenEfficiency": 124.74,
+      "tokensPerCase": 190.7,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 0,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0.423,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 71.35,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "VFJbauzfFOWM1e8PxLymqQ0"
+    },
+    {
+      "suite": "v2",
+      "suiteLabel": "Gym V2 diagnostic",
+      "arm": "features",
+      "seed": 102001,
+      "evidenceChars": 3899,
+      "latencyMs": 3927,
+      "usage": {
+        "promptTokens": 1206,
+        "outputTokens": 1244,
+        "totalTokens": 2450
+      },
+      "tokenEfficiency": 82.92,
+      "tokensPerCase": 402,
+      "completeCasesPer1kTokens": 2.488,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 100,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "V1JbaofMLouxvr0P2aCM4A0"
+    },
+    {
+      "suite": "v2",
+      "suiteLabel": "Gym V2 diagnostic",
+      "arm": "raw-features",
+      "seed": 102001,
+      "evidenceChars": 5338,
+      "latencyMs": 3726,
+      "usage": {
+        "promptTokens": 1560,
+        "outputTokens": 1246,
+        "totalTokens": 2806
+      },
+      "tokenEfficiency": 51.28,
+      "tokensPerCase": 520,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 0,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 80,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "W1JbaqzIHuKIosUP4OCk6A0"
+    },
+    {
+      "suite": "v3",
+      "suiteLabel": "Gym V3 canonical",
+      "arm": "none",
+      "seed": 103001,
+      "evidenceChars": 203,
+      "latencyMs": 1244,
+      "usage": {
+        "promptTokens": 218,
+        "outputTokens": 246,
+        "totalTokens": 464
+      },
+      "tokenEfficiency": 45.87,
+      "tokensPerCase": 72.7,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0,
+        "endpointRecall": 0,
+        "endpointF1": 0,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0,
+        "responseFieldRecall": 0,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 10,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "X1JbatWlDe_m1e8Pp8HLqA4"
+    },
+    {
+      "suite": "v3",
+      "suiteLabel": "Gym V3 canonical",
+      "arm": "raw",
+      "seed": 103001,
+      "evidenceChars": 1642,
+      "latencyMs": 3114,
+      "usage": {
+        "promptTokens": 572,
+        "outputTokens": 1004,
+        "totalTokens": 1576
+      },
+      "tokenEfficiency": 124.74,
+      "tokensPerCase": 190.7,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 0,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0.423,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 71.35,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "YFJbaorlHLqgvr0PtZWeyQ4"
+    },
+    {
+      "suite": "v3",
+      "suiteLabel": "Gym V3 canonical",
+      "arm": "features",
+      "seed": 103001,
+      "evidenceChars": 3899,
+      "latencyMs": 3834,
+      "usage": {
+        "promptTokens": 1206,
+        "outputTokens": 1259,
+        "totalTokens": 2465
+      },
+      "tokenEfficiency": 82.92,
+      "tokensPerCase": 402,
+      "completeCasesPer1kTokens": 2.488,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 100,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "Y1JbaojPJbH_1e8P57LTsQ4"
+    },
+    {
+      "suite": "v3",
+      "suiteLabel": "Gym V3 canonical",
+      "arm": "raw-features",
+      "seed": 103001,
+      "evidenceChars": 5338,
+      "latencyMs": 4139,
+      "usage": {
+        "promptTokens": 1560,
+        "outputTokens": 1235,
+        "totalTokens": 2795
+      },
+      "tokenEfficiency": 51.28,
+      "tokensPerCase": 520,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 3,
+        "completeCaseRate": 0,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 80,
+        "cases": [
+          {
+            "caseId": "easy",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "medium",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "Z1JbapKaHrrw1e8PoZn2gAc"
+    },
+    {
+      "suite": "v4",
+      "suiteLabel": "Gym V4 noise",
+      "arm": "none",
+      "seed": 104001,
+      "evidenceChars": 84,
+      "latencyMs": 1238,
+      "usage": {
+        "promptTokens": 182,
+        "outputTokens": 162,
+        "totalTokens": 344
+      },
+      "tokenEfficiency": 54.95,
+      "tokensPerCase": 182,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 1,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0,
+        "endpointRecall": 0,
+        "endpointF1": 0,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0,
+        "responseFieldRecall": 0,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 10,
+        "cases": [
+          {
+            "caseId": "noise",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "a1Jbat6LIo_s1e8Pza_p4A0"
+    },
+    {
+      "suite": "v4",
+      "suiteLabel": "Gym V4 noise",
+      "arm": "raw",
+      "seed": 104001,
+      "evidenceChars": 1028,
+      "latencyMs": 2282,
+      "usage": {
+        "promptTokens": 422,
+        "outputTokens": 608,
+        "totalTokens": 1030
+      },
+      "tokenEfficiency": 129.15,
+      "tokensPerCase": 422,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 1,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0.667,
+        "endpointRecall": 1,
+        "endpointF1": 0.8,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0.5,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 1,
+        "qualityScore": 54.5,
+        "cases": [
+          {
+            "caseId": "noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [
+              "POST /api/events"
+            ],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "bFJbaqqBMqSm1e8PjazQ6Q0"
+    },
+    {
+      "suite": "v4",
+      "suiteLabel": "Gym V4 noise",
+      "arm": "features",
+      "seed": 104001,
+      "evidenceChars": 1411,
+      "latencyMs": 2279,
+      "usage": {
+        "promptTokens": 544,
+        "outputTokens": 652,
+        "totalTokens": 1196
+      },
+      "tokenEfficiency": 183.82,
+      "tokensPerCase": 544,
+      "completeCasesPer1kTokens": 1.838,
+      "evaluation": {
+        "caseCount": 1,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 100,
+        "cases": [
+          {
+            "caseId": "noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "b1Jbau-iBIyTvr0P2vbt4Q0"
+    },
+    {
+      "suite": "v4",
+      "suiteLabel": "Gym V4 noise",
+      "arm": "raw-features",
+      "seed": 104001,
+      "evidenceChars": 2355,
+      "latencyMs": 2387,
+      "usage": {
+        "promptTokens": 784,
+        "outputTokens": 632,
+        "totalTokens": 1416
+      },
+      "tokenEfficiency": 69.52,
+      "tokensPerCase": 784,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 1,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0.667,
+        "endpointRecall": 1,
+        "endpointF1": 0.8,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0.5,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 1,
+        "qualityScore": 54.5,
+        "cases": [
+          {
+            "caseId": "noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [
+              "POST /api/events"
+            ],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "cVJbaoaTF_PR1e8PtfmPqQ4"
+    },
+    {
+      "suite": "v5",
+      "suiteLabel": "Gym V5",
+      "arm": "none",
+      "seed": 105001,
+      "evidenceChars": 901,
+      "latencyMs": 2483,
+      "usage": {
+        "promptTokens": 523,
+        "outputTokens": 724,
+        "totalTokens": 1247
+      },
+      "tokenEfficiency": 19.12,
+      "tokensPerCase": 43.6,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 12,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0,
+        "endpointRecall": 0,
+        "endpointF1": 0,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0,
+        "responseFieldRecall": 0,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 10,
+        "cases": [
+          {
+            "caseId": "simple-exact-noise",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "simple-base64-noise",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "simple-case-noise",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "simple-prefix-noise",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha256-clean",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha1-clean",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard-md5-clean",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha256-nodelim-clean",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha256-noise",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha1-noise",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard-md5-noise",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha256-candidate-noise",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "c1Jbaoi3LoK6vr0PjPb8yA0"
+    },
+    {
+      "suite": "v5",
+      "suiteLabel": "Gym V5",
+      "arm": "raw",
+      "seed": 105001,
+      "evidenceChars": 12833,
+      "latencyMs": 14398,
+      "usage": {
+        "promptTokens": 3771,
+        "outputTokens": 6070,
+        "totalTokens": 9841
+      },
+      "tokenEfficiency": 17.96,
+      "tokensPerCase": 314.3,
+      "completeCasesPer1kTokens": 0.796,
+      "evaluation": {
+        "caseCount": 12,
+        "completeCaseRate": 0.25,
+        "endpointPrecision": 0.625,
+        "endpointRecall": 0.833,
+        "endpointF1": 0.714,
+        "exactStatusAccuracy": 0.833,
+        "requestFieldRecall": 0.5,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 12,
+        "qualityScore": 67.74,
+        "cases": [
+          {
+            "caseId": "simple-exact-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/simple-exact-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "simple-base64-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/simple-base64-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "simple-case-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/simple-case-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "simple-prefix-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/simple-prefix-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha256-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha1-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-md5-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha256-nodelim-clean",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [
+              "POST /api/v5/hard-sha256-nodelim-clean/open",
+              "PUT /api/v5/hard-sha256-nodelim-clean/close"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha256-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/hard-sha256-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha1-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/hard-sha1-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "hard-md5-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/hard-md5-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha256-candidate-noise",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [
+              "POST /api/v5/hard-sha256-candidate-noise/open",
+              "PATCH /api/v5/hard-sha256-candidate-noise/events",
+              "PUT /api/v5/hard-sha256-candidate-noise/close"
+            ],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "dlJbateAG_anvr0P57KdsA4"
+    },
+    {
+      "suite": "v5",
+      "suiteLabel": "Gym V5",
+      "arm": "features",
+      "seed": 105001,
+      "evidenceChars": 39025,
+      "latencyMs": 13173,
+      "usage": {
+        "promptTokens": 12210,
+        "outputTokens": 6150,
+        "totalTokens": 18360
+      },
+      "tokenEfficiency": 8.19,
+      "tokensPerCase": 1017.5,
+      "completeCasesPer1kTokens": 0.983,
+      "evaluation": {
+        "caseCount": 12,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 100,
+        "cases": [
+          {
+            "caseId": "simple-exact-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "simple-base64-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "simple-case-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "simple-prefix-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha256-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha1-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-md5-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha256-nodelim-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha256-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha1-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-md5-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha256-candidate-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "hFJbatnEMpew1e8PkJSQiQ4"
+    },
+    {
+      "suite": "v5",
+      "suiteLabel": "Gym V5",
+      "arm": "raw-features",
+      "seed": 105001,
+      "evidenceChars": 50957,
+      "latencyMs": 14919,
+      "usage": {
+        "promptTokens": 15458,
+        "outputTokens": 6075,
+        "totalTokens": 21533
+      },
+      "tokenEfficiency": 4.97,
+      "tokensPerCase": 1288.2,
+      "completeCasesPer1kTokens": 0.259,
+      "evaluation": {
+        "caseCount": 12,
+        "completeCaseRate": 0.333,
+        "endpointPrecision": 0.75,
+        "endpointRecall": 1,
+        "endpointF1": 0.857,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 0.5,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 8,
+        "qualityScore": 76.79,
+        "cases": [
+          {
+            "caseId": "simple-exact-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/simple-exact-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "simple-base64-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/simple-base64-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "simple-case-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/simple-case-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "simple-prefix-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/simple-prefix-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha256-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha1-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-md5-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha256-nodelim-clean",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "hard-sha256-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/hard-sha256-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha1-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/hard-sha1-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "hard-md5-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/hard-md5-noise/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "hard-sha256-candidate-noise",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v5/:param/events"
+            ],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "kVJbarOCPeznosUPiPftqQ4"
+    },
+    {
+      "suite": "v6",
+      "suiteLabel": "Gym V6",
+      "arm": "none",
+      "seed": 106001,
+      "evidenceChars": 1731,
+      "latencyMs": 3542,
+      "usage": {
+        "promptTokens": 1183,
+        "outputTokens": 1159,
+        "totalTokens": 2342
+      },
+      "tokenEfficiency": 8.45,
+      "tokensPerCase": 56.3,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 21,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0,
+        "endpointRecall": 0,
+        "endpointF1": 0,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0,
+        "responseFieldRecall": 0,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 10,
+        "cases": [
+          {
+            "caseId": "v6-73001-01-arbitrary-affix",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-02-affine-numeric",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-03-hmac-sha256",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-04-json-base64url",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-05-reverse-string",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-06-array-selection",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-07-semantic-siblings",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-01-arbitrary-affix",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-02-affine-numeric",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-03-hmac-sha256",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-04-json-base64url",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-05-reverse-string",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-06-array-selection",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-07-semantic-siblings",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-01-arbitrary-affix",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-02-affine-numeric",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-03-hmac-sha256",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-04-json-base64url",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-05-reverse-string",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-06-array-selection",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-07-semantic-siblings",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "oFJbasnJMYmgvr0PiKSs8Q0"
+    },
+    {
+      "suite": "v6",
+      "suiteLabel": "Gym V6",
+      "arm": "raw",
+      "seed": 106001,
+      "evidenceChars": 19167,
+      "latencyMs": 29286,
+      "usage": {
+        "promptTokens": 6903,
+        "outputTokens": 10893,
+        "totalTokens": 17796
+      },
+      "tokenEfficiency": 11.94,
+      "tokensPerCase": 328.7,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 21,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0.682,
+        "endpointRecall": 1,
+        "endpointF1": 0.811,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 21,
+        "qualityScore": 82.43,
+        "cases": [
+          {
+            "caseId": "v6-73001-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/bixuvo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/zajoza/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/nyjovo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/jofecy/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/jorucy/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/bikaru/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73001-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/kaporu/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/kazafe/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/joqega/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/qejoza/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/karuvo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/kawiqe/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/zaxuny/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73019-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/qejovo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/fefeny/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/rufeka/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/xufejo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/pocybi/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/gabika/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/zaxufe/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-73043-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/cyvoqe/events"
+            ],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "pFJbatLmILik1e8P7pS-8Q0"
+    },
+    {
+      "suite": "v6",
+      "suiteLabel": "Gym V6",
+      "arm": "features",
+      "seed": 106001,
+      "evidenceChars": 47862,
+      "latencyMs": 24979,
+      "usage": {
+        "promptTokens": 15729,
+        "outputTokens": 9833,
+        "totalTokens": 25562
+      },
+      "tokenEfficiency": 6.36,
+      "tokensPerCase": 749,
+      "completeCasesPer1kTokens": 1.335,
+      "evaluation": {
+        "caseCount": 21,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 100,
+        "cases": [
+          {
+            "caseId": "v6-73001-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "wVJbapGNL8mB1e8Pgc2ayQ8"
+    },
+    {
+      "suite": "v6",
+      "suiteLabel": "Gym V6",
+      "arm": "raw-features",
+      "seed": 106001,
+      "evidenceChars": 65298,
+      "latencyMs": 19752,
+      "usage": {
+        "promptTokens": 21449,
+        "outputTokens": 7858,
+        "totalTokens": 29307
+      },
+      "tokenEfficiency": 4.19,
+      "tokensPerCase": 1021.4,
+      "completeCasesPer1kTokens": 0.979,
+      "evaluation": {
+        "caseCount": 21,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 0.326,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 89.89,
+        "cases": [
+          {
+            "caseId": "v6-73001-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73001-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73019-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-73043-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "2lJbaonPMOLU1e8PwNzR4A0"
+    },
+    {
+      "suite": "v7",
+      "suiteLabel": "Gym V7",
+      "arm": "none",
+      "seed": 107001,
+      "evidenceChars": 3294,
+      "latencyMs": 6203,
+      "usage": {
+        "promptTokens": 2093,
+        "outputTokens": 1989,
+        "totalTokens": 4082
+      },
+      "tokenEfficiency": 4.78,
+      "tokensPerCase": 52.3,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 40,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0,
+        "endpointRecall": 0,
+        "endpointF1": 0,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0,
+        "responseFieldRecall": 0,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 10,
+        "cases": [
+          {
+            "caseId": "v6-81017-01-arbitrary-affix",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-02-affine-numeric",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-03-hmac-sha256",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-04-json-base64url",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-05-reverse-string",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-06-array-selection",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-07-semantic-siblings",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v7-81017-08-character-rotation",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-01-arbitrary-affix",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-02-affine-numeric",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-03-hmac-sha256",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-04-json-base64url",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-05-reverse-string",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-06-array-selection",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-07-semantic-siblings",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v7-81037-08-character-rotation",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-01-arbitrary-affix",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-02-affine-numeric",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-03-hmac-sha256",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-04-json-base64url",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-05-reverse-string",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-06-array-selection",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-07-semantic-siblings",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v7-81061-08-character-rotation",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-01-arbitrary-affix",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-02-affine-numeric",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-03-hmac-sha256",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-04-json-base64url",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-05-reverse-string",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-06-array-selection",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-07-semantic-siblings",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v7-81083-08-character-rotation",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-01-arbitrary-affix",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-02-affine-numeric",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-03-hmac-sha256",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-04-json-base64url",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-05-reverse-string",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-06-array-selection",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-07-semantic-siblings",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v7-81101-08-character-rotation",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "7lJbauGAHoiOosUP0crduA4"
+    },
+    {
+      "suite": "v7",
+      "suiteLabel": "Gym V7",
+      "arm": "raw",
+      "seed": 107001,
+      "evidenceChars": 36649,
+      "latencyMs": 50750,
+      "usage": {
+        "promptTokens": 13035,
+        "outputTokens": 20446,
+        "totalTokens": 33481
+      },
+      "tokenEfficiency": 6.32,
+      "tokensPerCase": 325.9,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 40,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0.68,
+        "endpointRecall": 1,
+        "endpointF1": 0.81,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 40,
+        "qualityScore": 82.38,
+        "cases": [
+          {
+            "caseId": "v6-81017-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/zakaru/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/binyxu/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/fevoxu/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/wipobi/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/cykaga/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/pocyqe/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81017-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/cyqepo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v7-81017-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v7/:param/wzsnkxaz/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/vokafe/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/pojoqe/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/ruqewi/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/vocyvo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/vogajo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/nyfebi/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81037-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/wiqeqe/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v7-81037-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v7/:param/scfawaxu/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/kakaru/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/rufexu/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/jonyxu/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/vogaza/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/ruwijo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/wicycy/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81061-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/joqeza/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v7-81061-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v7/:param/cmsmfyfy/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/bipoza/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/rubiga/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/fevofe/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/nycypo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/nyruvo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/cywife/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81083-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/ganyga/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v7-81083-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v7/:param/jfjjlecu/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/nyruka/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/xuqexu/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/fexuvo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/winyga/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/vobiqe/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/poxufe/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v6-81101-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/gawicy/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v7-81101-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.667,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v7/:param/qfqcqglv/events"
+            ],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "9FJbas6hK6q9vr0PvKSxwA4"
+    },
+    {
+      "suite": "v7",
+      "suiteLabel": "Gym V7",
+      "arm": "features",
+      "seed": 107001,
+      "evidenceChars": 89597,
+      "latencyMs": 50156,
+      "usage": {
+        "promptTokens": 29259,
+        "outputTokens": 18601,
+        "totalTokens": 47860
+      },
+      "tokenEfficiency": 3.42,
+      "tokensPerCase": 731.5,
+      "completeCasesPer1kTokens": 1.367,
+      "evaluation": {
+        "caseCount": 40,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 100,
+        "cases": [
+          {
+            "caseId": "v6-81017-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v7-81017-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v7-81037-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v7-81061-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v7-81083-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v7-81101-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "J1NbasaVH-y4vr0PvfqD-A0"
+    },
+    {
+      "suite": "v7",
+      "suiteLabel": "Gym V7",
+      "arm": "raw-features",
+      "seed": 107001,
+      "evidenceChars": 122952,
+      "latencyMs": 47638,
+      "usage": {
+        "promptTokens": 40201,
+        "outputTokens": 17348,
+        "totalTokens": 57549
+      },
+      "tokenEfficiency": 2.43,
+      "tokensPerCase": 1005,
+      "completeCasesPer1kTokens": 0.995,
+      "evaluation": {
+        "caseCount": 40,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 0.857,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 97.86,
+        "cases": [
+          {
+            "caseId": "v6-81017-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81017-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v7-81017-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81037-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v7-81037-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81061-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v7-81061-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81083-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v7-81083-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-01-arbitrary-affix",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-02-affine-numeric",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-03-hmac-sha256",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-04-json-base64url",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-05-reverse-string",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-06-array-selection",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v6-81101-07-semantic-siblings",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v7-81101-08-character-rotation",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "WVNbaoaLKvKU9tMPvPu6sQ4"
+    },
+    {
+      "suite": "v8",
+      "suiteLabel": "Gym V8",
+      "arm": "none",
+      "seed": 108001,
+      "evidenceChars": 2079,
+      "latencyMs": 3923,
+      "usage": {
+        "promptTokens": 1333,
+        "outputTokens": 1279,
+        "totalTokens": 2612
+      },
+      "tokenEfficiency": 7.5,
+      "tokensPerCase": 53.3,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 25,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0,
+        "endpointRecall": 0,
+        "endpointF1": 0,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0,
+        "responseFieldRecall": 0,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 10,
+        "cases": [
+          {
+            "caseId": "v8-88001-crud-dense-01",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-crud-dense-02",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-crud-dense-03",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-crud-dense-04",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-crud-dense-05",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-01",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-02",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-03",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-04",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-05",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-01",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-02",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-03",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-04",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-05",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-01",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-02",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-03",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-04",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-05",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-01",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-02",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-03",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-04",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-05",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "iVNbapmVCKu8vr0PhtCD4Q0"
+    },
+    {
+      "suite": "v8",
+      "suiteLabel": "Gym V8",
+      "arm": "raw",
+      "seed": 108001,
+      "evidenceChars": 28709,
+      "latencyMs": 46289,
+      "usage": {
+        "promptTokens": 11108,
+        "outputTokens": 17968,
+        "totalTokens": 29076
+      },
+      "tokenEfficiency": 7.68,
+      "tokensPerCase": 444.3,
+      "completeCasesPer1kTokens": 0.45,
+      "evaluation": {
+        "caseCount": 25,
+        "completeCaseRate": 0.2,
+        "endpointPrecision": 0.846,
+        "endpointRecall": 1,
+        "endpointF1": 0.917,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 0.912,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 20,
+        "qualityScore": 85.34,
+        "cases": [
+          {
+            "caseId": "v8-88001-crud-dense-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-optional-session-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/gkspnyvj/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/ldtxomew/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/qrbfbsit/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/vglcylsd/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/cleaknyh/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/radxnroq/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/xcozlfsg/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/itkvopza/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/jurwoaex/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/agnbeuqz/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/ojvkjihs/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/eprhbnyf/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/gqnmfgzb/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/ndafrvnz/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/kcduvacm/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.833,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/gvscpyzo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.833,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/phafkcch/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.833,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/wzyylxzk/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.833,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/hghkbwei/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.833,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/bevqkanz/events"
+            ],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "jVNbasSXD5Ke1e8P5b6G6A0"
+    },
+    {
+      "suite": "v8",
+      "suiteLabel": "Gym V8",
+      "arm": "features",
+      "seed": 108001,
+      "evidenceChars": 70474,
+      "latencyMs": 45211,
+      "usage": {
+        "promptTokens": 23581,
+        "outputTokens": 16567,
+        "totalTokens": 40148
+      },
+      "tokenEfficiency": 4.24,
+      "tokensPerCase": 943.2,
+      "completeCasesPer1kTokens": 1.06,
+      "evaluation": {
+        "caseCount": 25,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 100,
+        "cases": [
+          {
+            "caseId": "v8-88001-crud-dense-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-optional-session-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-optional-session-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-optional-session-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-optional-session-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-optional-session-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-session-fanout-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-session-fanout-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-session-fanout-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-session-fanout-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-session-fanout-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "u1NbaoHsIMuB2roPhva2mA4"
+    },
+    {
+      "suite": "v8",
+      "suiteLabel": "Gym V8",
+      "arm": "raw-features",
+      "seed": 108001,
+      "evidenceChars": 97104,
+      "latencyMs": 45466,
+      "usage": {
+        "promptTokens": 33356,
+        "outputTokens": 19528,
+        "totalTokens": 52884
+      },
+      "tokenEfficiency": 2.6,
+      "tokensPerCase": 1334.2,
+      "completeCasesPer1kTokens": 0.15,
+      "evaluation": {
+        "caseCount": 25,
+        "completeCaseRate": 0.2,
+        "endpointPrecision": 0.846,
+        "endpointRecall": 1,
+        "endpointF1": 0.917,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 1,
+        "responseFieldRecall": 1,
+        "hallucinatedEndpoints": 20,
+        "qualityScore": 86.67,
+        "cases": [
+          {
+            "caseId": "v8-88001-crud-dense-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-crud-dense-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          },
+          {
+            "caseId": "v8-88001-optional-session-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/gkspnyvj/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/ldtxomew/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/qrbfbsit/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/vglcylsd/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-optional-session-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.75,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/cleaknyh/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/radxnroq/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/xcozlfsg/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/itkvopza/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/jurwoaex/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-parallel-identities-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/agnbeuqz/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/ojvkjihs/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/eprhbnyf/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/gqnmfgzb/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/ndafrvnz/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-semantic-siblings-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.8,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/kcduvacm/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-01",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.833,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/gvscpyzo/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-02",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.833,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/phafkcch/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-03",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.833,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/wzyylxzk/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-04",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.833,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/hghkbwei/events"
+            ],
+            "complete": false
+          },
+          {
+            "caseId": "v8-88001-session-fanout-05",
+            "endpointRecall": 1,
+            "endpointPrecision": 0.833,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [
+              "PATCH /api/v8/:param/bevqkanz/events"
+            ],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "6FNbapLtM7fA1e8PoIrHsA4"
+    },
+    {
+      "suite": "keymanager",
+      "suiteLabel": "KeyManager",
+      "arm": "none",
+      "seed": 109001,
+      "evidenceChars": 149,
+      "latencyMs": 1122,
+      "usage": {
+        "promptTokens": 201,
+        "outputTokens": 149,
+        "totalTokens": 350
+      },
+      "tokenEfficiency": 49.75,
+      "tokensPerCase": 201,
+      "completeCasesPer1kTokens": 0,
+      "evaluation": {
+        "caseCount": 1,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0,
+        "endpointRecall": 0,
+        "endpointF1": 0,
+        "exactStatusAccuracy": 0,
+        "requestFieldRecall": 0,
+        "responseFieldRecall": 0,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 10,
+        "cases": [
+          {
+            "caseId": "keymanager",
+            "endpointRecall": 0,
+            "endpointPrecision": 0,
+            "exactStatusAccuracy": 0,
+            "hallucinatedEndpoints": [],
+            "complete": false
+          }
+        ]
+      },
+      "responseId": "FVRbatG9O5DBvr0PzPuCuQ4"
+    },
+    {
+      "suite": "keymanager",
+      "suiteLabel": "KeyManager",
+      "arm": "raw",
+      "seed": 109001,
+      "evidenceChars": 31815,
+      "latencyMs": 3734,
+      "usage": {
+        "promptTokens": 14871,
+        "outputTokens": 1019,
+        "totalTokens": 15890
+      },
+      "tokenEfficiency": 5.23,
+      "tokensPerCase": 14871,
+      "completeCasesPer1kTokens": 0.067,
+      "evaluation": {
+        "caseCount": 1,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 0.381,
+        "responseFieldRecall": 0.133,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 77.71,
+        "cases": [
+          {
+            "caseId": "keymanager",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "F1RbaorbEeu-vr0Pg7ukuA4"
+    },
+    {
+      "suite": "keymanager",
+      "suiteLabel": "KeyManager",
+      "arm": "features",
+      "seed": 109001,
+      "evidenceChars": 24341,
+      "latencyMs": 4557,
+      "usage": {
+        "promptTokens": 6701,
+        "outputTokens": 1410,
+        "totalTokens": 8111
+      },
+      "tokenEfficiency": 12.11,
+      "tokensPerCase": 6701,
+      "completeCasesPer1kTokens": 0.149,
+      "evaluation": {
+        "caseCount": 1,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 0.476,
+        "responseFieldRecall": 0.267,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 81.14,
+        "cases": [
+          {
+            "caseId": "keymanager",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "G1Rbatr5A43o1e8Pmc_l6Q0"
+    },
+    {
+      "suite": "keymanager",
+      "suiteLabel": "KeyManager",
+      "arm": "raw-features",
+      "seed": 109001,
+      "evidenceChars": 31765,
+      "latencyMs": 4441,
+      "usage": {
+        "promptTokens": 10477,
+        "outputTokens": 1522,
+        "totalTokens": 11999
+      },
+      "tokenEfficiency": 6.68,
+      "tokensPerCase": 10477,
+      "completeCasesPer1kTokens": 0.095,
+      "evaluation": {
+        "caseCount": 1,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
+        "endpointRecall": 1,
+        "endpointF1": 1,
+        "exactStatusAccuracy": 1,
+        "requestFieldRecall": 0,
+        "responseFieldRecall": 0,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 70,
+        "cases": [
+          {
+            "caseId": "keymanager",
+            "endpointRecall": 1,
+            "endpointPrecision": 1,
+            "exactStatusAccuracy": 1,
+            "hallucinatedEndpoints": [],
+            "complete": true
+          }
+        ]
+      },
+      "responseId": "H1RbavroJbq9vr0PyZy1uA4"
+    }
+  ],
+  "aggregates": [
+    {
+      "arm": "none",
+      "runs": 9,
+      "totalCases": 109,
+      "meanQualityScore": 10,
+      "meanEndpointF1": 0,
+      "meanExactStatusAccuracy": 0,
+      "meanCompleteCaseRate": 0,
+      "meanPromptTokens": 685.4,
+      "meanLatencyMs": 2483.8,
+      "meanTokenEfficiency": 31.35,
+      "promptTokensPerCase": 56.6,
+      "completeCasesPer1kTokens": 0
+    },
+    {
+      "arm": "raw",
+      "runs": 9,
+      "totalCases": 109,
+      "meanQualityScore": 73.79,
+      "meanEndpointF1": 0.895,
+      "meanExactStatusAccuracy": 0.537,
+      "meanCompleteCaseRate": 0.161,
+      "meanPromptTokens": 5758.4,
+      "meanLatencyMs": 17373.3,
+      "meanTokenEfficiency": 61.39,
+      "promptTokensPerCase": 475.5,
+      "completeCasesPer1kTokens": 0.174
+    },
+    {
+      "arm": "features",
+      "runs": 9,
+      "totalCases": 109,
+      "meanQualityScore": 97.9,
+      "meanEndpointF1": 1,
+      "meanExactStatusAccuracy": 1,
+      "meanCompleteCaseRate": 1,
+      "meanPromptTokens": 10182.4,
+      "meanLatencyMs": 16882.9,
+      "meanTokenEfficiency": 51.88,
+      "promptTokensPerCase": 840.8,
+      "completeCasesPer1kTokens": 1.189
+    },
+    {
+      "arm": "raw-features",
+      "runs": 9,
+      "totalCases": 109,
+      "meanQualityScore": 79.52,
+      "meanEndpointF1": 0.953,
+      "meanExactStatusAccuracy": 0.556,
+      "meanCompleteCaseRate": 0.393,
+      "meanPromptTokens": 14045,
+      "meanLatencyMs": 16244.9,
+      "meanTokenEfficiency": 27.14,
+      "promptTokensPerCase": 1159.7,
+      "completeCasesPer1kTokens": 0.562
+    }
+  ]
+}

@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 1,
+  "benchmark": "keymanager-contract-multiseed",
+  "generatedAt": "2026-07-18T10:26:18.808Z",
+  "sourceRoot": "C:\\Users\\thuanvl\\Desktop\\codes\\features_farming\\generated\\keymanager-contract-ab-lineage-rerun",
+  "seeds": [
+    95501,
+    95503,
+    95507,
+    95509,
+    95521
+  ],
+  "arms": [
+    "raw",
+    "features",
+    "raw-features"
+  ],
+  "runs": [
+    {
+      "seed": 95501,
+      "arm": "raw",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "hFRbaoeHEZDBvr0PzPuCuQ4",
+      "promptTokens": 18046,
+      "contractHash": "c4f429bd706215ff",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": false,
+        "namedAdminCookie": false,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95501,
+      "arm": "features",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "iFRbarH-L-LU1e8PwNzR4A0",
+      "promptTokens": 12691,
+      "contractHash": "0f797c750797afbd",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": true,
+        "namedAdminCookie": true,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95501,
+      "arm": "raw-features",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "jVRbauHSE5m_vr0PjNud4AE",
+      "promptTokens": 16842,
+      "contractHash": "92631ce84b694df0",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": true,
+        "namedAdminCookie": true,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95503,
+      "arm": "raw",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "kVRbapvKMey4vr0PvfqD-A0",
+      "promptTokens": 18046,
+      "contractHash": "362e8cda951ec6dd",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": false,
+        "namedAdminCookie": false,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95503,
+      "arm": "features",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "llRbapGfDrD21e8Px5rU6A0",
+      "promptTokens": 12691,
+      "contractHash": "bee4ea2723050c7c",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": true,
+        "namedAdminCookie": true,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95503,
+      "arm": "raw-features",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "mlRbatKmOJew1e8PkJSQiQ4",
+      "promptTokens": 16842,
+      "contractHash": "83a0672d1fe61839",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": true,
+        "namedAdminCookie": true,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95507,
+      "arm": "raw",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "n1Rbao7JJbH_1e8P57LTsQ4",
+      "promptTokens": 18046,
+      "contractHash": "c52b49ed3821f492",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": false,
+        "namedAdminCookie": false,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95507,
+      "arm": "features",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "pFRbaqr1DPmdosUP1ZHBwQQ",
+      "promptTokens": 12691,
+      "contractHash": "22f4e47534f6d5f2",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": true,
+        "namedAdminCookie": true,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95507,
+      "arm": "raw-features",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "qFRbasCjNYeN1e8Pz4m-sQ0",
+      "promptTokens": 16842,
+      "contractHash": "1122efac146147ff",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": true,
+        "namedAdminCookie": true,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95509,
+      "arm": "raw",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "rVRbaoHWJs2ivr0PkPuTyQ4",
+      "promptTokens": 18046,
+      "contractHash": "b284c31026dccc14",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": false,
+        "namedAdminCookie": false,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95509,
+      "arm": "features",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "sVRbaomEN6nf1e8Po_G7qQ4",
+      "promptTokens": 12691,
+      "contractHash": "b1b8fe8971b25c6b",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": true,
+        "namedAdminCookie": true,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95509,
+      "arm": "raw-features",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "t1RbaqjVM725vr0P8uru-Q0",
+      "promptTokens": 16842,
+      "contractHash": "1b226ded013b5e30",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": true,
+        "namedAdminCookie": true,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95521,
+      "arm": "raw",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "u1Rbat6HO5Ke1e8P5b6G6A0",
+      "promptTokens": 18046,
+      "contractHash": "c7c3189389bc667b",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": false,
+        "namedAdminCookie": false,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95521,
+      "arm": "features",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "wVRbaoGbOO_m1e8Pp8HLqA4",
+      "promptTokens": 12691,
+      "contractHash": "d401b4180e6cda24",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": true,
+        "namedAdminCookie": true,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    },
+    {
+      "seed": 95521,
+      "arm": "raw-features",
+      "model": "gemini-3.1-flash-lite",
+      "responseId": "xlRbar-DGoLN1e8Phenf-Qw",
+      "promptTokens": 16842,
+      "contractHash": "d966380fcd7b1ce6",
+      "evaluation": {
+        "expectedEndpoints": 8,
+        "claimedEndpoints": 8,
+        "matchedEndpoints": 8,
+        "endpointCoverage": 1,
+        "hallucinatedEndpoints": [],
+        "exactStatusSets": 8,
+        "exactStatusSetAccuracy": 1
+      },
+      "behavior": {
+        "cookieAuthentication": true,
+        "namedAdminCookie": true,
+        "createToPatchDependency": true,
+        "createOrPatchToDeleteDependency": true
+      }
+    }
+  ],
+  "aggregates": [
+    {
+      "arm": "raw",
+      "runs": 5,
+      "endpointCoverage": {
+        "min": 1,
+        "mean": 1,
+        "perfectRunRate": 1
+      },
+      "exactStatusSetAccuracy": {
+        "min": 1,
+        "mean": 1,
+        "perfectRunRate": 1
+      },
+      "noHallucinationRate": 1,
+      "cookieAuthenticationRate": 0,
+      "namedAdminCookieRate": 0,
+      "createToPatchDependencyRate": 1,
+      "createOrPatchToDeleteDependencyRate": 1,
+      "promptTokens": {
+        "min": 18046,
+        "mean": 18046,
+        "max": 18046
+      },
+      "distinctContractCount": 5
+    },
+    {
+      "arm": "features",
+      "runs": 5,
+      "endpointCoverage": {
+        "min": 1,
+        "mean": 1,
+        "perfectRunRate": 1
+      },
+      "exactStatusSetAccuracy": {
+        "min": 1,
+        "mean": 1,
+        "perfectRunRate": 1
+      },
+      "noHallucinationRate": 1,
+      "cookieAuthenticationRate": 1,
+      "namedAdminCookieRate": 1,
+      "createToPatchDependencyRate": 1,
+      "createOrPatchToDeleteDependencyRate": 1,
+      "promptTokens": {
+        "min": 12691,
+        "mean": 12691,
+        "max": 12691
+      },
+      "distinctContractCount": 5
+    },
+    {
+      "arm": "raw-features",
+      "runs": 5,
+      "endpointCoverage": {
+        "min": 1,
+        "mean": 1,
+        "perfectRunRate": 1
+      },
+      "exactStatusSetAccuracy": {
+        "min": 1,
+        "mean": 1,
+        "perfectRunRate": 1
+      },
+      "noHallucinationRate": 1,
+      "cookieAuthenticationRate": 1,
+      "namedAdminCookieRate": 1,
+      "createToPatchDependencyRate": 1,
+      "createOrPatchToDeleteDependencyRate": 1,
+      "promptTokens": {
+        "min": 16842,
+        "mean": 16842,
+        "max": 16842
+      },
+      "distinctContractCount": 5
+    }
+  ]
+}

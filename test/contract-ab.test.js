@@ -11,6 +11,17 @@ const {
   behavioralChecks,
   parseSeeds,
 } = require('../scripts/run-keymanager-contract-multiseed');
+const {
+  evaluateSuite,
+  normalizePath,
+} = require('../scripts/run-contract-matrix');
+const {
+  addSemanticAutomationScore,
+  aggregateRuns,
+  evaluateExecutableReadiness,
+  literalRouteMatches,
+  validateAutomationCode,
+} = require('../scripts/run-public-no-login-benchmark');
 
 test('contract evaluator normalizes path parameters and scores statuses deterministically', () => {
   assert.equal(
@@ -88,4 +99,170 @@ test('behavioral contract checks recognize cookie auth and lifecycle dependencie
     createToPatchDependency: true,
     createOrPatchToDeleteDependency: true,
   });
+});
+
+test('all-version contract evaluator matches numeric route templates and rejects noise', () => {
+  assert.equal(normalizePath('/api/v8/88001/resource'), '/api/v8/:param/resource');
+  assert.equal(normalizePath('/api/v8/:number/resource'), '/api/v8/:param/resource');
+  const suite = {
+    cases: [{
+      id: 'case-1',
+      truth: [{
+        method: 'POST',
+        path: '/api/v8/:number/resource',
+        statuses: [201],
+        requestFields: ['label'],
+        responseFields: ['id'],
+      }],
+    }],
+  };
+  const evaluation = evaluateSuite(suite, {
+    cases: [{
+      caseId: 'case-1',
+      endpoints: [
+        {
+          method: 'POST',
+          path: '/api/v8/88001/resource',
+          observedStatuses: [201],
+          requestFields: ['label'],
+          responseFields: ['id'],
+        },
+        {
+          method: 'PATCH',
+          path: '/api/v8/88001/events',
+          observedStatuses: [202],
+          requestFields: [],
+          responseFields: [],
+        },
+      ],
+    }],
+  });
+  assert.equal(evaluation.endpointRecall, 1);
+  assert.equal(evaluation.endpointPrecision, 0.5);
+  assert.equal(evaluation.exactStatusAccuracy, 1);
+  assert.equal(evaluation.hallucinatedEndpoints, 1);
+  assert.equal(evaluation.completeCaseRate, 0);
+});
+
+test('public benchmark detects memorized routes and blocks unsafe automation', () => {
+  const definition = {
+    truth: [{ path: '/api/private/:id' }],
+  };
+  assert.deepEqual(
+    literalRouteMatches(
+      definition,
+      { cases: [{ endpoints: [{ path: '/api/private/:id' }] }] },
+      '',
+    ),
+    ['/api/private/:id'],
+  );
+  assert.throws(
+    () => validateAutomationCode(
+      "require('node:fs'); fetch('https://example.test/api')",
+      'https://example.test',
+    ),
+    /forbidden capability/,
+  );
+  assert.doesNotThrow(() => validateAutomationCode(
+    "fetch('https://example.test/api').then(console.log)",
+    'https://example.test',
+  ));
+});
+
+test('public benchmark aggregation reports effectiveness and token efficiency', () => {
+  const runs = [
+    {
+      arm: 'raw',
+      contract: {
+        promptTokens: 1000,
+        evaluation: {
+          qualityScore: 80,
+          endpointF1: 1,
+          exactStatusAccuracy: 1,
+        },
+      },
+      automation: {
+        promptTokens: 500,
+        score: { accepted: true, exactAccepted: true, semanticAccepted: true },
+      },
+    },
+    {
+      arm: 'raw',
+      contract: {
+        promptTokens: 1000,
+        evaluation: {
+          qualityScore: 60,
+          endpointF1: 0.5,
+          exactStatusAccuracy: 0.5,
+        },
+      },
+      automation: {
+        promptTokens: 500,
+        score: { accepted: false, exactAccepted: false, semanticAccepted: false },
+      },
+    },
+  ];
+  const aggregate = aggregateRuns(runs, 'raw');
+  assert.equal(aggregate.meanContractQuality, 70);
+  assert.equal(aggregate.automationPassRate, 0.5);
+  assert.equal(aggregate.meanPromptTokensPerTarget, 1500);
+  assert.equal(aggregate.contractQualityPer1kPromptTokens, 70);
+});
+
+test('public benchmark separates semantic success from exact output compliance', () => {
+  const score = addSemanticAutomationScore(
+    { id: 'tryscrapeme-ajax' },
+    { count: 10, sum: 118.94 },
+    { itemCount: 10, totalPrice: 118.94 },
+    { accepted: false, checks: { exactFields: false } },
+  );
+  assert.equal(score.semanticAccepted, true);
+  assert.equal(score.exactAccepted, false);
+});
+
+test('executable readiness checks representation, replay values and repeated flow', () => {
+  const definition = {
+    id: 'graphql',
+    executionTruth: {
+      representations: [{
+        method: 'POST',
+        path: '/api/graphql',
+        requestBodyKinds: ['json'],
+        responseBodyKinds: ['json-object'],
+        responseContentTypes: ['application/json'],
+      }],
+      replayProfiles: [{
+        endpoint: 'POST /api/graphql',
+        field: 'body.json$.variables.first',
+        observedValues: ['20'],
+      }],
+      flows: [{
+        from: 'response.body.json$.pageInfo.endCursor',
+        to: 'request.body.json$.variables.after',
+      }],
+      repeatedCalls: [{ endpoint: 'POST /api/graphql', count: 2 }],
+    },
+  };
+  const contract = {
+    cases: [{
+      caseId: 'graphql',
+      endpoints: [{
+        method: 'POST',
+        path: '/api/graphql',
+        requestBodyKinds: ['json'],
+        responseBodyKinds: ['json-object'],
+        responseContentTypes: ['application/json'],
+      }],
+      replayProfiles: [{
+        endpoint: 'POST /api/graphql',
+        field: 'body.json$.variables.first',
+        observedValues: ['20'],
+      }],
+      workflows: [{
+        steps: ['POST /api/graphql #1', 'POST /api/graphql #2'],
+        dataFlows: ['pageInfo.endCursor -> variables.after'],
+      }],
+    }],
+  };
+  assert.equal(evaluateExecutableReadiness(definition, contract).score, 100);
 });

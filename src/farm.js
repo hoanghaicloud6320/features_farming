@@ -186,6 +186,7 @@ function buildSchemas(observations, iterationOrder) {
         iterations: new Set(),
         keys: new Set(),
         itemTypes: new Set(),
+        contentTypes: new Set(),
         arrayLengths: [],
         examples: [],
         observationCount: 0,
@@ -196,6 +197,7 @@ function buildSchemas(observations, iterationOrder) {
     group.iterations.add(observation.iterationId);
     for (const keyName of observation.keys || []) group.keys.add(keyName);
     for (const itemType of observation.itemTypes || []) group.itemTypes.add(itemType);
+    if (observation.contentType) group.contentTypes.add(observation.contentType);
     if (Number.isInteger(observation.arrayLength)) group.arrayLengths.push(observation.arrayLength);
     if (observation.example !== undefined && group.examples.length < 5) group.examples.push(observation.example);
     group.observationCount += 1;
@@ -214,6 +216,7 @@ function buildSchemas(observations, iterationOrder) {
     observationCount: group.observationCount,
     keys: [...group.keys].sort(),
     itemTypes: [...group.itemTypes].sort(),
+    contentTypes: [...group.contentTypes].sort(),
     arrayLengthRange: group.arrayLengths.length
       ? { min: Math.min(...group.arrayLengths), max: Math.max(...group.arrayLengths), median: median(group.arrayLengths) }
       : null,
@@ -286,7 +289,12 @@ function parseStructuredText(text, contentType = '') {
   if (!text || typeof text !== 'string') return null;
   const trimmed = text.trim();
   if (!trimmed) return null;
-  if (/json/i.test(contentType) || /^[{[]/.test(trimmed)) {
+  const jsonLiteral = (
+    /^[{["]/.test(trimmed)
+    || /^(?:true|false|null)$/.test(trimmed)
+    || /^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$/.test(trimmed)
+  );
+  if (/json/i.test(contentType) || jsonLiteral) {
     try {
       return { format: 'json', value: JSON.parse(trimmed) };
     } catch {}
@@ -304,6 +312,21 @@ function parseStructuredText(text, contentType = '') {
         return { format: 'form', value };
       }
     } catch {}
+  }
+  return null;
+}
+
+function parseResponseText(text, contentType = '') {
+  const structured = parseStructuredText(text, contentType);
+  if (structured) return structured;
+  const trimmed = typeof text === 'string' ? text.trim() : '';
+  if (
+    trimmed
+    && trimmed.length <= 16_384
+    && /^text\//i.test(contentType)
+    && !/<[a-z][\s\S]*>/i.test(trimmed)
+  ) {
+    return { format: 'text', value: trimmed };
   }
   return null;
 }
@@ -463,6 +486,7 @@ function extractOccurrences(inputDirectory, records, routes, maxJsonBytes) {
         memberEndpoint: route.isGeneralizedFamily ? route.member.signature : null,
         side: 'request',
         location: `body.${requestBody.format}`,
+        contentType: requestContentType.split(';', 1)[0].trim().toLowerCase(),
       }, schemaObservations);
       flattenValue(
         requestBody.value,
@@ -488,34 +512,55 @@ function extractOccurrences(inputDirectory, records, routes, maxJsonBytes) {
 
     if (record.body?.captureError) {
       bodyWarnings.push({ requestId: base.requestId, endpoint: route.signature, error: record.body.captureError });
-    } else if (record.body?.file && /\.json$/i.test(record.body.file)) {
+    } else if (record.body?.file) {
       const bodyFile = path.resolve(inputDirectory, record.body.file);
       const relative = path.relative(inputDirectory, bodyFile);
       if (!relative.startsWith('..') && !path.isAbsolute(relative) && fs.existsSync(bodyFile)) {
         const size = fs.statSync(bodyFile).size;
         if (size <= maxJsonBytes) {
           try {
-            const responseValue = JSON.parse(fs.readFileSync(bodyFile, 'utf8'));
-            observeSchema(responseValue, '$', {
+            const responseText = fs.readFileSync(bodyFile, 'utf8');
+            const responseContentType = headerValue(
+              record.response?.headers,
+              'content-type',
+            ) || record.response?.mimeType || '';
+            const responseBody = parseResponseText(responseText, responseContentType);
+            if (!responseBody) continue;
+            const normalizedContentType = responseContentType
+              .split(';', 1)[0]
+              .trim()
+              .toLowerCase();
+            observeSchema(responseBody.value, '$', {
               iterationId: record.iterationId,
               endpointId: route.id,
               endpoint: route.signature,
               memberId: route.isGeneralizedFamily ? route.member.id : null,
               memberEndpoint: route.isGeneralizedFamily ? route.member.signature : null,
               side: 'response',
-              location: 'body.json',
+              location: `body.${responseBody.format}`,
+              contentType: normalizedContentType,
             }, schemaObservations);
             flattenValue(
-              responseValue,
+              responseBody.value,
               '$',
-              (fieldPath, value) => add('response', 'body.json', fieldPath, value, record.responseTimestamp),
+              (fieldPath, value) => add(
+                'response',
+                `body.${responseBody.format}`,
+                fieldPath,
+                value,
+                record.responseTimestamp,
+              ),
               { count: 0, limit: 25000, maxDepth: 16, maxArrayItems: 100 },
             );
           } catch (error) {
-            bodyWarnings.push({ requestId: base.requestId, endpoint: route.signature, error: `Invalid JSON body: ${error.message}` });
+            bodyWarnings.push({
+              requestId: base.requestId,
+              endpoint: route.signature,
+              error: `Response body parse failed: ${error.message}`,
+            });
           }
         } else {
-          bodyWarnings.push({ requestId: base.requestId, endpoint: route.signature, error: `JSON body skipped at ${size} bytes` });
+          bodyWarnings.push({ requestId: base.requestId, endpoint: route.signature, error: `Response body skipped at ${size} bytes` });
         }
       }
     }
@@ -557,12 +602,21 @@ function classifyFieldSeries(occurrences, iterationOrder) {
     for (const occurrence of group) {
       if (!byIteration.has(occurrence.iterationId)) byIteration.set(occurrence.iterationId, occurrence);
     }
-    const ordered = iterationOrder.map((id) => byIteration.get(id)).filter(Boolean);
+    const iterationRank = new Map(iterationOrder.map((id, index) => [id, index]));
+    const ordered = [...group].sort((a, b) => (
+      (iterationRank.get(a.iterationId) ?? Infinity)
+      - (iterationRank.get(b.iterationId) ?? Infinity)
+      || a.requestIndex - b.requestIndex
+    ));
     const values = ordered.map((item) => item.value);
     const unique = new Set(values.map((value) => JSON.stringify(value)));
     let classification = unique.size === 1 ? 'constant' : 'variable';
     let step = null;
-    if (values.length >= 3 && values.every((value) => typeof value === 'number' && Number.isFinite(value))) {
+    if (
+      group.length === byIteration.size
+      && values.length >= 3
+      && values.every((value) => typeof value === 'number' && Number.isFinite(value))
+    ) {
       const differences = values.slice(1).map((value, index) => value - values[index]);
       if (differences.every((value) => value === differences[0])) {
         step = differences[0];
@@ -729,11 +783,13 @@ function findRelations(occurrences, iterationOrder) {
     const support = evidence.length;
     const ratio = support / Math.max(iterationOrder.length, 1);
     const distinctSourceValues = new Set(evidence.map((item) => JSON.stringify(item.source.value))).size;
-    if (distinctSourceValues < 2) continue;
+    const limitedVariation = distinctSourceValues < 2;
     const sameRequest = sourceOccurrence.requestIndex === targetOccurrence.requestIndex;
     const sourceResponse = sourceOccurrence.side === 'response';
     const rarityBonus = String(sourceOccurrence.canonical).length >= 8 ? 0.08 : 0;
-    const confidence = Math.min(0.99, 0.35 + ratio * 0.4 + (sameRequest ? 0.12 : 0) + (sourceResponse ? 0.08 : 0) + rarityBonus);
+    const confidence = limitedVariation
+      ? Math.min(0.69, 0.25 + ratio * 0.25 + (sourceResponse ? 0.08 : 0))
+      : Math.min(0.99, 0.35 + ratio * 0.4 + (sameRequest ? 0.12 : 0) + (sourceResponse ? 0.08 : 0) + rarityBonus);
     relations.push({
       id: shortHash(`${first.source.field}|${first.target.field}`),
       kind: first.kind,
@@ -759,6 +815,20 @@ function findRelations(occurrences, iterationOrder) {
       medianRequestDistance: median(evidence.map((item) => item.requestDistance)),
       confidence: round(confidence),
       transform: forwardTransformForRelation(first.kind, targetOccurrence),
+      evidenceTier: limitedVariation ? 'hypothesis' : 'supported',
+      promotion: limitedVariation ? {
+        attentionEligible: false,
+        reason: 'The ordered value equality repeated, but only one distinct source value was observed.',
+        observedDistinctInputs: distinctSourceValues,
+        requiredDistinctInputs: 2,
+        risks: [
+          'constant-equality-not-causality',
+          'limited-input-diversity',
+        ],
+      } : {
+        attentionEligible: true,
+        reason: 'Ordered value equality repeated with at least two distinct source values.',
+      },
       evidence: evidence.slice(0, 5),
     });
   }
@@ -1602,27 +1672,36 @@ function buildWorkflow(records, routes, endpoints, iterationOrder) {
   const endpointById = new Map(endpoints.map((endpoint) => [endpoint.id, endpoint]));
   const steps = [];
   for (const iterationId of iterationOrder) {
-    const seen = new Set();
+    const occurrenceByEndpoint = new Map();
     let sequence = 0;
     for (const record of records) {
       if (record.iterationId !== iterationId || !routes.has(record)) continue;
       const route = routes.get(record);
       const endpoint = endpointById.get(route.id);
-      if (!endpoint || endpoint.classifications !== 'core' || seen.has(route.id)) continue;
-      seen.add(route.id);
-      steps.push({ iterationId, endpointId: route.id, sequence: sequence++ });
+      if (!endpoint || endpoint.classifications !== 'core') continue;
+      const occurrence = (occurrenceByEndpoint.get(route.id) || 0) + 1;
+      occurrenceByEndpoint.set(route.id, occurrence);
+      steps.push({
+        iterationId,
+        endpointId: route.id,
+        occurrence,
+        sequence: sequence++,
+      });
     }
   }
   const grouped = new Map();
   for (const step of steps) {
-    if (!grouped.has(step.endpointId)) grouped.set(step.endpointId, []);
-    grouped.get(step.endpointId).push(step);
+    const key = `${step.endpointId}|${step.occurrence}`;
+    if (!grouped.has(key)) grouped.set(key, []);
+    grouped.get(key).push(step);
   }
-  return [...grouped.entries()].map(([endpointId, occurrences]) => {
+  return [...grouped.values()].map((occurrences) => {
+    const endpointId = occurrences[0].endpointId;
     const endpoint = endpointById.get(endpointId);
     return {
       endpointId,
       endpoint: endpoint.signature,
+      occurrence: occurrences[0].occurrence,
       medianStep: median(occurrences.map((item) => item.sequence)),
       iterationPresence: new Set(occurrences.map((item) => item.iterationId)).size,
       presenceRatio: endpoint.presenceRatio,
@@ -1836,6 +1915,7 @@ function detectWorkflowPatterns(records, routes, endpoints, iterationOrder) {
     }));
   const retries = [];
   const polling = [];
+  const repeatedCalls = [];
   for (const iteration of perIteration) {
     const byEndpoint = new Map();
     for (const entry of iteration.entries) {
@@ -1848,8 +1928,17 @@ function detectWorkflowPatterns(records, routes, endpoints, iterationOrder) {
       if (!endpoint || endpoint.classifications !== 'core') continue;
       const gaps = entries.slice(1).map((entry, index) => entry.record.requestTimestamp - entries[index].record.requestTimestamp);
       const statuses = entries.map((entry) => entry.record.response?.status).filter(Boolean);
-      const exactUrls = new Set(entries.map((entry) => entry.record.request.url));
-      if (entries.length >= 3 && median(gaps) >= 0.2 && coefficientOfVariation(gaps) <= 0.5) {
+      const requestFingerprints = new Set(entries.map((entry) => JSON.stringify({
+        method: entry.record.request.method,
+        url: entry.record.request.url,
+        postData: entry.record.request.postData || null,
+      })));
+      if (
+        entries.length >= 3
+        && requestFingerprints.size === 1
+        && median(gaps) >= 0.2
+        && coefficientOfVariation(gaps) <= 0.5
+      ) {
         polling.push({
           iterationId: iteration.iterationId,
           endpoint: endpoint.signature,
@@ -1857,12 +1946,23 @@ function detectWorkflowPatterns(records, routes, endpoints, iterationOrder) {
           medianIntervalMs: round(median(gaps) * 1000, 1),
           intervalVariation: round(coefficientOfVariation(gaps)),
         });
-      } else if (exactUrls.size < entries.length || statuses.some((status) => status >= 400)) {
+      } else if (
+        requestFingerprints.size < entries.length
+        || statuses.some((status) => status >= 400)
+      ) {
         retries.push({
           iterationId: iteration.iterationId,
           endpoint: endpoint.signature,
           count: entries.length,
           statuses,
+          medianGapMs: round(median(gaps) * 1000, 1),
+        });
+      } else {
+        repeatedCalls.push({
+          iterationId: iteration.iterationId,
+          endpoint: endpoint.signature,
+          count: entries.length,
+          distinctRequestShapes: requestFingerprints.size,
           medianGapMs: round(median(gaps) * 1000, 1),
         });
       }
@@ -1872,8 +1972,7 @@ function detectWorkflowPatterns(records, routes, endpoints, iterationOrder) {
   for (const iteration of perIteration) {
     const sequence = iteration.entries
       .filter((entry) => endpointById.get(entry.route.id)?.classifications === 'core')
-      .map((entry) => entry.route.signature)
-      .filter((value, index, all) => index === 0 || all[index - 1] !== value);
+      .map((entry) => entry.route.signature);
     const key = sequence.join(' -> ');
     if (!variants.has(key)) variants.set(key, []);
     variants.get(key).push(iteration.iterationId);
@@ -1882,6 +1981,7 @@ function detectWorkflowPatterns(records, routes, endpoints, iterationOrder) {
     optionalBranches,
     retries,
     polling,
+    repeatedCalls,
     sequenceVariants: [...variants.entries()]
       .map(([sequence, iterations]) => ({ sequence, iterations, count: iterations.length }))
       .sort((a, b) => b.count - a.count),
@@ -2290,10 +2390,13 @@ async function farmRecording({
 
 module.exports = {
   canonicalValue,
+  buildWorkflow,
   classifyFieldSeries,
   farmRecording,
+  findRelations,
   findBoundedTransformRelations,
   findHashRelations,
+  parseResponseText,
   parseStructuredText,
   prepareRoutes,
 };

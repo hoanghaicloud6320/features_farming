@@ -6,13 +6,20 @@ const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
 const {
+  buildWorkflow,
   farmRecording,
   findBoundedTransformRelations,
   findHashRelations,
+  findRelations,
+  parseResponseText,
   parseStructuredText,
 } = require('../src/farm');
 const { farmInput } = require('../src/collection');
-const { buildFeatureContext, compactFeatureContext } = require('../src/gym-ab');
+const {
+  buildFeatureContext,
+  buildReplayProfiles,
+  compactFeatureContext,
+} = require('../src/gym-ab');
 
 test('parses JSON and form payloads', () => {
   assert.deepEqual(parseStructuredText('{"id":3}', 'application/json'), {
@@ -23,6 +30,126 @@ test('parses JSON and form payloads', () => {
     format: 'form',
     value: { q: 'hello world', limit: '5' },
   });
+});
+
+test('sniffs JSON served as text and preserves scalar text responses', () => {
+  assert.deepEqual(parseResponseText('[{"price":12.5}]', 'text/plain'), {
+    format: 'json',
+    value: [{ price: 12.5 }],
+  });
+  assert.deepEqual(parseResponseText('391', 'text/html'), {
+    format: 'json',
+    value: 391,
+  });
+  assert.deepEqual(parseResponseText('plain result', 'text/plain'), {
+    format: 'text',
+    value: 'plain result',
+  });
+});
+
+test('keeps constant ordered copies as trace candidates without promoting causality', () => {
+  const iterations = ['iteration-1', 'iteration-2', 'iteration-3'];
+  const occurrences = iterations.flatMap((iterationId, index) => ([
+    {
+      id: `${iterationId}-source`,
+      iterationId,
+      requestId: `${iterationId}-one`,
+      requestIndex: index * 2,
+      endpointId: 'graphql',
+      endpoint: 'POST example.test/api/graphql?',
+      side: 'response',
+      location: 'body.json',
+      fieldPath: '$.pageInfo.endCursor',
+      value: 'stable-cursor',
+      canonical: 'stable-cursor',
+      type: 'string',
+    },
+    {
+      id: `${iterationId}-target`,
+      iterationId,
+      requestId: `${iterationId}-two`,
+      requestIndex: (index * 2) + 1,
+      endpointId: 'graphql',
+      endpoint: 'POST example.test/api/graphql?',
+      side: 'request',
+      location: 'body.json',
+      fieldPath: '$.variables.after',
+      value: 'stable-cursor',
+      canonical: 'stable-cursor',
+      type: 'string',
+    },
+  ]));
+  const relation = findRelations(occurrences, iterations)[0];
+  assert.equal(relation.source.endpointId, relation.target.endpointId);
+  assert.equal(relation.distinctSourceValues, 1);
+  assert.equal(relation.evidenceTier, 'hypothesis');
+  assert.equal(relation.promotion.attentionEligible, false);
+});
+
+test('replay profiles retain observed defaults without asserting hardcoded requirements', () => {
+  const profiles = buildReplayProfiles({
+    crossSessionFields: [{
+      endpoint: 'POST example.test/api/graphql?',
+      endpointClassifications: ['core'],
+      side: 'request',
+      location: 'body.json',
+      fieldPath: '$.variables.first',
+      types: ['integer'],
+      behaviors: ['constant'],
+      sessionPresence: 2,
+      examples: [
+        { sessionId: 'a', iterationId: 'iteration-1', value: 20 },
+        { sessionId: 'b', iterationId: 'iteration-1', value: 20 },
+      ],
+    }],
+  });
+  assert.equal(profiles[0].role, 'pagination-control');
+  assert.equal(profiles[0].classification, 'observed-stable');
+  assert.equal(profiles[0].observedDefault, 20);
+  assert.equal(profiles[0].parameterize, true);
+  assert.match(profiles[0].interpretation, /not proven required/);
+});
+
+test('workflow preserves repeated occurrences of the same endpoint', () => {
+  const records = [
+    { iterationId: 'iteration-1' },
+    { iterationId: 'iteration-1' },
+    { iterationId: 'iteration-2' },
+    { iterationId: 'iteration-2' },
+  ];
+  const route = { id: 'graphql' };
+  const routes = new Map(records.map((record) => [record, route]));
+  const workflow = buildWorkflow(
+    records,
+    routes,
+    [{
+      id: 'graphql',
+      signature: 'POST example.test/api/graphql?',
+      classifications: 'core',
+      presenceRatio: 1,
+      examples: ['https://example.test/api/graphql'],
+    }],
+    ['iteration-1', 'iteration-2'],
+  );
+  assert.deepEqual(
+    workflow.map((step) => ({
+      endpoint: step.endpoint,
+      occurrence: step.occurrence,
+      iterationPresence: step.iterationPresence,
+    })),
+    [
+      {
+        endpoint: 'POST example.test/api/graphql?',
+        occurrence: 1,
+        iterationPresence: 2,
+      },
+      {
+        endpoint: 'POST example.test/api/graphql?',
+        occurrence: 2,
+        iterationPresence: 2,
+      },
+    ],
+  );
 });
 
 test('finds a repeated multi-source hash transform', () => {
