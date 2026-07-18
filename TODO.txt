@@ -28,7 +28,7 @@ CURRENT STATUS
     KEYMANAGER_CONTRACT_AB_EVALUATION.md
 - A five-seed KeyManager run and a 21-case seeded Gym V6 are documented in:
     GYM_V6_EVALUATION.md
-- All 33 local tests pass.
+- All 37 local tests pass.
 
 IMPLEMENTED IN V5
 - Twelve data-driven farmer challenges with independent Gym ground truth.
@@ -135,6 +135,31 @@ COMPLETED 2026-07-18: OBSERVATION-PRESERVING RELATION TIERS
   candidate count/artifact pointer, so insight is preserved without spending
   model attention on thousands of weak candidates.
 
+COMPLETED 2026-07-18: LOSSLESS LINEAGE COMPRESSION
+- Exact-copy relation components now expose a compact backbone while retaining
+  every direct edge by ID in a side index.
+- Directed transforms are kept separate and are never collapsed into
+  exact-copy equivalence groups.
+- KeyManager actionable exact edges compress from 1,514 to a 286-edge
+  backbone; candidate exact edges compress from 3,651 to 388.
+- Comparable cross-session artifact storage fell 30.7%, from 22.76 MB to
+  15.78 MB, while adding session provenance and lineage indexes.
+- Compact contract feature context grew by only 347 characters and still
+  selects seven contract data flows rather than exposing the full graph.
+
+COMPLETED 2026-07-18: RANDOMIZED GYM V8 FOR LINEAGE COMPRESSION
+- V8 has five configurations with five cases each: dense CRUD propagation,
+  session fan-out, parallel identities, semantic siblings, and an optional
+  one-session edge case.
+- It uses ordinary exact-copy website flows, randomized routes/fields/noise,
+  and no custom hash or magic transform.
+- The score requires direct-edge preservation, lineage purity, a connected
+  minimal backbone, and correct candidate/actionable tiering.
+- Canonical seed 88001 and holdout seed 88019 both scored 100/100 on all
+  25 cases.
+- Full report:
+    GYM_V8_EVALUATION.md
+
 OTHER FARMER TODO
 1. Continue replacing semantic field-name allowlists with bounded structural
    candidate generation where a detector has strong repeated evidence.
@@ -161,3 +186,5 @@ REPRODUCE
     npm run gym:v6
 - Fresh-seed Gym V7 with an unsupported transform holdout:
     npm run gym:v7
+- Randomized lineage-compression Gym V8:
+    npm run gym:v8

@@ -3,6 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
+const { buildLineageIndex } = require('./lineage');
 
 const API_RESOURCE_TYPES = new Set(['Fetch', 'XHR', 'Document']);
 const COMMON_STRING_VALUES = new Set([
@@ -2153,6 +2154,14 @@ async function farmRecording({
   const memberSchemas = buildSchemas(memberSchemaObservations, iterationOrder);
   const memberRelationCandidates = findAllRelations(memberOccurrences, memberFields, iterationOrder);
   const memberRelations = memberRelationCandidates.filter(isAttentionEligibleRelation);
+  const lineage = buildLineageIndex(memberRelations, {
+    benchmark: 'recording-member-lineage',
+    scope: 'actionable',
+  });
+  const lineageCandidates = buildLineageIndex(memberRelationCandidates, {
+    benchmark: 'recording-member-lineage',
+    scope: 'candidate-inventory',
+  });
   enrichEndpointMembers(endpoints, memberFields, memberSchemas, memberRelations, fields, schemas, relations);
   const workflow = buildWorkflow(records, routes, endpoints, iterationOrder);
   const coreEndpointIds = new Set(endpoints.filter((endpoint) => endpoint.classifications === 'core').map((endpoint) => endpoint.id));
@@ -2194,6 +2203,8 @@ async function farmRecording({
     valueOccurrenceCount: occurrences.length,
     relationCandidateCount: relationCandidates.length,
     diagnosticRelationCandidateCount: relationCandidates.length - relations.length,
+    lineage: lineage.stats,
+    candidateLineage: lineageCandidates.stats,
     variables: variables.slice(0, 100),
     relations: notableRelations.slice(0, 100),
     workflow,
@@ -2238,7 +2249,15 @@ async function farmRecording({
   writeJson(path.join(outputDirectory, 'relations.members.json'), memberRelations);
   writeJson(path.join(outputDirectory, 'relations.json'), relations);
   writeJson(path.join(outputDirectory, 'relations.candidates.json'), relationCandidates);
-  writeJson(path.join(outputDirectory, 'relations.members.candidates.json'), memberRelationCandidates);
+  writeJson(path.join(outputDirectory, 'relations.members.candidates.json'), {
+    schemaVersion: 1,
+    representation: 'lineage-index',
+    artifact: 'lineage.candidates.json',
+    relationCount: memberRelationCandidates.length,
+    note: 'Member candidate points and direct edges are stored once in the lineage index.',
+  });
+  writeJson(path.join(outputDirectory, 'lineage.json'), lineage);
+  writeJson(path.join(outputDirectory, 'lineage.candidates.json'), lineageCandidates);
   writeJson(path.join(outputDirectory, 'workflow.json'), workflow);
   writeJson(path.join(outputDirectory, 'workflow-patterns.json'), workflowPatterns);
   writeJson(path.join(outputDirectory, 'dependency-graph.json'), dependencyGraph);
@@ -2258,6 +2277,8 @@ async function farmRecording({
     memberRelationCandidates,
     relations,
     relationCandidates,
+    lineage,
+    lineageCandidates,
     workflow,
     workflowPatterns,
     dependencyGraph,

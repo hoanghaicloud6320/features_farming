@@ -385,6 +385,10 @@ function buildContractInventory(summary) {
 
 function buildFeatureContext(farmRoot) {
   const summary = readJson(path.join(farmRoot, 'cross-session.json'));
+  const relationCandidates = summary.crossSessionRelationCandidates;
+  const diagnosticCandidateCount = Array.isArray(relationCandidates)
+    ? relationCandidates.filter((relation) => relation.promotion?.attentionEligible === false).length
+    : relationCandidates?.diagnosticCount || 0;
   const generalizationWarnings = summary.crossSessionEndpoints
     .filter((endpoint) => endpoint.signature.includes(':var'))
     .map((endpoint) => ({
@@ -417,11 +421,15 @@ function buildFeatureContext(farmRoot) {
     schemas: summary.crossSessionSchemas,
     memberRelations: summary.crossSessionMemberRelations || [],
     diagnosticHypotheses: {
-      retainedCount: (summary.crossSessionRelationCandidates || [])
-        .filter((relation) => relation.promotion?.attentionEligible === false).length,
+      retainedCount: diagnosticCandidateCount,
       attentionEligible: false,
-      artifact: 'relations.candidates.cross-session.json',
+      artifact: relationCandidates?.artifact || 'relations.candidates.cross-session.json',
       note: 'Retained for analysis and future promotion; excluded from contract data flows.',
+    },
+    lineage: {
+      artifact: summary.crossSessionLineage?.artifact || 'lineage.cross-session.json',
+      stats: summary.crossSessionLineage?.stats || null,
+      note: 'Compressed view only; direct edge evidence remains in relation artifacts.',
     },
     contractInventory: buildContractInventory(summary),
     authenticationEvidence: buildAuthenticationEvidence(summary),
@@ -539,6 +547,7 @@ function compactFeatureContext(features, budgetChars) {
       omittedCount: 0,
     }),
     diagnosticHypotheses: features.diagnosticHypotheses,
+    lineage: features.lineage,
     endpoints: coreEndpoints,
     workflow: features.workflow,
     patterns: features.patterns,

@@ -385,6 +385,17 @@ test('keeps diagnostic relation candidates across sessions but out of actionable
   assert.equal(candidate.sessionPresence, 2);
   assert.equal(candidate.promotion.attentionEligible, false);
   assert.ok(fs.existsSync(path.join(output, 'relations.candidates.cross-session.json')));
+  assert.ok(fs.existsSync(path.join(output, 'lineage.cross-session.json')));
+  assert.ok(fs.existsSync(path.join(output, 'lineage.candidates.cross-session.json')));
+  const summaryDocument = JSON.parse(fs.readFileSync(path.join(output, 'cross-session.json'), 'utf8'));
+  assert.equal(summaryDocument.crossSessionRelationCandidates.diagnosticCount, 1);
+  assert.equal(summaryDocument.crossSessionCandidateLineage.artifact, 'lineage.candidates.cross-session.json');
+  assert.equal(summaryDocument.crossSessionMemberRelationCandidates.representation, 'lineage-index');
+  const memberCandidatePointer = JSON.parse(fs.readFileSync(
+    path.join(output, 'relations.members.candidates.cross-session.json'),
+    'utf8',
+  ));
+  assert.equal(memberCandidatePointer.artifact, 'lineage.candidates.cross-session.json');
   assert.match(fs.readFileSync(path.join(output, 'report.md'), 'utf8'), /Diagnostic relation hypotheses/);
 });
 

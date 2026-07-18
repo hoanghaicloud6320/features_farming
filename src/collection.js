@@ -4,9 +4,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { farmRecording } = require('./farm');
+const { buildLineageIndex } = require('./lineage');
 
 function writeJson(file, value) {
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
+}
+
+function withoutSessionSupport(relations) {
+  return relations.map(({ sessionSupport, ...relation }) => relation);
 }
 
 function isRecordingDirectory(directory) {
@@ -361,6 +366,12 @@ function aggregateSessions(sessionResults) {
         sessionPresence: new Set(entries.map((entry) => entry.sessionId)).size,
         averageConfidence: round(entries.reduce((sum, entry) => sum + entry.item.confidence, 0) / entries.length),
         supportIterations: entries.reduce((sum, entry) => sum + entry.item.supportIterations, 0),
+        sessionSupport: entries.map((entry) => ({
+          sessionId: entry.sessionId,
+          relationId: entry.item.id,
+          supportIterations: entry.item.supportIterations,
+          confidence: entry.item.confidence,
+        })),
         transforms: [...new Set(entries.map((entry) => JSON.stringify(entry.item.transform)).filter((value) => value !== undefined))].map(JSON.parse),
         evidenceTiers: [...new Set(entries.map((entry) => entry.item.evidenceTier || 'supported'))],
         promotion: entries.find((entry) => entry.item.promotion)?.item.promotion,
@@ -414,6 +425,12 @@ function aggregateSessions(sessionResults) {
         sessionPresence: new Set(entries.map((entry) => entry.sessionId)).size,
         averageConfidence: round(entries.reduce((sum, entry) => sum + entry.item.confidence, 0) / entries.length),
         supportIterations: entries.reduce((sum, entry) => sum + entry.item.supportIterations, 0),
+        sessionSupport: entries.map((entry) => ({
+          sessionId: entry.sessionId,
+          relationId: entry.item.id,
+          supportIterations: entry.item.supportIterations,
+          confidence: entry.item.confidence,
+        })),
         distinctSourceValues: Math.max(...entries.map((entry) => entry.item.distinctSourceValues || 0)),
         medianRequestDistance: median(entries
           .map((entry) => entry.item.medianRequestDistance)
@@ -465,6 +482,14 @@ function aggregateSessions(sessionResults) {
     memberRelationCandidatesRaw,
     memberRelations,
   );
+  const lineage = buildLineageIndex(memberRelations, {
+    benchmark: 'cross-session-member-lineage',
+    scope: 'actionable',
+  });
+  const lineageCandidates = buildLineageIndex(memberRelationCandidates, {
+    benchmark: 'cross-session-member-lineage',
+    scope: 'candidate-inventory',
+  });
   for (const endpoint of endpoints) {
     for (const member of endpoint.members || []) {
       member.relationIds = memberRelations
@@ -563,6 +588,8 @@ function aggregateSessions(sessionResults) {
     crossSessionMemberRelations: memberRelations,
     crossSessionRelationCandidates: relationCandidates,
     crossSessionMemberRelationCandidates: memberRelationCandidates,
+    crossSessionLineage: lineage,
+    crossSessionCandidateLineage: lineageCandidates,
     crossSessionSchemas: schemas,
     crossSessionCookies: cookies,
     consensusWorkflow,
@@ -597,13 +624,49 @@ async function farmInput({ inputDirectory, outputDirectory, maxJsonBytes }) {
     sessionResults.push({ sessionId, recordingDirectory, result });
   }
   const summary = aggregateSessions(sessionResults);
-  writeJson(path.join(outputDirectory, 'cross-session.json'), summary);
+  const diagnosticRelationCount = summary.crossSessionRelationCandidates
+    .filter((relation) => relation.promotion?.attentionEligible === false).length;
+  const diagnosticMemberRelationCount = summary.crossSessionMemberRelationCandidates
+    .filter((relation) => relation.promotion?.attentionEligible === false).length;
+  const summaryDocument = {
+    ...summary,
+    crossSessionRelations: withoutSessionSupport(summary.crossSessionRelations),
+    crossSessionMemberRelations: withoutSessionSupport(summary.crossSessionMemberRelations),
+    crossSessionRelationCandidates: {
+      artifact: 'relations.candidates.cross-session.json',
+      count: summary.crossSessionRelationCandidates.length,
+      diagnosticCount: diagnosticRelationCount,
+    },
+    crossSessionMemberRelationCandidates: {
+      artifact: 'lineage.candidates.cross-session.json',
+      representation: 'lineage-index',
+      count: summary.crossSessionMemberRelationCandidates.length,
+      diagnosticCount: diagnosticMemberRelationCount,
+    },
+    crossSessionLineage: {
+      artifact: 'lineage.cross-session.json',
+      stats: summary.crossSessionLineage.stats,
+    },
+    crossSessionCandidateLineage: {
+      artifact: 'lineage.candidates.cross-session.json',
+      stats: summary.crossSessionCandidateLineage.stats,
+    },
+  };
+  writeJson(path.join(outputDirectory, 'cross-session.json'), summaryDocument);
   writeJson(path.join(outputDirectory, 'endpoints.cross-session.json'), summary.crossSessionEndpoints);
   writeJson(path.join(outputDirectory, 'fields.cross-session.json'), summary.crossSessionFields);
-  writeJson(path.join(outputDirectory, 'relations.cross-session.json'), summary.crossSessionRelations);
-  writeJson(path.join(outputDirectory, 'relations.members.cross-session.json'), summary.crossSessionMemberRelations);
-  writeJson(path.join(outputDirectory, 'relations.candidates.cross-session.json'), summary.crossSessionRelationCandidates);
-  writeJson(path.join(outputDirectory, 'relations.members.candidates.cross-session.json'), summary.crossSessionMemberRelationCandidates);
+  writeJson(path.join(outputDirectory, 'relations.cross-session.json'), withoutSessionSupport(summary.crossSessionRelations));
+  writeJson(path.join(outputDirectory, 'relations.members.cross-session.json'), withoutSessionSupport(summary.crossSessionMemberRelations));
+  writeJson(path.join(outputDirectory, 'relations.candidates.cross-session.json'), withoutSessionSupport(summary.crossSessionRelationCandidates));
+  writeJson(path.join(outputDirectory, 'relations.members.candidates.cross-session.json'), {
+    schemaVersion: 1,
+    representation: 'lineage-index',
+    artifact: 'lineage.candidates.cross-session.json',
+    relationCount: summary.crossSessionMemberRelationCandidates.length,
+    note: 'Member candidate points, direct edges, session support, transforms, and promotion metadata are stored once in the lineage index.',
+  });
+  writeJson(path.join(outputDirectory, 'lineage.cross-session.json'), summary.crossSessionLineage);
+  writeJson(path.join(outputDirectory, 'lineage.candidates.cross-session.json'), summary.crossSessionCandidateLineage);
   writeJson(path.join(outputDirectory, 'schemas.cross-session.json'), summary.crossSessionSchemas);
   writeJson(path.join(outputDirectory, 'cookies.cross-session.json'), summary.crossSessionCookies);
   fs.writeFileSync(path.join(outputDirectory, 'report.md'), collectionReport(summary));

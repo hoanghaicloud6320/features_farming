@@ -16,6 +16,7 @@
     "gym:v5": "node scripts/run-gym-v5.js",
     "gym:v6": "node scripts/run-gym-v6.js",
     "gym:v7": "node scripts/run-gym-v7.js",
+    "gym:v8": "node scripts/run-gym-v8.js",
     "keymanager:contract-ab": "node scripts/run-keymanager-contract-ab.js",
     "keymanager:contract-multiseed": "node scripts/run-keymanager-contract-multiseed.js",
     "keymanager:feature-unroll": "node scripts/run-keymanager-feature-unroll.js",

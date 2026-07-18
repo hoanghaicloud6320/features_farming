@@ -76,9 +76,12 @@ known gap. This is preferable to asking the LLM to guess.
 
 The farmer now writes two separate relation layers:
 
-- `relations.candidates*.json` retains bounded transform fits and relations
-  even when they occur in only one session or have insufficient input
-  diversity.
+- `relations.candidates*.json` retains family-level bounded transform fits and
+  relations even when they occur in only one session or have insufficient
+  input diversity.
+- `lineage.candidates*.json` stores concrete member points, every direct edge,
+  transform, promotion decision, and session evidence once. Member-candidate
+  compatibility files point to this canonical index.
 - `relations*.json` contains only relations promoted for workflow,
   automation hints, and contract-oriented model context.
 
@@ -87,3 +90,28 @@ candidates. Of these, 2,143 remain diagnostic-only: 2,137 lack repeated
 cross-session support and six are low-diversity affine fits. The contract
 prompt receives none of those 2,143 relations; it receives only their count
 and a pointer to the diagnostic artifact.
+
+## Lossless lineage compression
+
+Exact-copy relations are grouped into connected lineage components. Each group
+has a small backbone for navigation, but every direct edge remains addressable
+by ID in the same lineage index. Non-equivalence transforms such as HMAC,
+affine, base64url, and reverse-copy remain directed transform edges and are
+never unioned into an exact-copy component.
+
+On KeyManager:
+
+| Scope | Exact direct edges | Backbone edges | Retained redundant edges |
+|---|---:|---:|---:|
+| Actionable | 1,514 | 286 | 1,228 |
+| All candidates | 3,651 | 388 | 3,263 |
+
+The candidate backbone is 10.63% of the direct exact-edge count. Direct edge
+IDs, point provenance, transforms, promotion metadata, and per-session
+references are still retained.
+
+Across the comparable cross-session relation/summary artifacts, storage fell
+from 22.76 MB to 15.78 MB (30.7%) even after adding both actionable and
+candidate lineage indexes. The compact feature context grew only from 23,849
+to 24,196 characters because it receives lineage statistics, not the lineage
+edge inventory.
