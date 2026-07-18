@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "benchmark": "all-versions-contract-generation",
-  "generatedAt": "2026-07-18T10:28:48.780Z",
+  "generatedAt": "2026-07-18T16:51:21.534Z",
   "model": "gemini-3.1-flash-lite",
   "suites": [
     {
@@ -57,7 +57,7 @@
       "arm": "none",
       "seed": 101001,
       "evidenceChars": 203,
-      "latencyMs": 1364,
+      "latencyMs": 1576,
       "usage": {
         "promptTokens": 218,
         "outputTokens": 221,
@@ -104,7 +104,7 @@
           }
         ]
       },
-      "responseId": "R1Jbau7YB4LN1e8Phenf-Qw"
+      "responseId": "wa5batv8L4W-vr0P0sGt0Q4"
     },
     {
       "suite": "v1",
@@ -112,7 +112,7 @@
       "arm": "raw",
       "seed": 101001,
       "evidenceChars": 1642,
-      "latencyMs": 3285,
+      "latencyMs": 2607,
       "usage": {
         "promptTokens": 572,
         "outputTokens": 981,
@@ -159,7 +159,7 @@
           }
         ]
       },
-      "responseId": "SFJbaqieD4m4vr0PwsaB4Q0"
+      "responseId": "w65basmjCuKIosUP4OCk6A0"
     },
     {
       "suite": "v1",
@@ -167,7 +167,7 @@
       "arm": "features",
       "seed": 101001,
       "evidenceChars": 3899,
-      "latencyMs": 3830,
+      "latencyMs": 4292,
       "usage": {
         "promptTokens": 1206,
         "outputTokens": 1245,
@@ -214,7 +214,7 @@
           }
         ]
       },
-      "responseId": "S1JbaoL_LaWA1e8PrbTqEA"
+      "responseId": "xa5bauWCL43o1e8Pmc_l6Q0"
     },
     {
       "suite": "v1",
@@ -222,7 +222,7 @@
       "arm": "raw-features",
       "seed": 101001,
       "evidenceChars": 5338,
-      "latencyMs": 3736,
+      "latencyMs": 3500,
       "usage": {
         "promptTokens": 1560,
         "outputTokens": 1243,
@@ -269,7 +269,7 @@
           }
         ]
       },
-      "responseId": "T1JbaoX1IfqEvr0P09jcqA4"
+      "responseId": "yq5bavP5BISG1e8P2-2v0Q0"
     },
     {
       "suite": "v2",
@@ -277,7 +277,7 @@
       "arm": "none",
       "seed": 102001,
       "evidenceChars": 203,
-      "latencyMs": 1235,
+      "latencyMs": 1281,
       "usage": {
         "promptTokens": 218,
         "outputTokens": 244,
@@ -324,7 +324,7 @@
           }
         ]
       },
-      "responseId": "U1JbaqayBt6i9tMP4viEsQ0"
+      "responseId": "za5bapvQIoa9vr0P8bn0qQ4"
     },
     {
       "suite": "v2",
@@ -332,7 +332,7 @@
       "arm": "raw",
       "seed": 102001,
       "evidenceChars": 1642,
-      "latencyMs": 3222,
+      "latencyMs": 3149,
       "usage": {
         "promptTokens": 572,
         "outputTokens": 1014,
@@ -379,7 +379,7 @@
           }
         ]
       },
-      "responseId": "VFJbauzfFOWM1e8PxLymqQ0"
+      "responseId": "zq5baoDuM-u-vr0Pg7ukuA4"
     },
     {
       "suite": "v2",
@@ -387,7 +387,7 @@
       "arm": "features",
       "seed": 102001,
       "evidenceChars": 3899,
-      "latencyMs": 3927,
+      "latencyMs": 3401,
       "usage": {
         "promptTokens": 1206,
         "outputTokens": 1244,
@@ -434,7 +434,7 @@
           }
         ]
       },
-      "responseId": "V1JbaofMLouxvr0P2aCM4A0"
+      "responseId": "0q5barRXj-zV7w_Nr-ngDQ"
     },
     {
       "suite": "v2",
@@ -442,7 +442,7 @@
       "arm": "raw-features",
       "seed": 102001,
       "evidenceChars": 5338,
-      "latencyMs": 3726,
+      "latencyMs": 3577,
       "usage": {
         "promptTokens": 1560,
         "outputTokens": 1246,
@@ -489,7 +489,7 @@
           }
         ]
       },
-      "responseId": "W1JbaqzIHuKIosUP4OCk6A0"
+      "responseId": "1a5barClJJCKvr0Pk6na6Q0"
     },
     {
       "suite": "v3",
@@ -497,7 +497,7 @@
       "arm": "none",
       "seed": 103001,
       "evidenceChars": 203,
-      "latencyMs": 1244,
+      "latencyMs": 1494,
       "usage": {
         "promptTokens": 218,
         "outputTokens": 246,
@@ -544,7 +544,7 @@
           }
         ]
       },
-      "responseId": "X1JbatWlDe_m1e8Pp8HLqA4"
+      "responseId": "2K5bav6wO-znosUPiPftqQ4"
     },
     {
       "suite": "v3",
@@ -552,7 +552,7 @@
       "arm": "raw",
       "seed": 103001,
       "evidenceChars": 1642,
-      "latencyMs": 3114,
+      "latencyMs": 2792,
       "usage": {
         "promptTokens": 572,
         "outputTokens": 1004,
@@ -599,7 +599,7 @@
           }
         ]
       },
-      "responseId": "YFJbaorlHLqgvr0PtZWeyQ4"
+      "responseId": "2q5bavHZHMGWvr0P48mKuQ4"
     },
     {
       "suite": "v3",
@@ -607,7 +607,7 @@
       "arm": "features",
       "seed": 103001,
       "evidenceChars": 3899,
-      "latencyMs": 3834,
+      "latencyMs": 3404,
       "usage": {
         "promptTokens": 1206,
         "outputTokens": 1259,
@@ -654,7 +654,7 @@
           }
         ]
       },
-      "responseId": "Y1JbaojPJbH_1e8P57LTsQ4"
+      "responseId": "3a5basjFEMqqvr0Plo7GsA4"
     },
     {
       "suite": "v3",
@@ -662,7 +662,7 @@
       "arm": "raw-features",
       "seed": 103001,
       "evidenceChars": 5338,
-      "latencyMs": 4139,
+      "latencyMs": 3591,
       "usage": {
         "promptTokens": 1560,
         "outputTokens": 1235,
@@ -709,7 +709,7 @@
           }
         ]
       },
-      "responseId": "Z1JbapKaHrrw1e8PoZn2gAc"
+      "responseId": "4K5bar6SKbrw1e8PoZn2gAc"
     },
     {
       "suite": "v4",
@@ -717,7 +717,7 @@
       "arm": "none",
       "seed": 104001,
       "evidenceChars": 84,
-      "latencyMs": 1238,
+      "latencyMs": 1040,
       "usage": {
         "promptTokens": 182,
         "outputTokens": 162,
@@ -748,7 +748,7 @@
           }
         ]
       },
-      "responseId": "a1Jbat6LIo_s1e8Pza_p4A0"
+      "responseId": "5K5baq2VENvCvr0PxeaS4AY"
     },
     {
       "suite": "v4",
@@ -756,7 +756,7 @@
       "arm": "raw",
       "seed": 104001,
       "evidenceChars": 1028,
-      "latencyMs": 2282,
+      "latencyMs": 2092,
       "usage": {
         "promptTokens": 422,
         "outputTokens": 608,
@@ -789,7 +789,7 @@
           }
         ]
       },
-      "responseId": "bFJbaqqBMqSm1e8PjazQ6Q0"
+      "responseId": "5a5bavXbE4Kzvr0PwpursQ4"
     },
     {
       "suite": "v4",
@@ -797,7 +797,7 @@
       "arm": "features",
       "seed": 104001,
       "evidenceChars": 1411,
-      "latencyMs": 2279,
+      "latencyMs": 2271,
       "usage": {
         "promptTokens": 544,
         "outputTokens": 652,
@@ -828,7 +828,7 @@
           }
         ]
       },
-      "responseId": "b1Jbau-iBIyTvr0P2vbt4Q0"
+      "responseId": "565barb0GJ2Rvr0P0-7m4Q0"
     },
     {
       "suite": "v4",
@@ -836,7 +836,7 @@
       "arm": "raw-features",
       "seed": 104001,
       "evidenceChars": 2355,
-      "latencyMs": 2387,
+      "latencyMs": 2456,
       "usage": {
         "promptTokens": 784,
         "outputTokens": 632,
@@ -869,7 +869,7 @@
           }
         ]
       },
-      "responseId": "cVJbaoaTF_PR1e8PtfmPqQ4"
+      "responseId": "6a5bavShMIuxvr0P2aCM4A0"
     },
     {
       "suite": "v5",
@@ -877,7 +877,7 @@
       "arm": "none",
       "seed": 105001,
       "evidenceChars": 901,
-      "latencyMs": 2483,
+      "latencyMs": 2597,
       "usage": {
         "promptTokens": 523,
         "outputTokens": 724,
@@ -996,7 +996,7 @@
           }
         ]
       },
-      "responseId": "c1Jbaoi3LoK6vr0PjPb8yA0"
+      "responseId": "7K5baoSmB4mgvr0PiKSs8Q0"
     },
     {
       "suite": "v5",
@@ -1004,7 +1004,7 @@
       "arm": "raw",
       "seed": 105001,
       "evidenceChars": 12833,
-      "latencyMs": 14398,
+      "latencyMs": 14557,
       "usage": {
         "promptTokens": 3771,
         "outputTokens": 6070,
@@ -1144,7 +1144,7 @@
           }
         ]
       },
-      "responseId": "dlJbateAG_anvr0P57KdsA4"
+      "responseId": "7q5basrQOM2ivr0PkPuTyQ4"
     },
     {
       "suite": "v5",
@@ -1152,7 +1152,7 @@
       "arm": "features",
       "seed": 105001,
       "evidenceChars": 39025,
-      "latencyMs": 13173,
+      "latencyMs": 15219,
       "usage": {
         "promptTokens": 12210,
         "outputTokens": 6150,
@@ -1271,7 +1271,7 @@
           }
         ]
       },
-      "responseId": "hFJbatnEMpew1e8PkJSQiQ4"
+      "responseId": "_a5barTnIbaZvr0P6Lzu2As"
     },
     {
       "suite": "v5",
@@ -1279,7 +1279,7 @@
       "arm": "raw-features",
       "seed": 105001,
       "evidenceChars": 50957,
-      "latencyMs": 14919,
+      "latencyMs": 15921,
       "usage": {
         "promptTokens": 15458,
         "outputTokens": 6075,
@@ -1414,7 +1414,7 @@
           }
         ]
       },
-      "responseId": "kVJbarOCPeznosUPiPftqQ4"
+      "responseId": "DK9barCJLJew1e8PkJSQiQ4"
     },
     {
       "suite": "v6",
@@ -1422,7 +1422,7 @@
       "arm": "none",
       "seed": 106001,
       "evidenceChars": 1731,
-      "latencyMs": 3542,
+      "latencyMs": 3496,
       "usage": {
         "promptTokens": 1183,
         "outputTokens": 1159,
@@ -1613,7 +1613,7 @@
           }
         ]
       },
-      "responseId": "oFJbasnJMYmgvr0PiKSs8Q0"
+      "responseId": "HK9bar3VH4vAvr0P8MLTsA4"
     },
     {
       "suite": "v6",
@@ -1621,14 +1621,14 @@
       "arm": "raw",
       "seed": 106001,
       "evidenceChars": 19167,
-      "latencyMs": 29286,
+      "latencyMs": 28071,
       "usage": {
-        "promptTokens": 6903,
-        "outputTokens": 10893,
-        "totalTokens": 17796
+        "promptTokens": 6639,
+        "outputTokens": 10641,
+        "totalTokens": 17280
       },
-      "tokenEfficiency": 11.94,
-      "tokensPerCase": 328.7,
+      "tokenEfficiency": 12.42,
+      "tokensPerCase": 316.1,
       "completeCasesPer1kTokens": 0,
       "evaluation": {
         "caseCount": 21,
@@ -1854,7 +1854,7 @@
           }
         ]
       },
-      "responseId": "pFJbatLmILik1e8P7pS-8Q0"
+      "responseId": "IK9basKjB9-bvr0Pxt2EqA4"
     },
     {
       "suite": "v6",
@@ -1862,7 +1862,7 @@
       "arm": "features",
       "seed": 106001,
       "evidenceChars": 47862,
-      "latencyMs": 24979,
+      "latencyMs": 22486,
       "usage": {
         "promptTokens": 15729,
         "outputTokens": 9833,
@@ -2053,7 +2053,7 @@
           }
         ]
       },
-      "responseId": "wVJbapGNL8mB1e8Pgc2ayQ8"
+      "responseId": "PK9bauS8DYuT1e8P6qGL4A0"
     },
     {
       "suite": "v6",
@@ -2061,15 +2061,15 @@
       "arm": "raw-features",
       "seed": 106001,
       "evidenceChars": 65298,
-      "latencyMs": 19752,
+      "latencyMs": 18273,
       "usage": {
-        "promptTokens": 21449,
-        "outputTokens": 7858,
-        "totalTokens": 29307
+        "promptTokens": 21185,
+        "outputTokens": 8047,
+        "totalTokens": 29232
       },
-      "tokenEfficiency": 4.19,
-      "tokensPerCase": 1021.4,
-      "completeCasesPer1kTokens": 0.979,
+      "tokenEfficiency": 4.28,
+      "tokensPerCase": 1008.8,
+      "completeCasesPer1kTokens": 0.991,
       "evaluation": {
         "caseCount": 21,
         "completeCaseRate": 1,
@@ -2078,9 +2078,9 @@
         "endpointF1": 1,
         "exactStatusAccuracy": 1,
         "requestFieldRecall": 1,
-        "responseFieldRecall": 0.326,
+        "responseFieldRecall": 0.374,
         "hallucinatedEndpoints": 0,
-        "qualityScore": 89.89,
+        "qualityScore": 90.6,
         "cases": [
           {
             "caseId": "v6-73001-01-arbitrary-affix",
@@ -2252,7 +2252,7 @@
           }
         ]
       },
-      "responseId": "2lJbaonPMOLU1e8PwNzR4A0"
+      "responseId": "Uq9baqHBLeLU1e8PwNzR4A0"
     },
     {
       "suite": "v7",
@@ -2260,7 +2260,7 @@
       "arm": "none",
       "seed": 107001,
       "evidenceChars": 3294,
-      "latencyMs": 6203,
+      "latencyMs": 5502,
       "usage": {
         "promptTokens": 2093,
         "outputTokens": 1989,
@@ -2603,7 +2603,7 @@
           }
         ]
       },
-      "responseId": "7lJbauGAHoiOosUP0crduA4"
+      "responseId": "Za9basTXAdO6vr0Pir7h-Q0"
     },
     {
       "suite": "v7",
@@ -2611,14 +2611,14 @@
       "arm": "raw",
       "seed": 107001,
       "evidenceChars": 36649,
-      "latencyMs": 50750,
+      "latencyMs": 51218,
       "usage": {
-        "promptTokens": 13035,
-        "outputTokens": 20446,
-        "totalTokens": 33481
+        "promptTokens": 12535,
+        "outputTokens": 20185,
+        "totalTokens": 32720
       },
-      "tokenEfficiency": 6.32,
-      "tokensPerCase": 325.9,
+      "tokenEfficiency": 6.57,
+      "tokensPerCase": 313.4,
       "completeCasesPer1kTokens": 0,
       "evaluation": {
         "caseCount": 40,
@@ -3034,7 +3034,7 @@
           }
         ]
       },
-      "responseId": "9FJbas6hK6q9vr0PvKSxwA4"
+      "responseId": "aq9baua2HfPW1e8Ppb_J-A0"
     },
     {
       "suite": "v7",
@@ -3042,7 +3042,7 @@
       "arm": "features",
       "seed": 107001,
       "evidenceChars": 89597,
-      "latencyMs": 50156,
+      "latencyMs": 51148,
       "usage": {
         "promptTokens": 29259,
         "outputTokens": 18601,
@@ -3385,7 +3385,7 @@
           }
         ]
       },
-      "responseId": "J1NbasaVH-y4vr0PvfqD-A0"
+      "responseId": "na9basjrOPHU1e8PnM7l0Q4"
     },
     {
       "suite": "v7",
@@ -3393,350 +3393,430 @@
       "arm": "raw-features",
       "seed": 107001,
       "evidenceChars": 122952,
-      "latencyMs": 47638,
+      "latencyMs": 49177,
       "usage": {
-        "promptTokens": 40201,
-        "outputTokens": 17348,
-        "totalTokens": 57549
+        "promptTokens": 39701,
+        "outputTokens": 19612,
+        "totalTokens": 59313
       },
-      "tokenEfficiency": 2.43,
-      "tokensPerCase": 1005,
-      "completeCasesPer1kTokens": 0.995,
+      "tokenEfficiency": 2.02,
+      "tokensPerCase": 992.5,
+      "completeCasesPer1kTokens": 0,
       "evaluation": {
         "caseCount": 40,
-        "completeCaseRate": 1,
-        "endpointPrecision": 1,
+        "completeCaseRate": 0,
+        "endpointPrecision": 0.68,
         "endpointRecall": 1,
-        "endpointF1": 1,
+        "endpointF1": 0.81,
         "exactStatusAccuracy": 1,
         "requestFieldRecall": 1,
         "responseFieldRecall": 0.857,
-        "hallucinatedEndpoints": 0,
-        "qualityScore": 97.86,
+        "hallucinatedEndpoints": 40,
+        "qualityScore": 80.24,
         "cases": [
           {
             "caseId": "v6-81017-01-arbitrary-affix",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/zakaru/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81017-02-affine-numeric",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/binyxu/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81017-03-hmac-sha256",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/fevoxu/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81017-04-json-base64url",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/wipobi/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81017-05-reverse-string",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/cykaga/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81017-06-array-selection",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/pocyqe/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81017-07-semantic-siblings",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.75,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/cyqepo/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v7-81017-08-character-rotation",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v7/:param/wzsnkxaz/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81037-01-arbitrary-affix",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/vokafe/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81037-02-affine-numeric",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/pojoqe/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81037-03-hmac-sha256",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/ruqewi/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81037-04-json-base64url",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/vocyvo/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81037-05-reverse-string",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/vogajo/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81037-06-array-selection",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/nyfebi/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81037-07-semantic-siblings",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.75,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/wiqeqe/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v7-81037-08-character-rotation",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v7/:param/scfawaxu/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81061-01-arbitrary-affix",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/kakaru/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81061-02-affine-numeric",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/rufexu/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81061-03-hmac-sha256",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/jonyxu/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81061-04-json-base64url",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/vogaza/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81061-05-reverse-string",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/ruwijo/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81061-06-array-selection",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/wicycy/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81061-07-semantic-siblings",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.75,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/joqeza/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v7-81061-08-character-rotation",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v7/:param/cmsmfyfy/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81083-01-arbitrary-affix",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/bipoza/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81083-02-affine-numeric",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/rubiga/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81083-03-hmac-sha256",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/fevofe/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81083-04-json-base64url",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/nycypo/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81083-05-reverse-string",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/nyruvo/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81083-06-array-selection",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/cywife/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81083-07-semantic-siblings",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.75,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/ganyga/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v7-81083-08-character-rotation",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v7/:param/jfjjlecu/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81101-01-arbitrary-affix",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/nyruka/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81101-02-affine-numeric",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/xuqexu/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81101-03-hmac-sha256",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/fexuvo/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81101-04-json-base64url",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/winyga/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81101-05-reverse-string",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/vobiqe/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81101-06-array-selection",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/poxufe/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v6-81101-07-semantic-siblings",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.75,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v6/:param/gawicy/events"
+            ],
+            "complete": false
           },
           {
             "caseId": "v7-81101-08-character-rotation",
             "endpointRecall": 1,
-            "endpointPrecision": 1,
+            "endpointPrecision": 0.667,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [],
-            "complete": true
+            "hallucinatedEndpoints": [
+              "PATCH /api/v7/:param/qfqcqglv/events"
+            ],
+            "complete": false
           }
         ]
       },
-      "responseId": "WVNbaoaLKvKU9tMPvPu6sQ4"
+      "responseId": "0K9baoHHNfKU9tMPvPu6sQ4"
     },
     {
       "suite": "v8",
@@ -3744,11 +3824,11 @@
       "arm": "none",
       "seed": 108001,
       "evidenceChars": 2079,
-      "latencyMs": 3923,
+      "latencyMs": 3825,
       "usage": {
         "promptTokens": 1333,
-        "outputTokens": 1279,
-        "totalTokens": 2612
+        "outputTokens": 1277,
+        "totalTokens": 2610
       },
       "tokenEfficiency": 7.5,
       "tokensPerCase": 53.3,
@@ -3766,7 +3846,7 @@
         "qualityScore": 10,
         "cases": [
           {
-            "caseId": "v8-88001-crud-dense-01",
+            "caseId": "v8-88019-crud-dense-01",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3774,7 +3854,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-crud-dense-02",
+            "caseId": "v8-88019-crud-dense-02",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3782,7 +3862,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-crud-dense-03",
+            "caseId": "v8-88019-crud-dense-03",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3790,7 +3870,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-crud-dense-04",
+            "caseId": "v8-88019-crud-dense-04",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3798,7 +3878,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-crud-dense-05",
+            "caseId": "v8-88019-crud-dense-05",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3806,7 +3886,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-optional-session-01",
+            "caseId": "v8-88019-optional-session-01",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3814,7 +3894,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-optional-session-02",
+            "caseId": "v8-88019-optional-session-02",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3822,7 +3902,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-optional-session-03",
+            "caseId": "v8-88019-optional-session-03",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3830,7 +3910,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-optional-session-04",
+            "caseId": "v8-88019-optional-session-04",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3838,7 +3918,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-optional-session-05",
+            "caseId": "v8-88019-optional-session-05",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3846,7 +3926,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-parallel-identities-01",
+            "caseId": "v8-88019-parallel-identities-01",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3854,7 +3934,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-parallel-identities-02",
+            "caseId": "v8-88019-parallel-identities-02",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3862,7 +3942,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-parallel-identities-03",
+            "caseId": "v8-88019-parallel-identities-03",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3870,7 +3950,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-parallel-identities-04",
+            "caseId": "v8-88019-parallel-identities-04",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3878,7 +3958,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-parallel-identities-05",
+            "caseId": "v8-88019-parallel-identities-05",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3886,7 +3966,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-semantic-siblings-01",
+            "caseId": "v8-88019-semantic-siblings-01",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3894,7 +3974,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-semantic-siblings-02",
+            "caseId": "v8-88019-semantic-siblings-02",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3902,7 +3982,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-semantic-siblings-03",
+            "caseId": "v8-88019-semantic-siblings-03",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3910,7 +3990,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-semantic-siblings-04",
+            "caseId": "v8-88019-semantic-siblings-04",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3918,7 +3998,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-semantic-siblings-05",
+            "caseId": "v8-88019-semantic-siblings-05",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3926,7 +4006,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-session-fanout-01",
+            "caseId": "v8-88019-session-fanout-01",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3934,7 +4014,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-session-fanout-02",
+            "caseId": "v8-88019-session-fanout-02",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3942,7 +4022,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-session-fanout-03",
+            "caseId": "v8-88019-session-fanout-03",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3950,7 +4030,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-session-fanout-04",
+            "caseId": "v8-88019-session-fanout-04",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3958,7 +4038,7 @@
             "complete": false
           },
           {
-            "caseId": "v8-88001-session-fanout-05",
+            "caseId": "v8-88019-session-fanout-05",
             "endpointRecall": 0,
             "endpointPrecision": 0,
             "exactStatusAccuracy": 0,
@@ -3967,7 +4047,7 @@
           }
         ]
       },
-      "responseId": "iVNbapmVCKu8vr0PhtCD4Q0"
+      "responseId": "AbBbarWLMqWA1e8PrbTqEA"
     },
     {
       "suite": "v8",
@@ -3975,15 +4055,15 @@
       "arm": "raw",
       "seed": 108001,
       "evidenceChars": 28709,
-      "latencyMs": 46289,
+      "latencyMs": 31184,
       "usage": {
-        "promptTokens": 11108,
-        "outputTokens": 17968,
-        "totalTokens": 29076
+        "promptTokens": 10598,
+        "outputTokens": 12573,
+        "totalTokens": 23171
       },
-      "tokenEfficiency": 7.68,
-      "tokensPerCase": 444.3,
-      "completeCasesPer1kTokens": 0.45,
+      "tokenEfficiency": 8.05,
+      "tokensPerCase": 423.9,
+      "completeCasesPer1kTokens": 0.472,
       "evaluation": {
         "caseCount": 25,
         "completeCaseRate": 0.2,
@@ -3997,7 +4077,7 @@
         "qualityScore": 85.34,
         "cases": [
           {
-            "caseId": "v8-88001-crud-dense-01",
+            "caseId": "v8-88019-crud-dense-01",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4005,7 +4085,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-02",
+            "caseId": "v8-88019-crud-dense-02",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4013,7 +4093,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-03",
+            "caseId": "v8-88019-crud-dense-03",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4021,7 +4101,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-04",
+            "caseId": "v8-88019-crud-dense-04",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4029,7 +4109,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-05",
+            "caseId": "v8-88019-crud-dense-05",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4037,208 +4117,208 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-01",
+            "caseId": "v8-88019-optional-session-01",
             "endpointRecall": 1,
             "endpointPrecision": 0.75,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/gkspnyvj/events"
+              "PATCH /api/v8/:param/jldhbpok/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-optional-session-02",
+            "caseId": "v8-88019-optional-session-02",
             "endpointRecall": 1,
             "endpointPrecision": 0.75,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/ldtxomew/events"
+              "PATCH /api/v8/:param/viuylaxn/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-optional-session-03",
+            "caseId": "v8-88019-optional-session-03",
             "endpointRecall": 1,
             "endpointPrecision": 0.75,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/qrbfbsit/events"
+              "PATCH /api/v8/:param/uxpouszp/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-optional-session-04",
+            "caseId": "v8-88019-optional-session-04",
             "endpointRecall": 1,
             "endpointPrecision": 0.75,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/vglcylsd/events"
+              "PATCH /api/v8/:param/vzkzphgk/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-optional-session-05",
+            "caseId": "v8-88019-optional-session-05",
             "endpointRecall": 1,
             "endpointPrecision": 0.75,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/cleaknyh/events"
+              "PATCH /api/v8/:param/frxiridx/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-parallel-identities-01",
+            "caseId": "v8-88019-parallel-identities-01",
             "endpointRecall": 1,
             "endpointPrecision": 0.8,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/radxnroq/events"
+              "PATCH /api/v8/:param/ubkewrgl/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-parallel-identities-02",
+            "caseId": "v8-88019-parallel-identities-02",
             "endpointRecall": 1,
             "endpointPrecision": 0.8,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/xcozlfsg/events"
+              "PATCH /api/v8/:param/wdktdahe/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-parallel-identities-03",
+            "caseId": "v8-88019-parallel-identities-03",
             "endpointRecall": 1,
             "endpointPrecision": 0.8,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/itkvopza/events"
+              "PATCH /api/v8/:param/sctxeiyp/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-parallel-identities-04",
+            "caseId": "v8-88019-parallel-identities-04",
             "endpointRecall": 1,
             "endpointPrecision": 0.8,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/jurwoaex/events"
+              "PATCH /api/v8/:param/exvfmxjz/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-parallel-identities-05",
+            "caseId": "v8-88019-parallel-identities-05",
             "endpointRecall": 1,
             "endpointPrecision": 0.8,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/agnbeuqz/events"
+              "PATCH /api/v8/:param/ibipncse/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-semantic-siblings-01",
+            "caseId": "v8-88019-semantic-siblings-01",
             "endpointRecall": 1,
             "endpointPrecision": 0.8,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/ojvkjihs/events"
+              "PATCH /api/v8/:param/kndldzxo/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-semantic-siblings-02",
+            "caseId": "v8-88019-semantic-siblings-02",
             "endpointRecall": 1,
             "endpointPrecision": 0.8,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/eprhbnyf/events"
+              "PATCH /api/v8/:param/dmyerpvd/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-semantic-siblings-03",
+            "caseId": "v8-88019-semantic-siblings-03",
             "endpointRecall": 1,
             "endpointPrecision": 0.8,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/gqnmfgzb/events"
+              "PATCH /api/v8/:param/ncehmpqj/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-semantic-siblings-04",
+            "caseId": "v8-88019-semantic-siblings-04",
             "endpointRecall": 1,
             "endpointPrecision": 0.8,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/ndafrvnz/events"
+              "PATCH /api/v8/:param/twgqdpgh/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-semantic-siblings-05",
+            "caseId": "v8-88019-semantic-siblings-05",
             "endpointRecall": 1,
             "endpointPrecision": 0.8,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/kcduvacm/events"
+              "PATCH /api/v8/:param/iyoctgsp/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-session-fanout-01",
+            "caseId": "v8-88019-session-fanout-01",
             "endpointRecall": 1,
             "endpointPrecision": 0.833,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/gvscpyzo/events"
+              "PATCH /api/v8/:param/qhnaonif/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-session-fanout-02",
+            "caseId": "v8-88019-session-fanout-02",
             "endpointRecall": 1,
             "endpointPrecision": 0.833,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/phafkcch/events"
+              "PATCH /api/v8/:param/gfwxyjoy/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-session-fanout-03",
+            "caseId": "v8-88019-session-fanout-03",
             "endpointRecall": 1,
             "endpointPrecision": 0.833,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/wzyylxzk/events"
+              "PATCH /api/v8/:param/gcnmopzg/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-session-fanout-04",
+            "caseId": "v8-88019-session-fanout-04",
             "endpointRecall": 1,
             "endpointPrecision": 0.833,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/hghkbwei/events"
+              "PATCH /api/v8/:param/ictniddk/events"
             ],
             "complete": false
           },
           {
-            "caseId": "v8-88001-session-fanout-05",
+            "caseId": "v8-88019-session-fanout-05",
             "endpointRecall": 1,
             "endpointPrecision": 0.833,
             "exactStatusAccuracy": 1,
             "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/bevqkanz/events"
+              "PATCH /api/v8/:param/eefodvqs/events"
             ],
             "complete": false
           }
         ]
       },
-      "responseId": "jVNbasSXD5Ke1e8P5b6G6A0"
+      "responseId": "BbBbap_UN5m_vr0PjNud4AE"
     },
     {
       "suite": "v8",
@@ -4246,15 +4326,15 @@
       "arm": "features",
       "seed": 108001,
       "evidenceChars": 70474,
-      "latencyMs": 45211,
+      "latencyMs": 41396,
       "usage": {
-        "promptTokens": 23581,
-        "outputTokens": 16567,
-        "totalTokens": 40148
+        "promptTokens": 23566,
+        "outputTokens": 16864,
+        "totalTokens": 40430
       },
       "tokenEfficiency": 4.24,
-      "tokensPerCase": 943.2,
-      "completeCasesPer1kTokens": 1.06,
+      "tokensPerCase": 942.6,
+      "completeCasesPer1kTokens": 1.061,
       "evaluation": {
         "caseCount": 25,
         "completeCaseRate": 1,
@@ -4268,7 +4348,7 @@
         "qualityScore": 100,
         "cases": [
           {
-            "caseId": "v8-88001-crud-dense-01",
+            "caseId": "v8-88019-crud-dense-01",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4276,7 +4356,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-02",
+            "caseId": "v8-88019-crud-dense-02",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4284,7 +4364,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-03",
+            "caseId": "v8-88019-crud-dense-03",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4292,7 +4372,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-04",
+            "caseId": "v8-88019-crud-dense-04",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4300,7 +4380,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-05",
+            "caseId": "v8-88019-crud-dense-05",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4308,7 +4388,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-01",
+            "caseId": "v8-88019-optional-session-01",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4316,7 +4396,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-02",
+            "caseId": "v8-88019-optional-session-02",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4324,7 +4404,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-03",
+            "caseId": "v8-88019-optional-session-03",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4332,7 +4412,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-04",
+            "caseId": "v8-88019-optional-session-04",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4340,7 +4420,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-05",
+            "caseId": "v8-88019-optional-session-05",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4348,7 +4428,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-parallel-identities-01",
+            "caseId": "v8-88019-parallel-identities-01",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4356,7 +4436,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-parallel-identities-02",
+            "caseId": "v8-88019-parallel-identities-02",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4364,7 +4444,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-parallel-identities-03",
+            "caseId": "v8-88019-parallel-identities-03",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4372,7 +4452,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-parallel-identities-04",
+            "caseId": "v8-88019-parallel-identities-04",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4380,7 +4460,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-parallel-identities-05",
+            "caseId": "v8-88019-parallel-identities-05",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4388,7 +4468,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-semantic-siblings-01",
+            "caseId": "v8-88019-semantic-siblings-01",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4396,7 +4476,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-semantic-siblings-02",
+            "caseId": "v8-88019-semantic-siblings-02",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4404,7 +4484,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-semantic-siblings-03",
+            "caseId": "v8-88019-semantic-siblings-03",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4412,7 +4492,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-semantic-siblings-04",
+            "caseId": "v8-88019-semantic-siblings-04",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4420,7 +4500,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-semantic-siblings-05",
+            "caseId": "v8-88019-semantic-siblings-05",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4428,7 +4508,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-session-fanout-01",
+            "caseId": "v8-88019-session-fanout-01",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4436,7 +4516,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-session-fanout-02",
+            "caseId": "v8-88019-session-fanout-02",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4444,7 +4524,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-session-fanout-03",
+            "caseId": "v8-88019-session-fanout-03",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4452,7 +4532,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-session-fanout-04",
+            "caseId": "v8-88019-session-fanout-04",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4460,7 +4540,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-session-fanout-05",
+            "caseId": "v8-88019-session-fanout-05",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4469,7 +4549,7 @@
           }
         ]
       },
-      "responseId": "u1NbaoHsIMuB2roPhva2mA4"
+      "responseId": "JbBbasnkAb25vr0P8uru-Q0"
     },
     {
       "suite": "v8",
@@ -4477,29 +4557,29 @@
       "arm": "raw-features",
       "seed": 108001,
       "evidenceChars": 97104,
-      "latencyMs": 45466,
+      "latencyMs": 37084,
       "usage": {
-        "promptTokens": 33356,
-        "outputTokens": 19528,
-        "totalTokens": 52884
+        "promptTokens": 32831,
+        "outputTokens": 16680,
+        "totalTokens": 49511
       },
-      "tokenEfficiency": 2.6,
-      "tokensPerCase": 1334.2,
-      "completeCasesPer1kTokens": 0.15,
+      "tokenEfficiency": 3.05,
+      "tokensPerCase": 1313.2,
+      "completeCasesPer1kTokens": 0.761,
       "evaluation": {
         "caseCount": 25,
-        "completeCaseRate": 0.2,
-        "endpointPrecision": 0.846,
+        "completeCaseRate": 1,
+        "endpointPrecision": 1,
         "endpointRecall": 1,
-        "endpointF1": 0.917,
+        "endpointF1": 1,
         "exactStatusAccuracy": 1,
         "requestFieldRecall": 1,
         "responseFieldRecall": 1,
-        "hallucinatedEndpoints": 20,
-        "qualityScore": 86.67,
+        "hallucinatedEndpoints": 0,
+        "qualityScore": 100,
         "cases": [
           {
-            "caseId": "v8-88001-crud-dense-01",
+            "caseId": "v8-88019-crud-dense-01",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4507,7 +4587,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-02",
+            "caseId": "v8-88019-crud-dense-02",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4515,7 +4595,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-03",
+            "caseId": "v8-88019-crud-dense-03",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4523,7 +4603,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-04",
+            "caseId": "v8-88019-crud-dense-04",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4531,7 +4611,7 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-crud-dense-05",
+            "caseId": "v8-88019-crud-dense-05",
             "endpointRecall": 1,
             "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
@@ -4539,208 +4619,168 @@
             "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-01",
+            "caseId": "v8-88019-optional-session-01",
             "endpointRecall": 1,
-            "endpointPrecision": 0.75,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/gkspnyvj/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-02",
+            "caseId": "v8-88019-optional-session-02",
             "endpointRecall": 1,
-            "endpointPrecision": 0.75,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/ldtxomew/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-03",
+            "caseId": "v8-88019-optional-session-03",
             "endpointRecall": 1,
-            "endpointPrecision": 0.75,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/qrbfbsit/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-04",
+            "caseId": "v8-88019-optional-session-04",
             "endpointRecall": 1,
-            "endpointPrecision": 0.75,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/vglcylsd/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-optional-session-05",
+            "caseId": "v8-88019-optional-session-05",
             "endpointRecall": 1,
-            "endpointPrecision": 0.75,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/cleaknyh/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-parallel-identities-01",
+            "caseId": "v8-88019-parallel-identities-01",
             "endpointRecall": 1,
-            "endpointPrecision": 0.8,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/radxnroq/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-parallel-identities-02",
+            "caseId": "v8-88019-parallel-identities-02",
             "endpointRecall": 1,
-            "endpointPrecision": 0.8,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/xcozlfsg/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-parallel-identities-03",
+            "caseId": "v8-88019-parallel-identities-03",
             "endpointRecall": 1,
-            "endpointPrecision": 0.8,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/itkvopza/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-parallel-identities-04",
+            "caseId": "v8-88019-parallel-identities-04",
             "endpointRecall": 1,
-            "endpointPrecision": 0.8,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/jurwoaex/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-parallel-identities-05",
+            "caseId": "v8-88019-parallel-identities-05",
             "endpointRecall": 1,
-            "endpointPrecision": 0.8,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/agnbeuqz/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-semantic-siblings-01",
+            "caseId": "v8-88019-semantic-siblings-01",
             "endpointRecall": 1,
-            "endpointPrecision": 0.8,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/ojvkjihs/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-semantic-siblings-02",
+            "caseId": "v8-88019-semantic-siblings-02",
             "endpointRecall": 1,
-            "endpointPrecision": 0.8,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/eprhbnyf/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-semantic-siblings-03",
+            "caseId": "v8-88019-semantic-siblings-03",
             "endpointRecall": 1,
-            "endpointPrecision": 0.8,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/gqnmfgzb/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-semantic-siblings-04",
+            "caseId": "v8-88019-semantic-siblings-04",
             "endpointRecall": 1,
-            "endpointPrecision": 0.8,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/ndafrvnz/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-semantic-siblings-05",
+            "caseId": "v8-88019-semantic-siblings-05",
             "endpointRecall": 1,
-            "endpointPrecision": 0.8,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/kcduvacm/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-session-fanout-01",
+            "caseId": "v8-88019-session-fanout-01",
             "endpointRecall": 1,
-            "endpointPrecision": 0.833,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/gvscpyzo/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-session-fanout-02",
+            "caseId": "v8-88019-session-fanout-02",
             "endpointRecall": 1,
-            "endpointPrecision": 0.833,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/phafkcch/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-session-fanout-03",
+            "caseId": "v8-88019-session-fanout-03",
             "endpointRecall": 1,
-            "endpointPrecision": 0.833,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/wzyylxzk/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-session-fanout-04",
+            "caseId": "v8-88019-session-fanout-04",
             "endpointRecall": 1,
-            "endpointPrecision": 0.833,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/hghkbwei/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           },
           {
-            "caseId": "v8-88001-session-fanout-05",
+            "caseId": "v8-88019-session-fanout-05",
             "endpointRecall": 1,
-            "endpointPrecision": 0.833,
+            "endpointPrecision": 1,
             "exactStatusAccuracy": 1,
-            "hallucinatedEndpoints": [
-              "PATCH /api/v8/:param/bevqkanz/events"
-            ],
-            "complete": false
+            "hallucinatedEndpoints": [],
+            "complete": true
           }
         ]
       },
-      "responseId": "6FNbapLtM7fA1e8PoIrHsA4"
+      "responseId": "TrBbarO-G4m4vr0PwsaB4Q0"
     },
     {
       "suite": "keymanager",
@@ -4748,7 +4788,7 @@
       "arm": "none",
       "seed": 109001,
       "evidenceChars": 149,
-      "latencyMs": 1122,
+      "latencyMs": 1041,
       "usage": {
         "promptTokens": 201,
         "outputTokens": 149,
@@ -4779,7 +4819,7 @@
           }
         ]
       },
-      "responseId": "FVRbatG9O5DBvr0PzPuCuQ4"
+      "responseId": "c7Bbas3cE6DF1e8P0drq4A0"
     },
     {
       "suite": "keymanager",
@@ -4787,13 +4827,13 @@
       "arm": "raw",
       "seed": 109001,
       "evidenceChars": 31815,
-      "latencyMs": 3734,
+      "latencyMs": 3230,
       "usage": {
         "promptTokens": 14871,
         "outputTokens": 1019,
         "totalTokens": 15890
       },
-      "tokenEfficiency": 5.23,
+      "tokenEfficiency": 5.43,
       "tokensPerCase": 14871,
       "completeCasesPer1kTokens": 0.067,
       "evaluation": {
@@ -4803,10 +4843,10 @@
         "endpointRecall": 1,
         "endpointF1": 1,
         "exactStatusAccuracy": 1,
-        "requestFieldRecall": 0.381,
-        "responseFieldRecall": 0.133,
+        "requestFieldRecall": 0.406,
+        "responseFieldRecall": 0.308,
         "hallucinatedEndpoints": 0,
-        "qualityScore": 77.71,
+        "qualityScore": 80.71,
         "cases": [
           {
             "caseId": "keymanager",
@@ -4818,23 +4858,23 @@
           }
         ]
       },
-      "responseId": "F1RbaorbEeu-vr0Pg7ukuA4"
+      "responseId": "dLBbasXIIr_W1e8P-LG2gA4"
     },
     {
       "suite": "keymanager",
       "suiteLabel": "KeyManager",
       "arm": "features",
       "seed": 109001,
-      "evidenceChars": 24341,
-      "latencyMs": 4557,
+      "evidenceChars": 31936,
+      "latencyMs": 4108,
       "usage": {
-        "promptTokens": 6701,
-        "outputTokens": 1410,
-        "totalTokens": 8111
+        "promptTokens": 9130,
+        "outputTokens": 1500,
+        "totalTokens": 10630
       },
-      "tokenEfficiency": 12.11,
-      "tokensPerCase": 6701,
-      "completeCasesPer1kTokens": 0.149,
+      "tokenEfficiency": 9.8,
+      "tokensPerCase": 9130,
+      "completeCasesPer1kTokens": 0.11,
       "evaluation": {
         "caseCount": 1,
         "completeCaseRate": 1,
@@ -4842,10 +4882,10 @@
         "endpointRecall": 1,
         "endpointF1": 1,
         "exactStatusAccuracy": 1,
-        "requestFieldRecall": 0.476,
-        "responseFieldRecall": 0.267,
+        "requestFieldRecall": 0.531,
+        "responseFieldRecall": 0.769,
         "hallucinatedEndpoints": 0,
-        "qualityScore": 81.14,
+        "qualityScore": 89.51,
         "cases": [
           {
             "caseId": "keymanager",
@@ -4857,23 +4897,23 @@
           }
         ]
       },
-      "responseId": "G1Rbatr5A43o1e8Pmc_l6Q0"
+      "responseId": "d7BbauO5MNSPosUP0_-I4A0"
     },
     {
       "suite": "keymanager",
       "suiteLabel": "KeyManager",
       "arm": "raw-features",
       "seed": 109001,
-      "evidenceChars": 31765,
-      "latencyMs": 4441,
+      "evidenceChars": 31640,
+      "latencyMs": 5318,
       "usage": {
-        "promptTokens": 10477,
-        "outputTokens": 1522,
-        "totalTokens": 11999
+        "promptTokens": 10720,
+        "outputTokens": 1676,
+        "totalTokens": 12396
       },
-      "tokenEfficiency": 6.68,
-      "tokensPerCase": 10477,
-      "completeCasesPer1kTokens": 0.095,
+      "tokenEfficiency": 8.09,
+      "tokensPerCase": 10720,
+      "completeCasesPer1kTokens": 0.093,
       "evaluation": {
         "caseCount": 1,
         "completeCaseRate": 1,
@@ -4881,10 +4921,10 @@
         "endpointRecall": 1,
         "endpointF1": 1,
         "exactStatusAccuracy": 1,
-        "requestFieldRecall": 0,
-        "responseFieldRecall": 0,
+        "requestFieldRecall": 0.5,
+        "responseFieldRecall": 0.615,
         "hallucinatedEndpoints": 0,
-        "qualityScore": 70,
+        "qualityScore": 86.73,
         "cases": [
           {
             "caseId": "keymanager",
@@ -4896,7 +4936,7 @@
           }
         ]
       },
-      "responseId": "H1RbavroJbq9vr0PyZy1uA4"
+      "responseId": "e7BbauyJO76ivr0P1J-euA4"
     }
   ],
   "aggregates": [
@@ -4909,7 +4949,7 @@
       "meanExactStatusAccuracy": 0,
       "meanCompleteCaseRate": 0,
       "meanPromptTokens": 685.4,
-      "meanLatencyMs": 2483.8,
+      "meanLatencyMs": 2428,
       "meanTokenEfficiency": 31.35,
       "promptTokensPerCase": 56.6,
       "completeCasesPer1kTokens": 0
@@ -4918,43 +4958,43 @@
       "arm": "raw",
       "runs": 9,
       "totalCases": 109,
-      "meanQualityScore": 73.79,
+      "meanQualityScore": 74.13,
       "meanEndpointF1": 0.895,
       "meanExactStatusAccuracy": 0.537,
       "meanCompleteCaseRate": 0.161,
-      "meanPromptTokens": 5758.4,
-      "meanLatencyMs": 17373.3,
-      "meanTokenEfficiency": 61.39,
-      "promptTokensPerCase": 475.5,
-      "completeCasesPer1kTokens": 0.174
+      "meanPromptTokens": 5616.9,
+      "meanLatencyMs": 15433.3,
+      "meanTokenEfficiency": 61.53,
+      "promptTokensPerCase": 463.8,
+      "completeCasesPer1kTokens": 0.178
     },
     {
       "arm": "features",
       "runs": 9,
       "totalCases": 109,
-      "meanQualityScore": 97.9,
+      "meanQualityScore": 98.83,
       "meanEndpointF1": 1,
       "meanExactStatusAccuracy": 1,
       "meanCompleteCaseRate": 1,
-      "meanPromptTokens": 10182.4,
-      "meanLatencyMs": 16882.9,
-      "meanTokenEfficiency": 51.88,
-      "promptTokensPerCase": 840.8,
-      "completeCasesPer1kTokens": 1.189
+      "meanPromptTokens": 10450.7,
+      "meanLatencyMs": 16413.9,
+      "meanTokenEfficiency": 51.62,
+      "promptTokensPerCase": 862.9,
+      "completeCasesPer1kTokens": 1.159
     },
     {
       "arm": "raw-features",
       "runs": 9,
       "totalCases": 109,
-      "meanQualityScore": 79.52,
-      "meanEndpointF1": 0.953,
+      "meanQualityScore": 80.98,
+      "meanEndpointF1": 0.941,
       "meanExactStatusAccuracy": 0.556,
-      "meanCompleteCaseRate": 0.393,
-      "meanPromptTokens": 14045,
-      "meanLatencyMs": 16244.9,
-      "meanTokenEfficiency": 27.14,
-      "promptTokensPerCase": 1159.7,
-      "completeCasesPer1kTokens": 0.562
+      "meanCompleteCaseRate": 0.37,
+      "meanPromptTokens": 13928.8,
+      "meanLatencyMs": 15433,
+      "meanTokenEfficiency": 27.31,
+      "promptTokensPerCase": 1150.1,
+      "completeCasesPer1kTokens": 0.407
     }
   ]
 }

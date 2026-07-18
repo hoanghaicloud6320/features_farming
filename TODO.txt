@@ -1,190 +1,161 @@
 FEATURES FARMING - TODO / HANDOFF
-Updated: 2026-07-18
+Updated: 2026-07-19
 
 CURRENT STATUS
 - Current model: gemini-3.1-flash-lite.
-- Local Gym V5 scores the farmer directly; Gemini is not part of the score.
-- V5 contains 12 cases across three axes:
-    simple transform + high noise
-    hard transform + low noise
-    hard transform + high noise
-- Canonical V5 result:
-    single-session farmer     92.00/100
-    cross-session farmer      100.00/100
-    core endpoint F1          100%
-    noise endpoint recall     100%
-    workflow ordered recall   100%
-    cross-session relation F1 100%
-- Full report:
+- All 46 local unit/integration tests pass.
+- Farmer-only Gym V5-V8 coverage includes:
+    endpoint/noise classification
+    ordered workflows
+    bounded transforms
+    semantic sibling attribution
+    actionable versus diagnostic relation tiers
+    lossless lineage compression
+- Latest V1-V8 contract rerun:
+    features endpoint F1       100% for every version
+    features exact statuses    100% for every version
+    features contract quality  100/100 for every version
+- Public no-login benchmark now separates:
+    contract inventory quality
+    executable-contract readiness
+    semantic automation success
+    exact output-schema compliance
+- Response farming now retains JSON served under non-JSON media types, JSON
+  scalars, bounded text responses, media types, parser guidance, replay
+  profiles, repeated same-endpoint calls, and low-diversity trace candidates.
+- KeyManager still recovers 8/8 endpoints, 8/8 exact status sets, cookie auth,
+  and the km_admin cookie over five seeds.
+- A regression remains in the shared 32K feature projection:
+    replay profiles and automation hints consume budget before confirmed
+    contract data flows
+    features then retain 0 lifecycle flows and generate explicit
+    create->patch/delete dependencies in 0/5 seeds
+- A contract-first experiment at the same 32K maximum retained seven confirmed
+  flows, reduced mean prompt tokens from 15,156 to 12,389, and recovered
+  endpoint/status/auth/create->patch/delete behavior in 5/5 seeds.
+
+NEXT - P0 CORRECTNESS
+1. Add task-aware evidence projection. RECOMMENDED.
+   - Keep one canonical farmer evidence model.
+   - Add explicit task modes:
+       contract
+       automation
+       hybrid
+       diagnostic
+   - Contract priority:
+       concrete contract inventory
+       confirmed response-to-request flows
+       authentication
+       request/response representation
+       repeated workflow structure
+       generalization warnings
+       candidate traces
+       replay and automation detail last
+   - Automation priority:
+       ordered/repeated workflow
+       confirmed flows
+       useful candidate traces
+       request encoding
+       response parser guidance
+       role-aware replay values
+       authentication
+       compact endpoint/status/schema inventory
+   - Hybrid must never evict concrete inventory or confirmed flows.
+   - Diagnostic may expose full candidates and provenance without an LLM-sized
+     attention guarantee.
+   - Acceptance:
+       KeyManager contract-first behavior passes 5/5 seeds
+       V1-V8 features retain 100% endpoint F1 and exact statuses
+       public no-login features retain semantic automation success
+       every projection stays inside its declared budget
+
+2. Correct compaction priority.
+   - Trim replay examples, automation-only hints, duplicate route summaries,
+     and candidate traces before confirmed contract data flows in contract mode.
+   - Preserve an explicit omitted-count breakdown for every evidence class.
+   - Add a regression test proving a 32K KeyManager projection keeps the
+     create->patch and create/patch->delete license.id flows.
+   - Do not solve this only by increasing the global context budget.
+
+NEXT - P1 ARCHITECTURE AND REPRODUCIBILITY
+3. Reorganize module boundaries. RECOMMENDED.
+   - Keep farmer extraction and aggregation provider-independent.
+   - Move buildFeatureContext, replay profiles, compaction, raw projection, and
+     budget allocation out of src/gym-ab.js into src/evidence/.
+   - Add task projectors such as:
+       projectContractEvidence
+       projectAutomationEvidence
+       projectHybridEvidence
+       projectDiagnosticEvidence
+   - Move contract prompt/schema/evaluation into src/tasks/contract/.
+   - Move automation prompt/schema/validation/execution/evaluation into
+     src/tasks/automation/.
+   - Keep src/gemini.js as a provider adapter behind a structured-generation
+     interface.
+   - Reduce scripts to dataset selection, task configuration, orchestration,
+     and artifact output.
+
+4. Make benchmark fixtures self-validating.
+   - Fix the default V5 manifest path.
+   - Reject stale KeyManager evidence when contractInventory is missing.
+   - Load only suites selected by CONTRACT_SUITES instead of eagerly loading
+     every manifest.
+   - Record source recording/farm paths, farmer schema version, projection
+     mode, budget policy, model, seed, and git commit in every matrix.
+   - Fail early with a concise regeneration command when a fixture is absent.
+
+5. Strengthen regression gates.
+   - Add KeyManager five-seed lifecycle rates to the normal test/release gate.
+   - Report contract shape, executable readiness, semantic automation, and
+     exact output compliance independently.
+   - Compare token use per task projection, not one mixed features payload.
+   - Keep no-evidence contamination checks and quarantine contaminated targets.
+   - Add at least one multi-seed public no-login run before making statistical
+     claims about arm superiority.
+
+NEXT - P2 COVERAGE
+6. Continue replacing semantic field-name allowlists with bounded structural
+   candidate generation where repeated evidence supports it.
+7. Improve semantic-action sibling versus dynamic-parameter classification
+   using member stability, finite vocabularies, schemas, and statuses.
+8. Keep hash/transform relations labeled as bounded observed candidates rather
+   than proof of source-code causality.
+9. Add unseen real applications and fresh holdout transform families before
+   treating synthetic Gym scores as production estimates.
+10. Preserve an intentionally unsupported holdout family in each detector
+    benchmark to measure false discovery pressure.
+
+COMPLETED HISTORY
+- Detailed implementation history is kept in:
     GYM_V5_EVALUATION.md
-- Runtime matrix:
-    generated/gym-ab-v5/matrix.md
-- The KeyManager real-dashboard experiment captured 3 sessions x 3
-  iterations / 159 requests and produced contracts under all four canonical
-  conditions: none, raw, features, and raw+features.
-- Features-only plus an explicit unroll instruction recovered all 8 observed
-  concrete endpoints with fewer prompt tokens than raw.
-- Full real-dashboard report:
-    KEYMANAGER_CONTRACT_AB_EVALUATION.md
-- A five-seed KeyManager run and a 21-case seeded Gym V6 are documented in:
     GYM_V6_EVALUATION.md
-- All 37 local tests pass.
-
-IMPLEMENTED IN V5
-- Twelve data-driven farmer challenges with independent Gym ground truth.
-- Direct scoring for core/noise classification, workflow ordering, and
-  relation precision/recall.
-- Single-session versus cross-session A/B without Gemini.
-- A deliberate session-one false correlation verifies that cross-session
-  aggregation removes unstable relations.
-- Fixed-budget feature compaction now enforces the complete evidence envelope
-  even with high relation counts.
-- Raw projection supports configurable API path prefixes such as /v1/.
-- Real-browser KeyManager recorder exercises login, CRUD, audit, delete, and
-  logout while redacting sensitive values before Gemini.
-- Feature evidence emits structured warnings when semantic sibling routes were
-  generalized into :var.
-
-COMPLETED 2026-07-18: PRESERVE PER-SIBLING PROVENANCE
-- Current route farming can generalize semantic siblings:
-    GET  /v1/admin/session
-    GET  /v1/admin/licenses
-    GET  /v1/admin/audit-logs
-      -> GET /v1/admin/:var
-- Concrete endpoint names remain recoverable from endpoint examples, so Gemini
-  can unroll them when explicitly instructed.
-- However, cross-session features currently aggregate request fields, response
-  schemas, query keys, and status counts at the :var family level.
-- This means features are sufficient for concrete endpoint discovery but not
-  for lossless per-sibling contract attribution.
-- A member index is now preserved under every generalized route family:
-    concrete method + path
-    per-member request count and session/iteration support
-    per-member observed status counts
-    per-member query keys
-    per-member request fields and response schemas
-    per-member examples and relations
-- The generalized family remains the primary abstraction; unrolling is
-  lossless and attributes supported only at family level emit explicit
-  attribution warnings.
-- A regression benchmark now gives login, licenses, and logout siblings
-  different statuses and incompatible request/response schemas.
-- All 24 local tests pass.
-- The KeyManager rerun recovered 8 concrete endpoints from neutral
-  features-only evidence, with all 8 observed status sets matching raw.
-- Before this change, neutral features emitted 4 generalized endpoints and
-  the explicit-unroll diagnostic emitted 8 endpoints with empty statuses.
-
-COMPLETED 2026-07-18: CONTRACT-ORIENTED ATTENTION COMPACTION
-- Member relations are stored once in a shared concrete relation index;
-  members keep relation IDs instead of duplicating full relation objects.
-- Contract evidence now includes an authoritative concrete inventory with
-  pre-attributed statuses, request fields, response schemas, authentication
-  transport, and ranked incoming response-to-request data flows.
-- Observational response-to-response correlations and lower-value generic
-  relations are excluded from the contract prompt.
-- Under the 32K evidence budget, features-only and raw+features both recover
-  8/8 concrete endpoints with 8/8 exact observed status sets.
-- Features-only prompt tokens fell from 15,504 to 12,407 while preserving
-  endpoint, status, authentication, and workflow dependency fidelity.
-- KeyManager farm artifacts fell from 150.33 MB to 70.41 MB.
-
-COMPLETED 2026-07-18: MULTI-SEED MEASUREMENT AND SEEDED GYM V6
-- KeyManager contract generation now runs raw, features, and raw+features over
-  five configurable model seeds.
-- All three arms were stable on endpoints, statuses, hallucinations, and
-  lifecycle dependencies. Features and raw+features identified cookie
-  authentication in 5/5 runs; raw identified it in 0/5.
-- Features used 12,407 prompt tokens, 31.3% fewer than raw.
-- Gym V6 generates randomized recorder-compatible holdouts from three seeds:
-  arbitrary affix, affine numeric, HMAC-SHA256, JSON-base64url, reverse
-  string, array selection, and semantic siblings.
-- Across 21 V6 cases, cross-session farming scored 90.48 versus 84.57 for one
-  session. Core/noise classification, workflow order, and semantic sibling
-  attribution remained exact.
-- Five novel transforms remain unsupported and reach only 50% relation recall;
-  array selection reaches 100%. This provides explicit targets for the next
-  detector work without asking the LLM to discover candidate relationships.
-
-COMPLETED 2026-07-18: BOUNDED TRANSFORM DETECTORS AND GYM V7
-- Candidate selection is structural and bounded instead of relying on semantic
-  field-name allowlists.
-- Deterministic detectors cover affix, affine numeric, HMAC-SHA256,
-  JSON-base64url, reverse string, and array selection transforms.
-- V6 cross-session improved from 90.48 to 100.00 and relation recall improved
-  from 58.3% to 100%.
-- Gym V7 uses five fresh seeds / 40 cases and includes an unsupported
-  character-rotation holdout. Supported families remain at 100% relation
-  recall; the holdout remains undiscovered with 100% precision.
-- A real KeyManager refarm exposed six low-diversity affine correlations.
-  They are retained as diagnostic hypotheses with support/risk metadata, but
-  excluded from actionable contract attention. The supported Gym affine
-  family remains promoted.
-- Full farmer-vs-raw interpretation:
-    FARMER_EFFECTIVENESS.md
-
-COMPLETED 2026-07-18: OBSERVATION-PRESERVING RELATION TIERS
-- Relation detection now produces a high-recall candidate inventory separately
-  from the actionable relation projection.
-- Single-session and low-diversity hypotheses retain transforms, support,
-  promotion reasons, and risk flags in dedicated candidate artifacts.
-- KeyManager retains 3,684 cross-session candidates: 1,541 actionable and
-  2,143 diagnostic-only, including all six affine observations discussed
-  above.
-- Contract prompts receive only actionable relations plus the diagnostic
-  candidate count/artifact pointer, so insight is preserved without spending
-  model attention on thousands of weak candidates.
-
-COMPLETED 2026-07-18: LOSSLESS LINEAGE COMPRESSION
-- Exact-copy relation components now expose a compact backbone while retaining
-  every direct edge by ID in a side index.
-- Directed transforms are kept separate and are never collapsed into
-  exact-copy equivalence groups.
-- KeyManager actionable exact edges compress from 1,514 to a 286-edge
-  backbone; candidate exact edges compress from 3,651 to 388.
-- Comparable cross-session artifact storage fell 30.7%, from 22.76 MB to
-  15.78 MB, while adding session provenance and lineage indexes.
-- Compact contract feature context grew by only 347 characters and still
-  selects seven contract data flows rather than exposing the full graph.
-
-COMPLETED 2026-07-18: RANDOMIZED GYM V8 FOR LINEAGE COMPRESSION
-- V8 has five configurations with five cases each: dense CRUD propagation,
-  session fan-out, parallel identities, semantic siblings, and an optional
-  one-session edge case.
-- It uses ordinary exact-copy website flows, randomized routes/fields/noise,
-  and no custom hash or magic transform.
-- The score requires direct-edge preservation, lineage purity, a connected
-  minimal backbone, and correct candidate/actionable tiering.
-- Canonical seed 88001 and holdout seed 88019 both scored 100/100 on all
-  25 cases.
-- Full report:
     GYM_V8_EVALUATION.md
-
-OTHER FARMER TODO
-1. Continue replacing semantic field-name allowlists with bounded structural
-   candidate generation where a detector has strong repeated evidence.
-2. Distinguish semantic action siblings from truly dynamic path parameters
-   using member stability, schemas, statuses, and repeated finite vocabularies.
-3. Preserve the warning that hash-derived relations are bounded tested
-   candidates, not proof of source-code causality.
-4. Add unseen real applications and holdout transformations before treating
-   the current synthetic score as a production success estimate.
-5. Add bounded deterministic detectors for the V6 holdouts, then evaluate
-   them on fresh seeds and at least one transform family not used while
-   implementing each detector.
+    FARMER_EFFECTIVENESS.md
+    KEYMANAGER_CONTRACT_AB_EVALUATION.md
+    CONTRACT_RERUN_EVALUATION.md
+    PUBLIC_NO_LOGIN_EVALUATION.md
+    PUBLIC_NO_LOGIN_BEFORE_AFTER.md
+- Completed areas include per-sibling provenance, contract attention
+  compaction, multi-seed measurement, bounded transform detectors, candidate
+  relation tiers, lineage compression, V1-V8 contract matrices, and the public
+  no-login benchmark.
 
 REPRODUCE
+- Unit/integration suite:
+    npm test
 - Farmer-only Gym V5:
     npm run gym:v5
-- KeyManager four-arm API-contract experiment:
-    npm run keymanager:contract-ab
-- Features-only concrete endpoint unroll diagnostic:
-    npm run keymanager:feature-unroll
-- KeyManager multi-seed contract experiment:
-    npm run keymanager:contract-multiseed
 - Seeded randomized Gym V6:
     npm run gym:v6
-- Fresh-seed Gym V7 with an unsupported transform holdout:
+- Fresh-seed Gym V7:
     npm run gym:v7
 - Randomized lineage-compression Gym V8:
     npm run gym:v8
+- V1-V8 + KeyManager contract matrix:
+    npm run gym:contract-matrix
+- KeyManager four-arm contract experiment:
+    npm run keymanager:contract-ab
+- KeyManager five-seed contract experiment:
+    npm run keymanager:contract-multiseed
+- Public no-login contract and automation matrix:
+    npm run gym:public-no-login
