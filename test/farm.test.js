@@ -7,6 +7,7 @@ const path = require('node:path');
 const test = require('node:test');
 const { farmRecording, findHashRelations, parseStructuredText } = require('../src/farm');
 const { farmInput } = require('../src/collection');
+const { buildFeatureContext, compactFeatureContext } = require('../src/gym-ab');
 
 test('parses JSON and form payloads', () => {
   assert.deepEqual(parseStructuredText('{"id":3}', 'application/json'), {
@@ -305,7 +306,11 @@ function writeSiblingRecording(input, recordingId) {
     {
       path: 'licenses',
       status: 202,
-      request: (iteration) => ({ licenseKey: `key-${iteration}`, limits: { seats: iteration + 1 } }),
+      request: (iteration) => ({
+        licenseKey: `key-${iteration}`,
+        limits: { seats: iteration + 1 },
+        sessionToken: `token-${recordingId}-${iteration}`,
+      }),
       response: (iteration) => ({ jobId: `job-${recordingId}-${iteration}`, queued: true }),
     },
     {
@@ -376,5 +381,34 @@ test('preserves lossless per-sibling statuses and incompatible schemas across se
   assert.ok(login.responseSchemas.some((schema) => schema.fieldPath === '$.session.token'));
   assert.ok(licenses.responseSchemas.some((schema) => schema.fieldPath === '$.jobId'));
   assert.equal(logout.responseSchemas.length, 0);
+  assert.ok(farmed.summary.crossSessionMemberRelations.some((relation) => (
+    relation.source.routeKey.endsWith('/login')
+    && relation.source.fieldPath === '$.session.token'
+    && relation.target.routeKey.endsWith('/licenses')
+    && relation.target.fieldPath === '$.sessionToken'
+  )));
+
+  const context = buildFeatureContext(output);
+  const contractLogin = context.contractInventory.find((endpoint) => endpoint.path.endsWith('/login'));
+  const contractLicenses = context.contractInventory.find((endpoint) => (
+    endpoint.method === 'POST' && endpoint.path.endsWith('/licenses')
+  ));
+  assert.deepEqual(contractLogin.observed.statusCounts, { 201: 6 });
+  assert.ok(contractLogin.responseSchemas.some((schema) => schema.path === 'body.json$.session.token'));
+  assert.ok(contractLicenses.requestFields.some((field) => field.path === 'body.json$.sessionToken'));
+  assert.ok(contractLicenses.dataFlows.selected.some((relation) => (
+    relation.from.endpoint === 'POST /v1/admin/login'
+    && relation.from.field === 'response.body.json$.session.token'
+    && relation.to.endpoint === 'POST /v1/admin/licenses'
+    && relation.to.field === 'request.body.json$.sessionToken'
+  )));
+  const compact = compactFeatureContext(context, 12_000);
+  assert.ok(JSON.stringify(compact).length <= 12_000);
+  assert.equal(compact.contractInventory.length, 3);
+  assert.ok(compact.contractInventory.some((endpoint) => (
+    endpoint.method === 'POST'
+    && endpoint.path.endsWith('/licenses')
+    && endpoint.dataFlows.selected.some((relation) => relation.to.field.endsWith('$.sessionToken'))
+  )));
   assert.ok(fs.existsSync(path.join(output, 'endpoints.cross-session.json')));
 });

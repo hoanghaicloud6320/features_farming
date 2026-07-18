@@ -67,11 +67,25 @@ COMPLETED 2026-07-18: PRESERVE PER-SIBLING PROVENANCE
   attribution warnings.
 - A regression benchmark now gives login, licenses, and logout siblings
   different statuses and incompatible request/response schemas.
-- All 23 local tests pass.
+- All 24 local tests pass.
 - The KeyManager rerun recovered 8 concrete endpoints from neutral
   features-only evidence, with all 8 observed status sets matching raw.
 - Before this change, neutral features emitted 4 generalized endpoints and
   the explicit-unroll diagnostic emitted 8 endpoints with empty statuses.
+
+COMPLETED 2026-07-18: CONTRACT-ORIENTED ATTENTION COMPACTION
+- Member relations are stored once in a shared concrete relation index;
+  members keep relation IDs instead of duplicating full relation objects.
+- Contract evidence now includes an authoritative concrete inventory with
+  pre-attributed statuses, request fields, response schemas, authentication
+  transport, and ranked incoming response-to-request data flows.
+- Observational response-to-response correlations and lower-value generic
+  relations are excluded from the contract prompt.
+- Under the 32K evidence budget, features-only and raw+features both recover
+  8/8 concrete endpoints with 8/8 exact observed status sets.
+- Features-only prompt tokens fell from 15,504 to 12,407 while preserving
+  endpoint, status, authentication, and workflow dependency fidelity.
+- KeyManager farm artifacts fell from 150.33 MB to 70.41 MB.
 
 OTHER FARMER TODO
 1. Expand the generic substring/prefix detector beyond its semantic field-name
@@ -85,8 +99,6 @@ OTHER FARMER TODO
    candidates, not proof of source-code causality.
 4. Add unseen real applications and holdout transformations before treating
    the current synthetic score as a production success estimate.
-5. Evaluate compact feature ranking after per-sibling provenance is available;
-   compare endpoint coverage, schema/status fidelity, token cost, and latency.
 
 REPRODUCE
 - Farmer-only Gym V5:

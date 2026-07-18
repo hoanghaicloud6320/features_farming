@@ -86,6 +86,11 @@ function shortHash(value) {
   return crypto.createHash('sha256').update(String(value)).digest('hex').slice(0, 12);
 }
 
+function round(value, digits = 3) {
+  const scale = 10 ** digits;
+  return Math.round(value * scale) / scale;
+}
+
 function redact(value, key = '') {
   if (Array.isArray(value)) return value.map((item) => redact(item, key));
   if (value && typeof value === 'object') {
@@ -224,6 +229,9 @@ function buildPrompt(condition, evidence) {
     'Mark every endpoint as observed, inferred, or unknown.',
     'When evidence is absent, state that a reliable contract cannot be recovered.',
     'Describe request and response shapes compactly in plain text.',
+    'When farmedFeatures.contractInventory exists, treat it as the authoritative concrete inventory and transcribe its pre-attributed status/schema evidence; do not rematch siblings yourself.',
+    'contractInventory.dataFlows are already joined and ranked by the farmer. Describe those direct flows without searching other fields for matches.',
+    'An omitted count means lower-ranked evidence was intentionally excluded; do not infer its contents.',
     'For every endpoint unrolled from a generalized :var family, use its concrete member index for statuses, query keys, request fields, response schemas, examples, and relations.',
     'Do not copy a family-level status, schema, field, or relation onto a concrete sibling; warn when the evidence marks an attribute as family-only.',
     'Keep redacted values redacted; never attempt to reconstruct secrets.',
@@ -270,6 +278,44 @@ function renderContract(condition, generated) {
   for (const item of contract.uncertainties) lines.push(`- ${item}`);
   if (contract.nodejsSample) lines.push('', '## Optional Node.js sample', '', '```js', contract.nodejsSample, '```');
   return `${lines.join('\n')}\n`;
+}
+
+function normalizeContractPath(value) {
+  return String(value || '')
+    .split('?', 1)[0]
+    .replace(/[0-9a-f]{8}-[0-9a-f-]{27,}/ig, ':param')
+    .replace(/\{[^/}]+\}|:[^/]+/g, ':param')
+    .replace(/\/+$/, '') || '/';
+}
+
+function evaluateContract(contract, contractInventory) {
+  const expected = new Map(contractInventory.map((endpoint) => ([
+    `${endpoint.method.toUpperCase()} ${normalizeContractPath(endpoint.path)}`,
+    endpoint,
+  ])));
+  const claims = new Map(contract.endpoints.map((endpoint) => ([
+    `${endpoint.method.toUpperCase()} ${normalizeContractPath(endpoint.path)}`,
+    endpoint,
+  ])));
+  let matchedEndpoints = 0;
+  let exactStatusSets = 0;
+  for (const [key, endpoint] of expected) {
+    const claim = claims.get(key);
+    if (!claim) continue;
+    matchedEndpoints += 1;
+    const expectedStatuses = Object.keys(endpoint.observed.statusCounts || {}).map(Number).sort((a, b) => a - b);
+    const claimedStatuses = [...new Set(claim.observedStatuses || [])].sort((a, b) => a - b);
+    if (JSON.stringify(expectedStatuses) === JSON.stringify(claimedStatuses)) exactStatusSets += 1;
+  }
+  return {
+    expectedEndpoints: expected.size,
+    claimedEndpoints: claims.size,
+    matchedEndpoints,
+    endpointCoverage: round(matchedEndpoints / Math.max(expected.size, 1)),
+    hallucinatedEndpoints: [...claims.keys()].filter((key) => !expected.has(key)),
+    exactStatusSets,
+    exactStatusSetAccuracy: round(exactStatusSets / Math.max(expected.size, 1)),
+  };
 }
 
 async function main() {
@@ -339,6 +385,7 @@ async function main() {
     fs.writeFileSync(path.join(conditionRoot, 'evidence.json'), `${JSON.stringify(evidence, null, 2)}\n`);
     fs.writeFileSync(path.join(conditionRoot, 'contract.json'), `${JSON.stringify(generated.data, null, 2)}\n`);
     fs.writeFileSync(path.join(conditionRoot, 'contract.md'), renderContract(condition, generated));
+    const evaluation = evaluateContract(generated.data, features.contractInventory);
     matrix.conditions.push({
       id: condition.id,
       label: condition.label,
@@ -346,6 +393,7 @@ async function main() {
       promptTokens: generated.usageMetadata?.promptTokenCount || null,
       endpointClaims: generated.data.endpoints.length,
       workflowClaims: generated.data.workflows.length,
+      evaluation,
       responseId: generated.responseId,
     });
     console.log(`${condition.id}: ${generated.data.endpoints.length} endpoint claims`);
@@ -365,5 +413,7 @@ if (require.main === module) {
 
 module.exports = {
   CONTRACT_SCHEMA,
+  evaluateContract,
+  normalizeContractPath,
   renderContract,
 };

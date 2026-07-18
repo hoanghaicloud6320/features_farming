@@ -2,6 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const { farmRecording } = require('./farm');
 
 function writeJson(file, value) {
@@ -33,6 +34,10 @@ function median(values) {
 function round(value, digits = 3) {
   const scale = 10 ** digits;
   return Math.round(value * scale) / scale;
+}
+
+function shortHash(value) {
+  return crypto.createHash('sha256').update(value).digest('hex').slice(0, 12);
 }
 
 function endpointBase(signature) {
@@ -124,36 +129,6 @@ function aggregateEndpointMembers(entries, usableCount) {
         };
       },
     ).sort((a, b) => a.side.localeCompare(b.side) || a.fieldPath.localeCompare(b.fieldPath));
-    const relations = aggregateNested(
-      memberEntries,
-      (member) => member.relations || [],
-      (relation) => [
-        relation.kind,
-        relation.source.endpoint,
-        relation.source.side,
-        relation.source.location,
-        relation.source.fieldPath,
-        relation.target.endpoint,
-        relation.target.side,
-        relation.target.location,
-        relation.target.fieldPath,
-      ].join('|'),
-      (relationEntries) => {
-        const relation = relationEntries[0].item;
-        return {
-          kind: relation.kind,
-          source: relation.source,
-          sources: relation.sources,
-          target: relation.target,
-          sessionPresence: new Set(relationEntries.map((entry) => entry.sessionId)).size,
-          supportIterations: relationEntries.reduce((sum, entry) => sum + entry.item.supportIterations, 0),
-          transforms: [...new Set(relationEntries
-            .map((entry) => JSON.stringify(entry.item.transform))
-            .filter((value) => value !== undefined))].map(JSON.parse),
-          examples: relationEntries.flatMap((entry) => entry.item.evidence || []).slice(0, 5),
-        };
-      },
-    ).sort((a, b) => b.sessionPresence - a.sessionPresence || b.supportIterations - a.supportIterations);
     return {
       routeKey,
       signature: `${routeKey}?${queryKeys.join(',')}`,
@@ -176,7 +151,7 @@ function aggregateEndpointMembers(entries, usableCount) {
       requestFields: fields.filter((field) => field.side === 'request'),
       schemas,
       responseSchemas: schemas.filter((schema) => schema.side === 'response'),
-      relations,
+      relationIds: [],
     };
   }).sort((a, b) => a.signature.localeCompare(b.signature));
 }
@@ -375,6 +350,66 @@ function aggregateSessions(sessionResults) {
   ).filter((relation) => relation.sessionPresence >= Math.min(2, usableCount))
     .sort((a, b) => b.sessionPresence - a.sessionPresence || b.averageConfidence - a.averageConfidence);
 
+  const memberRelations = aggregateByKey(
+    usable,
+    (result) => result.memberRelations,
+    (relation) => {
+      const sources = relation.sources?.length ? relation.sources : [relation.source];
+      return [
+        relation.kind,
+        sources.map((source) => [
+          endpointBase(source.endpoint),
+          source.side,
+          source.location,
+          source.fieldPath,
+        ].join('|')).sort().join(','),
+        endpointBase(relation.target.endpoint),
+        relation.target.side,
+        relation.target.location,
+        relation.target.fieldPath,
+      ].join('|');
+    },
+    (key, entries) => {
+      const first = entries[0].item;
+      const compactPoint = (point) => ({
+        routeKey: endpointBase(point.endpoint),
+        side: point.side,
+        location: point.location,
+        fieldPath: point.fieldPath,
+      });
+      const sources = (first.sources?.length ? first.sources : [first.source]).map(compactPoint);
+      return {
+        id: shortHash(key),
+        kind: first.kind,
+        source: compactPoint(first.source),
+        sources,
+        target: compactPoint(first.target),
+        sessionPresence: new Set(entries.map((entry) => entry.sessionId)).size,
+        averageConfidence: round(entries.reduce((sum, entry) => sum + entry.item.confidence, 0) / entries.length),
+        supportIterations: entries.reduce((sum, entry) => sum + entry.item.supportIterations, 0),
+        distinctSourceValues: Math.max(...entries.map((entry) => entry.item.distinctSourceValues || 0)),
+        medianRequestDistance: median(entries
+          .map((entry) => entry.item.medianRequestDistance)
+          .filter(Number.isFinite)),
+        transforms: [...new Set(entries
+          .map((entry) => JSON.stringify(entry.item.transform))
+          .filter((value) => value !== undefined))].map(JSON.parse),
+      };
+    },
+  ).filter((relation) => relation.sessionPresence >= Math.min(2, usableCount))
+    .sort((a, b) => b.sessionPresence - a.sessionPresence || b.averageConfidence - a.averageConfidence);
+  for (const endpoint of endpoints) {
+    for (const member of endpoint.members || []) {
+      member.relationIds = memberRelations
+        .filter((relation) => (
+          relation.source.routeKey === member.routeKey
+          || relation.sources.some((source) => source.routeKey === member.routeKey)
+          || relation.target.routeKey === member.routeKey
+        ))
+        .map((relation) => relation.id);
+    }
+  }
+
   const schemas = aggregateByKey(
     usable,
     (result) => result.schemas,
@@ -443,7 +478,7 @@ function aggregateSessions(sessionResults) {
   ).sort((a, b) => b.sessionPresence - a.sessionPresence || a.name.localeCompare(b.name));
 
   return {
-    schemaVersion: 3,
+    schemaVersion: 4,
     generatedAt: new Date().toISOString(),
     sessionCount: sessionResults.length,
     usableSessionCount: usableCount,
@@ -458,6 +493,7 @@ function aggregateSessions(sessionResults) {
     crossSessionEndpoints: endpoints,
     crossSessionFields: fields,
     crossSessionRelations: relations,
+    crossSessionMemberRelations: memberRelations,
     crossSessionSchemas: schemas,
     crossSessionCookies: cookies,
     consensusWorkflow,
@@ -496,6 +532,7 @@ async function farmInput({ inputDirectory, outputDirectory, maxJsonBytes }) {
   writeJson(path.join(outputDirectory, 'endpoints.cross-session.json'), summary.crossSessionEndpoints);
   writeJson(path.join(outputDirectory, 'fields.cross-session.json'), summary.crossSessionFields);
   writeJson(path.join(outputDirectory, 'relations.cross-session.json'), summary.crossSessionRelations);
+  writeJson(path.join(outputDirectory, 'relations.members.cross-session.json'), summary.crossSessionMemberRelations);
   writeJson(path.join(outputDirectory, 'schemas.cross-session.json'), summary.crossSessionSchemas);
   writeJson(path.join(outputDirectory, 'cookies.cross-session.json'), summary.crossSessionCookies);
   fs.writeFileSync(path.join(outputDirectory, 'report.md'), collectionReport(summary));

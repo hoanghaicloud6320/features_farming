@@ -230,3 +230,61 @@ better than the previous four generalized claims but below the eight endpoints
 from features-only and raw. Since the feature-only arm contains all eight
 within the same evidence budget, this combined-arm miss is a generation/ranking
 result rather than loss of member provenance and remains an evaluation target.
+
+## 2026-07-18 contract-oriented attention rerun
+
+The next iteration moved matching and ranking work out of the model prompt:
+
+- concrete/member relations are stored once in a shared index;
+- every contract endpoint is pre-attributed with statuses, query keys, request
+  fields, response schemas, and session/iteration support;
+- incoming response-to-request dependencies are pre-joined and ranked;
+- cookie producers and consumers are summarized directly;
+- generic response-to-response correlations are omitted from contract
+  evidence;
+- the model is instructed to transcribe the authoritative inventory instead
+  of rediscovering sibling matches.
+
+The same 159-request recording produced:
+
+| Output | Provenance rerun | Attention rerun |
+|---|---:|---:|
+| Features endpoint coverage | 8/8 | 8/8 |
+| Features exact status sets | 8/8 | 8/8 |
+| Raw+features endpoint coverage | 6/8 | 8/8 |
+| Raw+features exact status sets | 6/8 | 8/8 |
+| Features evidence chars | 31,643 | 23,542 |
+| Features prompt tokens | 15,504 | 12,407 |
+| Raw reference prompt tokens | 17,967 | 18,046 |
+| Farm artifact size | 150.33 MB | 70.41 MB |
+| Cross-session JSON size | 16.66 MB | 3.93 MB |
+| Cross-session endpoint index | 14.78 MB | 1.21 MB |
+
+Features-only now uses 20.0% fewer prompt tokens than the first provenance
+implementation and 31.2% fewer than the current raw arm. It also produced the
+correct cookie-based authentication interpretation, while raw-only described
+authentication as token-based in this run.
+
+The ranked evidence explicitly supplied the lifecycle dependencies:
+
+```text
+POST /v1/admin/licenses response.license.id
+  -> PATCH  /v1/admin/licenses/:uuid request.path
+  -> DELETE /v1/admin/licenses/:uuid request.path
+```
+
+This fixes the combined-arm endpoint regression without asking the model to
+search relation candidates. A deterministic evaluator now scores normalized
+endpoint coverage, hallucinated endpoints, and exact observed status sets.
+
+Remaining limitations:
+
+- artifact size is still larger than the pre-provenance 38.0 MB baseline
+  because both family-level and concrete relation indexes are retained;
+- schema fidelity is regression-tested but does not yet have field-level
+  precision/recall scoring;
+- relation ranking is evidence-based and can still select stable correlations
+  that are not source-code causal;
+- a single model run cannot measure generation variance;
+- this remains one real application plus synthetic holdouts, not a production
+  accuracy estimate.

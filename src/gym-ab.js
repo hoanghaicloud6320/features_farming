@@ -96,6 +96,286 @@ function buildRawContext(recordingRoot, options = {}) {
   };
 }
 
+function contractRoute(routeKey) {
+  const separator = routeKey.indexOf(' ');
+  const method = separator >= 0 ? routeKey.slice(0, separator) : 'GET';
+  const hostAndPath = separator >= 0 ? routeKey.slice(separator + 1) : routeKey;
+  const pathIndex = hostAndPath.indexOf('/');
+  return {
+    method,
+    path: pathIndex >= 0 ? hostAndPath.slice(pathIndex) : '/',
+  };
+}
+
+function fieldImportance(field) {
+  const locationScore = field.location?.startsWith('body.') ? 40
+    : field.location === 'url.query' ? 35
+      : field.location === 'url.path' ? 10
+        : field.location === 'header' || field.location === 'cookie' ? 20
+          : 0;
+  return locationScore + (field.sessionPresence || 0) * 10 + (field.iterationPresence || 0);
+}
+
+function compactRequestFields(fields, maximum = 60) {
+  const meaningful = fields.filter((field) => (
+    field.location !== 'url.path'
+    || /:/.test(field.fieldPath)
+    || field.behaviors?.some((behavior) => behavior !== 'constant')
+  ));
+  return meaningful
+    .sort((a, b) => fieldImportance(b) - fieldImportance(a) || a.fieldPath.localeCompare(b.fieldPath))
+    .slice(0, maximum)
+    .map((field) => {
+      const output = {
+        path: `${field.location}${field.fieldPath}`,
+        types: field.types,
+        sessions: field.sessionPresence,
+      };
+      if (field.behaviors?.some((behavior) => behavior !== 'constant')) output.behaviors = field.behaviors;
+      return output;
+    });
+}
+
+function compactResponseSchemas(schemas, maximum = 80) {
+  return schemas
+    .sort((a, b) => (
+      (b.sessionPresence || 0) - (a.sessionPresence || 0)
+      || a.fieldPath.localeCompare(b.fieldPath)
+    ))
+    .slice(0, maximum)
+    .map((schema) => {
+      const output = {
+        path: `${schema.location}${schema.fieldPath}`,
+        kind: schema.kind,
+        sessions: schema.sessionPresence,
+      };
+      if (schema.types?.length) output.types = schema.types;
+      if (schema.itemTypes?.length) output.itemTypes = schema.itemTypes;
+      if (schema.keys?.length) output.keys = schema.keys;
+      return output;
+    });
+}
+
+function relationImportance(relation) {
+  const crossEndpoint = relation.source.routeKey !== relation.target.routeKey ? 40 : 0;
+  const responseToRequest = relation.source.side === 'response' && relation.target.side === 'request' ? 60 : 0;
+  const structured = /body|query|path/.test(`${relation.source.location}|${relation.target.location}`) ? 20 : 0;
+  const transformed = relation.transforms?.length ? 15 : 0;
+  const dynamicPathTarget = relation.target.location === 'url.path' ? 80 : 0;
+  const identitySource = /(?:^|[._-])(?:id|uuid)(?:$|[._-])/i.test(relation.source.fieldPath) ? 30 : 0;
+  const sourceMethod = contractRoute(relation.source.routeKey).method;
+  const producerMethod = ['POST', 'PUT', 'PATCH'].includes(sourceMethod) ? 40 : 0;
+  const observationalSourcePenalty = /(?:audit|history|logs?|events?)(?:\/|$)/i.test(
+    contractRoute(relation.source.routeKey).path,
+  ) ? 100 : 0;
+  const distancePenalty = Math.min(Math.max(relation.medianRequestDistance || 0, 0), 50);
+  return responseToRequest + crossEndpoint + structured + transformed + dynamicPathTarget + identitySource + producerMethod
+    + (relation.sessionPresence || 0) * 20
+    + (relation.supportIterations || 0)
+    + (relation.averageConfidence || 0) * 10
+    - distancePenalty
+    - observationalSourcePenalty;
+}
+
+function compactRelationPoint(point) {
+  const route = contractRoute(point.routeKey);
+  return {
+    endpoint: `${route.method} ${route.path}`,
+    field: `${point.side}.${point.location}${point.fieldPath}`,
+  };
+}
+
+function selectContractRelations(relations, relationIds, targetRouteKey, maximum = 8) {
+  const relationIdSet = new Set(relationIds);
+  const candidates = relations
+    .filter((relation) => relationIdSet.has(relation.id))
+    .filter((relation) => relation.target.routeKey === targetRouteKey)
+    .filter((relation) => relation.source.side === 'response' && relation.target.side === 'request')
+    .filter((relation) => relation.source.routeKey !== relation.target.routeKey)
+    .sort((a, b) => relationImportance(b) - relationImportance(a));
+  const selected = [];
+  const targets = new Set();
+  for (const relation of candidates) {
+    const targetKey = [
+      relation.kind,
+      relation.target.routeKey,
+      relation.target.location,
+      relation.target.fieldPath,
+    ].join('|');
+    if (targets.has(targetKey)) continue;
+    targets.add(targetKey);
+    const compactRelation = {
+      kind: relation.kind,
+      from: compactRelationPoint(relation.source),
+      to: compactRelationPoint(relation.target),
+      support: {
+        sessions: relation.sessionPresence,
+        iterations: relation.supportIterations,
+        distinctValues: relation.distinctSourceValues,
+        medianRequestDistance: relation.medianRequestDistance,
+        confidence: relation.averageConfidence,
+      },
+    };
+    if (relation.sources.length > 1) compactRelation.sources = relation.sources.map(compactRelationPoint);
+    if (relation.transforms[0]) compactRelation.transform = relation.transforms[0];
+    if (relation.kind === 'hash-derived-copy') {
+      compactRelation.note = 'Bounded tested candidate; not proof of source-code causality.';
+    }
+    selected.push(compactRelation);
+    if (selected.length >= maximum) break;
+  }
+  return {
+    selected,
+    availableCount: candidates.length,
+    omittedCount: Math.max(0, candidates.length - selected.length),
+    selectionRule: 'Cross-endpoint response-to-request flows first, then structured transformed flows, ranked by session and iteration support.',
+  };
+}
+
+function buildAuthenticationEvidence(summary, maximum = 8) {
+  const relations = summary.crossSessionMemberRelations || [];
+  const credentials = new Map();
+  const addFields = (endpoint, fields) => {
+    for (const field of fields) {
+      const credentialLike = field.location === 'cookie'
+        || (field.location === 'header' && /authorization|csrf|token/i.test(field.fieldPath));
+      if (!credentialLike) continue;
+      const key = `${field.location}|${field.fieldPath}`;
+      if (!credentials.has(key)) {
+        credentials.set(key, {
+          transport: field.location,
+          fieldPath: field.fieldPath,
+          producers: new Set(),
+          consumers: new Set(),
+          sessionPresence: 0,
+        });
+      }
+      const credential = credentials.get(key);
+      if (field.side === 'response') credential.producers.add(endpoint);
+      if (field.side === 'request') credential.consumers.add(endpoint);
+      credential.sessionPresence = Math.max(credential.sessionPresence, field.sessionPresence || 0);
+    }
+  };
+  for (const family of summary.crossSessionEndpoints || []) {
+    if (family.members?.length) {
+      for (const member of family.members) {
+        const route = contractRoute(member.routeKey);
+        addFields(`${route.method} ${route.path}`, member.fields || []);
+      }
+    } else {
+      const route = contractRoute(family.routeKey);
+      addFields(
+        `${route.method} ${route.path}`,
+        summary.crossSessionFields.filter((field) => field.endpoint === family.signature),
+      );
+    }
+  }
+  const candidates = relations
+    .filter((relation) => (
+      relation.kind.includes('token')
+      || relation.kind.includes('jwt')
+      || [relation.source, relation.target].some((point) => (
+        point.location === 'cookie'
+        || point.location === 'header'
+        || /authorization|cookie|csrf|(?:^|[._-])token(?:$|[._-])/i.test(point.fieldPath)
+      ))
+    ))
+    .sort((a, b) => relationImportance(b) - relationImportance(a));
+  const selected = [];
+  const seen = new Set();
+  for (const relation of candidates) {
+    const key = `${relation.kind}|${relation.target.routeKey}|${relation.target.location}|${relation.target.fieldPath}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    selected.push({
+      kind: relation.kind,
+      from: compactRelationPoint(relation.source),
+      to: compactRelationPoint(relation.target),
+      support: {
+        sessions: relation.sessionPresence,
+        iterations: relation.supportIterations,
+        confidence: relation.averageConfidence,
+      },
+    });
+    if (selected.length >= maximum) break;
+  }
+  return {
+    credentials: [...credentials.values()].map((credential) => ({
+      transport: credential.transport,
+      fieldPath: credential.fieldPath,
+      producers: [...credential.producers].sort(),
+      consumers: [...credential.consumers].sort(),
+      sessionPresence: credential.sessionPresence,
+      interpretation: credential.transport === 'cookie'
+        ? 'Observed cookie transport; session semantics still require endpoint evidence.'
+        : 'Observed authentication-related header transport.',
+    })),
+    lineage: selected,
+    availableCount: candidates.length,
+    omittedCount: Math.max(0, candidates.length - selected.length),
+    note: 'Authentication lineage is pre-matched from redacted cookie/header/token evidence; values remain unavailable.',
+  };
+}
+
+function buildContractInventory(summary) {
+  const memberRelations = summary.crossSessionMemberRelations || [];
+  const inventory = [];
+  for (const family of summary.crossSessionEndpoints.filter((endpoint) => (
+    (endpoint.classifications || []).includes('core')
+  ))) {
+    if (family.members?.length) {
+      for (const member of family.members) {
+        const route = contractRoute(member.routeKey);
+        inventory.push({
+          ...route,
+          family: family.signature,
+          attribution: 'concrete-member',
+          observed: {
+            statusCounts: member.statusCounts,
+            queryKeys: member.queryKeys,
+            sessionPresence: member.sessionPresence,
+            iterationPresence: member.iterationPresence,
+            requestCount: member.totalRequestCount,
+          },
+          requestFields: compactRequestFields(member.requestFields || []),
+          responseSchemas: compactResponseSchemas(member.responseSchemas || []),
+          dataFlows: selectContractRelations(memberRelations, member.relationIds || [], member.routeKey),
+          examples: (member.examples || []).slice(0, 1),
+          warnings: family.attributionWarnings || [],
+        });
+      }
+      continue;
+    }
+    const route = contractRoute(family.routeKey);
+    const familyFields = summary.crossSessionFields.filter((field) => field.endpoint === family.signature);
+    const familySchemas = summary.crossSessionSchemas.filter((schema) => schema.endpoint === family.signature);
+    const relationIds = memberRelations
+      .filter((relation) => (
+        relation.source.routeKey === family.routeKey
+        || relation.sources.some((source) => source.routeKey === family.routeKey)
+        || relation.target.routeKey === family.routeKey
+      ))
+      .map((relation) => relation.id);
+    inventory.push({
+      ...route,
+      family: family.signature,
+      attribution: 'route-family-without-semantic-siblings',
+      observed: {
+        statusCounts: family.statusCounts,
+        queryKeys: family.queryKeys,
+        sessionPresence: family.sessionPresence,
+        requestCount: family.totalRequestCount,
+      },
+      requestFields: compactRequestFields(familyFields.filter((field) => field.side === 'request')),
+      responseSchemas: compactResponseSchemas(familySchemas.filter((schema) => schema.side === 'response')),
+      dataFlows: selectContractRelations(memberRelations, relationIds, family.routeKey),
+      examples: (family.examples || []).slice(0, 1),
+      warnings: family.attributionWarnings || [],
+    });
+  }
+  return inventory.sort((a, b) => a.path.localeCompare(b.path) || a.method.localeCompare(b.method));
+}
+
 function buildFeatureContext(farmRoot) {
   const summary = readJson(path.join(farmRoot, 'cross-session.json'));
   const generalizationWarnings = summary.crossSessionEndpoints
@@ -128,6 +408,9 @@ function buildFeatureContext(farmRoot) {
     workflow: summary.consensusWorkflow,
     fields: summary.crossSessionFields,
     schemas: summary.crossSessionSchemas,
+    memberRelations: summary.crossSessionMemberRelations || [],
+    contractInventory: buildContractInventory(summary),
+    authenticationEvidence: buildAuthenticationEvidence(summary),
     patterns: summary.patternTotals,
     generalizationWarnings,
   };
@@ -212,106 +495,116 @@ function compactFeatureContext(features, budgetChars) {
   const coreEndpoints = features.endpoints
     .filter((endpoint) => endpoint.classifications.includes('core'))
     .map((endpoint) => ({
-      routeKey: endpoint.routeKey,
       signature: endpoint.signature,
-      queryKeys: endpoint.queryKeys,
-      sessionPresence: endpoint.sessionPresence,
-      totalRequestCount: endpoint.totalRequestCount,
-      statusCounts: endpoint.statusCounts,
       classifications: endpoint.classifications,
-      examples: (endpoint.examples || []).slice(0, 2),
+      support: {
+        sessions: endpoint.sessionPresence,
+        requests: endpoint.totalRequestCount,
+      },
+      concreteMembers: (endpoint.members || []).map((member) => `${member.method} ${member.pathnameTemplate}`),
       familyOnlyAttributes: Object.fromEntries(Object.entries(endpoint.familyOnlyAttributes || {}).map(([key, values]) => (
-        [key, { count: values.length, examples: values.slice(0, 3) }]
+        [key, { count: values.length, examples: values.slice(0, 1) }]
       ))),
       attributionWarnings: endpoint.attributionWarnings,
-      members: (endpoint.members || []).map((member) => ({
-        signature: member.signature,
-        method: member.method,
-        pathnameTemplate: member.pathnameTemplate,
-        queryKeys: member.queryKeys,
-        sessionPresence: member.sessionPresence,
-        iterationPresence: member.iterationPresence,
-        totalRequestCount: member.totalRequestCount,
-        sessionSupport: member.sessionSupport,
-        statusCounts: member.statusCounts,
-        examples: (member.examples || []).slice(0, 1),
-        requestFields: (member.requestFields || []).map((field) => ({
-          path: `${field.location}${field.fieldPath}`,
-          sessionPresence: field.sessionPresence,
-          types: field.types,
-        })),
-        responseSchemas: (member.responseSchemas || []).map((schema) => ({
-          path: `${schema.location}${schema.fieldPath}`,
-          kind: schema.kind,
-          sessionPresence: schema.sessionPresence,
-          types: schema.types,
-          itemTypes: schema.itemTypes,
-          keys: schema.keys,
-        })),
-        relations: (member.relations || []).slice(0, 10).map((relation) => ({
-          kind: relation.kind,
-          source: relation.source?.display || relation.source,
-          target: relation.target?.display || relation.target,
-          sessionPresence: relation.sessionPresence,
-          supportIterations: relation.supportIterations,
-          transforms: relation.transforms,
-        })),
-        omittedRelations: Math.max(0, (member.relations || []).length - 10),
-      })),
     }));
-  const coreSignatures = new Set(coreEndpoints.map((endpoint) => endpoint.signature));
   const compact = {
     kind: features.kind,
     collection: features.collection,
     budgetChars,
+    attentionPolicy: {
+      contractInventory: 'Authoritative concrete endpoint attribution computed by the farmer. No sibling matching or schema/status transfer is required.',
+      dataFlows: 'Already joined source-to-target relations ranked by repeated cross-session support.',
+      routeFamilies: 'Abstraction context only; do not copy family attributes over contractInventory.',
+    },
+    contractInventory: structuredClone(features.contractInventory || []),
+    authenticationEvidence: structuredClone(features.authenticationEvidence || {
+      credentials: [],
+      lineage: [],
+      availableCount: 0,
+      omittedCount: 0,
+    }),
     endpoints: coreEndpoints,
-    relations: features.relations.filter((relation) => (
-      coreSignatures.has(relation.sourceEndpoint) && coreSignatures.has(relation.targetEndpoint)
-    )),
     workflow: features.workflow,
     patterns: features.patterns,
     generalizationWarnings: features.generalizationWarnings || [],
-    fields: features.fields.filter((field) => coreSignatures.has(field.endpoint)),
-    schemas: features.schemas.filter((schema) => coreSignatures.has(schema.endpoint)),
   };
-  for (const key of ['fields', 'schemas']) {
-    while (compact[key].length && jsonChars(compact) > budgetChars) compact[key].pop();
-  }
-  for (const endpoint of compact.endpoints) {
-    for (const member of endpoint.members || []) {
-      const originalRelationCount = member.relations.length;
-      while (member.relations.length && jsonChars(compact) > budgetChars) member.relations.pop();
-      if (member.relations.length !== originalRelationCount) {
-        member.omittedRelations += originalRelationCount - member.relations.length;
-      }
+  for (const endpoint of [...compact.contractInventory].reverse()) {
+    while (endpoint.responseSchemas?.length > 12 && jsonChars(compact) > budgetChars) {
+      endpoint.responseSchemas.pop();
+      endpoint.omittedResponseSchemas = (endpoint.omittedResponseSchemas || 0) + 1;
+    }
+    while (endpoint.requestFields?.length > 12 && jsonChars(compact) > budgetChars) {
+      endpoint.requestFields.pop();
+      endpoint.omittedRequestFields = (endpoint.omittedRequestFields || 0) + 1;
     }
   }
-  if (jsonChars(compact) > budgetChars) {
-    compact.relations = compact.relations.map((relation) => ({
-      kind: relation.kind,
-      source: relation.source,
-      target: relation.target,
-      sessionPresence: relation.sessionPresence,
-      supportIterations: relation.supportIterations,
-      transforms: relation.transforms,
-    }));
+  while (compact.authenticationEvidence.lineage.length && jsonChars(compact) > budgetChars) {
+    compact.authenticationEvidence.lineage.pop();
+    compact.authenticationEvidence.omittedCount += 1;
   }
-  while (compact.relations.length && jsonChars(compact) > budgetChars) compact.relations.pop();
   while (compact.workflow.length && jsonChars(compact) > budgetChars) compact.workflow.pop();
   if (jsonChars(compact) > budgetChars) compact.patterns = {};
+  for (const endpoint of [...compact.contractInventory].reverse()) {
+    while (endpoint.responseSchemas?.length > 6 && jsonChars(compact) > budgetChars) {
+      endpoint.responseSchemas.pop();
+      endpoint.omittedResponseSchemas = (endpoint.omittedResponseSchemas || 0) + 1;
+    }
+    while (endpoint.requestFields?.length > 8 && jsonChars(compact) > budgetChars) {
+      endpoint.requestFields.pop();
+      endpoint.omittedRequestFields = (endpoint.omittedRequestFields || 0) + 1;
+    }
+  }
+  for (const endpoint of [...compact.contractInventory].reverse()) {
+    while (endpoint.dataFlows?.selected?.length && jsonChars(compact) > budgetChars) {
+      endpoint.dataFlows.selected.pop();
+      endpoint.dataFlows.omittedCount += 1;
+    }
+  }
+  for (const endpoint of compact.contractInventory) {
+    if (jsonChars(compact) <= budgetChars) break;
+    endpoint.examples = [];
+  }
   compact.omitted = {
     endpoints: features.endpoints.length - compact.endpoints.length,
-    relations: features.relations.length - compact.relations.length,
+    relations: features.relations.length,
     workflow: features.workflow.length - compact.workflow.length,
-    fields: features.fields.length - compact.fields.length,
-    schemas: features.schemas.length - compact.schemas.length,
+    fields: features.fields.length,
+    schemas: features.schemas.length,
+    contractEndpoints: (features.contractInventory || []).length - compact.contractInventory.length,
   };
-  for (const key of ['fields', 'schemas']) {
-    while (compact[key].length && jsonChars(compact) > budgetChars) compact[key].pop();
-  }
-  while (compact.relations.length && jsonChars(compact) > budgetChars) compact.relations.pop();
   while (compact.workflow.length && jsonChars(compact) > budgetChars) compact.workflow.pop();
   while (compact.endpoints.length > 1 && jsonChars(compact) > budgetChars) compact.endpoints.pop();
+  for (const endpoint of [...compact.contractInventory].reverse()) {
+    while (endpoint.responseSchemas?.length && jsonChars(compact) > budgetChars) {
+      endpoint.responseSchemas.pop();
+      endpoint.omittedResponseSchemas = (endpoint.omittedResponseSchemas || 0) + 1;
+    }
+    while (endpoint.requestFields?.length && jsonChars(compact) > budgetChars) {
+      endpoint.requestFields.pop();
+      endpoint.omittedRequestFields = (endpoint.omittedRequestFields || 0) + 1;
+    }
+  }
+  while (compact.authenticationEvidence.credentials.length && jsonChars(compact) > budgetChars) {
+    compact.authenticationEvidence.credentials.pop();
+  }
+  if (jsonChars(compact) > budgetChars) {
+    compact.endpoints = [];
+    compact.generalizationWarnings = [];
+    compact.attentionPolicy = {
+      contractInventory: 'Authoritative farmer-attributed concrete endpoints.',
+    };
+    for (const endpoint of compact.contractInventory) {
+      delete endpoint.family;
+      delete endpoint.examples;
+      delete endpoint.warnings;
+      endpoint.dataFlows = { omittedCount: endpoint.dataFlows.omittedCount };
+      endpoint.observed = {
+        statusCounts: endpoint.observed.statusCounts,
+        queryKeys: endpoint.observed.queryKeys,
+        sessionPresence: endpoint.observed.sessionPresence,
+      };
+    }
+  }
   if (jsonChars(compact) > budgetChars) {
     compact.collection = {};
     compact.omitted = { budgetExhausted: true };
@@ -591,6 +884,7 @@ async function runGymMatrix({
 module.exports = {
   CONDITIONS,
   RESPONSE_SCHEMA,
+  buildContractInventory,
   buildFeatureContext,
   buildBudgetedEvidence,
   buildPrompt,

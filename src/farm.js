@@ -1193,11 +1193,11 @@ function enrichEndpointMembers(endpoints, memberFields, memberSchemas, memberRel
       member.requestFields = member.fields.filter((field) => field.side === 'request');
       member.schemas = memberSchemas.filter((schema) => schema.endpointId === member.id);
       member.responseSchemas = member.schemas.filter((schema) => schema.side === 'response');
-      member.relations = memberRelations.filter((relation) => (
+      member.relationIds = memberRelations.filter((relation) => (
         relation.source.endpointId === member.id
         || relation.target.endpointId === member.id
         || relation.sources?.some((source) => source.endpointId === member.id)
-      ));
+      )).map((relation) => relation.id);
     }
 
     const memberFieldShapes = new Set(endpoint.members.flatMap((member) => member.fields.map((field) => (
@@ -1734,13 +1734,11 @@ function writeOccurrences(file, occurrences) {
 }
 
 function projectMemberEvidence(items) {
-  return items
-    .filter((item) => item.memberId && item.memberEndpoint)
-    .map((item) => ({
-      ...item,
-      endpointId: item.memberId,
-      endpoint: item.memberEndpoint,
-    }));
+  return items.map((item) => ({
+    ...item,
+    endpointId: item.memberId || item.endpointId,
+    endpoint: item.memberEndpoint || item.endpoint,
+  }));
 }
 
 function findAllRelations(occurrences, fields, iterationOrder) {
@@ -1801,7 +1799,7 @@ async function farmRecording({
   ));
   const automationHints = buildAutomationHints(endpoints, fields, notableRelations, workflow);
   const summary = {
-    schemaVersion: 2,
+    schemaVersion: 3,
     generatedAt: new Date().toISOString(),
     recording: {
       id: manifest.id,

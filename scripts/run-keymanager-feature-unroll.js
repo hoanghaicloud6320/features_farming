@@ -4,7 +4,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { generateJsonWithFallback, loadApiKeys } = require('../src/gemini');
-const { CONTRACT_SCHEMA, renderContract } = require('./run-keymanager-contract-ab');
+const { CONTRACT_SCHEMA, evaluateContract, renderContract } = require('./run-keymanager-contract-ab');
 
 async function main() {
   const workspace = path.resolve(__dirname, '..');
@@ -21,6 +21,8 @@ async function main() {
     'Do not generate automation tests. A short Node.js fetch sample is optional.',
     'Do not invent endpoints, fields, statuses, authentication mechanisms, or semantics.',
     'The farmer may generalize stable sibling path segments as :var.',
+    'When contractInventory exists, it is already unrolled and attributed by the farmer. Emit those concrete entries directly; do not rediscover or match siblings.',
+    'contractInventory.dataFlows are already joined source-to-target relations. Do not search for additional matches in unrelated evidence.',
     'UNROLL RULE: when endpoint examples, fields, relations, schemas, or workflow evidence name concrete sibling paths, emit each supported concrete method + path as its own endpoint.',
     'Do not retain a :var endpoint when the evidence supports its finite concrete alternatives.',
     'Use the concrete member index for sibling-specific request fields, response schemas, query keys, statuses, examples, and relations.',
@@ -55,6 +57,7 @@ async function main() {
     evidenceChars: JSON.stringify(evidence).length,
     promptTokens: generated.usageMetadata?.promptTokenCount || null,
     endpointClaims: generated.data.endpoints.length,
+    evaluation: evaluateContract(generated.data, evidence.farmedFeatures?.contractInventory || []),
     responseId: generated.responseId,
     diagnosticOnly: true,
     promptDiffersFromCanonicalMatrix: true,
