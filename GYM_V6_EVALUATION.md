@@ -127,6 +127,10 @@ that was held out from detector implementation:
 The holdout result is intentional. The farmer recovered the ordinary relation
 but did not claim the unsupported rotation transform.
 
+Low-evidence matches are no longer hard-deleted to obtain these scores. They
+are retained in a candidate inventory with promotion reasons and risk flags.
+Only the actionable projection is scored and supplied to contract prompts.
+
 ## Reproduce
 
 ```powershell

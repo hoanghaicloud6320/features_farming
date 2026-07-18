@@ -145,6 +145,10 @@ test('feature context warns when semantic sibling routes were generalized', () =
       ],
     }],
     crossSessionRelations: [],
+    crossSessionRelationCandidates: [{
+      kind: 'affine-numeric',
+      promotion: { attentionEligible: false },
+    }],
     consensusWorkflow: [],
     crossSessionFields: [],
     crossSessionSchemas: [],
@@ -156,4 +160,10 @@ test('feature context warns when semantic sibling routes were generalized', () =
     'GET /v1/admin/session',
     'GET /v1/admin/licenses?limit=100',
   ]);
+  assert.deepEqual(context.diagnosticHypotheses, {
+    retainedCount: 1,
+    attentionEligible: false,
+    artifact: 'relations.candidates.cross-session.json',
+    note: 'Retained for analysis and future promotion; excluded from contract data flows.',
+  });
 });

@@ -42,10 +42,11 @@ metrics.
 
 - Any compaction can remove rare but real behavior. Raw remains the audit
   source when completeness matters more than attention cost.
-- Repeated correlation is not causality. An initial affine detector incorrectly
-  linked KeyManager counters that happened to move together with the scripted
-  iteration. Requiring four distinct values and both a non-identity scale and
-  a non-zero offset removed all six spurious affine candidates.
+- Repeated correlation is not causality. An initial affine detector promoted
+  KeyManager counters that happened to move together with the scripted
+  iteration. All six fits are now retained as diagnostic hypotheses, with
+  limited-diversity/common-cause risks, but excluded from actionable contract
+  data flows.
 - Unsupported transforms are omitted. In V7 the new character-rotation
   holdout remained undiscovered: recall was 50% because the ordinary `runId`
   relation was found and the held-out transform was not.
@@ -70,3 +71,19 @@ known gap. This is preferable to asking the LLM to guess.
    attaching the full raw timeline by default.
 5. Validate every new detector on fresh seeds, real recordings, and at least
    one unsupported holdout family.
+
+## Candidate inventory versus attention
+
+The farmer now writes two separate relation layers:
+
+- `relations.candidates*.json` retains bounded transform fits and relations
+  even when they occur in only one session or have insufficient input
+  diversity.
+- `relations*.json` contains only relations promoted for workflow,
+  automation hints, and contract-oriented model context.
+
+On the current KeyManager recording this produces 3,684 cross-session
+candidates. Of these, 2,143 remain diagnostic-only: 2,137 lack repeated
+cross-session support and six are low-diversity affine fits. The contract
+prompt receives none of those 2,143 relations; it receives only their count
+and a pointer to the diagnostic artifact.

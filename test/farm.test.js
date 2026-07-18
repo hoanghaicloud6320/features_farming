@@ -66,7 +66,7 @@ test('finds a repeated multi-source hash transform', () => {
   assert.deepEqual(relation.sources.map((source) => source.fieldPath), ['$.seed', '$.salt', '$.label']);
 });
 
-test('does not promote a three-point numeric coincidence to an affine data flow', () => {
+test('retains a three-point affine fit without promoting it to attention', () => {
   const iterations = ['iteration-1', 'iteration-2', 'iteration-3'];
   const occurrences = [];
   iterations.forEach((iterationId, index) => {
@@ -90,7 +90,14 @@ test('does not promote a three-point numeric coincidence to an affine data flow'
     add('target', 'close', 'PUT example.test/close?', 'request', '$.otherCounter', (index + 1) * 3 + 17, 1);
   });
   const relations = findBoundedTransformRelations(occurrences, iterations);
-  assert.equal(relations.some((relation) => relation.kind === 'affine-numeric'), false);
+  const affine = relations.find((relation) => relation.kind === 'affine-numeric');
+  assert.ok(affine);
+  assert.equal(affine.evidenceTier, 'hypothesis');
+  assert.equal(affine.promotion.attentionEligible, false);
+  assert.deepEqual(affine.promotion.risks, [
+    'limited-input-diversity',
+    'observational-correlation-not-causality',
+  ]);
 });
 
 test('farms variables, request-response echo and route templates', async (t) => {
@@ -299,6 +306,86 @@ test('describes the forward transform for a base64url Bearer token', async (t) =
       { operation: 'prefix', value: 'Bearer ' },
     ],
   });
+});
+
+function writeLowDiversityAffineRecording(input, recordingId) {
+  fs.mkdirSync(path.join(input, 'bodies'), { recursive: true });
+  fs.writeFileSync(path.join(input, 'manifest.json'), JSON.stringify({
+    id: recordingId,
+    startUrl: 'https://example.test/',
+  }));
+  fs.writeFileSync(path.join(input, 'iterations.json'), JSON.stringify([1, 2, 3].map((iteration) => ({
+    id: `iteration-${iteration}`,
+    requestCount: 2,
+  }))));
+  const requests = [];
+  for (let iteration = 1; iteration <= 3; iteration += 1) {
+    const openId = `${recordingId}-open-${iteration}`;
+    const closeId = `${recordingId}-close-${iteration}`;
+    fs.writeFileSync(
+      path.join(input, 'bodies', `${openId}.json`),
+      JSON.stringify({ observedCounter: iteration }),
+    );
+    fs.writeFileSync(
+      path.join(input, 'bodies', `${closeId}.json`),
+      JSON.stringify({ accepted: true }),
+    );
+    requests.push({
+      id: openId,
+      requestId: openId,
+      iterationId: `iteration-${iteration}`,
+      requestTimestamp: iteration * 100,
+      responseTimestamp: iteration * 100 + 1,
+      resourceType: 'Fetch',
+      request: {
+        method: 'POST',
+        url: 'https://example.test/open',
+        headers: { 'content-type': 'application/json' },
+        postData: JSON.stringify({ label: `${recordingId}-${iteration}` }),
+      },
+      response: { status: 200, mimeType: 'application/json' },
+      body: { file: `bodies/${openId}.json` },
+    }, {
+      id: closeId,
+      requestId: closeId,
+      iterationId: `iteration-${iteration}`,
+      requestTimestamp: iteration * 100 + 2,
+      responseTimestamp: iteration * 100 + 3,
+      resourceType: 'Fetch',
+      request: {
+        method: 'PUT',
+        url: 'https://example.test/close',
+        headers: { 'content-type': 'application/json' },
+        postData: JSON.stringify({ derivedCounter: iteration * 3 + 17 }),
+      },
+      response: { status: 200, mimeType: 'application/json' },
+      body: { file: `bodies/${closeId}.json` },
+    });
+  }
+  fs.writeFileSync(path.join(input, 'requests.json'), JSON.stringify(requests));
+  fs.writeFileSync(path.join(input, 'cookies.json'), '[]');
+}
+
+test('keeps diagnostic relation candidates across sessions but out of actionable relations', async (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'features-candidates-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const input = path.join(root, 'recordings');
+  writeLowDiversityAffineRecording(path.join(input, 'session-a'), 'session-a');
+  writeLowDiversityAffineRecording(path.join(input, 'session-b'), 'session-b');
+  const output = path.join(root, 'features');
+  const farmed = await farmInput({ inputDirectory: input, outputDirectory: output });
+
+  assert.equal(
+    farmed.summary.crossSessionRelations.some((relation) => relation.kind === 'affine-numeric'),
+    false,
+  );
+  const candidate = farmed.summary.crossSessionRelationCandidates
+    .find((relation) => relation.kind === 'affine-numeric');
+  assert.ok(candidate);
+  assert.equal(candidate.sessionPresence, 2);
+  assert.equal(candidate.promotion.attentionEligible, false);
+  assert.ok(fs.existsSync(path.join(output, 'relations.candidates.cross-session.json')));
+  assert.match(fs.readFileSync(path.join(output, 'report.md'), 'utf8'), /Diagnostic relation hypotheses/);
 });
 
 test('aggregates repeated evidence across recording sessions', async (t) => {

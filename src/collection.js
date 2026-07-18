@@ -180,6 +180,8 @@ function collectionReport(summary) {
     || relation.kind.includes('token')
     || relation.kind.includes('jwt')
   ));
+  const diagnosticRelations = (summary.crossSessionRelationCandidates || [])
+    .filter((relation) => relation.promotion?.attentionEligible === false);
   const coreArraySchemas = summary.crossSessionSchemas.filter((schema) => (
     schema.kind === 'array' && schema.endpointClassifications.includes('core')
   ));
@@ -187,6 +189,7 @@ function collectionReport(summary) {
   lines.push(`- ${summary.sessionCount} recording sessions were analyzed; ${summary.usableSessionCount} contained captured iteration requests.`);
   lines.push(`- ${summary.iterationCount} total usable iterations contain ${summary.capturedRequestCount} captured requests.`);
   lines.push(`- ${summary.crossSessionEndpoints.length} endpoint structures were seen across the collection.`);
+  lines.push(`- ${diagnosticRelations.length} diagnostic relation hypotheses were retained outside the actionable prompt projection.`);
   lines.push('');
 
   lines.push('## Stable workflow across sessions', '');
@@ -212,6 +215,19 @@ function collectionReport(summary) {
     lines.push(`- **${relation.kind}** in ${relation.sessionPresence}/${summary.usableSessionCount} sessions: \`${relation.source}\` -> \`${relation.target}\`.${transform}`);
   }
   if (!notableRelations.length) lines.push('No core-to-core value-flow relation repeated across sessions.');
+  lines.push('');
+
+  lines.push('## Diagnostic relation hypotheses', '');
+  for (const relation of diagnosticRelations.slice(0, 30)) {
+    const transform = relation.transforms[0]
+      ? ` Transform fit: \`${JSON.stringify(relation.transforms[0])}\`.`
+      : '';
+    const risks = relation.promotion?.risks?.length
+      ? ` Risks: ${relation.promotion.risks.join(', ')}.`
+      : '';
+    lines.push(`- **${relation.kind}** in ${relation.sessionPresence}/${summary.usableSessionCount} sessions: \`${relation.source}\` -> \`${relation.target}\`.${transform}${risks}`);
+  }
+  if (!diagnosticRelations.length) lines.push('No diagnostic-only relation hypothesis was retained.');
   lines.push('');
 
   lines.push('## Stable array schemas', '');
@@ -292,7 +308,7 @@ function aggregateSessions(sessionResults) {
       const normalizedPath = field.location.startsWith('body.') ? field.fieldPath.replace(/\[\d+\]/g, '[]') : field.fieldPath;
       return `${endpointAliases.get(field.endpoint) || field.endpoint}|${field.side}|${field.location}|${normalizedPath}`;
     },
-    (_key, entries) => {
+    (key, entries) => {
       const first = entries[0].item;
       const endpoint = endpointAliases.get(first.endpoint) || first.endpoint;
       const fieldPath = first.location.startsWith('body.')
@@ -318,21 +334,22 @@ function aggregateSessions(sessionResults) {
   ).filter((field) => field.sessionPresence >= Math.min(2, usableCount))
     .sort((a, b) => b.sessionPresence - a.sessionPresence || a.display.localeCompare(b.display));
 
-  const relations = aggregateByKey(
+  const aggregateRelationSet = (selector, minimumSessions) => aggregateByKey(
     usable,
-    (result) => result.relations,
+    selector,
     (relation) => {
       const sourceEndpoint = endpointAliases.get(relation.source.endpoint) || relation.source.endpoint;
       const targetEndpoint = endpointAliases.get(relation.target.endpoint) || relation.target.endpoint;
       return `${relation.kind}|${sourceEndpoint}|${relation.source.side}|${relation.source.location}|${relation.source.fieldPath}|${targetEndpoint}|${relation.target.side}|${relation.target.location}|${relation.target.fieldPath}`;
     },
-    (_key, entries) => {
+    (key, entries) => {
       const first = entries[0].item;
       const sourceEndpoint = endpointAliases.get(first.source.endpoint) || first.source.endpoint;
       const targetEndpoint = endpointAliases.get(first.target.endpoint) || first.target.endpoint;
       const source = `${sourceEndpoint} :: ${first.source.side}.${first.source.location}${first.source.fieldPath}`;
       const target = `${targetEndpoint} :: ${first.target.side}.${first.target.location}${first.target.fieldPath}`;
       return {
+        id: shortHash(key),
         kind: first.kind,
         source,
         sources: first.sources,
@@ -345,14 +362,24 @@ function aggregateSessions(sessionResults) {
         averageConfidence: round(entries.reduce((sum, entry) => sum + entry.item.confidence, 0) / entries.length),
         supportIterations: entries.reduce((sum, entry) => sum + entry.item.supportIterations, 0),
         transforms: [...new Set(entries.map((entry) => JSON.stringify(entry.item.transform)).filter((value) => value !== undefined))].map(JSON.parse),
+        evidenceTiers: [...new Set(entries.map((entry) => entry.item.evidenceTier || 'supported'))],
+        promotion: entries.find((entry) => entry.item.promotion)?.item.promotion,
       };
     },
-  ).filter((relation) => relation.sessionPresence >= Math.min(2, usableCount))
+  ).filter((relation) => relation.sessionPresence >= minimumSessions)
     .sort((a, b) => b.sessionPresence - a.sessionPresence || b.averageConfidence - a.averageConfidence);
+  const relations = aggregateRelationSet(
+    (result) => result.relations,
+    Math.min(2, usableCount),
+  );
+  const relationCandidatesRaw = aggregateRelationSet(
+    (result) => result.relationCandidates || result.relations,
+    1,
+  );
 
-  const memberRelations = aggregateByKey(
+  const aggregateMemberRelationSet = (selector, minimumSessions) => aggregateByKey(
     usable,
-    (result) => result.memberRelations,
+    selector,
     (relation) => {
       const sources = relation.sources?.length ? relation.sources : [relation.source];
       return [
@@ -394,10 +421,50 @@ function aggregateSessions(sessionResults) {
         transforms: [...new Set(entries
           .map((entry) => JSON.stringify(entry.item.transform))
           .filter((value) => value !== undefined))].map(JSON.parse),
+        evidenceTiers: [...new Set(entries.map((entry) => entry.item.evidenceTier || 'supported'))],
+        promotion: entries.find((entry) => entry.item.promotion)?.item.promotion,
       };
     },
-  ).filter((relation) => relation.sessionPresence >= Math.min(2, usableCount))
+  ).filter((relation) => relation.sessionPresence >= minimumSessions)
     .sort((a, b) => b.sessionPresence - a.sessionPresence || b.averageConfidence - a.averageConfidence);
+  const memberRelations = aggregateMemberRelationSet(
+    (result) => result.memberRelations,
+    Math.min(2, usableCount),
+  );
+  const memberRelationCandidatesRaw = aggregateMemberRelationSet(
+    (result) => result.memberRelationCandidates || result.memberRelations,
+    1,
+  );
+  const classifyCandidateInventory = (candidates, actionable) => {
+    const actionableIds = new Set(actionable.map((relation) => relation.id));
+    return candidates.map((candidate) => {
+      if (actionableIds.has(candidate.id)) return candidate;
+      const existing = candidate.promotion || {};
+      const risks = new Set(existing.risks || []);
+      if (candidate.sessionPresence < Math.min(2, usableCount)) {
+        risks.add('insufficient-cross-session-support');
+      }
+      return {
+        ...candidate,
+        evidenceTiers: [...new Set([...(candidate.evidenceTiers || []), 'hypothesis'])],
+        promotion: {
+          ...existing,
+          attentionEligible: false,
+          reason: existing.attentionEligible === false
+            ? existing.reason
+            : 'Observed relation candidate did not repeat across the required number of sessions.',
+          observedSessions: candidate.sessionPresence,
+          requiredSessions: Math.min(2, usableCount),
+          risks: [...risks],
+        },
+      };
+    });
+  };
+  const relationCandidates = classifyCandidateInventory(relationCandidatesRaw, relations);
+  const memberRelationCandidates = classifyCandidateInventory(
+    memberRelationCandidatesRaw,
+    memberRelations,
+  );
   for (const endpoint of endpoints) {
     for (const member of endpoint.members || []) {
       member.relationIds = memberRelations
@@ -478,7 +545,7 @@ function aggregateSessions(sessionResults) {
   ).sort((a, b) => b.sessionPresence - a.sessionPresence || a.name.localeCompare(b.name));
 
   return {
-    schemaVersion: 4,
+    schemaVersion: 5,
     generatedAt: new Date().toISOString(),
     sessionCount: sessionResults.length,
     usableSessionCount: usableCount,
@@ -494,6 +561,8 @@ function aggregateSessions(sessionResults) {
     crossSessionFields: fields,
     crossSessionRelations: relations,
     crossSessionMemberRelations: memberRelations,
+    crossSessionRelationCandidates: relationCandidates,
+    crossSessionMemberRelationCandidates: memberRelationCandidates,
     crossSessionSchemas: schemas,
     crossSessionCookies: cookies,
     consensusWorkflow,
@@ -533,6 +602,8 @@ async function farmInput({ inputDirectory, outputDirectory, maxJsonBytes }) {
   writeJson(path.join(outputDirectory, 'fields.cross-session.json'), summary.crossSessionFields);
   writeJson(path.join(outputDirectory, 'relations.cross-session.json'), summary.crossSessionRelations);
   writeJson(path.join(outputDirectory, 'relations.members.cross-session.json'), summary.crossSessionMemberRelations);
+  writeJson(path.join(outputDirectory, 'relations.candidates.cross-session.json'), summary.crossSessionRelationCandidates);
+  writeJson(path.join(outputDirectory, 'relations.members.candidates.cross-session.json'), summary.crossSessionMemberRelationCandidates);
   writeJson(path.join(outputDirectory, 'schemas.cross-session.json'), summary.crossSessionSchemas);
   writeJson(path.join(outputDirectory, 'cookies.cross-session.json'), summary.crossSessionCookies);
   fs.writeFileSync(path.join(outputDirectory, 'report.md'), collectionReport(summary));

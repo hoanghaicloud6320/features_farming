@@ -28,7 +28,7 @@ CURRENT STATUS
     KEYMANAGER_CONTRACT_AB_EVALUATION.md
 - A five-seed KeyManager run and a 21-case seeded Gym V6 are documented in:
     GYM_V6_EVALUATION.md
-- All 32 local tests pass.
+- All 33 local tests pass.
 
 IMPLEMENTED IN V5
 - Twelve data-driven farmer challenges with independent Gym ground truth.
@@ -116,11 +116,24 @@ COMPLETED 2026-07-18: BOUNDED TRANSFORM DETECTORS AND GYM V7
 - Gym V7 uses five fresh seeds / 40 cases and includes an unsupported
   character-rotation holdout. Supported families remain at 100% relation
   recall; the holdout remains undiscovered with 100% precision.
-- A real KeyManager refarm exposed six spurious affine correlations. Requiring
-  four distinct source values plus a non-identity scale and non-zero offset
-  removed all six while preserving the supported Gym affine family.
+- A real KeyManager refarm exposed six low-diversity affine correlations.
+  They are retained as diagnostic hypotheses with support/risk metadata, but
+  excluded from actionable contract attention. The supported Gym affine
+  family remains promoted.
 - Full farmer-vs-raw interpretation:
     FARMER_EFFECTIVENESS.md
+
+COMPLETED 2026-07-18: OBSERVATION-PRESERVING RELATION TIERS
+- Relation detection now produces a high-recall candidate inventory separately
+  from the actionable relation projection.
+- Single-session and low-diversity hypotheses retain transforms, support,
+  promotion reasons, and risk flags in dedicated candidate artifacts.
+- KeyManager retains 3,684 cross-session candidates: 1,541 actionable and
+  2,143 diagnostic-only, including all six affine observations discussed
+  above.
+- Contract prompts receive only actionable relations plus the diagnostic
+  candidate count/artifact pointer, so insight is preserved without spending
+  model attention on thousands of weak candidates.
 
 OTHER FARMER TODO
 1. Continue replacing semantic field-name allowlists with bounded structural

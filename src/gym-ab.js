@@ -416,6 +416,13 @@ function buildFeatureContext(farmRoot) {
     fields: summary.crossSessionFields,
     schemas: summary.crossSessionSchemas,
     memberRelations: summary.crossSessionMemberRelations || [],
+    diagnosticHypotheses: {
+      retainedCount: (summary.crossSessionRelationCandidates || [])
+        .filter((relation) => relation.promotion?.attentionEligible === false).length,
+      attentionEligible: false,
+      artifact: 'relations.candidates.cross-session.json',
+      note: 'Retained for analysis and future promotion; excluded from contract data flows.',
+    },
     contractInventory: buildContractInventory(summary),
     authenticationEvidence: buildAuthenticationEvidence(summary),
     patterns: summary.patternTotals,
@@ -521,6 +528,7 @@ function compactFeatureContext(features, budgetChars) {
     attentionPolicy: {
       contractInventory: 'Authoritative concrete endpoint attribution computed by the farmer. No sibling matching or schema/status transfer is required.',
       dataFlows: 'Already joined source-to-target relations ranked by repeated cross-session support.',
+      diagnosticHypotheses: 'Count only. Full low-evidence candidates remain outside this prompt to preserve attention.',
       routeFamilies: 'Abstraction context only; do not copy family attributes over contractInventory.',
     },
     contractInventory: structuredClone(features.contractInventory || []),
@@ -530,6 +538,7 @@ function compactFeatureContext(features, budgetChars) {
       availableCount: 0,
       omittedCount: 0,
     }),
+    diagnosticHypotheses: features.diagnosticHypotheses,
     endpoints: coreEndpoints,
     workflow: features.workflow,
     patterns: features.patterns,

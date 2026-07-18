@@ -982,6 +982,7 @@ function makeBoundedTransformRelation({
   iterationOrder,
   transform,
   confidence = 0.94,
+  promotion,
 }) {
   const sourceOccurrences = sources.map((source) => source.first);
   const target = targets[0];
@@ -1006,6 +1007,11 @@ function makeBoundedTransformRelation({
     ))),
     confidence,
     transform,
+    evidenceTier: promotion?.attentionEligible === false ? 'hypothesis' : 'supported',
+    promotion: promotion || {
+      attentionEligible: true,
+      reason: 'Exact bounded transform repeated across the required observations.',
+    },
     evidence: transformEvidence(targets, sources),
     note: 'Bounded deterministic candidate verified across repeated observations; not proof of source-code causality.',
   };
@@ -1122,7 +1128,7 @@ function findBoundedTransformRelations(occurrences, iterationOrder) {
         }));
         const distinctSourceCount = new Set(numericPairs.map((item) => item.source)).size;
         const distinct = numericPairs.find((item) => item.source !== numericPairs[0].source);
-        if (distinct && distinctSourceCount >= 4) {
+        if (distinct && distinctSourceCount >= 3) {
           const scale = (distinct.target - numericPairs[0].target)
             / (distinct.source - numericPairs[0].source);
           const offset = numericPairs[0].target - scale * numericPairs[0].source;
@@ -1134,9 +1140,13 @@ function findBoundedTransformRelations(occurrences, iterationOrder) {
             && numericPairs.every((item) => (
               Math.abs((item.source * scale + offset) - item.target) < 1e-9
             ))
-            && Math.abs(scale - 1) > 1e-9
-            && Math.abs(offset) > 1e-9
+            && (Math.abs(scale - 1) > 1e-9 || Math.abs(offset) > 1e-9)
           ) {
+            const attentionEligible = (
+              distinctSourceCount >= 4
+              && Math.abs(scale - 1) > 1e-9
+              && Math.abs(offset) > 1e-9
+            );
             relations.push(makeBoundedTransformRelation({
               kind: 'affine-numeric',
               targets: uniqueTargets,
@@ -1146,6 +1156,21 @@ function findBoundedTransformRelations(occurrences, iterationOrder) {
                 operation: 'affine',
                 scale: round(scale, 9),
                 offset: round(offset, 9),
+              },
+              confidence: attentionEligible ? 0.94 : 0.68,
+              promotion: {
+                attentionEligible,
+                reason: attentionEligible
+                  ? 'At least four distinct inputs support a non-identity scale and non-zero offset.'
+                  : 'Transform fits the observations but has limited input diversity or can be explained by a simpler shared trend.',
+                observedDistinctInputs: distinctSourceCount,
+                requiredDistinctInputs: 4,
+                risks: [
+                  ...(distinctSourceCount < 4 ? ['limited-input-diversity'] : []),
+                  ...(Math.abs(scale - 1) <= 1e-9 ? ['offset-only-fit'] : []),
+                  ...(Math.abs(offset) <= 1e-9 ? ['scale-only-fit'] : []),
+                  'observational-correlation-not-causality',
+                ],
               },
             }));
             matched = true;
@@ -1934,6 +1959,7 @@ function reportMarkdown(summary, automationHints, bodyWarnings) {
   lines.push(`- ${summary.endpoints.coreCount} endpoints look central to the repeated workflow; ${summary.endpoints.supportCount} are framework/supporting traffic; ${summary.endpoints.noiseCount} look like static, telemetry or third-party noise.`);
   lines.push(`- ${summary.variables.length} request fields vary between iterations.`);
   lines.push(`- ${summary.relations.length} repeated value-flow relations have supporting evidence.`);
+  lines.push(`- ${summary.diagnosticRelationCandidateCount || 0} additional relation hypotheses were retained in \`relations.candidates.json\` but excluded from the actionable projection.`);
   lines.push('');
 
   lines.push('## Likely workflow', '');
@@ -2093,6 +2119,10 @@ function findAllRelations(occurrences, fields, iterationOrder) {
   ].sort((a, b) => b.confidence - a.confidence || b.supportIterations - a.supportIterations);
 }
 
+function isAttentionEligibleRelation(relation) {
+  return relation.promotion?.attentionEligible !== false;
+}
+
 async function farmRecording({
   inputDirectory,
   outputDirectory,
@@ -2115,12 +2145,14 @@ async function farmRecording({
   const endpoints = buildEndpoints(records, routes, iterationOrder, startHost);
   const fields = classifyFieldSeries(occurrences, iterationOrder);
   const schemas = buildSchemas(schemaObservations, iterationOrder);
-  const relations = findAllRelations(occurrences, fields, iterationOrder);
+  const relationCandidates = findAllRelations(occurrences, fields, iterationOrder);
+  const relations = relationCandidates.filter(isAttentionEligibleRelation);
   const memberOccurrences = projectMemberEvidence(occurrences);
   const memberSchemaObservations = projectMemberEvidence(schemaObservations);
   const memberFields = classifyFieldSeries(memberOccurrences, iterationOrder);
   const memberSchemas = buildSchemas(memberSchemaObservations, iterationOrder);
-  const memberRelations = findAllRelations(memberOccurrences, memberFields, iterationOrder);
+  const memberRelationCandidates = findAllRelations(memberOccurrences, memberFields, iterationOrder);
+  const memberRelations = memberRelationCandidates.filter(isAttentionEligibleRelation);
   enrichEndpointMembers(endpoints, memberFields, memberSchemas, memberRelations, fields, schemas, relations);
   const workflow = buildWorkflow(records, routes, endpoints, iterationOrder);
   const coreEndpointIds = new Set(endpoints.filter((endpoint) => endpoint.classifications === 'core').map((endpoint) => endpoint.id));
@@ -2142,7 +2174,7 @@ async function farmRecording({
   ));
   const automationHints = buildAutomationHints(endpoints, fields, notableRelations, workflow);
   const summary = {
-    schemaVersion: 3,
+    schemaVersion: 4,
     generatedAt: new Date().toISOString(),
     recording: {
       id: manifest.id,
@@ -2160,6 +2192,8 @@ async function farmRecording({
       supportCount: endpoints.filter((endpoint) => ['supporting', 'framework-support'].includes(endpoint.classifications)).length,
     },
     valueOccurrenceCount: occurrences.length,
+    relationCandidateCount: relationCandidates.length,
+    diagnosticRelationCandidateCount: relationCandidates.length - relations.length,
     variables: variables.slice(0, 100),
     relations: notableRelations.slice(0, 100),
     workflow,
@@ -2203,6 +2237,8 @@ async function farmRecording({
   writeJson(path.join(outputDirectory, 'schemas.members.json'), memberSchemas);
   writeJson(path.join(outputDirectory, 'relations.members.json'), memberRelations);
   writeJson(path.join(outputDirectory, 'relations.json'), relations);
+  writeJson(path.join(outputDirectory, 'relations.candidates.json'), relationCandidates);
+  writeJson(path.join(outputDirectory, 'relations.members.candidates.json'), memberRelationCandidates);
   writeJson(path.join(outputDirectory, 'workflow.json'), workflow);
   writeJson(path.join(outputDirectory, 'workflow-patterns.json'), workflowPatterns);
   writeJson(path.join(outputDirectory, 'dependency-graph.json'), dependencyGraph);
@@ -2219,7 +2255,9 @@ async function farmRecording({
     memberFields,
     memberSchemas,
     memberRelations,
+    memberRelationCandidates,
     relations,
+    relationCandidates,
     workflow,
     workflowPatterns,
     dependencyGraph,
